@@ -15,3 +15,22 @@
 ### 💡 BACKEND
 - createsuperuser Account 생성
 ---
+## 🔔 7/29_화
+### 💡 FRONTEND
+- 회의 때 받았던 이미지로 design 컨셉 구성
+- Create IA: figma로 page 구조도 제작
+- next.js init setup
+- netlify deploy
+- deploy test
+
+### 💡 BACKEND
+- ERD 생성
+- Django project Flow 생성
+- Django REST API init setup
+- AWS lightsail setup
+- nginx connect
+- django & nginx connect
+- GitHub Actions CI workflow setup
+- GitHub Actions deploy
+- deploy test
+---
