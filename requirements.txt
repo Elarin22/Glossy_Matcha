@@ -30,3 +30,11 @@ pytest-django
 
 # PostgreSQL
 psycopg2-binary
+
+# 배포
+asgiref==3.7.2
+gunicorn==21.2.0
+packaging==23.2
+pytz==2023.3.post1
+sqlparse==0.4.4
+tzdata==2023.3
