@@ -1,4 +1,5 @@
 # DRF Project Flow Architecture
+```
 ┌─────────────────────────────────────┐
 │        클라이언트 애플리케이션          │
 │    (React, Vue, Mobile App 등)      │
@@ -33,3 +34,4 @@
 │           Database Layer            │
 │        (PostgreSQL)                 │
 └─────────────────────────────────────┘
+```
