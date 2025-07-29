@@ -1,0 +1,29 @@
+### Backend ###
+# base
+django~=5.2.0
+djangorestframework~=3.16.0
+
+# CORS 처리
+django-cors-headers
+
+# 개발환경 & 설정
+django-environ
+django-extensions
+
+# AI
+pyhub-llm[all]
+
+# data 분석 및 처리
+pandas
+
+# Excel파일 읽기/쓰기 지원
+openpyxl
+
+# python 테스트 framework
+pytest
+
+# 테스트 결과 읽기
+pytest-testdox
+
+# django project pytest
+pytest-django
