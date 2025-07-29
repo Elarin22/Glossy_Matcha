@@ -27,3 +27,6 @@ pytest-testdox
 
 # django project pytest
 pytest-django
+
+# PostgreSQL
+psycopg2-binary
