@@ -1,0 +1,39 @@
+name: CI/CD - Django Backend
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  deploy:
+    name: Deploy Django Backend to Lightsail
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup SSH connection
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.PEM_FILE_CONTENT }}
+
+    - name: Deploy on Lightsail
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          echo "🔁 서버 접속 성공. 배포 시작..."
+
+          cd /home/ubuntu/glossy/Glossy_Matcha/be
+          git pull origin main
+
+          source venv/bin/activate
+          pip install -r requirements.txt
+
+          python manage.py migrate
+          python manage.py collectstatic --noinput
+
+          sudo systemctl restart gunicorn
+          sudo systemctl restart nginx
+
+          echo "✅ 배포 완료"
+        EOF
