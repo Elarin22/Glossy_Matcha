@@ -24,7 +24,7 @@ jobs:
           echo "🔁 서버 접속 성공. 배포 시작..."
 
           cd /home/ubuntu/glossy/Glossy_Matcha/be
-          git pull origin main
+          git pull origin develop
 
           source venv/bin/activate
           pip install -r requirements.txt
