@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_extensions',
     # apps
-    'accounts',
     'glossymatcha',
 ]
 
