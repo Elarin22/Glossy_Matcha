@@ -32,8 +32,7 @@ jobs:
           python manage.py migrate
           python manage.py collectstatic --noinput
 
-          sudo systemctl restart gunicorn
-          sudo systemctl restart nginx
+          sudo systemctl restart site
 
           echo "✅ 배포 완료"
         EOF
