@@ -3,6 +3,8 @@ name: CI/CD - Django Backend
 on:
   push:
     branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
 
 jobs:
   deploy:
