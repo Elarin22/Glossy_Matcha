@@ -23,7 +23,7 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
           echo "🔁 서버 접속 성공. 배포 시작..."
 
-          cd /home/ubuntu/glossy/Glossy_Matcha/be
+          cd /home/ubuntu/glossy/Glossy_Matcha
           git pull origin develop
 
           source venv/bin/activate
