@@ -34,7 +34,7 @@
 - GitHub Actions deploy
 - deploy test
 ---
-## 🔔 7/29_화
+## 🔔 7/30_수
 ### 💡 FRONTEND
 - TypeScript 환경 구성
 - 프로젝트에 필요한 페이지 시안 구성
