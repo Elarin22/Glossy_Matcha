@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-cz0&-f+f=bn&bep2v@t&0eu6-&vsn8xit8828^xw=9$l1@qrfr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,9 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # package
+    'rest_framework',
+    'corsheaders',
+    'django_extensions',
+    # apps
+    'accounts',
+    'glossymatcha',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

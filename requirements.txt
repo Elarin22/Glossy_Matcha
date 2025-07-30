@@ -27,3 +27,14 @@ pytest-testdox
 
 # django project pytest
 pytest-django
+
+# PostgreSQL
+psycopg2-binary
+
+# 배포
+asgiref
+gunicorn
+packaging
+pytz
+sqlparse
+tzdata
