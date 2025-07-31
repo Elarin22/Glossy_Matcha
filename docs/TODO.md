@@ -34,3 +34,16 @@
 - GitHub Actions deploy
 - deploy test
 ---
+## 🔔 7/30_수
+### 💡 FRONTEND
+- TypeScript 환경 구성
+- 프로젝트에 필요한 페이지 시안 구성
+- 메인 페이지 구성
+- 브랜드 소개 페이지 구성
+- 제품 소개 페이지 구성
+
+### 💡 BACKEND
+- GitHub Actions CI workflow 오류 수정
+- DB 스키마 생성
+- API 설계도 초안 작성
+---
