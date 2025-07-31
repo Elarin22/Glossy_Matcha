@@ -46,4 +46,20 @@
 - GitHub Actions CI workflow 오류 수정
 - DB 스키마 생성
 - API 설계도 초안 작성
+- 인증/세션 관리 구현 삭제
 ---
+## 🔔 7/31_목
+### 💡 FRONTEND
+- 체험형 콘텐츠 페이지 디자인
+- 제품 상세 페이지 디자인
+- 문의하기 페이지 디자인
+- 공통 컴포넌트 분리
+- 컬러 및 타이포 스타일로 분리
+
+### 💡 BACKEND
+- API 구조 개편
+  - 바이어 전용 API 삭제
+- PostgreSQL DATABASE 연결 [ 심희현 + 최은빈 ]
+- Django ORM Model 구현 [ 심희현 ]
+- 문의하기 API(저장용) 구현 [ 심희현 ]
+- lightsail 에도 postgreSQL DB 연결 [ 심희현 ]
