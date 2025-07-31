@@ -16,16 +16,15 @@ class ProductSpecificationsInline(admin.TabularInline):
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'category', 'is_active', 'created_at')
-    list_filter = ('is_active', 'created_at')
+    list_display = ('name', 'category', 'created_at')
+    list_filter = ('created_at',)
     search_fields = ('name', 'description')
-    list_editable = ('is_active',)
     readonly_fields = ('created_at', 'updated_at')
     inlines = [ProductImagesInline, ProductSpecificationsInline]
     
     fieldsets = (
         ('기본 정보', {
-            'fields': ('name', 'description', 'category', 'is_active', 'is_export', 'sort_order')
+            'fields': ('product_code', 'name', 'description', 'category', 'sort_order')
         }),
         ('시간 정보', {
             'fields': ('created_at', 'updated_at'),

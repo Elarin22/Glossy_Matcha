@@ -1,12 +1,10 @@
 from django.db import models
 
 class Products(models.Model):
-    product_code = models.CharField(max_length=450, unique=True, verbose_name="제품 고유 코드")
+    product_code = models.CharField(max_length=450, unique=True, blank=True, null=True, verbose_name="제품 고유 코드")
     name = models.CharField(max_length=200, verbose_name="제품명")
     description = models.TextField(verbose_name="제품 설명")
     category = models.CharField(max_length=50, verbose_name="제품 카테고리")  # 예: signature, pure, premium
-    is_active = models.BooleanField(default=True, verbose_name="판매 활성화 여부")
-    is_export = models.BooleanField(default=False, verbose_name="수출용 제품 여부")
     sort_order = models.IntegerField(default=0, verbose_name="화면 표시 순서")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="생성 시간")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="수정 시간")
