@@ -9,17 +9,6 @@ from django.conf import settings
 from .models import Inquiries
 from .serializers import InquirySerializer
 
-
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def health_check(request):
-    """헬스체크 엔드포인트"""
-    return Response({
-        'status': 'ok',
-        'timestamp': datetime.now().isoformat()
-    }, status=status.HTTP_200_OK)
-
-
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def create_inquiry(request):
