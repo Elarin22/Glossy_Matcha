@@ -4,9 +4,10 @@
 
 .footer {
     background-color: $color-green-500;
-    color: #ffffff;
+    color: 
+#ffffff;
     padding: 40px 0;
-    
+
     .container {
         max-width: 1200px;
         padding: 0 100px;
@@ -14,62 +15,62 @@
         flex-direction: column;
         gap: 24px;
     }
-    
+
     .socialIcons {
         display: flex;
         gap: 12px;
         align-items: center;
-        
+
         .socialLink {
             display: inline-block;
             transition: opacity 0.2s ease;
-            
+
             &:hover {
                 opacity: 0.8;
             }
-            
+
             .icon {
                 width: 40px;
                 height: 40px;
             }
         }
     }
-    
+
     .companyInfo {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        
+
         .companyName {
             @include pretendard($font-size-18, 500);
             margin-bottom: 8px;
         }
-        
+
         .infoRow {
             @include pretendard($font-size-18, 300);
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             line-height: 1.5;
-            
+
             .infoItem {
                 white-space: nowrap;
-                
+
                 &:not(:last-child) {
                     margin-right: 8px;
                 }
             }
         }
     }
-    
+
     @media (max-width: 768px) {
         padding: 32px 0;
-        
+
         .container {
             padding: 0 40px;
             gap: 20px;
         }
-        
+
         .socialIcons {
             .socialLink {
                 .icon {
@@ -78,21 +79,21 @@
                 }
             }
         }
-        
+
         .companyInfo {
             .companyName {
                 @include pretendard($font-size-16, 500);
             }
-            
+
             .infoRow {
                 @include pretendard($font-size-16, 300);
                 flex-direction: column;
                 gap: 4px;
-                
+
                 .infoItem {
                     white-space: normal;
                     margin-right: 0;
-                    
+
                     &:not(:last-child) {
                         margin-bottom: 4px;
                     }

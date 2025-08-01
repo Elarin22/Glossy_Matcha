@@ -36,6 +36,8 @@ export function Nav({ menuItems }: NavProps) {
     );
 }
 
+export default Nav
+
 // ********* 사용예시(브랜드 소개) *********
 // const mainMenuItems = [
 //     { label: '브랜드 소개', href: '/brand' },
