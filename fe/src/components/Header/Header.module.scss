@@ -5,7 +5,8 @@
   top: 0;
   z-index: 1000;
   background-color: $color-beige-100;
-  padding: 1.25rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid $color-green-50;
 
   &-box {
     display: flex;
@@ -14,20 +15,6 @@
 
     width: min(1660px, 100%);
     margin: 0 auto;
-  }
-
-  .logo {
-    &-mb {
-      display: none;
-      width: 40px;
-      object-fit: contain;
-    }
-    &-pc {
-      display: inline-block;
-      width: 276px;
-      object-fit: contain;
-      margin-right: 2.125rem;
-    }
   }
 
   &-mb {
@@ -41,18 +28,35 @@
     justify-content: space-between;
   }
 
-  .nav {
-    &-list {
+  .logo {
+    &-mb {
+      display: none;
+      object-fit: contain;
+    }
+    &-pc {
+      display: block;
+      object-fit: contain;
+      margin-right: 2.125rem;
+    }
+  }
+
+  &__list {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    & button,
+    & a {
       display: flex;
-      gap: 1.5rem;
       align-items: center;
     }
-    &-item {
-      font-size: $font-size-18;
-      &:hover,
-      &:focus {
-        color: $color-green-500;
-      }
+  }
+
+  &__item {
+    font-size: $font-size-18;
+    &:hover,
+    &:focus {
+      color: $color-green-500;
     }
   }
 
@@ -71,12 +75,17 @@
     color: white;
     font-size: $font-size-14;
 
-    img {
+    & img {
       width: 18px;
       height: 18px;
     }
+    & span {
+      line-height: 1;
+    }
   }
 }
+
+// moblie sidebar
 
 .sidebar {
   position: fixed;
@@ -87,10 +96,10 @@
   height: 100vh;
   background-color: $color-green-500;
   z-index: 900;
-  padding: 7.5rem 1.5rem 2rem;
+  padding: 7.5rem 1.5rem;
 
   transform: translateX(100%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s;
 
   &.open {
     transform: translateX(0);
@@ -117,14 +126,12 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 800;
 }
 
 @media screen and (max-width: 768px) {
   .header {
-    padding: 0.75rem 1.25rem;
-
     &-pc {
       display: none;
     }
@@ -138,14 +145,12 @@
         display: none;
       }
       &-mb {
-        display: inline-block;
+        display: block;
       }
     }
 
-    .nav {
-      &-list {
-        gap: 1.25rem;
-      }
+    &__list {
+      gap: 1.25rem;
     }
   }
 }

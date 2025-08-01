@@ -1,6 +1,7 @@
 import "@/styles/reset.scss";
-// import "@/styles/globals.scss";
+import "@/styles/globals.scss";
 import "@/styles/fonts.scss";
+import Header from "@/components/Header/Header";
 
 export default function RootLayout({
   children,
@@ -9,7 +10,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

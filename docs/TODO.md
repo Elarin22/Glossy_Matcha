@@ -59,7 +59,28 @@
 ### 💡 BACKEND
 - API 구조 개편
   - 바이어 전용 API 삭제
-- PostgreSQL DATABASE 연결 [ 심희현 + 최은빈 ]
-- Django ORM Model 구현 [ 심희현 ]
-- 문의하기 API(저장용) 구현 [ 심희현 ]
-- lightsail 에도 postgreSQL DB 연결 [ 심희현 ]
+- PostgreSQL DATABASE 연결
+- Django ORM Model 구현
+- 문의하기 API(저장용) 구현
+- lightsail 에도 postgreSQL DB 연결
+---
+## 🔔 8/1_Fri
+### 💡 FRONTEND
+- reset.css 및 스타일 변수 생성
+- 폰트 생성
+- 공통 컴포넌트 제작
+  - footer, sub navigation
+  - main header
+  - globals.scss에 공통 button 및 input 스타일 생성
+
+### 💡 BACKEND
+- Django ORM Model
+  - Inquiries: 문의 내역 관리
+  - Products: 제품 정보
+  - ProductImages: 제품 이미지 관리
+  - ProductSpecifications: 제품 상세 스펙
+- Django Templates Model
+  - Sales: 월별 매출 관리
+  - Staff: 직원 정보
+  - Suppliers: 거래처 정보
+  - WorkRecord: 직원 급여 및 근무 기록
