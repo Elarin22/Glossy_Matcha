@@ -189,17 +189,43 @@ class WorkRecord(models.Model):
         return f"{self.staff.name} ({self.staff.nickname}) - {self.total_payment:,}원"
 
 
-class Sales(models.Model):
+class DailySales(models.Model):
     """
-    월별 매출 기록 관리 모델
-    매장 운영 대시보드를 위한 세분화된 매출/원가 관리
+    일별 매출 기록 관리 모델
+    매일의 매출을 기록하여 월별 매출 계산의 기준이 됨
     """
-    year = models.PositiveIntegerField(verbose_name="연도")
-    month = models.PositiveIntegerField(verbose_name="월")
+    date = models.DateField(unique=True, verbose_name="날짜")
     
     # 매출 항목들
     offline_sales = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="오프라인 매출")
     other_sales = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="기타 매출")
+    
+    memo = models.TextField(blank=True, verbose_name="메모")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="수정일")
+    
+    class Meta:
+        verbose_name = "일별 매출"
+        verbose_name_plural = "일별 매출"
+        ordering = ['-date']
+    
+    @property
+    def total_sales(self):
+        """일별 총 매출 계산"""
+        return self.offline_sales + self.other_sales
+    
+    def __str__(self):
+        return f"{self.date} - 총매출: {self.total_sales:,}원"
+
+
+class Sales(models.Model):
+    """
+    월별 매출 기록 관리 모델
+    매장 운영 대시보드를 위한 세분화된 매출/원가 관리
+    일별 매출을 합산하여 월별 매출을 자동 계산
+    """
+    year = models.PositiveIntegerField(verbose_name="연도")
+    month = models.PositiveIntegerField(verbose_name="월")
     
     # 매출원가 항목들
     material_cost = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="재료비")
@@ -222,8 +248,33 @@ class Sales(models.Model):
         unique_together = ['year', 'month']
     
     @property
+    def offline_sales(self):
+        """해당 월의 일별 오프라인 매출 합계"""
+        from django.db.models import Sum
+        from datetime import date
+        
+        daily_sales = DailySales.objects.filter(
+            date__year=self.year,
+            date__month=self.month
+        ).aggregate(total=Sum('offline_sales'))['total']
+        
+        return daily_sales or 0
+    
+    @property
+    def other_sales(self):
+        """해당 월의 일별 기타 매출 합계"""
+        from django.db.models import Sum
+        
+        daily_sales = DailySales.objects.filter(
+            date__year=self.year,
+            date__month=self.month
+        ).aggregate(total=Sum('other_sales'))['total']
+        
+        return daily_sales or 0
+    
+    @property
     def total_sales(self):
-        """총 매출 계산 (매출 소계)"""
+        """총 매출 계산 (일별 매출 합계)"""
         return self.offline_sales + self.other_sales
     
     @property
@@ -238,6 +289,76 @@ class Sales(models.Model):
     
     def __str__(self):
         return f"{self.year}년 {self.month}월 - 총매출: {self.total_sales:,}원, 이익: {self.gross_profit:,}원"
+
+
+class YearlySales(models.Model):
+    """
+    연별 매출 기록 관리 모델
+    월별 매출을 합산하여 연별 매출을 자동 계산
+    """
+    year = models.PositiveIntegerField(unique=True, verbose_name="연도")
+    
+    # 연별 매출원가 항목들 (연간 총합)
+    total_material_cost = models.DecimalField(max_digits=15, decimal_places=0, default=0, verbose_name="연간 총 재료비")
+    total_labor_cost = models.DecimalField(max_digits=15, decimal_places=0, default=0, verbose_name="연간 총 노무비")
+    total_supplies_expense = models.DecimalField(max_digits=15, decimal_places=0, default=0, verbose_name="연간 총 경비-소모품")
+    total_other_expense = models.DecimalField(max_digits=15, decimal_places=0, default=0, verbose_name="연간 총 경비-기타")
+    
+    memo = models.TextField(blank=True, verbose_name="메모")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="수정일")
+    
+    class Meta:
+        verbose_name = "년별 매출"
+        verbose_name_plural = "년별 매출"
+        ordering = ['-year']
+    
+    @property
+    def offline_sales(self):
+        """해당 연도의 월별 오프라인 매출 합계"""
+        monthly_sales = Sales.objects.filter(year=self.year)
+        return sum(sale.offline_sales for sale in monthly_sales)
+    
+    @property
+    def other_sales(self):
+        """해당 연도의 월별 기타 매출 합계"""
+        monthly_sales = Sales.objects.filter(year=self.year)
+        return sum(sale.other_sales for sale in monthly_sales)
+    
+    @property
+    def total_sales(self):
+        """연간 총 매출 계산 (월별 매출 합계)"""
+        return self.offline_sales + self.other_sales
+    
+    @property
+    def total_cost(self):
+        """연간 총 매출원가 계산"""
+        return self.total_material_cost + self.total_labor_cost + self.total_supplies_expense + self.total_other_expense
+    
+    @property
+    def gross_profit(self):
+        """연간 매출이익 계산 (매출 - 매출원가)"""
+        return self.total_sales - self.total_cost
+    
+    def update_annual_costs(self):
+        """해당 연도의 월별 매출원가를 합산하여 연간 총액 업데이트"""
+        from django.db.models import Sum
+        
+        monthly_totals = Sales.objects.filter(year=self.year).aggregate(
+            material_cost=Sum('material_cost'),
+            labor_cost=Sum('labor_cost'),
+            supplies_expense=Sum('supplies_expense'),
+            other_expense=Sum('other_expense')
+        )
+        
+        self.total_material_cost = monthly_totals['material_cost'] or 0
+        self.total_labor_cost = monthly_totals['labor_cost'] or 0
+        self.total_supplies_expense = monthly_totals['supplies_expense'] or 0
+        self.total_other_expense = monthly_totals['other_expense'] or 0
+        self.save()
+    
+    def __str__(self):
+        return f"{self.year}년 - 총매출: {self.total_sales:,}원, 이익: {self.gross_profit:,}원"
 
 
 class Suppliers(models.Model):
@@ -255,8 +376,8 @@ class Suppliers(models.Model):
     
     name = models.CharField(max_length=100, verbose_name="업체명")
     contact_person = models.CharField(max_length=50, verbose_name="담당자")
-    phone = models.CharField(max_length=20, verbose_name="연락처")
-    email = models.EmailField(blank=True, verbose_name="이메일")
+    phone = models.CharField(max_length=20, blank=True, verbose_name="연락처")
+    email = models.EmailField(verbose_name="이메일")
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, verbose_name="결제방식")
     memo = models.TextField(blank=True, verbose_name="메모")
     is_active = models.BooleanField(default=True, verbose_name="거래 중")
