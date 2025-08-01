@@ -1,0 +1,10 @@
+@use "./fonts";
+@use "./variables";
+
+body {
+    font-family: "Pretendard-Medium", sans-serif;
+    font-size: variables.$font-size-16;
+    font-weight: variables.$font-weight-medium;
+    line-height: 1.6;
+    color: variables.$color-black-200;
+}
