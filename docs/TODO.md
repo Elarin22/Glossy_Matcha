@@ -84,3 +84,6 @@
   - Staff: 직원 정보
   - Suppliers: 거래처 정보
   - WorkRecord: 직원 급여 및 근무 기록
+- DEBUG 환경변수 설정
+  - Django Templates 404page
+- Model에 EN(english) 필드 추가
