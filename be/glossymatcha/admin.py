@@ -71,3 +71,34 @@ class ProductsAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+@admin.register(ProductImages)
+class ProductImagesAdmin(admin.ModelAdmin):
+    """
+    제품 이미지 관리 어드민 클래스
+    - 제품 이미지 목록 페이지에서 표시할 필드: 제품, 이미지 타입, 정렬 순서, 한국어 대체 텍스트, 영어 대체 텍스트, 생성일
+    - 필터링: 이미지 타입, 생성일
+    - 검색: 제품 이름, 영어 이름, 한국어 대체 텍스트, 영어 대체 텍스트
+    - 읽기 전용 필드: 생성일
+    - 정렬 순서 필드 수정 가능
+    """
+    list_display = ('product', 'image_type', 'sort_order', 'alt_text_ko', 'alt_text_en', 'created_at')
+    list_filter = ('image_type', 'created_at')
+    search_fields = ('product__name', 'product__name_en' 'alt_text_ko', 'alt_text_en')
+    list_editable = ('sort_order',)
+    ordering = ('product', 'sort_order',)
+    readonly_fields = ('created_at',)
+
+    fieldsets = (
+        ('이미지 정보', {
+            'fields': ('product', 'image', 'image_type', 'sort_order')
+        }),
+        ('대체 텍스트', {
+            'fields': ('alt_text_ko', 'alt_text_en'),
+            'description': 'SEO 및 접근성을 위한 이미지 설명'
+        }),
+        ('시간 정보', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
