@@ -31,22 +31,22 @@ export function Footer() {
         <div className={styles.companyInfo}>
             <div className={styles.companyName}>(주) 컬쳐히어로제주</div>
             <div className={styles.infoRow}>
-            <span className={styles.infoItem}>대표자 | 윤종석</span>
+                <span className={styles.infoItem}>대표자 | 윤종석</span>
             </div>
             <div className={styles.infoRow}>
-            <span className={styles.infoItem}>연락처 | 0507-1449-7847 |</span>
-            <span className={styles.infoItem}>jay@culturehero.net</span>
+                <span className={styles.infoItem}>연락처 | 0507-1449-7847 |</span>
+                <span className={styles.infoItem}>jay@culturehero.net</span>
             </div>
             <div className={styles.infoRow}>
-            <span className={styles.infoItem}>사업자번호 | 779-81-02082</span>
+                <span className={styles.infoItem}>사업자번호 | 779-81-02082</span>
             </div>
             <div className={styles.infoRow}>
-            <span className={styles.infoItem}>주소 | 제주시 조천읍 조함해안로 112</span>
+                <span className={styles.infoItem}>주소 | 제주시 조천읍 조함해안로 112</span>
             </div>
         </div>
         </div>
     </footer>
     );
-};
+}
 
-export default Footer;
+export default Footer
