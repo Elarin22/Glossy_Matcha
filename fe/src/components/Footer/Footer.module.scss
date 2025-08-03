@@ -42,12 +42,12 @@
         gap: 8px;
 
         .companyName {
-            @include pretendard($font-size-18, 500);
+            @include pretendard($font-size-16, 500);
             margin-bottom: 8px;
         }
 
         .infoRow {
-            @include pretendard($font-size-18, 300);
+            @include pretendard($font-size-16, 300);
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -82,11 +82,11 @@
 
         .companyInfo {
             .companyName {
-                @include pretendard($font-size-16, 500);
+                @include pretendard($font-size-14, 500);
             }
 
             .infoRow {
-                @include pretendard($font-size-16, 300);
+                @include pretendard($font-size-14, 300);
                 flex-direction: column;
                 gap: 4px;
 
