@@ -224,3 +224,41 @@ class ProductDetailSerializer(ProductSerializer):
     
     class Meta(ProductSerializer.Meta):
         pass
+
+class ProductListSerializer(serializers.ModelSerializer):
+    main_image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Products
+        fields = [
+            'id', 'product_code', 'name', 'name_en', 'description', 'description_en',
+            'category', 'category_en', 'sort_order', 'main_image', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+    
+    def get_main_image(self, obj):
+        main_image = obj.images.filter(image_type='main').first()
+        if main_image:
+            serializer = ProductImageSerializer(main_image, context=self.context)
+            return serializer.data
+        return None
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+
+        if language == 'en':
+            data['name'] = instance.name_en or instance.name
+            data['description'] = instance.description_en or instance.description
+            data['category'] = instance.category_en or instance.category
+        else:
+            data['name'] = instance.name
+            data['description'] = instance.description
+            data['category'] = instance.category
+        
+        # 원본 언어별 필드는 제거
+        data.pop('name_en', None)
+        data.pop('description_en', None)
+        data.pop('category_en', None)
+
+        return data
