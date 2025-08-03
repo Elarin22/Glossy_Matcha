@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Inquiries, ProductImages
+from .models import Inquiries, ProductImages, ProductSpecifications
 
 class InquirySerializer(serializers.ModelSerializer):
     """
@@ -104,4 +104,41 @@ class ProductImageSerializer(serializers.ModelSerializer):
         data.pop('alt_text_ko', None)
         data.pop('alt_text_en', None)
 
+        return data
+
+class ProductSpecificationSerializer(serializers.ModelSerializer):
+    """
+    제품 사양 직렬화 클래스
+    이 클래스는 제품 사양 모델의 데이터를 직렬화하고 검증하는 역할을 합니다.
+    - id: 사양 ID
+    - spec_key: 사양 키 (한국어)
+    - spec_key_en: 사양 키 (영어)
+    - spec_value: 사양 값 (한국어)
+    - spec_value_en: 사양 값 (영어)
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    - spec_key: 사양 키 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - spec_value: 사양 값 (언어 설정에 따라 한국어 또는 영어로 반환)
+    """
+    class Meta:
+        model = ProductSpecifications
+        fields = ['id', 'spec_key', 'spec_key_en', 'spec_value', 'spec_value_en', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def to_representation(self, instance):
+        """언어별 스펙 처리"""
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+        
+        if language == 'en':
+            data['spec_key'] = instance.spec_key_en or instance.spec_key
+            data['spec_value'] = instance.spec_value_en or instance.spec_value
+        else:
+            data['spec_key'] = instance.spec_key
+            data['spec_value'] = instance.spec_value
+            
+        # 원본 언어별 필드는 제거
+        data.pop('spec_key_en', None)
+        data.pop('spec_value_en', None)
+        
         return data
