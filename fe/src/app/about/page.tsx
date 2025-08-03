@@ -3,6 +3,7 @@ import ScrollNav from "@/components/Nav/ScrollNav";
 import BrandIntro from "@/components/About/BrandIntro";
 import BrandPhilosophy from "@/components/About/BrandPhilosophy";
 import JejuMatcha from "@/components/About/JejuMatcha";
+import BrandHistory from "@/components/About/BrandHistory";
 
 export default function About() {
     const mainMenuItems = [
@@ -27,6 +28,7 @@ export default function About() {
             <BrandIntro />
             <BrandPhilosophy />
             <JejuMatcha />
+            <BrandHistory />
         </main>
     );
 }
