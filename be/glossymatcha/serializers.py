@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Inquiries
+from .models import Inquiries, ProductImages
 
 class InquirySerializer(serializers.ModelSerializer):
     """
@@ -63,5 +63,45 @@ class InquirySerializer(serializers.ModelSerializer):
         
         # 원본 언어별 필드는 제거
         data.pop('message_en', None)
+
+        return data
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    """
+    제품 이미지 직렬화 클래스
+    이 클래스는 제품 이미지 모델의 데이터를 직렬화하고 검증하는 역할을 합니다.
+    - id: 이미지 ID
+    - image: 이미지 파일
+    - image_type: 이미지 유형 (예: 썸네일, 상세 이미지 등)
+    - sort_order: 정렬 순서
+    - alt_text_ko: 이미지 대체 텍스트 (한국어)
+    - alt_text_en: 이미지 대체 텍스트 (영어)
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    - alt_text: 이미지 대체 텍스트 (언어 설정에 따라 한국어 또는 영어로 반환)
+    """
+    class Meta:
+        model = ProductImages
+        fields = ['id', 'image', 'image_type', 'sort_order', 'alt_text_ko', 'alt_text_en', 'created_at']
+        read_only_fields = ['id', 'created_at']
+    
+    def to_reqresentation(self, instance):
+        """
+        직렬화된 데이터를 반환하는 메서드
+        이 메서드는 언어 설정에 따라 이미지 대체 텍스트를 한국어 또는 영어로 반환합니다.
+        """
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+
+        if language == 'en':
+            """ 영어로 이미지 대체 텍스트를 반환합니다."""
+            data['alt_text'] = instance.alt_text_en or instance.alt_text_ko
+        else:
+            """ 한국어로 이미지 대체 텍스트를 반환합니다."""
+            data['alt_text'] = instance.alt_text_ko
+        
+        # 원본 언어별 필드는 제거
+        data.pop('alt_text_ko', None)
+        data.pop('alt_text_en', None)
 
         return data
