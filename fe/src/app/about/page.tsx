@@ -2,12 +2,13 @@ import Image from "next/image";
 import ScrollNav from "@/components/Nav/ScrollNav";
 import BrandIntro from "@/components/About/BrandIntro";
 import BrandPhilosophy from "@/components/About/BrandPhilosophy";
+import JejuMatcha from "@/components/About/JejuMatcha";
 
 export default function About() {
     const mainMenuItems = [
         { label: "브랜드 소개", href: "#brand-intro" },
         { label: "브랜드 철학", href: "#philosophy" },
-        { label: "제주 유기농 말차", href: "#matcha" },
+        { label: "제주 유기농 말차", href: "#jeju-matcha" },
         { label: "연혁", href: "#history" },
     ];
 
@@ -25,6 +26,7 @@ export default function About() {
             <ScrollNav menuItems={mainMenuItems} />
             <BrandIntro />
             <BrandPhilosophy />
+            <JejuMatcha />
         </main>
     );
 }
