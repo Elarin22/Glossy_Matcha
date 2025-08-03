@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Inquiries, ProductImages, ProductSpecifications
+from .models import Inquiries, ProductImages, ProductSpecifications, Products
 
 class InquirySerializer(serializers.ModelSerializer):
     """
@@ -140,5 +140,78 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
         # 원본 언어별 필드는 제거
         data.pop('spec_key_en', None)
         data.pop('spec_value_en', None)
+        
+        return data
+    
+class ProductSerializer(serializers.ModelSerializer):
+    """
+    제품 데이터 직렬화 클래스
+    제품 정보와 관련된 이미지, 스펙 정보를 포함하여 직렬화합니다.
+    - id: 제품 ID
+    - product_code: 제품 코드
+    - name: 제품명 (한국어)
+    - name_en: 제품명 (영어)
+    - description: 제품 설명 (한국어)
+    - description_en: 제품 설명 (영어)
+    - category: 제품 카테고리 (한국어)
+    - category_en: 제품 카테고리 (영어)
+    - sort_order: 정렬 순서
+    - images: 제품 이미지 목록
+    - specifications: 제품 사양 목록
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    - name: 제품명 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - description: 제품 설명 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - category: 제품 카테고리 (언어 설정에 따라 한국어 또는 영어로 반환)
+    """
+    images = ProductImageSerializer(many=True, read_only=True)
+    specifications = ProductSpecificationSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Products
+        fields = [
+            'id', 'product_code', 'name', 'name_en', 'description', 'description_en',
+            'category', 'category_en', 'sort_order', 'images', 'specifications',
+            'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def validate_name(self, value):
+        """제품명 필드 검증"""
+        if not value.strip():
+            raise serializers.ValidationError("제품명은 필수 입력 항목입니다.")
+        return value.strip()
+
+    def validate_description(self, value):
+        """제품 설명 필드 검증"""
+        if not value.strip():
+            raise serializers.ValidationError("제품 설명은 필수 입력 항목입니다.")
+        return value.strip()
+
+    def validate_category(self, value):
+        """카테고리 필드 검증"""
+        if not value.strip():
+            raise serializers.ValidationError("제품 카테고리는 필수 입력 항목입니다.")
+        return value.strip()
+    
+    def to_representation(self, instance):
+        """언어별 제품 정보 처리"""
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+        
+        # 언어에 따라 적절한 필드 값 선택
+        if language == 'en':
+            data['name'] = instance.name_en or instance.name
+            data['description'] = instance.description_en or instance.description
+            data['category'] = instance.category_en or instance.category
+        else:
+            data['name'] = instance.name
+            data['description'] = instance.description
+            data['category'] = instance.category
+        
+        # 원본 언어별 필드는 제거
+        data.pop('name_en', None)
+        data.pop('description_en', None)
+        data.pop('category_en', None)
         
         return data
