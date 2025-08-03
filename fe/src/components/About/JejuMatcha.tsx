@@ -1,8 +1,18 @@
 import Image from "next/image";
 
+/**
+ * 제주 유기농 말차 소개 컴포넌트
+ *
+ * 제주 유기농 말차의 특징과 품질을 소개하는 두 개의 섹션으로 구성:
+ * 1. 말차 소개 및 브랜드 메시지 섹션
+ * 2. 말차의 주요 특징 (유기농 첫순 1번 잎, 지속 가능한 미래, 품질에 대한 약속) 섹션
+ *
+ * @returns 제주 유기농 말차 소개 컴포넌트
+ */
 export default function JejuMatcha() {
     return (
         <>
+            {/* 말차 소개 및 브랜드 메시지 섹션 */}
             <section id="jeju-matcha" className="jeju-matcha__intro">
                 <h3 className="sr-only">제주 유기농 말차 첫번째 섹션</h3>
                 <Image
@@ -48,6 +58,7 @@ export default function JejuMatcha() {
                 </div>
             </section>
 
+            {/* 말차 주요 특징 소개 섹션 */}
             <section className="jeju-matcha__features">
                 <h3 className="sr-only">제주 유기농 말차 두번째 섹션</h3>
                 <div className="jeju-matcha__feature-list">

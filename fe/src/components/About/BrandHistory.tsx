@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { HistoryItem } from "@/types/history";
 
+/**
+ * 브랜드 연혁 데이터 배열
+ * 글로시 말차의 주요 이정표와 성과를 시간순으로 정리한 데이터
+ */
 const historyItems: HistoryItem[] = [
     { date: "2023.09", desc: ["'GLOSSY MATCHA' OPENING"] },
     { date: "2024.09", desc: ["Select shop 'WITH GLOSSY' OPENING"] },
@@ -29,6 +33,14 @@ const historyItems: HistoryItem[] = [
     },
 ];
 
+/**
+ * 브랜드 연혁 섹션 컴포넌트
+ *
+ * 글로시 말차의 카페 전경 이미지와 함께 브랜드의 주요 연혁을
+ * 시간순으로 표시하는 섹션을 렌더링합니다.
+ *
+ * @returns 브랜드 연혁 섹션 컴포넌트
+ */
 export default function BrandHistory() {
     return (
         <section id="history" className="brand-history">

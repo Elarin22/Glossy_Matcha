@@ -1,5 +1,12 @@
 import Image from "next/image";
 
+/**
+ * 브랜드 소개 섹션 컴포넌트
+ *
+ * 글로시말차의 브랜드 철학과 비전을 소개하는 정적 콘텐츠 섹션
+ *
+ * @returns 브랜드 소개 섹션 컴포넌트
+ */
 export default function BrandIntro() {
     return (
         <section id="brand-intro" className="brand-intro">

@@ -1,5 +1,12 @@
 import Image from "next/image";
 
+/**
+ * 브랜드 철학 섹션 컴포넌트
+ *
+ * 글로시말차의 핵심 가치인 LIGHT, NATURAL, TRAVEL을 소개하는 섹션
+ *
+ * @returns 브랜드 철학 섹션 컴포넌트
+ */
 export default function BrandPhilosophy() {
     return (
         <section id="philosophy" className="brand-philosophy">
@@ -31,7 +38,7 @@ export default function BrandPhilosophy() {
 
                     <article className="brand-philosophy__item">
                         <h4 className="brand-philosophy__item-title">
-                            TRABEL
+                            TRAVEL
                         </h4>
                         <p className="brand-philosophy__item-desc">
                             여행과 함께 할 수 있는
