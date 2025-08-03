@@ -220,6 +220,25 @@ class ProductDetailSerializer(ProductSerializer):
     """
     제품 상세 직렬화 클래스
     제품 상세 정보를 직렬화하며, 이미지와 사양 정보를 포함합니다.
+    - id: 제품 ID
+    - product_code: 제품 코드
+    - name: 제품명 (한국어)
+    - name_en: 제품명 (영어)
+    - description: 제품 설명 (한국어)
+    - description_en: 제품 설명 (영어)
+    - category: 제품 카테고리 (한국어)
+    - category_en: 제품 카테고리 (영어)
+    - sort_order: 정렬 순서
+    - images: 제품 이미지 목록
+    - specifications: 제품 사양 목록
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    - name: 제품명 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - description: 제품 설명 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - category: 제품 카테고리 (언어 설정에 따라 한국어 또는 영어로 반환)
+    - images: 제품 이미지 목록 (언어 설정에 따라 이미지 대체 텍스트 포함)
+    - specifications: 제품 사양 목록 (언어 설정에 따라 사양 키와 값 포함)
+    - alt_text: 이미지 대체 텍스트 (언어 설정에 따라 한국어 또는 영어로 반환)
     """
     
     class Meta(ProductSerializer.Meta):
