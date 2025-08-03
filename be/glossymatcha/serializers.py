@@ -215,3 +215,12 @@ class ProductSerializer(serializers.ModelSerializer):
         data.pop('category_en', None)
         
         return data
+    
+class ProductDetailSerializer(ProductSerializer):
+    """
+    제품 상세 직렬화 클래스
+    제품 상세 정보를 직렬화하며, 이미지와 사양 정보를 포함합니다.
+    """
+    
+    class Meta(ProductSerializer.Meta):
+        pass
