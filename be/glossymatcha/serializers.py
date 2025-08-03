@@ -85,7 +85,7 @@ class ProductImageSerializer(serializers.ModelSerializer):
         fields = ['id', 'image', 'image_type', 'sort_order', 'alt_text_ko', 'alt_text_en', 'created_at']
         read_only_fields = ['id', 'created_at']
     
-    def to_reqresentation(self, instance):
+    def to_representation(self, instance):
         """
         직렬화된 데이터를 반환하는 메서드
         이 메서드는 언어 설정에 따라 이미지 대체 텍스트를 한국어 또는 영어로 반환합니다.
