@@ -105,6 +105,14 @@ class ProductImagesAdmin(admin.ModelAdmin):
 
 @admin.register(ProductSpecifications)
 class ProductSpecificationsAdmin(admin.ModelAdmin):
+    """
+    제품 사양 관리 어드민 클래스
+    - 제품 사양 목록 페이지에서 표시할 필드: 제품, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어), 생성일
+    - 필터링: 생성일
+    - 검색: 제품 이름, 영어 이름, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어)
+    - 읽기 전용 필드: 생성일
+    - 정렬 순서 필드 수정 가능
+    """
     list_display = ('product', 'spec_key', 'spec_key_en', 'spec_value', 'spec_value_en', 'created_at')
     list_filter = ('created_at',)
     search_fields = ('product__name', 'product__name_en', 'spec_key', 'spec_key_en', 'spec_value', 'spec_value_en')
