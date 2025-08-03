@@ -2,137 +2,139 @@
 @use "./variables" as *;
 
 body {
-    font-family: "Pretendard-Medium", sans-serif;
-    font-size: $font-size-16;
-    font-weight: $font-weight-medium;
-    line-height: 1.6;
-    background-color: $color-beige-100;
-    color: $color-black-200;
+  font-family: "Pretendard-Medium", sans-serif;
+  font-size: $font-size-16;
+  font-weight: $font-weight-medium;
+  line-height: 1.6;
+  background-color: $color-beige-100;
+  color: $color-black-200;
+
+  overscroll-behavior: none;
 }
 
 .btn-g {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color-green-500;
-    color: #fff;
-    border-radius: 10px;
-    font-weight: $font-weight-medium;
-    line-height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-green-500;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: $font-weight-medium;
+  line-height: 28px;
 
-    &.pc {
-        width: 200px;
-        padding: 14px 0;
-        font-size: $font-size-18;
-    }
+  &.pc {
+    width: 200px;
+    padding: 14px 0;
+    font-size: $font-size-18;
+  }
 
-    &.mb {
-        width: 140px;
-        padding: 8px 0;
-        font-size: $font-size-16;
-    }
+  &.mb {
+    width: 140px;
+    padding: 8px 0;
+    font-size: $font-size-16;
+  }
 }
 
 .btn-choice {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    color: $color-black-200;
-    font-weight: $font-weight-medium;
-    line-height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: $color-black-200;
+  font-weight: $font-weight-medium;
+  line-height: 18px;
 
-    &.pc {
-        width: 600px;
-        padding: 41px 0;
-        font-size: $font-size-24;
-        border: 2px solid $color-green-500;
-        border-radius: 18px;
-    }
+  &.pc {
+    width: 600px;
+    padding: 41px 0;
+    font-size: $font-size-24;
+    border: 2px solid $color-green-500;
+    border-radius: 18px;
+  }
 
-    &.mb {
-        width: 240px;
-        padding: 16px 0;
-        font-size: $font-size-14;
-        border: 1px solid $color-green-500;
-        border-radius: 8px;
-    }
+  &.mb {
+    width: 240px;
+    padding: 16px 0;
+    font-size: $font-size-14;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+  }
 }
 
 .tag {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    background-color: $color-green-50;
-    color: $color-black-200;
-    border-radius: 50px;
-    font-weight: $font-weight-medium;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  background-color: $color-green-50;
+  color: $color-black-200;
+  border-radius: 50px;
+  font-weight: $font-weight-medium;
 
-    &.pc {
-        padding: 4px 14px;
-        font-size: $font-size-14;
-    }
+  &.pc {
+    padding: 4px 14px;
+    font-size: $font-size-14;
+  }
 
-    &.mb {
-        padding: 4px 10px;
-        font-size: $font-size-8;
-    }
+  &.mb {
+    padding: 4px 10px;
+    font-size: $font-size-8;
+  }
 }
 
 .btn-category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    padding: 10px 16px;
-    background-color: #fff;
-    color: $color-green-500;
-    font-size: $font-size-16;
-    font-weight: $font-weight-medium;
-    border: 1px solid $color-green-50;
-    border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 10px 16px;
+  background-color: #fff;
+  color: $color-green-500;
+  font-size: $font-size-16;
+  font-weight: $font-weight-medium;
+  border: 1px solid $color-green-50;
+  border-radius: 30px;
 
-    &.selected {
-        background-color: $color-green-500;
-        color: #fff;
-    }
+  &.selected {
+    background-color: $color-green-500;
+    color: #fff;
+  }
 }
 
 .input {
-    display: flex;
-    flex-direction: column;
-    font-size: $font-size-20;
-    font-weight: $font-weight-medium;
+  display: flex;
+  flex-direction: column;
+  font-size: $font-size-20;
+  font-weight: $font-weight-medium;
 
-    &.label {
-        color: $color-green-500;
-        margin-bottom: 14px;
+  &.label {
+    color: $color-green-500;
+    margin-bottom: 14px;
+  }
+
+  &.box {
+    width: 700px;
+    height: 58px;
+    padding: 17px 18px;
+    color: $color-black-200;
+    border: 2px solid $color-green-50;
+    border-radius: 10px;
+
+    &:focus {
+      outline: none;
+      border: 2px solid $color-green-500;
     }
-
-    &.box {
-        width: 700px;
-        height: 58px;
-        padding: 17px 18px;
-        color: $color-black-200;
-        border: 2px solid $color-green-50;
-        border-radius: 10px;
-
-        &:focus {
-            outline: none;
-            border: 2px solid $color-green-500;
-        }
-    }
+  }
 }
 
 .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
