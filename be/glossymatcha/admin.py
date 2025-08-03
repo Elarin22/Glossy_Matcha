@@ -133,7 +133,7 @@ class ProductSpecificationsAdmin(admin.ModelAdmin):
             'description': '영어 스펙이 비어있으면 한국어 스펙을 사용합니다.'
         }),
         ('시간 정보', {
-            'fields': ('created_at', 'updated_at'),
+            'fields': ('created_at',),
             'classes': ('collapse',)
         }),
     )
