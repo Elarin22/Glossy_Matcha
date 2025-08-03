@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
 export default function Home() {
   return (
     <>
       <main>
-        <h1>글로시 말차 페이지</h1>
+        <h1 className="sr-only">글로시말차 홈페이지</h1>
       </main>
     </>
   );
