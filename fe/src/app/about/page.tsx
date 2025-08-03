@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ScrollNav from "@/components/Nav/ScrollNav";
+import BrandIntro from "@/components/About/BrandIntro";
 
 export default function About() {
     const mainMenuItems = [
@@ -21,6 +22,7 @@ export default function About() {
                 />
             </section>
             <ScrollNav menuItems={mainMenuItems} />
+            <BrandIntro />
         </main>
     );
 }
