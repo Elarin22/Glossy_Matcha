@@ -1,0 +1,9 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.main-banner__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1920 / 720;
+    object-fit: cover;
+}
