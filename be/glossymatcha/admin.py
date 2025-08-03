@@ -102,3 +102,38 @@ class ProductImagesAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+@admin.register(ProductSpecifications)
+class ProductSpecificationsAdmin(admin.ModelAdmin):
+    """
+    제품 사양 관리 어드민 클래스
+    - 제품 사양 목록 페이지에서 표시할 필드: 제품, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어), 생성일
+    - 필터링: 생성일
+    - 검색: 제품 이름, 영어 이름, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어)
+    - 읽기 전용 필드: 생성일
+    - 정렬 순서 필드 수정 가능
+    """
+    list_display = ('product', 'spec_key', 'spec_key_en', 'spec_value', 'spec_value_en', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('product__name', 'product__name_en', 'spec_key', 'spec_key_en', 'spec_value', 'spec_value_en')
+    ordering = ('product', 'spec_key',)
+    readonly_fields = ('created_at',)
+
+    fieldsets = (
+        ('제품 정보', {
+            'fields': ('product',)
+        }),
+        ('한국어 스펙', {
+            'fields': ('spec_key', 'spec_value'),
+            'classes': ('wide',)
+        }),
+        ('영어 스펙', {
+            'fields': ('spec_key_en', 'spec_value_en'),
+            'classes': ('collapse', 'wide'),
+            'description': '영어 스펙이 비어있으면 한국어 스펙을 사용합니다.'
+        }),
+        ('시간 정보', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
