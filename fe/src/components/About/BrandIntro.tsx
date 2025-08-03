@@ -21,9 +21,9 @@ export default function BrandIntro() {
 
             <div className="brand-intro__content">
                 <h4 className="brand-intro__title">LIFE WITH GLOSSY</h4>
-                <blockquote className="brand-intro__slogan">
-                    "모든 일상을 빛나는 순간으로 만듭니다."
-                </blockquote>
+                <p className="brand-intro__slogan">
+                    &ldquo;모든 일상을 빛나는 순간으로 만듭니다.&rdquo;
+                </p>
 
                 <div className="brand-intro__description">
                     <p className="brand-intro__paragraph">

@@ -26,7 +26,7 @@ export default function JejuMatcha() {
                 <div className="jeju-matcha__content">
                     <h4 className="jeju-matcha__title">RELAX WITH GLOSSY</h4>
                     <p className="jeju-matcha__slogan">
-                        "글로시말차는 진정한 휴식을 선물합니다."
+                        &ldquo;글로시말차는 진정한 휴식을 선물합니다.&rdquo;
                     </p>
 
                     <div className="jeju-matcha__description">
