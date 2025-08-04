@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./JejuMatcha.module.scss"; // CSS Module import
+import styles from "./JejuMatcha.module.scss";
 
 /**
  * 제주 유기농 말차 소개 컴포넌트
