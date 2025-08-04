@@ -4,6 +4,7 @@ import BrandIntro from "@/components/About/BrandIntro";
 import BrandPhilosophy from "@/components/About/BrandPhilosophy";
 import JejuMatcha from "@/components/About/JejuMatcha";
 import BrandHistory from "@/components/About/BrandHistory";
+import styles from "./page.module.scss";
 
 /**
  * 브랜드 소개 페이지 컴포넌트
@@ -27,10 +28,12 @@ export default function About() {
             <section className="main-banner">
                 <h2 className="sr-only">브랜드 소개 페이지</h2>
                 <Image
+                    className={styles["main-banner__image"]}
                     src="/images/about/main-banner.svg"
                     alt="브랜드 소개 매인 배너"
                     width={1920}
-                    height={600}
+                    height={720}
+                    priority
                 />
             </section>
             <ScrollNav menuItems={mainMenuItems} />

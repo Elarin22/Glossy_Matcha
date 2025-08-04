@@ -1,0 +1,51 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.brand-history {
+    display: flex;
+    margin-bottom: 240px;
+
+    &__image {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        aspect-ratio: 960 / 800;
+        object-fit: cover;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 0 auto;
+    }
+
+    &__title {
+        @include myeongjo($font-size-50, 700);
+        color: $color-green-500;
+        margin-bottom: 20px;
+    }
+
+    &__location {
+        @include pretendard($font-size-24, 500);
+        margin-bottom: 50px;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.history-item {
+    display: flex;
+    gap: 20px;
+    @include pretendard($font-size-20, 500);
+
+    &__desc-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
