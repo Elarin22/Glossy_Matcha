@@ -193,3 +193,12 @@ class ProductSerializer(serializers.ModelSerializer):
         data.pop('sub_description_en', None)
         
         return data
+
+class ProductDetailSerializer(ProductSerializer):
+    """
+    제품 상세 정보 직렬화 클래스
+    이 클래스는 제품의 상세 정보를 직렬화하며, ProductSerializer를 상속받아 사용합니다.
+    """
+    
+    class Meta(ProductSerializer.Meta):
+        pass
