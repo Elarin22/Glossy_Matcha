@@ -16,19 +16,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 200px;
+  padding: 14px 0;
   background-color: $color-green-500;
   color: #fff;
   border-radius: 10px;
+  font-size: $font-size-18;
   font-weight: $font-weight-medium;
   line-height: 28px;
 
-  &.pc {
-    width: 200px;
-    padding: 14px 0;
-    font-size: $font-size-18;
-  }
-
-  &.mb {
+  @media (max-width: 768px) {
     width: 140px;
     padding: 8px 0;
     font-size: $font-size-16;
@@ -39,20 +36,17 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 600px;
+  padding: 41px 0;
   background-color: #fff;
   color: $color-black-200;
+  font-size: $font-size-24;
   font-weight: $font-weight-medium;
   line-height: 18px;
+  border: 2px solid $color-green-500;
+  border-radius: 18px;
 
-  &.pc {
-    width: 600px;
-    padding: 41px 0;
-    font-size: $font-size-24;
-    border: 2px solid $color-green-500;
-    border-radius: 18px;
-  }
-
-  &.mb {
+  @media (max-width: 768px) {
     width: 240px;
     padding: 16px 0;
     font-size: $font-size-14;
@@ -66,17 +60,14 @@ body {
   justify-content: center;
   align-items: center;
   width: fit-content;
+  padding: 4px 14px;
   background-color: $color-green-50;
   color: $color-black-200;
   border-radius: 50px;
+  font-size: $font-size-14;
   font-weight: $font-weight-medium;
 
-  &.pc {
-    padding: 4px 14px;
-    font-size: $font-size-14;
-  }
-
-  &.mb {
+  @media (max-width: 768px) {
     padding: 4px 10px;
     font-size: $font-size-8;
   }
