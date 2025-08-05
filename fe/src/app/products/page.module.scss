@@ -1,0 +1,40 @@
+@import '@/styles/variables.scss';
+
+.main {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.contentSection {
+    height: 100vh;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-beige-100;
+
+    h2 {
+        font-family: "YeolrinMyeongjo", serif;
+        font-size: $font-size-32;
+        font-weight: $font-weight-medium;
+        line-height: 1.6;
+        letter-spacing: -0.02em;
+        color: $color-black-200;
+    }
+}
+
+// Mobile
+@media (max-width: 768px) {
+    .contentSection {
+        padding: 1rem;
+        
+        h2 {
+            font-family: "YeolrinMyeongjo", serif;
+            font-size: $font-size-24;
+            font-weight: $font-weight-medium;
+            line-height: 1.6;
+            letter-spacing: -0.02em;
+            text-align: center;
+        }
+    }
+}
