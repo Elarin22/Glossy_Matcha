@@ -73,51 +73,6 @@ body {
   }
 }
 
-.btn-category {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: fit-content;
-  padding: 10px 16px;
-  background-color: #fff;
-  color: $color-green-500;
-  font-size: $font-size-16;
-  font-weight: $font-weight-medium;
-  border: 1px solid $color-green-50;
-  border-radius: 30px;
-
-  &.selected {
-    background-color: $color-green-500;
-    color: #fff;
-  }
-}
-
-.input {
-  display: flex;
-  flex-direction: column;
-  font-size: $font-size-20;
-  font-weight: $font-weight-medium;
-
-  &.label {
-    color: $color-green-500;
-    margin-bottom: 14px;
-  }
-
-  &.box {
-    width: 700px;
-    height: 58px;
-    padding: 17px 18px;
-    color: $color-black-200;
-    border: 2px solid $color-green-50;
-    border-radius: 10px;
-
-    &:focus {
-      outline: none;
-      border: 2px solid $color-green-500;
-    }
-  }
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
