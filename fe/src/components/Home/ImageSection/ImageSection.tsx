@@ -18,7 +18,7 @@ export default function ImageSection({
 }: {
   sectionRefs: React.RefObject<HTMLDivElement[]>;
 }): React.JSX.Element {
-  const [clientHeight, setClientHeight] = useState<number | null>(null);
+  const [clientHeight, setClientHeight] = useState<number | undefined>(0);
 
   useEffect(() => {
     setClientHeight(window.innerHeight - 65);
