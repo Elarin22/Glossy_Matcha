@@ -119,3 +119,77 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
         data['product_code'] = instance.product_code
         
         return data
+    
+class ProductSerializer(serializers.ModelSerializer):
+    """
+    제품 데이터 직렬화 클래스
+    제품 정보와 관련된 이미지, 스펙 정보를 포함하여 직렬화합니다.
+    - id: 제품 ID
+    - name: 제품명 (한국어)
+    - name_en: 제품명 (영어)
+    - subtitle: 제품 부제목 (한국어)
+    - subtitle_en: 제품 부제목 (영어)
+    - description: 제품 설명 (한국어)
+    - description_en: 제품 설명 (영어)
+    - short_description: 제품 안내사항 (한국어)
+    - short_description_en: 제품 안내사항 (영어)
+    - sub_description: 제품 부가 설명 (한국어)
+    - sub_description_en: 제품 부가 설명 (영어)
+    - images: 제품 이미지 목록
+    - specifications: 제품 사양 목록
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    """
+    images = ProductImageSerializer(many=True, read_only=True)
+    specifications = ProductSpecificationSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Products
+        fields = [
+            'id', 'name', 'name_en', 'subtitle', 'subtitle_en',
+            'description', 'description_en', 'short_description', 'short_description_en',
+            'sub_description', 'sub_description_en',
+            'images', 'specifications', 'created_at', 'updated_at'
+        ]
+        read_only_fields = ['id', 'created_at', 'updated_at']
+
+    def validate_name(self, value):
+        """제품명 필드 검증"""
+        if not value.strip():
+            raise serializers.ValidationError("제품명은 필수 입력 항목입니다.")
+        return value.strip()
+
+    def validate_description(self, value):
+        """제품 설명 필드 검증"""
+        if not value.strip():
+            raise serializers.ValidationError("제품 설명은 필수 입력 항목입니다.")
+        return value.strip()
+
+    
+    def to_representation(self, instance):
+        """언어별 제품 정보 처리"""
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+        
+        # 언어에 따라 적절한 필드 값 선택
+        if language == 'en':
+            data['name'] = instance.name_en or instance.name
+            data['subtitle'] = instance.subtitle_en or instance.subtitle
+            data['description'] = instance.description_en or instance.description
+            data['short_description'] = instance.short_description_en or instance.short_description
+            data['sub_description'] = instance.sub_description_en or instance.sub_description
+        else:
+            data['name'] = instance.name
+            data['subtitle'] = instance.subtitle
+            data['description'] = instance.description
+            data['short_description'] = instance.short_description
+            data['sub_description'] = instance.sub_description
+        
+        # 원본 언어별 필드는 제거
+        data.pop('name_en', None)
+        data.pop('subtitle_en', None)
+        data.pop('description_en', None)
+        data.pop('short_description_en', None)
+        data.pop('sub_description_en', None)
+        
+        return data
