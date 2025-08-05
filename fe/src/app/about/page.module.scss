@@ -6,4 +6,8 @@
     height: auto;
     aspect-ratio: 1920 / 720;
     object-fit: cover;
+
+    @media (max-width: 768px) {
+        aspect-ratio: 360 / 240;
+    }
 }
