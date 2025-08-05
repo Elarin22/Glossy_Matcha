@@ -202,3 +202,65 @@ class ProductDetailSerializer(ProductSerializer):
     
     class Meta(ProductSerializer.Meta):
         pass
+
+class ProductListSerializer(serializers.ModelSerializer):
+    """
+    제품 목록 직렬화 클래스
+    - id: 제품 ID
+    - name: 제품명 (한국어)
+    - name_en: 제품명 (영어)
+    - subtitle: 제품 부제목 (한국어)
+    - subtitle_en: 제품 부제목 (영어)
+    - description: 제품 설명 (한국어)
+    - description_en: 제품 설명 (영어)
+    - short_description: 제품 안내사항 (한국어)
+    - short_description_en: 제품 안내사항 (영어)
+    - sub_description: 제품 부가 설명 (한국어)
+    - sub_description_en: 제품 부가 설명 (영어)
+    - main_image: 제품의 대표 이미지
+    - created_at: 생성 일시
+    """
+    main_image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Products
+        fields = [
+            'id', 'name', 'name_en', 'subtitle', 'subtitle_en',
+            'description', 'description_en', 'short_description', 'short_description_en',
+            'sub_description', 'sub_description_en',
+            'main_image', 'created_at'
+        ]
+        read_only_fields = ['id', 'created_at']
+    
+    def get_main_image(self, obj):
+        main_image = obj.images.first()
+        if main_image:
+            serializer = ProductImageSerializer(main_image, context=self.context)
+            return serializer.data
+        return None
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+
+        if language == 'en':
+            data['name'] = instance.name_en or instance.name
+            data['subtitle'] = instance.subtitle_en or instance.subtitle
+            data['description'] = instance.description_en or instance.description
+            data['short_description'] = instance.short_description_en or instance.short_description
+            data['sub_description'] = instance.sub_description_en or instance.sub_description
+        else:
+            data['name'] = instance.name
+            data['subtitle'] = instance.subtitle
+            data['description'] = instance.description
+            data['short_description'] = instance.short_description
+            data['sub_description'] = instance.sub_description
+        
+        # 원본 언어별 필드는 제거
+        data.pop('name_en', None)
+        data.pop('subtitle_en', None)
+        data.pop('description_en', None)
+        data.pop('short_description_en', None)
+        data.pop('sub_description_en', None)
+
+        return data
