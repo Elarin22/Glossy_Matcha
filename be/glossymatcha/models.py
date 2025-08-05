@@ -409,3 +409,30 @@ class Suppliers(models.Model):
     
     def __str__(self):
         return f"{self.name} ({self.contact_person})"
+
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+
+@receiver(post_delete, sender=DailySales)
+def auto_delete_monthly_sales_when_no_daily_sales(sender, instance, **kwargs):
+    """
+    일별 매출 삭제 시, 해당 월의 일별 매출이 모두 없어졌다면
+    관련 월별 매출(Sales)도 자동 삭제
+    """
+    year = instance.date.year
+    month = instance.date.month
+    
+    # 해당 년월에 남아있는 다른 일별 매출이 있는지 확인
+    remaining_daily_sales = DailySales.objects.filter(
+        date__year=year,
+        date__month=month
+    ).exists()
+    
+    # 해당 월에 일별 매출이 완전히 없어졌으면 월별 매출도 삭제
+    if not remaining_daily_sales:
+        try:
+            monthly_sales = Sales.objects.get(year=year, month=month)
+            monthly_sales.delete()
+            print(f"{year}년 {month}월 일별 매출이 모두 삭제되어 월별 매출도 자동 삭제되었습니다.")
+        except Sales.DoesNotExist:
+            pass  # 월별 매출이 없으면 무시
