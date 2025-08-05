@@ -1,3 +1,4 @@
+@import '@/styles/mixins.scss';
 @import '@/styles/variables.scss';
 
 .banner {
@@ -61,11 +62,7 @@
 }
 
 .title {
-    font-family: "YeolrinMyeongjo", serif;
-    font-size: $font-size-72;
-    font-weight: $font-weight-bold;
-    line-height: 1.6;
-    letter-spacing: -0.02em;
+    @include myeongjo($font-size-72, $font-weight-bold);
     margin: 0 0 2rem 0;
     color: $color-green-500;
 
@@ -76,11 +73,7 @@
 }
 
 .description {
-    font-family: "Pretendard", sans-serif;
-    font-size: $font-size-18;
-    font-weight: 300;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+    @include pretendard($font-size-18, 300);
     margin: 0;
     opacity: 0.9;
     max-width: 500px;
@@ -108,10 +101,7 @@
 }
 
 .scrollText {
-    font-family: "Pretendard", sans-serif;
-    font-size: $font-size-14;
-    font-weight: 300;
-    line-height: 1.6;
+    @include pretendard($font-size-14, 300);
     letter-spacing: 0.1em;
     margin-bottom: 8px;
 }
@@ -182,20 +172,12 @@
     }
 
     .title {
-        font-family: "YeolrinMyeongjo", serif;
-        font-size: $font-size-50;
-        font-weight: $font-weight-bold;
-        line-height: 1.6;
-        letter-spacing: -0.02em;
+        @include myeongjo($font-size-50, $font-weight-bold);
         margin-bottom: 1.5rem;
     }
 
     .description {
-        font-family: "Pretendard", sans-serif;
-        font-size: $font-size-16;
-        font-weight: 300;
-        line-height: 1.6;
-        letter-spacing: -0.01em;
+        @include pretendard($font-size-16, 300);
         max-width: 100%;
     }
 
