@@ -50,7 +50,7 @@ class ProductsAdmin(admin.ModelAdmin):
         """번역 완료 상태 표시"""
         if obj.name_en and obj.description_en:
             return "✅ 완료"
-        elif obj.name_en or obj.subtitle_en or obj.description_en or obj.short_description_en or obj.sub_description_en or obj.note_en:
+        elif obj.name_en or obj.subtitle_en or obj.description_en or obj.short_description_en or obj.sub_description_en:
             return "⚠️ 부분완료"
         else:
             return "❌ 미완료"
@@ -58,11 +58,11 @@ class ProductsAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('한국어 정보', {
-            'fields': ('name', 'subtitle', 'description', 'short_description', 'sub_description', 'note'),
+            'fields': ('name', 'subtitle', 'description', 'short_description', 'sub_description'),
             'classes': ('wide',)
         }),
         ('영어 정보', {
-            'fields': ('name_en', 'subtitle_en', 'description_en', 'short_description_en', 'sub_description_en', 'note_en'),
+            'fields': ('name_en', 'subtitle_en', 'description_en', 'short_description_en', 'sub_description_en'),
             'classes': ('collapse', 'wide'),
             'description': '영어 버전이 비어있으면 한국어 버전을 사용합니다.'
         }),
