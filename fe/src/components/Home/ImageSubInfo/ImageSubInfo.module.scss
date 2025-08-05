@@ -1,0 +1,23 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 3.125rem;
+  background-color: white;
+}
+
+.title {
+  @include myeongjo($font-size-32, 700);
+  color: $color-green-500;
+}
+
+.subtitle {
+  font-size: $font-size-18;
+  color: $color-green-500;
+  margin-bottom: 1rem;
+}

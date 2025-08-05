@@ -52,8 +52,8 @@ export default function Header() {
               src="/images/logo/logo-1.png"
               alt="Glossy Matcha"
               className={styles["logo-pc"]}
-              width={276}
-              height={50}
+              width={300}
+              height={28}
               priority
             />
             <Image

@@ -1,9 +1,11 @@
 @use "../../styles/variables" as *;
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
+
+  width: 100%;
   background-color: $color-beige-100;
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid $color-green-50;
