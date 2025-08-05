@@ -19,7 +19,7 @@ class ProductSpecificationsInline(admin.TabularInline):
     제품 사양 인라인 클래스
     - 제품 상세 페이지에서 관련된 사양 데이터를 함께 관리할 수 있도록 설정
     - 추가 사양 입력 필드 제공 (extra=1)
-    - 표시 필드: 스펙 키, 스펙 값 (한국어/영어)
+    - 표시 필드: 제품 코드, 생성일
     - 생성일은 읽기 전용 필드로 설정
     """
     model = ProductSpecifications
@@ -31,11 +31,14 @@ class ProductSpecificationsInline(admin.TabularInline):
 class ProductsAdmin(admin.ModelAdmin):
     """
     제품 관리 어드민 클래스
-    - 제품 목록 페이지에서 표시할 필드: 이름, 영어 이름, 카테고리, 영어 카테고리, 번역 상태, 생성일
-    - 필터링: 카테고리, 생성일
-    - 검색: 이름, 영어 이름, 설명, 영어 설명
+    - 제품 목록 페이지에서 표시할 필드: 제품 이름, 영어 이름, 번역 상태, 생성일
+    - 필터링: 생성일
+    - 검색: 제품 이름, 영어 이름, 설명, 영어 설명
     - 읽기 전용 필드: 생성일, 수정일
-    - 인라인 클래스: ProductImagesInline, ProductSpecificationsInline
+    - 인라인: 제품 이미지, 제품 사양
+    - 번역 상태 표시: 완료, 부분완료, 미완료
+    - 필드셋: 한국어 정보, 영어 정보, 시간 정보
+    - 영어 버전이 비어있으면 한국어 버전을 사용하도록 설정
     """
     list_display = ('name', 'name_en', 'translation_status', 'created_at')
     list_filter = ('created_at',)
@@ -73,11 +76,12 @@ class ProductsAdmin(admin.ModelAdmin):
 class ProductImagesAdmin(admin.ModelAdmin):
     """
     제품 이미지 관리 어드민 클래스
-    - 제품 이미지 목록 페이지에서 표시할 필드: 제품, 이미지 타입, 정렬 순서, 한국어 대체 텍스트, 영어 대체 텍스트, 생성일
-    - 필터링: 이미지 타입, 생성일
-    - 검색: 제품 이름, 영어 이름, 한국어 대체 텍스트, 영어 대체 텍스트
+    - 제품 이미지 목록 페이지에서 표시할 필드: 제품, 이미지, 한국어 대체 텍스트, 영어 대체 텍스트, 생성일
+    - 필터링: 생성일
+    - 검색: 제품 이름, 영어 이름, 대체 텍스트
     - 읽기 전용 필드: 생성일
     - 정렬 순서 필드 수정 가능
+    - 필드셋: 이미지 정보, 대체 텍스트, 시간 정보
     """
     list_display = ('product', 'alt_text_ko', 'alt_text_en', 'created_at')
     list_filter = ('created_at',)
@@ -102,11 +106,11 @@ class ProductImagesAdmin(admin.ModelAdmin):
 class ProductSpecificationsAdmin(admin.ModelAdmin):
     """
     제품 사양 관리 어드민 클래스
-    - 제품 사양 목록 페이지에서 표시할 필드: 제품, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어), 생성일
+    - 제품 사양 목록 페이지에서 표시할 필드: 제품, 제품 코드, 생성일
     - 필터링: 생성일
-    - 검색: 제품 이름, 영어 이름, 스펙 키, 스펙 키 (영어), 스펙 값, 스펙 값 (영어)
+    - 검색: 제품 이름, 영어 이름, 제품 코드
     - 읽기 전용 필드: 생성일, 수정일
-    - 정렬 순서 필드 수정 가능
+    - 필드셋: 제품 정보, 제품 코드, 시간 정보
     """
     list_display = ('product', 'product_code', 'created_at')
     list_filter = ('created_at',)
