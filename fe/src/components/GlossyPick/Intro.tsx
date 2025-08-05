@@ -19,7 +19,7 @@ export default function Intro() {
                 width={970}
                 height={420}
             />
-            <button className="btn-g pc">시작하기</button>
+            <button className="btn-g">시작하기</button>
         </div>
     );
 }
