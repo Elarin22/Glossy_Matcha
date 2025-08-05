@@ -11,3 +11,5 @@ venv
 .venv
 .idea
 *.env
+staticfiles
+*.DS_Store
