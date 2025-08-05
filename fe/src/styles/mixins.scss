@@ -1,20 +1,20 @@
-@use './variables' as *;
+@use "./variables" as *;
 
 // 폰트 - 사용 예시:  @include myeongjo($font-size-50, 700);
 /* 열린명조 */
 @mixin myeongjo($size, $weight: 400) {
-    font-family: 'YeolrinMyeongjo', serif;
-    font-size: $size;
-    font-weight: $weight;
-    line-height: 1.6;
-    letter-spacing: -0.02em;
+  font-family: "YeolrinMyeongjo", serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
 }
 
 /* Pretendard */
 @mixin pretendard($size, $weight: 400) {
-    font-family: 'Pretendard-Medium', sans-serif;
-    font-size: $size;
-    font-weight: $weight;
-    line-height: 1.6;
-    letter-spacing: -0.01em;
+  font-family: "Pretendard-Medium", sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
 }

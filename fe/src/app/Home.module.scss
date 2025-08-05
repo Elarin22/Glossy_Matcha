@@ -1,0 +1,57 @@
+@use "../styles/mixins" as *;
+@use "../styles/variables" as *;
+
+.home-container {
+  display: grid;
+  grid-template-columns: min(40%, 500px) 1fr;
+}
+
+.info {
+  &-box {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100vh;
+    background-color: $color-beige-100;
+    padding: 0 1.25rem;
+  }
+
+  &-item {
+    max-width: 370px;
+    padding-bottom: 1.25rem;
+
+    // transform: translateY(100px);
+    // opacity: 0;
+    // transition: all 0.3s ease-in-out;
+  }
+
+  &-title {
+    @include myeongjo($font-size-50, $font-weight-bold);
+    line-height: 1.2;
+    color: $color-green-500;
+    margin-bottom: 0.825rem;
+  }
+
+  &-subtitle {
+    font-size: $font-size-24;
+    color: $color-green-500;
+    margin-bottom: 1rem;
+  }
+
+  &-content {
+    font-size: $font-size-18;
+    word-break: keep-all;
+    margin-bottom: 1rem;
+  }
+}
+
+.section-item {
+}
