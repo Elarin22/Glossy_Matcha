@@ -49,7 +49,7 @@ export default Nav
 // <Nav menuItems={mainMenuItems} />
 
 // ********* 사용예시(제품) *********
-// const productMenuItems = [
+// const productsMenuItems = [
 //   { label: '시그니처', href: '/signature' },
 //   { label: '말차다구세트', href: '/tea-set' },
 //   { label: '틴케이스', href: '/tin-case' }
