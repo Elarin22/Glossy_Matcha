@@ -176,11 +176,14 @@ class WorkRecord(models.Model):
     
     def save(self, *args, **kwargs):
         """
-        저장 시 지급합계 자동 계산
-        지급합계 = 시급×총근무시간 + 월급 + 주휴수당
+        저장 시 월급과 지급합계 자동 계산
+        월급 = 시급 × 총근무시간
+        지급합계 = 월급 + 주휴수당
         """
-        hourly_total = self.hourly_rate * self.total_hours
-        self.total_payment = hourly_total + self.monthly_salary + self.weekly_holiday_allowance
+        # 월급 자동 계산 (시급 × 총근무시간)
+        self.monthly_salary = self.hourly_rate * self.total_hours
+        # 지급합계 계산
+        self.total_payment = self.monthly_salary + self.weekly_holiday_allowance
         super().save(*args, **kwargs)
     
     def __str__(self):
