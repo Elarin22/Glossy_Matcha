@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./Home.module.scss";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import ImageSubInfo from "@/components/Home/ImageSubInfo/ImageSubInfo";
+import { imageSubInfos } from "@/components/Home/Home.type";
 
 const slogans: {
   title: string;
@@ -15,7 +17,7 @@ const slogans: {
 }[] = [
   {
     title: "Life With Glossy",
-    subtitle: "모든 일상을 빛나는 순간으로 만듭니다.",
+    subtitle: "모든 일상을 빛나는 순간으로 만듭니다",
     content:
       "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
   },
@@ -42,11 +44,11 @@ const slogans: {
   },
 ];
 
-const sections: { id: number; title: string; image: string }[] = [
-  { id: 1, title: "브랜드 소개", image: "/images/home/glossy-matcha.png" },
-  { id: 2, title: "카페 소개", image: "/images/home/glossy-matcha.png" },
-  { id: 3, title: "제품 소개", image: "/images/home/glossy-signature.png" },
-  { id: 4, title: "말차 테스트", image: "/images/home/matcha-test.png" },
+const sections: { title: string; image: string }[] = [
+  { title: "브랜드 소개", image: "/images/home/glossy-matcha.png" },
+  { title: "카페 소개", image: "/images/home/glossy-matcha.png" },
+  { title: "제품 소개", image: "/images/home/glossy-signature.png" },
+  { title: "말차 테스트", image: "/images/home/matcha-test.png" },
 ];
 
 export default function Home() {
@@ -66,7 +68,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     console.log("Section Refs:", sectionRefs.current);
@@ -87,7 +89,10 @@ export default function Home() {
         <h1 className="sr-only">글로시말차에 방문해주셔서 감사합니다.</h1>
         <aside className={styles["info-box"]}>
           <h2 className="sr-only">글로시 말차 슬로건</h2>
-          <div className={styles["info-item"]}>
+          <div
+            key={currentIndex}
+            className={`${styles["info-item"]} ${styles["fade-up"]}`}
+          >
             <h3 className={styles["info-title"]}>
               {slogans[currentIndex].title}
             </h3>
@@ -98,8 +103,8 @@ export default function Home() {
               <Image
                 src={slogans[currentIndex].image || "/images/logo/logo-1.png"}
                 alt="Glossy Matcha Location(위치)"
-                width={340}
-                height={250}
+                width={300}
+                height={220}
               />
             )}
             <p className={styles["info-content"]}>
@@ -114,23 +119,21 @@ export default function Home() {
         </aside>
 
         <div>
-          {sections.map((section, i) => {
+          {sections.map((section, index) => {
             return (
-              <section
-                key={section.id}
-                ref={(el) => {
-                  sectionRefs.current[i] = el as HTMLDivElement;
-                }}
-                className={styles["section-item"]}
-              >
-                <h2 className="sr-only">{section.title}</h2>
-                <Image
-                  src={section.image}
-                  alt=""
-                  width={1000}
-                  height={500}
-                  style={{ width: "100%", height: "auto" }}
-                />
+              <section key={index}>
+                {index !== 0 && index !== sections.length - 1 && (
+                  <ImageSubInfo {...imageSubInfos[index - 1]} />
+                )}
+                <div
+                  ref={(el) => {
+                    sectionRefs.current[index] = el as HTMLDivElement;
+                  }}
+                  className={styles["section-item"]}
+                >
+                  <h2 className="sr-only">{section.title}</h2>
+                  <Image src={section.image} alt="" fill />
+                </div>
               </section>
             );
           })}

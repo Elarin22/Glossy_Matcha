@@ -22,36 +22,52 @@
     height: 100vh;
     background-color: $color-beige-100;
     padding: 0 1.25rem;
+    border-right: 1px solid $color-green-50;
   }
 
   &-item {
     max-width: 370px;
-    padding-bottom: 1.25rem;
 
-    // transform: translateY(100px);
-    // opacity: 0;
-    // transition: all 0.3s ease-in-out;
+    &.fade-up {
+      animation: fadeUp 0.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
 
   &-title {
+    max-width: 360px;
     @include myeongjo($font-size-50, $font-weight-bold);
-    line-height: 1.2;
+    line-height: 1.1;
     color: $color-green-500;
     margin-bottom: 0.825rem;
   }
 
   &-subtitle {
-    font-size: $font-size-24;
+    font-size: $font-size-20;
     color: $color-green-500;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   &-content {
     font-size: $font-size-18;
     word-break: keep-all;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
 
-.section-item {
+.section {
+  &-item {
+    position: relative;
+    height: 100vh;
+  }
 }
