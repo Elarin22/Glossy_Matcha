@@ -1,0 +1,33 @@
+@import '@/styles/mixins.scss';
+@import '@/styles/variables.scss';
+
+.main {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.contentSection {
+    height: 100vh;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-beige-100;
+
+    h2 {
+        @include myeongjo($font-size-32, $font-weight-medium);
+        color: $color-black-200;
+    }
+}
+
+// Mobile
+@media (max-width: 768px) {
+    .contentSection {
+        padding: 1rem;
+        
+        h2 {
+            @include myeongjo($font-size-24, $font-weight-medium);
+            text-align: center;
+        }
+    }
+}

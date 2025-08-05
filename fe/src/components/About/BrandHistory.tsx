@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HistoryItem } from "@/types/history";
+import styles from "./BrandHistory.module.scss";
 
 /**
  * 브랜드 연혁 데이터 배열
@@ -43,35 +44,48 @@ const historyItems: HistoryItem[] = [
  */
 export default function BrandHistory() {
     return (
-        <section id="history" className="brand-history">
+        <section id="history" className={styles["brand-history"]}>
             <Image
-                className="brand-history__image"
+                className={styles["brand-history__image"]}
                 src="/images/about/glossy-matcha.svg"
                 alt="글로시말차 카페 전경 이미지"
                 width={960}
                 height={800}
             />
 
-            <div className="brand-history__content">
-                <h3 className="brand-history__title">GLOSSY HISTORY</h3>
-                <p className="brand-history__location">
+            <div className={styles["brand-history__content"]}>
+                <h3 className={styles["brand-history__title"]}>
+                    GLOSSY HISTORY
+                </h3>
+                <p className={styles["brand-history__location"]}>
                     제주특별자치도 제주시 조천읍 조함해안로 112 일대 (약 1천평)
                 </p>
 
-                <ul className="brand-history__list">
+                <ul className={styles["brand-history__list"]}>
                     {historyItems.map((item) => (
-                        <li key={item.date} className="history-item">
+                        <li key={item.date} className={styles["history-item"]}>
                             <time
-                                className="history-item__date"
+                                className={styles["history-item__date"]}
                                 dateTime={item.date.replace(".", "-")}
                             >
                                 {item.date}
                             </time>
-                            {item.desc.map((text, idx) => (
-                                <p key={idx} className="history-item__desc">
-                                    {text}
-                                </p>
-                            ))}
+                            <div
+                                className={
+                                    styles["history-item__desc-wrapper"]
+                                }
+                            >
+                                {item.desc.map((text, idx) => (
+                                    <p
+                                        key={idx}
+                                        className={
+                                            styles["history-item__desc"]
+                                        }
+                                    >
+                                        {text}
+                                    </p>
+                                ))}
+                            </div>
                         </li>
                     ))}
                 </ul>

@@ -2,7 +2,7 @@
 
 // 폰트 - 사용 예시:  @include myeongjo($font-size-50, 700);
 /* 열린명조 */
-@mixin myeongjo($size, $weight: 400) {
+@mixin myeongjo($size, $weight: 500) {
   font-family: "YeolrinMyeongjo", serif;
   font-size: $size;
   font-weight: $weight;
@@ -11,8 +11,8 @@
 }
 
 /* Pretendard */
-@mixin pretendard($size, $weight: 400) {
-  font-family: "Pretendard-Medium", sans-serif;
+@mixin pretendard($size, $weight: 500) {
+  font-family: "Pretendard", sans-serif;
   font-size: $size;
   font-weight: $weight;
   line-height: 1.6;

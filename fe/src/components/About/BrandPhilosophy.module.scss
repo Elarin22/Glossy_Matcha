@@ -1,0 +1,65 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.brand-philosophy {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 160px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 960px;
+        flex: 1;
+        gap: 120px;
+    }
+
+    &__title {
+        @include myeongjo($font-size-50, 500);
+        color: $color-green-500;
+    }
+
+    &__list {
+        display: flex;
+        gap: 65px;
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+    }
+
+    &__circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background-color: $color-green-500;
+    }
+
+    &__item-title {
+        @include myeongjo($font-size-24, 500);
+        color: #fff;
+    }
+
+    &__item-desc {
+        @include pretendard($font-size-20, 500);
+        text-align: center;
+    }
+
+    &__image {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        aspect-ratio: 960 / 800;
+        object-fit: cover;
+    }
+}

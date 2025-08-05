@@ -6,14 +6,16 @@ class Products(models.Model):
     글로시 말차 제품 정보를 관리하는 모델(한/영문 지원)
     제품 카탈로그 및 상세 정보 저장
     """
-    product_code = models.CharField(max_length=450, unique=True, blank=True, null=True, verbose_name="제품 고유 코드")
     name = models.CharField(max_length=200, verbose_name="제품명")
     name_en = models.CharField(max_length=200, blank=True, verbose_name="제품명 (영어)")
+    subtitle = models.CharField(max_length=300, blank=True, verbose_name="제품 부제목")
+    subtitle_en = models.CharField(max_length=300, blank=True, verbose_name="제품 부제목 (영어)")
     description = models.TextField(verbose_name="제품 설명")
     description_en = models.TextField(blank=True, verbose_name="제품 설명 (영어)")
-    category = models.CharField(max_length=50, verbose_name="제품 카테고리")  # 예: signature, pure, premium
-    category_en = models.CharField(max_length=50, blank=True, verbose_name="제품 카테고리 (영어)")
-    sort_order = models.IntegerField(default=0, verbose_name="화면 표시 순서")
+    short_description = models.CharField(max_length=500, blank=True, verbose_name="제품 안내사항")
+    short_description_en = models.CharField(max_length=500, blank=True, verbose_name="제품 안내사항 (영어)")
+    sub_description = models.TextField(blank=True, verbose_name="제품 부가 설명")
+    sub_description_en = models.TextField(blank=True, verbose_name="제품 부가 설명 (영어)")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="생성 시간")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="수정 시간")
     
@@ -31,18 +33,9 @@ class ProductImages(models.Model):
     제품 이미지 관리 모델
     하나의 제품에 여러 이미지 첨부 가능
     """
-    IMAGE_TYPE_CHOICES = [
-        ('main', 'Main'),
-        ('detail', 'Detail'),
-        ('package', 'Package'),
-        ('label', 'Label'),
-        ('certificate', 'Certificate'),
-    ]
 
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='images')
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='images', verbose_name="제품")
     image = models.ImageField(upload_to="posts/")
-    image_type = models.CharField(max_length=20, choices=IMAGE_TYPE_CHOICES)
-    sort_order = models.IntegerField(default=0)
     alt_text_ko = models.CharField(max_length=100, blank=True, verbose_name="이미지 설명 (한국어)")
     alt_text_en = models.CharField(max_length=100, blank=True, verbose_name="이미지 설명 (영어)")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -50,10 +43,10 @@ class ProductImages(models.Model):
     class Meta:
         verbose_name = "제품 이미지"
         verbose_name_plural = "제품 이미지"
-        ordering = ['sort_order', '-created_at']
+        ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.product.name} - 이미지 {self.sort_order}"
+        return f"{self.product.name} - 이미지"
 
 
 class ProductSpecifications(models.Model):
@@ -61,11 +54,8 @@ class ProductSpecifications(models.Model):
     제품 상세 스펙 정보 관리 모델
     제품별 세부 사양 정보를 키-값 쌍으로 저장
     """
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='specifications')
-    spec_key = models.CharField(max_length=100, verbose_name="스펙 항목명")  # 예: caffeine_content, origin, certification
-    spec_key_en = models.CharField(max_length=100, blank=True, verbose_name="스펙 항목명 (영어)")
-    spec_value = models.CharField(max_length=255, verbose_name="스펙 값")
-    spec_value_en = models.CharField(max_length=255, blank=True, verbose_name="스펙 값 (영어)")
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='specifications', verbose_name="제품")
+    product_code = models.CharField(max_length=450, blank=True, verbose_name="제품 고유 코드")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="생성 시간")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="수정 시간")
     
@@ -75,7 +65,7 @@ class ProductSpecifications(models.Model):
         ordering = ['created_at']
     
     def __str__(self):
-        return f"{self.product.name} - {self.spec_key}"
+        return f"{self.product.name} - {self.product_code}"
 
 
 class Inquiries(models.Model):
