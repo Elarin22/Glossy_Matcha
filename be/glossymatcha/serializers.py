@@ -95,3 +95,27 @@ class ProductImageSerializer(serializers.ModelSerializer):
         data.pop('alt_text_en', None)
 
         return data
+    
+class ProductSpecificationSerializer(serializers.ModelSerializer):
+    """
+    제품 사양 데이터 직렬화 클래스
+    이 클래스는 제품 사양 모델의 데이터를 직렬화하고 검증하는 역할을 합니다.
+    - id: 사양 ID
+    - product: 제품 선택
+    - product_code: 제품 코드
+    - created_at: 생성 일시
+    - updated_at: 수정 일시
+    """
+    class Meta:
+        model = ProductSpecifications
+        fields = ['id', 'product', 'product_code', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at']
+    
+    def to_representation(self, instance):
+        """언어별 스펙 처리"""
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+        
+        data['product_code'] = instance.product_code
+        
+        return data
