@@ -82,7 +82,7 @@ class Inquiries(models.Model):
     name = models.CharField(max_length=100, verbose_name="이름")
     email = models.EmailField(verbose_name="이메일")
     inquiry_type = models.CharField(max_length=20, choices=INQUIRY_TYPE_CHOICES, default='general', verbose_name="문의 유형")
-    message = models.TextField(verbose_name="문의 내용")
+    message = models.TextField(blank=True, verbose_name="문의 내용")
     message_en = models.TextField(blank=True, verbose_name="문의 내용 (영어)")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="문의일")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="수정일")
