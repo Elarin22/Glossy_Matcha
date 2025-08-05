@@ -37,14 +37,18 @@ class InquirySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("이름은 필수 입력 항목입니다.")
         return value.strip()
     
-    def validate_message(self, value):
+    def validate(self, data):
         """
-        문의 내용 필드 검증 메서드
-        문의 내용이 비어있거나 유효하지 않은 경우 예외를 발생시킵니다.
+        전체 데이터 검증 메서드
+        한국어 또는 영어 중 최소 하나의 문의 내용은 필수입니다.
         """
-        if not value.strip():
-            raise serializers.ValidationError("문의 내용은 필수 입력 항목입니다.")
-        return value.strip()
+        message = data.get('message', '').strip()
+        message_en = data.get('message_en', '').strip()
+        
+        if not message and not message_en:
+            raise serializers.ValidationError("한국어 또는 영어 중 최소 하나의 문의 내용은 필수입니다.")
+        
+        return data
     
     def to_representation(self, instance):
         """
