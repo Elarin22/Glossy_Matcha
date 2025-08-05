@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./ImageSection.module.scss";
 import ImageSubInfo from "../ImageSubInfo/ImageSubInfo";
 import Image from "next/image";
@@ -18,12 +16,6 @@ export default function ImageSection({
 }: {
   sectionRefs: React.RefObject<HTMLDivElement[]>;
 }): React.JSX.Element {
-  const [clientHeight, setClientHeight] = useState<number | undefined>(0);
-
-  useEffect(() => {
-    setClientHeight(window.innerHeight - 65);
-  }, []);
-
   return (
     <div>
       {images.map((section, index) => {
@@ -46,7 +38,7 @@ export default function ImageSection({
                 sizes="70vw"
                 className={styles["section-image"]}
               />
-              {index === 0 && <ScrollIndicator moveHeight={clientHeight} />}
+              {index === 0 && <ScrollIndicator />}
             </div>
           </section>
         );

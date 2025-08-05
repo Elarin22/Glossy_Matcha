@@ -1,15 +1,11 @@
 import React from "react";
 import styles from "./ScrollIndicator.module.scss";
 
-export default function ScrollIndicator({
-  moveHeight = window.innerHeight,
-}: {
-  moveHeight?: number;
-}): React.JSX.Element {
+export default function ScrollIndicator(): React.JSX.Element {
   const scrollToNext = () => {
     if (typeof window !== "undefined") {
       window.scrollTo({
-        top: moveHeight,
+        top: window.innerHeight,
         behavior: "smooth",
       });
     }
@@ -18,7 +14,7 @@ export default function ScrollIndicator({
   return (
     <div className={styles.scrollIndicator} onClick={scrollToNext}>
       <span>Scroll</span>
-      <span className={styles.scrollArrow}>↓</span>
+      <img src="/images/icon/icon-Down-arrow.svg" alt="" />
     </div>
   );
 }
