@@ -161,6 +161,7 @@ class WorkRecord(models.Model):
     """
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE, related_name='work_records', verbose_name="직원")
     total_hours = models.DecimalField(max_digits=6, decimal_places=1, default=0, verbose_name="총 근무시간")
+    pay_period_weeks = models.DecimalField(max_digits=3, decimal_places=1, default=4.0, verbose_name="급여 기간(주)")
     hourly_rate = models.DecimalField(max_digits=10, decimal_places=0, default=0, verbose_name="시급")
     monthly_salary = models.DecimalField(max_digits=12, decimal_places=0, default=0, verbose_name="월급")
     weekly_holiday_allowance = models.DecimalField(max_digits=10, decimal_places=0, default=0, verbose_name="주휴수당")
@@ -176,12 +177,28 @@ class WorkRecord(models.Model):
     
     def save(self, *args, **kwargs):
         """
-        저장 시 월급과 지급합계 자동 계산
+        저장 시 월급, 주휴수당, 지급합계 자동 계산
         월급 = 시급 × 총근무시간
+        주휴수당 = 15시간 이상 근무 시 자동 계산
         지급합계 = 월급 + 주휴수당
         """
         # 월급 자동 계산 (시급 × 총근무시간)
         self.monthly_salary = self.hourly_rate * self.total_hours
+        
+        # 주휴수당 자동 계산 (주 15시간 이상 근무 시)
+        weekly_hours = float(self.total_hours) / float(self.pay_period_weeks)  # 정확한 주별 근무시간 계산
+        
+        if weekly_hours >= 15:  # 주 15시간 이상 근무 시 주휴수당 지급
+            if weekly_hours < 40:
+                # 주 40시간 미만: (1주 소정근로시간 / 40) * 8 * 시급
+                self.weekly_holiday_allowance = (weekly_hours / 40) * 8 * float(self.hourly_rate)
+            else:
+                # 주 40시간 이상: 1일 소정근로시간(최대 8시간) * 시급
+                self.weekly_holiday_allowance = 8 * float(self.hourly_rate)
+        else:
+            # 주 15시간 미만은 주휴수당 없음
+            self.weekly_holiday_allowance = 0
+        
         # 지급합계 계산
         self.total_payment = self.monthly_salary + self.weekly_holiday_allowance
         super().save(*args, **kwargs)
