@@ -1,6 +1,6 @@
-@import '@/styles/fonts';
-@import '@/styles/mixins';
-@import '@/styles/variables';
+@import "@/styles/fonts";
+@import "@/styles/mixins";
+@import "@/styles/variables";
 
 .nav {
     background-color: $color-beige-100;
@@ -17,8 +17,8 @@
     padding: 0;
 
     @media (max-width: 768px) {
-    gap: 24px;
-    flex-wrap: wrap;
+        gap: 24px;
+        flex-wrap: wrap;
     }
 }
 
@@ -30,10 +30,10 @@
     transition: color 0.2s ease;
 
     &:hover {
-    color: $color-green-500;
+        color: $color-green-500;
 
         &::before {
-            content: '';
+            content: "";
             position: absolute;
             bottom: -8px;
             left: 0;
@@ -45,16 +45,19 @@
     }
 
     &.active {
-    color: $color-green-500;
+        color: $color-green-500;
 
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: $color-green-500;
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: $color-green-500;
+        }
     }
+    @media (max-width: 768px) {
+        @include pretendard($font-size-14, 500);
     }
 }

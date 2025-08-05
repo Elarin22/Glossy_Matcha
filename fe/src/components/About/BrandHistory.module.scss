@@ -3,11 +3,11 @@
 
 .brand-history {
     display: flex;
-    margin-bottom: 240px;
+    margin-bottom: 15vw;
 
     &__image {
         width: 100%;
-        max-width: 960px;
+        max-width: 50vw;
         height: auto;
         aspect-ratio: 960 / 800;
         object-fit: cover;
@@ -22,14 +22,14 @@
     }
 
     &__title {
-        @include myeongjo($font-size-50, 700);
+        @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
         color: $color-green-500;
-        margin-bottom: 20px;
+        margin-bottom: clamp(12px, 1.5vw, 20px);
     }
 
     &__location {
-        @include pretendard($font-size-24, 500);
-        margin-bottom: 50px;
+        @include pretendard(clamp(16px, 1.25vw, 24px), 500);
+        margin-bottom: clamp(24px, 3vw, 50px);
     }
 
     &__list {
@@ -37,15 +37,58 @@
         flex-direction: column;
         gap: 10px;
     }
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 30px;
+
+        &__image {
+            width: 100%;
+            max-width: 100vw;
+            height: auto;
+            aspect-ratio: 360 / 200;
+            object-fit: cover;
+        }
+
+        &__content {
+            align-items: center;
+        }
+
+        &__title {
+            @include myeongjo($font-size-24, 500);
+            margin-bottom: 10px;
+        }
+
+        &__location {
+            @include pretendard($font-size-14, 500);
+            margin-bottom: 20px;
+        }
+
+        &__list {
+            align-items: flex-start;
+            gap: 5px;
+        }
+    }
 }
 
 .history-item {
     display: flex;
     gap: 20px;
-    @include pretendard($font-size-20, 500);
+    @include pretendard(clamp(14px, 1.2vw, 20px), 500);
 
     &__desc-wrapper {
         display: flex;
         flex-direction: column;
+    }
+
+    @media (max-width: 768px) {
+        gap: 10px;
+        @include pretendard($font-size-12, 500);
+
+        &__desc-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
     }
 }

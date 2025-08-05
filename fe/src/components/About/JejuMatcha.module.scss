@@ -4,12 +4,11 @@
 .jeju-matcha {
     &__intro {
         display: flex;
-        margin-bottom: 160px;
+        margin-bottom: 10vw;
     }
 
     &__image {
-        width: 100%;
-        max-width: 960px;
+        max-width: 50vw;
         height: auto;
         aspect-ratio: 960 / 800;
         object-fit: cover;
@@ -19,36 +18,34 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
         margin: 0 auto;
     }
 
     &__title {
-        @include myeongjo($font-size-50, 700);
+        @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
         color: $color-green-500;
-        margin-bottom: 20px;
+        margin-bottom: clamp(12px, 1.5vw, 20px);
     }
 
     &__slogan {
-        @include pretendard($font-size-24, 400);
-        margin-bottom: 50px;
+        @include pretendard(clamp(16px, 1.25vw, 24px), 500);
+        margin-bottom: clamp(24px, 3vw, 50px);
     }
 
     &__description {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 50px;
+        gap: clamp(24px, 2.5vw, 50px);
     }
 
     &__paragraph {
-        @include pretendard($font-size-20, 400);
+        @include pretendard(clamp(14px, 1.05vw, 20px), 500);
     }
 
     &__feature {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 160px;
+        margin-bottom: 10vw;
 
         &-list {
             display: flex;
@@ -56,8 +53,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 960px;
-            flex: 1;
+            max-width: 50vw;
         }
 
         &-item {
@@ -65,25 +61,96 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 320px;
-            gap: 30px;
+            height: 16.67vw;
+            gap: 1.56vw;
         }
 
         &-title {
-            @include myeongjo($font-size-50, 700);
+            @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
             color: $color-green-500;
         }
 
         &-description {
-            @include pretendard($font-size-24, 500);
+            @include pretendard(clamp(14px, 1.05vw, 20px), 500);
             text-align: center;
         }
 
         &-image {
-            width: 100%;
-            max-width: 960px;
-            aspect-ratio: 1 / 1;
+            max-width: 50vw;
+            height: auto;
+            aspect-ratio: 960 / 960;
             object-fit: cover;
+        }
+    }
+
+    @media (max-width: 768px) {
+        &__intro {
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        &__image {
+            max-width: 100%;
+            aspect-ratio: 360 / 200;
+        }
+
+        &__content {
+            align-items: center;
+        }
+
+        &__title {
+            @include myeongjo($font-size-24, 500);
+            margin-bottom: 10px;
+        }
+
+        &__slogan {
+            @include pretendard($font-size-14, 500);
+            margin-bottom: 20px;
+        }
+
+        &__description {
+            align-items: center;
+            gap: 10px;
+        }
+
+        &__paragraph {
+            @include pretendard($font-size-12, 500);
+            max-width: 300px;
+            text-align: center;
+            word-break: keep-all;
+        }
+
+        &__feature {
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 30px;
+
+            &-list {
+                order: 2;
+                max-width: 100%;
+                gap: 20px;
+            }
+
+            &-item {
+                height: auto;
+                gap: 10px;
+            }
+
+            &-title {
+                @include myeongjo($font-size-22, 500);
+            }
+
+            &-description {
+                @include pretendard($font-size-12, 500);
+            }
+
+            &-image {
+                content: url("/images/about/leaf-2-mb.svg");
+                order: 1;
+                max-width: 100%;
+                aspect-ratio: 360 / 200;
+            }
         }
     }
 }
