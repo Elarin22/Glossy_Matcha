@@ -35,7 +35,7 @@ export default function ScrollNav({
     const [activeId, setActiveId] = useState<string | null>(null);
 
     /** 고정된 네비게이션 바의 높이 (스크롤 오프셋 보정용) */
-    const NAV_HEIGHT = 80;
+    const NAV_HEIGHT = 130;
 
     /**
      * 메뉴 항목 클릭 시 부드럽게 해당 섹션으로 스크롤 이동
