@@ -1,4 +1,4 @@
-from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products
+from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
@@ -13,6 +13,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
+from .forms import StaffForm, WorkRecordForm
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -314,3 +315,100 @@ class ProductDetailView(generics.RetrieveAPIView):
             'language': self.get_serializer_context()['language'],
             'result': serializer.data
         })
+    
+class StaffListView(LoginRequiredMixin, ListView):
+    """
+    직원 목록 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 직원 목록 페이지를 렌더링
+    """
+    model = Staff
+    template_name = 'glossymatcha/staff/list.html'
+    context_object_name = 'staff_list'
+
+class StaffCreateView(LoginRequiredMixin, CreateView):
+    """
+    직원 생성 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 직원 생성 페이지를 렌더링
+    """
+    model = Staff
+    form_class = StaffForm
+    template_name = 'glossymatcha/staff/create.html'
+    success_url = reverse_lazy('staff_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.name} 직원이 성공적으로 등록되었습니다.')
+        return response
+    
+class StaffDetailView(LoginRequiredMixin, DetailView):
+    """
+    직원 상세 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 직원 상세 페이지를 렌더링
+    """
+    model = Staff
+    template_name = 'glossymatcha/staff/detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # 최근 급여 기록
+        recent_work_records = WorkRecord.objects.filter(staff=self.object).order_by('-created_at')[:10]
+        context['recent_work_records'] = recent_work_records            
+        
+        return context
+    
+class StaffUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    직원 수정 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 직원 수정 페이지를 렌더링
+    """
+    model = Staff
+    form_class = StaffForm
+    template_name = 'glossymatcha/staff/update.html'
+
+    def get_success_url(self):
+        return reverse_lazy('staff_detail', kwargs={'pk': self.object.pk})
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.name} 직원 정보가 수정되었습니다.')
+        return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['staff'] = self.object
+        return context
+    
+class StaffDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    직원 삭제 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 직원 삭제 페이지를 렌더링
+    """
+    model = Staff
+    template_name = 'glossymatcha/staff/delete.html'
+    success_url = reverse_lazy('staff_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.name} 직원이 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
+    
+class WorkRecordCreateView(LoginRequiredMixin, CreateView):
+    """
+    직원 근무 기록 생성 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 근무 기록 생성 페이지를 렌더링
+    """
+    model = WorkRecord
+    form_class = WorkRecordForm
+    template_name = 'glossymatcha/staff/work_record.html'
+    success_url = reverse_lazy('dashboard')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 등록되었습니다.')
+        return response
