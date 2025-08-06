@@ -13,7 +13,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
-from .forms import StaffForm, WorkRecordForm, SuppliersForm
+from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -486,4 +486,82 @@ class SuppliersDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         messages.success(request, f'{self.object.name} 거래처가 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
+
+# Django Template Views for daily sales management
+class DailySalesListView(LoginRequiredMixin, ListView):
+    """
+    일별 매출 목록 조회
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일별 매출 목록 페이지를 렌더링
+    """
+    model = DailySales
+    template_name = 'glossymatcha/daily_sales/list.html'
+    context_object_name = 'daily_sales_list'
+
+
+class DailySalesCreateView(LoginRequiredMixin, CreateView):
+    """
+    일별 매출 등록
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일별 매출 등록 페이지를 렌더링"""
+    model = DailySales
+    form_class = DailySalesForm
+    template_name = 'glossymatcha/daily_sales/create.html'
+    success_url = reverse_lazy('daily_sales_list')
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.date} 일별 매출이 등록되었습니다.')
+        return response
+
+
+class DailySalesDetailView(LoginRequiredMixin, DetailView):
+    """
+    일별 매출 상세 정보
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일별 매출 상세 페이지를 렌더링
+    """
+    model = DailySales
+    template_name = 'glossymatcha/daily_sales/detail.html'
+    context_object_name = 'daily_sale'
+
+
+class DailySalesUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    일별 매출 정보 수정
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일별 매출 수정 페이지를 렌더링
+    """
+    model = DailySales
+    form_class = DailySalesForm
+    template_name = 'glossymatcha/daily_sales/create.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('daily_sales_detail', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.date} 일별 매출 정보가 수정되었습니다.')
+        return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['daily_sale'] = self.object
+        return context
+
+
+class DailySalesDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    일별 매출 삭제
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일별 매출 삭제 페이지를 렌더링
+    """
+    model = DailySales
+    template_name = 'glossymatcha/daily_sales/delete.html'
+    success_url = reverse_lazy('daily_sales_list')
+    
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.date} 일별 매출이 삭제되었습니다.')
         return super().delete(request, *args, **kwargs)

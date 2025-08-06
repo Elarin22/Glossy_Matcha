@@ -33,4 +33,18 @@ urlpatterns = [
     path('suppliers/<int:pk>/', views.SuppliersDetailView.as_view(), name='suppliers_detail'),  # 거래처 상세
     path('suppliers/<int:pk>/update/', views.SuppliersUpdateView.as_view(), name='suppliers_update'), # 거래처 수정
     path('suppliers/<int:pk>/delete/', views.SuppliersDeleteView.as_view(), name='suppliers_delete'), # 거래처 삭제
+
+    # Django Template Views for daily sales management(main)
+    path('sales/', views.DailySalesListView.as_view(), name='sales_list'),                      # 매출 관리 메인
+    path('sales/create/', views.DailySalesCreateView.as_view(), name='sales_create'),           # 매출 입력
+    path('sales/<int:pk>/', views.DailySalesDetailView.as_view(), name='sales_detail'),         # 매출 상세
+    path('sales/<int:pk>/update/', views.DailySalesUpdateView.as_view(), name='sales_update'),  # 매출 수정
+    path('sales/<int:pk>/delete/', views.DailySalesDeleteView.as_view(), name='sales_delete'),  # 매출 삭제
+    
+    # Django Template Views for daily sales management
+    path('daily-sales/', views.DailySalesListView.as_view(), name='daily_sales_list'),          # 일별 매출 목록
+    path('daily-sales/create/', views.DailySalesCreateView.as_view(), name='daily_sales_create'), # 일별 매출 등록
+    path('daily-sales/<int:pk>/', views.DailySalesDetailView.as_view(), name='daily_sales_detail'), # 일별 매출 상세
+    path('daily-sales/<int:pk>/update/', views.DailySalesUpdateView.as_view(), name='daily_sales_update'), # 일별 매출 수정
+    path('daily-sales/<int:pk>/delete/', views.DailySalesDeleteView.as_view(), name='daily_sales_delete'), # 일별 매출 삭제
 ]
