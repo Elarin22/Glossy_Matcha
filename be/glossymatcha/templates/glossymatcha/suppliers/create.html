@@ -1,0 +1,142 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}
+    {% if supplier %}거래처 정보 수정{% else %}거래처 등록{% endif %} - Glossy Matcha
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-building-add me-2"></i>
+                    {% if supplier %}{{ supplier.name }} 정보 수정{% else %}새 거래처 등록{% endif %}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="{{ form.name.id_for_label }}" class="form-label">업체명 *</label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger small">{{ form.name.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.contact_person.id_for_label }}" class="form-label">담당자 *</label>
+                            {{ form.contact_person }}
+                            {% if form.contact_person.errors %}
+                                <div class="text-danger small">{{ form.contact_person.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.phone.id_for_label }}" class="form-label">연락처</label>
+                            {{ form.phone }}
+                            {% if form.phone.errors %}
+                                <div class="text-danger small">{{ form.phone.errors.0 }}</div>
+                            {% endif %}
+                            <small class="text-muted">선택사항</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.email.id_for_label }}" class="form-label">이메일 *</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="text-danger small">{{ form.email.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.payment_method.id_for_label }}" class="form-label">결제방식 *</label>
+                            {{ form.payment_method }}
+                            {% if form.payment_method.errors %}
+                                <div class="text-danger small">{{ form.payment_method.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <div class="form-check mt-4">
+                                {{ form.is_active }}
+                                <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                                    현재 거래 중
+                                </label>
+                            </div>
+                            {% if form.is_active.errors %}
+                                <div class="text-danger small">{{ form.is_active.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.memo.id_for_label }}" class="form-label">메모</label>
+                        {{ form.memo }}
+                        {% if form.memo.errors %}
+                            <div class="text-danger small">{{ form.memo.errors.0 }}</div>
+                        {% endif %}
+                        <small class="text-muted">거래 조건, 특이사항 등을 입력하세요.</small>
+                    </div>
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'suppliers_list' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>목록으로
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>
+                            {% if supplier %}수정하기{% else %}등록하기{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 결제방식 가이드 -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h6 class="text-muted mb-3"><i class="bi bi-credit-card me-2"></i>결제방식 가이드</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-success me-2">현금</span>
+                            <small class="text-muted">현금 결제</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-primary me-2">계좌이체</span>
+                            <small class="text-muted">무통장 입금</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-info me-2">카드</span>
+                            <small class="text-muted">신용카드</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-warning me-2">외상</span>
+                            <small class="text-muted">외상거래</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

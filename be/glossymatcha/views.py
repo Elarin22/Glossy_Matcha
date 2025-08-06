@@ -13,7 +13,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
-from .forms import StaffForm, WorkRecordForm
+from .forms import StaffForm, WorkRecordForm, SuppliersForm
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -412,3 +412,78 @@ class WorkRecordCreateView(LoginRequiredMixin, CreateView):
         response = super().form_valid(form)
         messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 등록되었습니다.')
         return response
+    
+# Django Template Views for suppliers management
+class SuppliersListView(LoginRequiredMixin, ListView):
+    """
+    공급업체 목록 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 공급업체 목록 페이지를 렌더링
+    """
+    model = Suppliers
+    template_name = 'glossymatcha/suppliers/list.html'
+    context_object_name = 'suppliers_list'
+
+class SuppliersCreateView(LoginRequiredMixin, CreateView):
+    """
+    공급업체 생성 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 공급업체 생성 페이지를 렌더링
+    """
+    model = Suppliers
+    form_class = SuppliersForm
+    template_name = 'glossymatcha/suppliers/create.html'
+    success_url = reverse_lazy('suppliers_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.name} 거래처가 등록되었습니다.')
+        return response
+    
+class SuppliersDetailView(LoginRequiredMixin, DetailView):
+    """
+    공급업체 상세 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 공급업체 상세 페이지를 렌더링
+    """
+    model = Suppliers
+    template_name = 'glossymatcha/suppliers/detail.html'
+    context_object_name = 'supplier'
+
+class SuppliersUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    공급업체 수정 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 공급업체 수정 페이지를 렌더링
+    """
+    model = Suppliers
+    form_class = SuppliersForm
+    template_name = 'glossymatcha/suppliers/create.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('suppliers_detail', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.name} 거래처 정보가 수정되었습니다.')
+        return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['supplier'] = self.object
+        return context
+    
+class SuppliersDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    공급업체 삭제 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 공급업체 삭제 페이지를 렌더링
+    """
+    model = Suppliers
+    template_name = 'glossymatcha/suppliers/delete.html'
+    success_url = reverse_lazy('suppliers_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.name} 거래처가 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
