@@ -1,0 +1,170 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}급여 기록 입력 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-cash me-2"></i>급여 기록 입력
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.staff.id_for_label }}" class="form-label">직원 선택 *</label>
+                        {{ form.staff }}
+                        {% if form.staff.errors %}
+                            <div class="text-danger small">{{ form.staff.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.total_hours.id_for_label }}" class="form-label">총 근무시간 *</label>
+                            {{ form.total_hours }}
+                            {% if form.total_hours.errors %}
+                                <div class="text-danger small">{{ form.total_hours.errors.0 }}</div>
+                            {% endif %}
+                            <small class="text-muted">시간 단위로 입력 (예: 160.0)</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.pay_period_weeks.id_for_label }}" class="form-label">급여 기간(주) *</label>
+                            {{ form.pay_period_weeks }}
+                            {% if form.pay_period_weeks.errors %}
+                                <div class="text-danger small">{{ form.pay_period_weeks.errors.0 }}</div>
+                            {% endif %}
+                            <small class="text-muted">주 단위로 입력 (예: 4.0)</small>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="{{ form.hourly_rate.id_for_label }}" class="form-label">시급 *</label>
+                            <div class="input-group">
+                                {{ form.hourly_rate }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.hourly_rate.errors %}
+                                <div class="text-danger small">{{ form.hourly_rate.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.monthly_salary.id_for_label }}" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                {{ form.monthly_salary }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.monthly_salary.errors %}
+                                <div class="text-danger small">{{ form.monthly_salary.errors.0 }}</div>
+                            {% endif %}
+                            <small class="text-muted">시급과 총근무시간 입력 시 자동 계산됩니다</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.weekly_holiday_allowance.id_for_label }}" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                {{ form.weekly_holiday_allowance }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.weekly_holiday_allowance.errors %}
+                                <div class="text-danger small">{{ form.weekly_holiday_allowance.errors.0 }}</div>
+                            {% endif %}
+                            <small class="text-muted">주 15시간 이상 근무 시 법정 기준으로 자동 계산됩니다</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.memo.id_for_label }}" class="form-label">비고</label>
+                        {{ form.memo }}
+                        {% if form.memo.errors %}
+                            <div class="text-danger small">{{ form.memo.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <small><i class="bi bi-info-circle me-1"></i>월급과 주휴수당이 자동으로 계산됩니다</small>
+                        <br><small>• 월급: 시급 × 총근무시간</small>
+                        <br><small>• 주휴수당: 주 15시간 이상 근무 시 법정 기준으로 자동 계산</small>
+                        <br><strong>• 예상 지급합계: <span id="total_payment_display" class="text-primary">0원</span></strong>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>대시보드로
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>저장하기
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateSalary() {
+    const totalHours = parseFloat(document.getElementById('id_total_hours').value) || 0;
+    const payPeriodWeeks = parseFloat(document.getElementById('id_pay_period_weeks').value) || 1;
+    const hourlyRate = parseFloat(document.getElementById('id_hourly_rate').value) || 0;
+    const monthlySalary = totalHours * hourlyRate;
+    
+    // 주휴수당 계산 (정확한 주별 근무시간 사용)
+    const weeklyHours = totalHours / payPeriodWeeks;
+    let weeklyHolidayAllowance = 0;
+    
+    if (weeklyHours >= 15) {  // 주 15시간 이상 근무 시 주휴수당 지급
+        if (weeklyHours < 40) {
+            // 주 40시간 미만: (1주 소정근로시간 / 40) * 8 * 시급
+            weeklyHolidayAllowance = (weeklyHours / 40) * 8 * hourlyRate;
+        } else {
+            // 주 40시간 이상: 1일 소정근로시간(최대 8시간) * 시급
+            weeklyHolidayAllowance = 8 * hourlyRate;
+        }
+    }
+    
+    document.getElementById('id_monthly_salary').value = Math.round(monthlySalary);
+    document.getElementById('id_weekly_holiday_allowance').value = Math.round(weeklyHolidayAllowance);
+    
+    // 지급합계도 업데이트 (실시간 표시용)
+    const totalPayment = monthlySalary + weeklyHolidayAllowance;
+    const totalPaymentElement = document.getElementById('total_payment_display');
+    if (totalPaymentElement) {
+        totalPaymentElement.textContent = Math.round(totalPayment).toLocaleString() + '원';
+    }
+}
+
+// 페이지 로드 시 이벤트 리스너 추가
+document.addEventListener('DOMContentLoaded', function() {
+    const totalHoursInput = document.getElementById('id_total_hours');
+    const payPeriodWeeksInput = document.getElementById('id_pay_period_weeks');
+    const hourlyRateInput = document.getElementById('id_hourly_rate');
+    
+    // 입력 필드에 이벤트 리스너 추가
+    if (totalHoursInput) {
+        totalHoursInput.addEventListener('input', calculateSalary);
+        totalHoursInput.addEventListener('change', calculateSalary);
+    }
+    
+    if (payPeriodWeeksInput) {
+        payPeriodWeeksInput.addEventListener('input', calculateSalary);
+        payPeriodWeeksInput.addEventListener('change', calculateSalary);
+    }
+    
+    if (hourlyRateInput) {
+        hourlyRateInput.addEventListener('input', calculateSalary);
+        hourlyRateInput.addEventListener('change', calculateSalary);
+    }
+    
+    // 페이지 로드 시 초기 계산
+    calculateSalary();
+});
+</script>
+{% endblock %}
