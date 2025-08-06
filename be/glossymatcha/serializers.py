@@ -9,14 +9,13 @@ class InquirySerializer(serializers.ModelSerializer):
     - name: 문의자 이름
     - email: 문의자 이메일
     - inquiry_type: 문의 유형
-    - message: 문의 내용 (한국어)
-    - message_en: 문의 내용 (영어)
+    - message: 문의 내용
     - created_at: 생성 일시
     - updated_at: 수정 일시
     """
     class Meta:
         model = Inquiries
-        fields = ['id', 'name', 'email', 'inquiry_type', 'message', 'message_en', 'created_at', 'updated_at']
+        fields = ['id', 'name', 'email', 'inquiry_type', 'message', 'created_at', 'updated_at']
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def validate_email(self, value):
@@ -37,38 +36,15 @@ class InquirySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("이름은 필수 입력 항목입니다.")
         return value.strip()
     
-    def validate(self, data):
+    def validate_message(self, value):
         """
-        전체 데이터 검증 메서드
-        한국어 또는 영어 중 최소 하나의 문의 내용은 필수입니다.
+        문의 내용 필드 검증 메서드
+        문의 내용이 비어있거나 유효하지 않은 경우 예외를 발생시킵니다.
         """
-        message = data.get('message', '').strip()
-        message_en = data.get('message_en', '').strip()
-        
-        if not message and not message_en:
-            raise serializers.ValidationError("한국어 또는 영어 중 최소 하나의 문의 내용은 필수입니다.")
-        
-        return data
+        if not value.strip():
+            raise serializers.ValidationError("문의 내용은 필수 입력 항목입니다.")
+        return value.strip()
     
-    def to_representation(self, instance):
-        """
-        직렬화된 데이터를 반환하는 메서드
-        이 메서드는 언어 설정에 따라 문의 내용을 한국어 또는 영어로 반환합니다.
-        """
-        data = super().to_representation(instance)
-        language = self.context.get('language', 'ko')
-
-        if language == 'en':
-            """ 영어로 문의 내용을 반환합니다."""
-            data['message'] = instance.message_en or instance.message
-        else:
-            """ 한국어로 문의 내용을 반환합니다."""
-            data['message'] = instance.message
-        
-        # 원본 언어별 필드는 제거
-        data.pop('message_en', None)
-
-        return data
 
 class ProductImageSerializer(serializers.ModelSerializer):
     """
@@ -157,17 +133,25 @@ class ProductSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
 
-    def validate_name(self, value):
-        """제품명 필드 검증"""
-        if not value.strip():
-            raise serializers.ValidationError("제품명은 필수 입력 항목입니다.")
-        return value.strip()
-
-    def validate_description(self, value):
-        """제품 설명 필드 검증"""
-        if not value.strip():
-            raise serializers.ValidationError("제품 설명은 필수 입력 항목입니다.")
-        return value.strip()
+    def validate(self, data):
+        """
+        전체 데이터 검증 메서드
+        한국어 또는 영어 중 최소 하나의 제품명과 설명은 필수입니다.
+        """
+        name = data.get('name', '').strip() if data.get('name') else ''
+        name_en = data.get('name_en', '').strip() if data.get('name_en') else ''
+        description = data.get('description', '').strip() if data.get('description') else ''
+        description_en = data.get('description_en', '').strip() if data.get('description_en') else ''
+        
+        # 제품명 검증: 한국어 또는 영어 중 최소 하나는 필수
+        if not name and not name_en:
+            raise serializers.ValidationError("제품명(한국어 또는 영어)은 최소 하나는 필수입니다.")
+        
+        # 제품 설명 검증: 한국어 또는 영어 중 최소 하나는 필수
+        if not description and not description_en:
+            raise serializers.ValidationError("제품 설명(한국어 또는 영어)은 최소 하나는 필수입니다.")
+        
+        return data
 
     
     def to_representation(self, instance):
