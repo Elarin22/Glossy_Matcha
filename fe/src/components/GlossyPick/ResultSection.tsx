@@ -24,7 +24,7 @@ export default function ResultSection({
             </p>
 
             <section className={styles["result__menu"]}>
-                <h4 className={styles["result__menuName"]}>{menuInfo.name}</h4>
+                <h4 className="sr-only">글로시 메뉴 추천</h4>
                 <Image
                     className={styles["result__image"]}
                     src={menuInfo.image}
@@ -32,9 +32,10 @@ export default function ResultSection({
                     width={230}
                     height={360}
                 />
+                <p className={styles["result__menuName"]}>{menuInfo.name}</p>
                 <div className={styles.result__tags}>
                     {menuInfo.tags.map((tag, index) => (
-                        <span key={index} className={styles.result__tag}>
+                        <span key={index} className="tag">
                             {tag}
                         </span>
                     ))}
