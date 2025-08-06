@@ -2,8 +2,8 @@
 @use "@/styles/mixins" as *;
 
 .brand-philosophy {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: 10vw;
 
     &__content {
@@ -59,13 +59,14 @@
     }
 
     &__image {
-        max-width: 50vw;
+        width: 100%;
         height: auto;
         aspect-ratio: 960 / 800;
         object-fit: cover;
     }
 
     @media (max-width: 768px) {
+        display: flex;
         flex-direction: column;
         gap: 30px;
         margin-bottom: 30px;
