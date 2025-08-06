@@ -60,6 +60,18 @@ export const useMatchaQuiz = () => {
         setQuizState((prev) => ({ ...prev, currentStep: 1 }));
     }, []);
 
+    const goPrevStep = useCallback(() => {
+        setQuizState((prev) => {
+            if (prev.currentStep > 1) {
+                return {
+                    ...prev,
+                    currentStep: prev.currentStep - 1,
+                };
+            }
+            return prev;
+        });
+    }, []);
+
     /**
      * 퀴즈가 끝난 경우(5단계)에 추천 결과를 반환합니다.
      */
@@ -73,6 +85,7 @@ export const useMatchaQuiz = () => {
         handleAnswer,
         resetQuiz,
         startQuiz,
+        goPrevStep,
         recommendation,
     };
 };
