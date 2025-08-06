@@ -6,43 +6,48 @@ import styles from "./page.module.scss";
 type FormDataType = {
   name: string;
   email: string;
-  inquireText: string;
+  message: string;
 };
 
-const categories: string[] = ["일반 문의", "제품 문의", "기타 문의"];
+type Category = "일반 문의" | "제품 문의" | "기타";
 
-const fields: {
-  label: string;
-  name: keyof FormDataType;
-  placeholder: string;
-  type: string;
-}[] = [
+const CATEGORIES: Category[] = ["일반 문의", "제품 문의", "기타"];
+
+const CATEGORY_MAP = {
+  "일반 문의": "general",
+  "제품 문의": "product",
+  기타: "other",
+} as const;
+
+const FORM_FIELDS = [
   {
     label: "이름",
-    name: "name",
+    name: "name" as keyof FormDataType,
     placeholder: "이름을 입력해주세요.",
     type: "text",
   },
   {
     label: "이메일",
-    name: "email",
+    name: "email" as keyof FormDataType,
     placeholder: "이메일을 입력해주세요.",
     type: "email",
   },
   {
     label: "문의 내용",
-    name: "inquireText",
+    name: "message" as keyof FormDataType,
     placeholder: "문의 내용을 입력해주세요.",
     type: "textArea",
   },
-];
+] as const;
 
 export default function Inquire() {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<Category>(
+    CATEGORIES[0]
+  );
   const [formData, setFormData] = useState<FormDataType>({
     name: "",
     email: "",
-    inquireText: "",
+    message: "",
   });
 
   const handleChange = (
@@ -59,17 +64,47 @@ export default function Inquire() {
       return;
     }
 
-    console.log("제출! formData: ", formData);
+    fetchInquire();
+  };
 
-    alert("문의를 접수했습니다. 확인 즉시 이메일로 답변드릴게요!");
+  const fetchInquire = async () => {
+    const requestData = {
+      name: formData.name,
+      email: formData.email,
+      inquiry_type: CATEGORY_MAP[selectedCategory],
+      message: formData.message,
+    };
 
-    // API 연결
-    // 홈화면으로 이동할지 아니면 문의하기 페이지에 그대로 머무를지 고민중. 홈화면으로 이동시에는 아래 상태 초기화 제거
-    setFormData({
-      name: "",
-      email: "",
-      inquireText: "",
-    });
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        }
+      );
+
+      console.log(requestData);
+
+      if (response.ok) {
+        alert("문의를 접수했습니다. 확인 즉시 이메일로 답변드릴게요!");
+        setSelectedCategory(CATEGORIES[0]);
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
+      } else {
+        alert("문의 접수에 실패했습니다. 다시 시도해주세요.");
+      }
+
+      console.log("response: ", response);
+    } catch (error) {
+      alert("네트워크 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -91,7 +126,7 @@ export default function Inquire() {
           role="group"
           aria-label="문의 카테고리 선택"
         >
-          {categories.map((category) => (
+          {CATEGORIES.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -106,7 +141,7 @@ export default function Inquire() {
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
-          {fields.map((field) => (
+          {FORM_FIELDS.map((field) => (
             <div key={field.name} className={styles.field}>
               <label htmlFor={field.name} className={styles.label}>
                 {field.label}
