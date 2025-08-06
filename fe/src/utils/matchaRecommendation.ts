@@ -1,103 +1,105 @@
 import { AnswerType } from "@/types/matcha";
 import { menuData } from "@/data/menuData";
 
-/**
- * 사용자의 퀴즈 응답을 기반으로 가장 적합한 말차 메뉴를 추천합니다.
- *
- * @param {AnswerType} userAnswers - 사용자로부터 받은 4가지 질문에 대한 응답 객체
- * @returns {string} 추천된 메뉴의 key (menuData에서 해당 key로 메뉴 정보 조회 가능)
- *
- * @example
- * const userAnswers = {
- *   style: 'depth',
- *   mood: 'professional',
- *   purpose: 'caffeine',
- *   favorite: 'coffee'
- * };
- * const recommended = getRecommendation(userAnswers);
- * // → '제주, 오름'
- */
+// menuData의 키를 타입 안전하게 추출
+type MenuKey = keyof typeof menuData;
+
+// 메뉴 키들을 상수로 정의 (타입 체크 + 자동완성 지원)
+const MENU_KEYS: Record<string, MenuKey> = {
+    JEJU_OREUM: "제주, 오름",
+    MATCHA_STRAIGHT: "말차 스트레이트",
+    GLOSSY_MATCHA_LATTE: "글로시 말차 라떼",
+    MATCHA_SCHPENER: "말차 슈페너",
+    BARLEY_CREAM_MATCHA_LATTE: "보리크림 말차 라떼",
+    GLOSSY_MATCHA_MOJITO: "글로시 말차 모히또",
+    COCONUT_MATCHA_SHAKE: "코코넛 말차 쉐이크",
+    GREEN_LEMONADE: "그린 레몬에이드",
+} as const;
+
 export const getRecommendation = (userAnswers: AnswerType): string => {
     const { style, mood, purpose, favorite } = userAnswers;
 
-    const scores: Record<string, number> = {};
-    Object.keys(menuData).forEach((menu) => {
+    const scores: Record<MenuKey, number> = {};
+
+    // menuData의 모든 키로 scores 초기화
+    (Object.keys(menuData) as MenuKey[]).forEach((menu) => {
         scores[menu] = 0;
     });
 
     // Q1: 말차 스타일
     if (style === "depth") {
-        scores["제주, 오름"] += 3;
-        scores["말차 스트레이트"] += 3;
-        scores["글로시 말차 라떼"] += 1;
+        scores[MENU_KEYS.JEJU_OREUM] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
     } else if (style === "sweet") {
-        scores["말차 슈페너"] += 3;
-        scores["글로시 말차 라떼"] += 2;
-        scores["보리크림 말차 라떼"] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
     } else if (style === "visual") {
-        scores["말차 슈페너"] += 3;
-        scores["글로시 말차 모히또"] += 2;
-        scores["코코넛 말차 쉐이크"] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
     } else if (style === "fresh") {
-        scores["글로시 말차 모히또"] += 3;
-        scores["그린 레몬에이드"] += 3;
-        scores["말차 스트레이트"] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
     }
 
     // Q2: 무드
     if (mood === "professional") {
-        scores["제주, 오름"] += 2;
-        scores["말차 스트레이트"] += 2;
-        scores["글로시 말차 라떼"] += 1;
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
     } else if (mood === "natural") {
-        scores["말차 스트레이트"] += 2;
-        scores["보리크림 말차 라떼"] += 2;
-        scores["글로시 말차 라떼"] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
     } else if (mood === "cheerful") {
-        scores["글로시 말차 모히또"] += 2;
-        scores["그린 레몬에이드"] += 2;
-        scores["코코넛 말차 쉐이크"] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
     } else if (mood === "minimal") {
-        scores["말차 스트레이트"] += 2;
-        scores["글로시 말차 라떼"] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
     }
 
     // Q3: 목적
     if (purpose === "thirst") {
-        scores["그린 레몬에이드"] += 3;
-        scores["글로시 말차 모히또"] += 2;
-        scores["코코넛 말차 쉐이크"] += 1;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 1;
     } else if (purpose === "caffeine") {
-        scores["제주, 오름"] += 3;
-        scores["말차 스트레이트"] += 3;
-        scores["글로시 말차 라떼"] += 1;
+        scores[MENU_KEYS.JEJU_OREUM] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
     } else if (purpose === "healing") {
-        scores["글로시 말차 라떼"] += 2;
-        scores["보리크림 말차 라떼"] += 2;
-        scores["말차 슈페너"] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 1;
     } else if (purpose === "health") {
-        scores["말차 스트레이트"] += 3;
-        scores["제주, 오름"] += 2;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
     }
 
     // Q4: 선호 음료
     if (favorite === "coffee") {
-        scores["제주, 오름"] += 2;
-        scores["말차 스트레이트"] += 2;
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
     } else if (favorite === "herbal") {
-        scores["말차 스트레이트"] += 2;
-        scores["보리크림 말차 라떼"] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 1;
     } else if (favorite === "refreshing") {
-        scores["그린 레몬에이드"] += 3;
-        scores["글로시 말차 모히또"] += 3;
-        scores["코코넛 말차 쉐이크"] += 2;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
     } else if (favorite === "milk") {
-        scores["글로시 말차 라떼"] += 3;
-        scores["말차 슈페너"] += 2;
-        scores["보리크림 말차 라떼"] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
     }
 
-    return Object.keys(scores).reduce((a, b) =>
+    // 가장 높은 점수를 받은 메뉴 반환
+    return (Object.keys(scores) as MenuKey[]).reduce((a, b) =>
         scores[a] > scores[b] ? a : b
     );
 };
