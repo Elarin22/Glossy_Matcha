@@ -14,4 +14,8 @@ urlpatterns = [
     path('inquiries/', views.InquiriesListView.as_view(), name='inquiries_list'),               # 문의 목록
     path('inquiries/<int:pk>/', views.InquiriesDetailView.as_view(), name='inquiries_detail'),  # 문의 상세
     path('inquiries/<int:pk>/delete/', views.InquiriesDeleteView.as_view(), name='inquiries_delete'), # 문의 삭제
+
+    # API Views for Products
+    path('api/products/', views.ProductListView.as_view(), name='product_list'),               # GET: 제품 목록 조회
+    path('api/products/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),  # GET: 제품 상세 조회
 ]
