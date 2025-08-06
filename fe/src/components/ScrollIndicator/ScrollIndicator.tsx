@@ -1,11 +1,15 @@
 import React from "react";
 import styles from "./ScrollIndicator.module.scss";
 
-export default function ScrollIndicator(): React.JSX.Element {
+export default function ScrollIndicator({
+  extraMoveHeight = 0,
+}: {
+  extraMoveHeight?: number;
+}): React.JSX.Element {
   const scrollToNext = () => {
     if (typeof window !== "undefined") {
       window.scrollTo({
-        top: window.innerHeight,
+        top: window.innerHeight + extraMoveHeight,
         behavior: "smooth",
       });
     }

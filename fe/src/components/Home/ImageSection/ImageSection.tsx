@@ -7,7 +7,7 @@ import Image from "next/image";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 
 export const sections: { title: string; source: string }[] = [
-  { title: "브랜드 소개", source: "/videos/glossy-intro.webm" },
+  { title: "브랜드 소개", source: "/videos/intro-pc.webm" },
   { title: "카페 소개", source: "/images/home/glossy-matcha.png" },
   { title: "제품 소개", source: "/images/home/glossy-signature.png" },
   { title: "말차 테스트", source: "/images/home/matcha-test.png" },
@@ -62,8 +62,8 @@ export default function ImageSection({
                       zIndex: -1,
                     }}
                   >
-                    <source src="/videos/glossy-intro.webm" type="video/webm" />
-                    <source src="/videos/glossy-intro.mp4" type="video/mp4" />
+                    <source src="/videos/intro-pc.webm" type="video/webm" />
+                    <source src="/videos/intro-pc.mp4" type="video/mp4" />
                     브라우저가 비디오를 지원하지 않습니다.
                   </video>
 
@@ -79,7 +79,7 @@ export default function ImageSection({
                     )}
                   </button>
 
-                  <ScrollIndicator />
+                  <ScrollIndicator extraMoveHeight={240} />
                 </>
               ) : (
                 <Image
