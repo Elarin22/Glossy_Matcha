@@ -40,7 +40,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         # 최근 문의 현황 (최근 5건)
         recent_inquiries = Inquiries.objects.all()[:5]
         total_inquiries = Inquiries.objects.count()
-
+        
         context.update({
             'today': today,
             'active_staff_count': active_staff_count,
