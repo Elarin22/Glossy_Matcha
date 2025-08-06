@@ -26,4 +26,11 @@ urlpatterns = [
     path('staff/<int:pk>/update/', views.StaffUpdateView.as_view(), name='staff_update'),       # 직원 수정
     path('staff/<int:pk>/delete/', views.StaffDeleteView.as_view(), name='staff_delete'),       # 직원 삭제
     path('work-record/create/', views.WorkRecordCreateView.as_view(), name='work_record_create'), # 근무시간 입력
+
+    # Django Template Views for suppliers management
+    path('suppliers/', views.SuppliersListView.as_view(), name='suppliers_list'),               # 거래처 목록
+    path('suppliers/create/', views.SuppliersCreateView.as_view(), name='suppliers_create'),    # 거래처 등록
+    path('suppliers/<int:pk>/', views.SuppliersDetailView.as_view(), name='suppliers_detail'),  # 거래처 상세
+    path('suppliers/<int:pk>/update/', views.SuppliersUpdateView.as_view(), name='suppliers_update'), # 거래처 수정
+    path('suppliers/<int:pk>/delete/', views.SuppliersDeleteView.as_view(), name='suppliers_delete'), # 거래처 삭제
 ]
