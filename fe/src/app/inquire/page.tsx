@@ -75,7 +75,7 @@ export default function Inquire() {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1 className={styles.title}>문의하기</h1>
+        <h2 className={styles.title}>문의하기</h2>
         <p className={styles.description}>
           궁금한 사항이 있으신가요?
           <br />
@@ -84,7 +84,7 @@ export default function Inquire() {
       </header>
 
       <section className={styles.formSection}>
-        <h2 className="sr-only">문의 내용 작성</h2>
+        <h3 className="sr-only">문의 내용 작성</h3>
 
         <div
           className={styles.categories}

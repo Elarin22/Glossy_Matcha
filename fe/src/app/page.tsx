@@ -38,7 +38,6 @@ export default function Home() {
   return (
     <>
       <main className={styles["home-container"]}>
-        <h1 className="sr-only">글로시말차에 방문해주셔서 감사합니다.</h1>
         <SideInfo currentIndex={currentIndex} />
         <ImageSection sectionRefs={sectionRefs} />
       </main>
