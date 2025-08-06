@@ -23,9 +23,8 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.6 }
     );
-
     sectionRefs.current?.forEach((el) => {
       el && observer.observe(el);
     });
