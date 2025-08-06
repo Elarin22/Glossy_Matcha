@@ -53,4 +53,45 @@
         justify-content: center;
         gap: clamp(20px, 5vw, 50px);
     }
+
+    @media (max-width: 768px) {
+        margin-bottom: 30px;
+
+        &__title {
+            @include myeongjo($font-size-14, 500);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        &__image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 150 / 240;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        &__menuName {
+            @include pretendard($font-size-12, 500);
+            margin-bottom: 20px;
+        }
+
+        &__tags {
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        &__menuDescription {
+            @include pretendard($font-size-10, 500);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        &__actions {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+    }
 }
