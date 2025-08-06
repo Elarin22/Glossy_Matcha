@@ -72,7 +72,11 @@ export default function ImageSection({
                     className={styles["sound-toggle-button"]}
                     aria-label={isMuted ? "소리 켜기" : "소리 끄기"}
                   >
-                    {isMuted ? "🔇" : "🔊"}
+                    {isMuted ? (
+                      <img src={"/images/icon/sound-off.svg"} alt="" />
+                    ) : (
+                      <img src={"/images/icon/sound-on.svg"} alt="" />
+                    )}
                   </button>
 
                   <ScrollIndicator />
