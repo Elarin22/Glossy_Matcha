@@ -8,51 +8,67 @@ import styles from "./Nav.module.scss";
  * 메뉴 항목을 나타내는 인터페이스
  */
 interface MenuItem {
+    /** 메뉴에 표시될 텍스트 */
     label: string;
-    href: string; // 예: "#brand-intro"
+    /** 이동할 섹션의 id를 포함한 앵커 href (예: "#intro") */
+    href: string;
 }
 
 /**
  * ScrollNav 컴포넌트의 props 인터페이스
  */
 interface ScrollNavProps {
+    /** 네비게이션에 표시할 메뉴 항목 배열 */
     menuItems: MenuItem[];
 }
 
 /**
- * 스크롤 위치에 따라 활성 메뉴를 자동으로 하이라이트하는 네비게이션 컴포넌트
+ * 섹션에 스크롤 이동 및 현재 위치에 따른 메뉴 활성화 기능을 제공하는 ScrollNav 컴포넌트
  *
- * Intersection Observer API를 사용하여 뷰포트에 들어온 섹션을 감지하고,
- * 해당하는 메뉴 항목을 활성 상태로 표시합니다.
- *
- * @param props - ScrollNav 컴포넌트의 props
- * @param props.menuItems - 네비게이션에 표시할 메뉴 항목들의 배열
- * @returns 스크롤 네비게이션 컴포넌트
- *
- * @example
- * ```tsx
- * const menuItems = [
- *   { label: "브랜드 소개", href: "#brand-intro" },
- *   { label: "서비스", href: "#services" },
- *   { label: "연락처", href: "#contact" }
- * ];
- *
- * <ScrollNav menuItems={menuItems} />
- * ```
+ * @param {ScrollNavProps} props - 메뉴 항목을 전달하는 props
+ * @returns {JSX.Element} - ScrollNav 네비게이션 컴포넌트
  */
-export default function ScrollNav({ menuItems }: ScrollNavProps) {
-    /**
-     * 현재 활성화된 섹션의 ID를 저장하는 상태
-     * null인 경우 활성화된 섹션이 없음을 의미
-     */
+export default function ScrollNav({ menuItems }: ScrollNavProps): JSX.Element {
+    /** 현재 활성화된 섹션의 id */
     const [activeId, setActiveId] = useState<string | null>(null);
 
+    /** 고정된 네비게이션 바의 높이 (스크롤 오프셋 보정용) */
+    const NAV_HEIGHT = 80;
+
+    /**
+     * 메뉴 항목 클릭 시 부드럽게 해당 섹션으로 스크롤 이동
+     *
+     * @param {React.MouseEvent<HTMLAnchorElement>} e - 클릭 이벤트 객체
+     * @param {string} href - 이동할 대상의 href (예: "#section1")
+     */
+    const handleClick = (
+        e: React.MouseEvent<HTMLAnchorElement>,
+        href: string
+    ) => {
+        e.preventDefault();
+
+        const id = href.replace("#", "");
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        const offsetTop =
+            target.getBoundingClientRect().top +
+            window.pageYOffset -
+            NAV_HEIGHT;
+
+        window.scrollTo({
+            top: offsetTop,
+            behavior: "smooth",
+        });
+
+        setActiveId(id);
+    };
+
+    /**
+     * IntersectionObserver를 사용해 현재 보이는 섹션을 감지하고
+     * 해당 섹션의 id를 active 상태로 설정
+     */
     useEffect(() => {
-        /**
-         * Intersection Observer 인스턴스 생성
-         * 뷰포트에 들어온 요소들을 감지하여 활성 ID를 업데이트
-         * threshold: 0.3 = 요소의 30%가 뷰포트에 들어왔을 때 트리거
-         */
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -61,43 +77,38 @@ export default function ScrollNav({ menuItems }: ScrollNavProps) {
                     }
                 });
             },
-            { threshold: 0.3 }
+            { threshold: 0.3 } // 최소 30% 이상 보여야 활성화 처리
         );
 
-        /**
-         * 메뉴 항목들의 href에 해당하는 DOM 요소들을 찾아서 배열로 반환
-         * null인 요소들은 필터링하여 제거
-         */
         const targets = menuItems
             .map((item) => document.querySelector(item.href))
             .filter((el): el is Element => el !== null);
 
         targets.forEach((section) => observer.observe(section));
 
-        /**
-         * 컴포넌트 언마운트 시 observer 정리
-         * 메모리 누수 방지를 위해 필수
-         */
         return () => observer.disconnect();
     }, [menuItems]);
 
     return (
         <nav className={styles.nav}>
             <ul className={styles.menuList}>
-                {menuItems.map((item) => (
-                    <li key={item.href}>
-                        <Link
-                            href={item.href}
-                            className={`${styles.menuItem} ${
-                                activeId === item.href.slice(1)
-                                    ? styles.active
-                                    : ""
-                            }`}
-                        >
-                            {item.label}
-                        </Link>
-                    </li>
-                ))}
+                {menuItems.map((item) => {
+                    const id = item.href.replace("#", "");
+                    return (
+                        <li key={item.href}>
+                            <Link
+                                href={item.href}
+                                scroll={false}
+                                className={`${styles.menuItem} ${
+                                    activeId === id ? styles.active : ""
+                                }`}
+                                onClick={(e) => handleClick(e, item.href)}
+                            >
+                                {item.label}
+                            </Link>
+                        </li>
+                    );
+                })}
             </ul>
         </nav>
     );
