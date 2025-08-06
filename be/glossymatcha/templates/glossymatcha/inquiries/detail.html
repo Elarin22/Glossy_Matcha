@@ -1,0 +1,168 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}문의 상세보기 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2 class="mb-0">
+            <i class="bi bi-chat-left me-2"></i>문의 상세보기
+        </h2>
+        <p class="text-muted">문의 ID: #{{ inquiry.pk }}</p>
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="{% url 'inquiries_delete' inquiry.pk %}" class="btn" style="background-color: #373735; color: #f2efe8; border: none;">
+            <i class="bi bi-trash me-2"></i>삭제
+        </a>
+        <a href="{% url 'inquiries_list' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>목록으로
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">문의 내용</h5>
+            </div>
+            <div class="card-body">
+                {% if inquiry.message and inquiry.message|length > 0 %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold">
+                        문의 내용
+                    </label>
+                    <div class="p-3 bg-light rounded">
+                        {{ inquiry.message|linebreaks }}
+                    </div>
+                </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">문의자 정보</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label fw-bold">이름</label>
+                    <p class="mb-2">{{ inquiry.name }}</p>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">이메일</label>
+                    <p class="mb-2">
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ inquiry.email }}" 
+                           target="_blank" 
+                           class="text-decoration-none">
+                            {{ inquiry.email }}
+                        </a>
+                    </p>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">문의 유형</label>
+                    <p class="mb-2">
+                        <span class="badge 
+                            {% if inquiry.inquiry_type == 'general' %}bg-primary
+                            {% elif inquiry.inquiry_type == 'product' %}bg-success
+                            {% else %}bg-secondary{% endif %} fs-6">
+                            {{ inquiry.get_inquiry_type_display }}
+                        </span>
+                    </p>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-bold">문의일시</label>
+                    <p class="mb-2">
+                        {{ inquiry.created_at|date:"Y년 m월 d일" }}
+                        <br>
+                        <small class="text-muted">{{ inquiry.created_at|date:"H:i" }}</small>
+                    </p>
+                </div>
+                
+                {% if inquiry.updated_at != inquiry.created_at %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold">수정일시</label>
+                    <p class="mb-2">
+                        {{ inquiry.updated_at|date:"Y년 m월 d일" }}
+                        <br>
+                        <small class="text-muted">{{ inquiry.updated_at|date:"H:i" }}</small>
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- 빠른 연락 -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">빠른 연락</h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ inquiry.email }}&su=Re: {{ inquiry.get_inquiry_type_display }} 문의&body=안녕하세요 {{ inquiry.name }}님,%0A%0A문의해 주신 내용에 대해 답변드립니다.%0A%0A원본 문의:%0A{{ inquiry.message|urlencode }}%0A%0A감사합니다.%0AGlossy Matcha" 
+                       target="_blank"
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-envelope me-2"></i>Gmail로 답장
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 관련 문의 (같은 이메일) -->
+{% if related_inquiries %}
+<div class="card mt-4">
+    <div class="card-header">
+        <h5 class="mb-0">동일 문의자의 다른 문의</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>문의 유형</th>
+                        <th>문의 내용</th>
+                        <th>문의일</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for related in related_inquiries %}
+                    <tr>
+                        <td>
+                            <span class="badge 
+                                {% if related.inquiry_type == 'general' %}bg-primary
+                                {% elif related.inquiry_type == 'product' %}bg-success
+                                {% else %}bg-secondary{% endif %} badge-sm">
+                                {{ related.get_inquiry_type_display }}
+                            </span>
+                        </td>
+                        <td>{{ related.message|truncatechars:40 }}</td>
+                        <td>
+                            <small>{{ related.created_at|date:"m.d H:i" }}</small>
+                        </td>
+                        <td>
+                            {% if related.pk != inquiry.pk %}
+                            <a href="{% url 'inquiries_detail' related.pk %}" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-eye"></i>
+                            </a>
+                            {% else %}
+                            <span class="badge bg-info">현재</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
