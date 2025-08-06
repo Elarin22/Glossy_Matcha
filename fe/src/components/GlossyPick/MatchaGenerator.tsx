@@ -8,6 +8,7 @@ import { useMatchaQuiz } from "@/hooks/useMatchaQuiz";
 import { useShare } from "@/hooks/useShare";
 import { useDownload } from "@/hooks/useDownload";
 import Intro from "./Intro";
+import QuestionSection from "./QuestionSection";
 import styles from "./MatchaGenerator.module.scss";
 
 export default function MatchaGenerator() {
@@ -53,6 +54,14 @@ export default function MatchaGenerator() {
             </section>
             <section className={styles["matcha-generator__section"]}>
                 {currentStep === 0 && <Intro onStart={startQuiz} />}
+
+                {currentStep >= 1 && currentStep <= 4 && (
+                    <QuestionSection
+                        question={questions[currentStep - 1]}
+                        currentStep={currentStep}
+                        onAnswer={handleAnswer}
+                    />
+                )}
             </section>
         </main>
     );
