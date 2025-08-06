@@ -1,7 +1,18 @@
 from .models import Staff, Suppliers, DailySales, Sales, Inquiries
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
+from django.db.models import Sum, Q
+from django.contrib import messages
+from django.urls import reverse_lazy
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from rest_framework import generics, status
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializers import InquirySerializer
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -54,3 +65,131 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         })
 
         return context
+    
+# API Views for Inquiries
+class CreateInquiryView(generics.CreateAPIView):
+    """
+    문의 생성 API
+    - 모든 사용자 접근 가능
+    - 문의 내용을 저장하고 응답
+    Request body 예시:
+    {
+        "name": "문의자 이름 (필수)",
+        "email": "문의자 이메일 (필수)",
+        "inquiry_type": "문의 유형 (general/product/other, 기본값: general)",
+        "message": "문의 내용 (필수)"
+    }
+    Response:
+    - 201: 문의 생성 성공
+    - 400: 입력 데이터 검증 실패
+    """
+    queryset = Inquiries.objects.all()
+    serializer_class = InquirySerializer
+    permission_classes = [AllowAny]
+
+class InquiryListView(generics.ListAPIView):
+    """
+    문의 목록 API
+    - 관리자만 접근 가능
+    - 모든 문의를 조회
+    
+    Response body 예시:
+    [
+        {
+            "id": 1,
+            "name": "문의자 이름",
+            "email": "문의자 이메일",
+            "inquiry_type": "general",
+            "message": "문의 내용",
+            "created_at": "2023-10-01T12:00:00Z"
+        },
+        ...
+    ]
+    Response:
+    - 200: 문의 목록 조회 성공
+    - 403: 권한 없음 (관리자만 접근 가능)
+    """
+    queryset = Inquiries.objects.all()
+    serializer_class = InquirySerializer
+    permission_classes = [IsAdminUser]
+
+class InquiryDetailView(generics.RetrieveAPIView):
+    """
+    문의 상세 조회 API
+    - 관리자만 접근 가능
+    - 특정 문의의 상세 정보를 조회
+    Response body 예시:
+    {
+        "id": 1,
+        "name": "문의자 이름",
+        "email": "문의자 이메일",
+        "inquiry_type": "general",
+        "message": "문의 내용",
+        "created_at": "2023-10-01T12:00:00Z"
+    }
+    Response:
+    - 200: 문의 상세 조회 성공
+    - 404: 해당 문의가 존재하지 않음
+    - 403: 권한 없음 (관리자만 접근 가능)
+    """
+    queryset = Inquiries.objects.all()
+    serializer_class = InquirySerializer
+    permission_classes = [IsAdminUser]
+
+# TemplateView for Inquiry Form
+class InquiriesListView(LoginRequiredMixin, ListView):
+    """
+    문의 목록 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 문의 목록 페이지를 렌더링
+    """
+    model = Inquiries
+    template_name = 'glossymatcha/inquiries/list.html'
+    context_object_name = 'inquiries_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # 유형별 문의 수 집계
+        queryset = self.get_queryset()
+        context['general_count'] = queryset.filter(inquiry_type='general').count()
+        context['product_count'] = queryset.filter(inquiry_type='product').count()
+        context['other_count'] = queryset.filter(inquiry_type='other').count()
+
+        return context
+
+class InquiriesDetailView(LoginRequiredMixin, DetailView):
+    """
+    문의 상세 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 문의 상세 페이지를 렌더링
+    """
+    model = Inquiries
+    template_name = 'glossymatcha/inquiries/detail.html'
+    context_object_name = 'inquiry'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # 같은 이메일의 다른 문의들 조회 (최근 5건, 본인 문의 포함)
+        related_inquiries = Inquiries.objects.filter(
+            email=self.object.email
+        ).order_by('-created_at')[:5]
+        context['related_inquiries'] = related_inquiries
+
+        return context
+
+class InquiriesDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    문의 삭제 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 문의 삭제 페이지를 렌더링
+    """
+    model = Inquiries
+    template_name = 'glossymatcha/inquiries/delete.html'
+    success_url = reverse_lazy('inquiries_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.name}님의 문의가 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
