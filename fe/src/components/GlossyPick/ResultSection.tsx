@@ -4,7 +4,6 @@ import styles from "./ResultSection.module.scss";
 import GlossyPickHeader from "./GlossyPickHeader";
 
 interface ResultSectionProps {
-    recommendation: string;
     menuInfo: MenuInfo;
     onShare: () => void;
     onDownload: () => void;
@@ -12,7 +11,6 @@ interface ResultSectionProps {
 }
 
 export default function ResultSection({
-    recommendation,
     menuInfo,
     onShare,
     onDownload,

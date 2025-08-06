@@ -73,7 +73,6 @@ export default function MatchaGenerator() {
 
                 {currentStep === 5 && recommendation && (
                     <ResultSection
-                        recommendation={recommendation}
                         menuInfo={menuData[recommendation]}
                         onShare={handleShare}
                         onDownload={handleDownload}
