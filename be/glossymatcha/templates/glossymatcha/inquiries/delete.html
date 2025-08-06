@@ -1,0 +1,51 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}문의 삭제{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header" style="background-color: #f2efe8; border-bottom: 2px solid #DAE3D8;">
+                    <h4 class="card-title mb-0" style="color: #373735;">
+                        <i class="fas fa-exclamation-triangle me-2" style="color: #00563f;"></i>
+                        문의 삭제 확인
+                    </h4>
+                </div>
+                <div class="card-body" style="background-color: #f2efe8;">
+                    <div class="alert" style="background-color: #DAE3D8; border: 1px solid #00563f; color: #373735;">
+                        <i class="fas fa-info-circle me-2"></i>
+                        정말로 <strong>{{ object.name }}</strong>님의 문의를 삭제하시겠습니까?
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong style="color: #373735;">문의 정보:</strong>
+                        <ul class="list-unstyled mt-2" style="color: #373735;">
+                            <li><strong>문의자:</strong> {{ object.name }}</li>
+                            <li><strong>이메일:</strong> {{ object.email }}</li>
+                            <li><strong>문의 유형:</strong> {{ object.get_inquiry_type_display }}</li>
+                            <li><strong>작성일:</strong> {{ object.created_at|date:"Y-m-d H:i" }}</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert" style="background-color: #DAE3D8; border: 1px solid #00563f; color: #373735;">
+                        <i class="fas fa-warning me-2"></i>
+                        <strong>주의:</strong> 삭제된 데이터는 복구할 수 없습니다.
+                    </div>
+                    
+                    <form method="post" class="d-flex gap-2 justify-content-center">
+                        {% csrf_token %}
+                        <button type="submit" class="btn px-4" style="background-color: #373735; color: #f2efe8; border: none;">
+                            <i class="fas fa-trash me-2"></i>삭제
+                        </button>
+                        <a href="{% url 'inquiries_detail' object.pk %}" class="btn px-4" style="background-color: #00563f; color: #f2efe8; text-decoration: none;">
+                            <i class="fas fa-arrow-left me-2"></i>취소
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
