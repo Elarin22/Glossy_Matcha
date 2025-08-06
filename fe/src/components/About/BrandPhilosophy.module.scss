@@ -31,7 +31,6 @@
     &__item {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         align-items: center;
         gap: clamp(20px, 2vw, 40px);
         flex: 1;
