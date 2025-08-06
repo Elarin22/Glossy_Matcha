@@ -1,4 +1,4 @@
-from .models import Staff, Suppliers, DailySales, Sales, Inquiries
+from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
@@ -12,7 +12,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import InquirySerializer
+from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -193,3 +193,124 @@ class InquiriesDeleteView(LoginRequiredMixin, DeleteView):
         self.object = self.get_object()
         messages.success(request, f'{self.object.name}님의 문의가 삭제되었습니다.')
         return super().delete(request, *args, **kwargs)
+    
+# API Views for Products
+class ProductListView(generics.ListAPIView):
+    """
+    제품 목록 API
+    - 모든 사용자 접근 가능
+    - 제품 목록을 조회하고 응답
+    Request query parameters:
+    - lang: 언어 코드 (ko/en, 기본값: ko)
+    Response body 예시:
+    {
+        "success": true,
+        "language": "ko",
+        "count": 10,
+        "results": [
+            {
+                "id": 1,
+                "name": "제품 이름",
+                "description": "제품 설명",
+                ...
+            },
+            ...
+        ]
+    }
+    Response:
+    - 200: 제품 목록 조회 성공
+    - 400: 잘못된 언어 코드
+    """
+    queryset = Products.objects.all()
+    serializer_class = ProductListSerializer
+    permission_classes = [AllowAny]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        # url 파라미터에서 언어 정보 추출(기본값 : 'ko')
+        language = self.request.query_params.get('lang', 'ko')
+        if language not in ['ko', 'en']:
+            language = 'ko'
+        context['language'] = language
+        return context
+    
+    def list(self, request, *args, **kwargs):
+        """
+        GET 요청에 대한 처리
+        - 제품 목록을 조회하고 응답
+        - 언어 파라미터에 따라 제품 이름과 설명을 번역
+        """
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({
+            'success': True,
+            'language': self.get_serializer_context()['language'],
+            'count': len(serializer.data),
+            'results': serializer.data
+        })
+
+class ProductDetailView(generics.RetrieveAPIView):
+    """
+    제품 상세 조회 API
+    - 모든 사용자 접근 가능
+    - 특정 제품의 상세 정보를 조회
+    Request path parameters:
+    - pk: 제품 ID
+    Response body 예시:
+    {
+        "success": true,
+        "language": "ko",
+        "result": {
+            "id": 1,
+            "name": "제품 이름",
+            "description": "제품 설명",
+            "images": [
+                {
+                    "id": 1,
+                    "url": "https://example.com/image1.jpg"
+                },
+                ...
+            ],
+            "specifications": [
+                {
+                    "id": 1,
+                    "key": "사양 키",
+                    "value": "사양 값"
+                },
+                ...
+            ]
+        }
+    }
+    Response:
+    - 200: 제품 상세 조회 성공
+    - 404: 해당 제품이 존재하지 않음
+    """
+    queryset = Products.objects.all()
+    serializer_class = ProductDetailSerializer
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related('images', 'specifications')
+    
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        # url 파라미터에서 언어 정보 추출(기본값 : 'ko')
+        language = self.request.query_params.get('lang', 'ko')
+        if language not in ['ko', 'en']:
+            language = 'ko'
+        context['language'] = language
+        return context
+    
+    def retrieve(self, request, *args, **kwargs):
+        """
+        GET 요청에 대한 처리
+        - 특정 제품의 상세 정보를 조회하고 응답
+        - 언어 파라미터에 따라 제품 이름과 설명을 번역
+        """
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({
+            'success': True,
+            'language': self.get_serializer_context()['language'],
+            'result': serializer.data
+        })
