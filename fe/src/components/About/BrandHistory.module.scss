@@ -4,6 +4,7 @@
 .brand-history {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    align-items: stretch;
     margin-bottom: 15vw;
 
     &__image {

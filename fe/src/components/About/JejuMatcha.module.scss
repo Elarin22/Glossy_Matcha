@@ -5,6 +5,7 @@
     &__intro {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        align-items: stretch;
         margin-bottom: 10vw;
     }
 
@@ -47,6 +48,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         justify-content: space-between;
+        align-items: stretch;
         margin-bottom: 10vw;
 
         &-list {
