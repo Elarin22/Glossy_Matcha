@@ -2,12 +2,12 @@
 @use "@/styles/mixins" as *;
 
 .brand-history {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-bottom: 15vw;
 
     &__image {
         width: 100%;
-        max-width: 50vw;
         height: auto;
         aspect-ratio: 960 / 800;
         object-fit: cover;

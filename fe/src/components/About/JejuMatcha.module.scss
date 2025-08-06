@@ -3,12 +3,13 @@
 
 .jeju-matcha {
     &__intro {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         margin-bottom: 10vw;
     }
 
     &__image {
-        max-width: 50vw;
+        width: 100%;
         height: auto;
         aspect-ratio: 960 / 800;
         object-fit: cover;
@@ -43,7 +44,8 @@
     }
 
     &__feature {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         justify-content: space-between;
         margin-bottom: 10vw;
 
@@ -76,7 +78,7 @@
         }
 
         &-image {
-            max-width: 50vw;
+            width: 100%;
             height: auto;
             aspect-ratio: 960 / 960;
             object-fit: cover;
