@@ -6,11 +6,11 @@ class Products(models.Model):
     글로시 말차 제품 정보를 관리하는 모델(한/영문 지원)
     제품 카탈로그 및 상세 정보 저장
     """
-    name = models.CharField(max_length=200, verbose_name="제품명")
+    name = models.CharField(max_length=200, blank=True, verbose_name="제품명")
     name_en = models.CharField(max_length=200, blank=True, verbose_name="제품명 (영어)")
     subtitle = models.CharField(max_length=300, blank=True, verbose_name="제품 부제목")
     subtitle_en = models.CharField(max_length=300, blank=True, verbose_name="제품 부제목 (영어)")
-    description = models.TextField(verbose_name="제품 설명")
+    description = models.TextField(blank=True, verbose_name="제품 설명")
     description_en = models.TextField(blank=True, verbose_name="제품 설명 (영어)")
     short_description = models.CharField(max_length=500, blank=True, verbose_name="제품 안내사항")
     short_description_en = models.CharField(max_length=500, blank=True, verbose_name="제품 안내사항 (영어)")
@@ -24,8 +24,39 @@ class Products(models.Model):
         verbose_name_plural = "제품"
         ordering = ['-created_at']
     
+    def clean(self):
+        """
+        모델 검증 메소드
+        한국어 또는 영어 중 최소 하나의 제품명과 설명은 필수입니다.
+        """
+        from django.core.exceptions import ValidationError
+        
+        name_ko = self.name.strip() if self.name else ''
+        name_en = self.name_en.strip() if self.name_en else ''
+        desc_ko = self.description.strip() if self.description else ''
+        desc_en = self.description_en.strip() if self.description_en else ''
+        
+        errors = {}
+        
+        # 제품명 검증: 한국어 또는 영어 중 최소 하나는 필수
+        if not name_ko and not name_en:
+            errors['name'] = '제품명(한국어 또는 영어)은 최소 하나는 필수입니다.'
+            errors['name_en'] = '제품명(한국어 또는 영어)은 최소 하나는 필수입니다.'
+        
+        # 제품 설명 검증: 한국어 또는 영어 중 최소 하나는 필수
+        if not desc_ko and not desc_en:
+            errors['description'] = '제품 설명(한국어 또는 영어)은 최소 하나는 필수입니다.'
+            errors['description_en'] = '제품 설명(한국어 또는 영어)은 최소 하나는 필수입니다.'
+        
+        if errors:
+            raise ValidationError(errors)
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.name
+        return self.name or self.name_en or f"제품 #{self.pk}"
 
 
 class ProductImages(models.Model):
@@ -82,8 +113,7 @@ class Inquiries(models.Model):
     name = models.CharField(max_length=100, verbose_name="이름")
     email = models.EmailField(verbose_name="이메일")
     inquiry_type = models.CharField(max_length=20, choices=INQUIRY_TYPE_CHOICES, default='general', verbose_name="문의 유형")
-    message = models.TextField(blank=True, verbose_name="문의 내용")
-    message_en = models.TextField(blank=True, verbose_name="문의 내용 (영어)")
+    message = models.TextField(verbose_name="문의 내용")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="문의일")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="수정일")
     
@@ -410,7 +440,7 @@ class Suppliers(models.Model):
     def __str__(self):
         return f"{self.name} ({self.contact_person})"
 
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save
 from django.dispatch import receiver
 
 @receiver(post_delete, sender=DailySales)
@@ -436,3 +466,23 @@ def auto_delete_monthly_sales_when_no_daily_sales(sender, instance, **kwargs):
             print(f"{year}년 {month}월 일별 매출이 모두 삭제되어 월별 매출도 자동 삭제되었습니다.")
         except Sales.DoesNotExist:
             pass  # 월별 매출이 없으면 무시
+
+
+@receiver(post_save, sender=Sales)
+@receiver(post_delete, sender=Sales)
+def auto_update_yearly_sales_costs(sender, instance, **kwargs):
+    """
+    월별 매출 생성/수정/삭제 시 연별 매출의 매출원가 자동 업데이트
+    """
+    year = instance.year
+    
+    # 해당 연도의 YearlySales가 존재하면 매출원가 업데이트
+    try:
+        yearly_sales = YearlySales.objects.get(year=year)
+        yearly_sales.update_annual_costs()
+        print(f"{year}년 연별 매출원가가 자동으로 업데이트되었습니다.")
+    except YearlySales.DoesNotExist:
+        # 연별 매출이 없으면 자동으로 생성
+        yearly_sales = YearlySales.objects.create(year=year)
+        yearly_sales.update_annual_costs()
+        print(f"{year}년 연별 매출이 자동으로 생성되고 매출원가가 계산되었습니다.")
