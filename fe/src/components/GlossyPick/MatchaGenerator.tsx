@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { questions } from "@/data/questions";
 import { menuData } from "@/data/menuData";
@@ -9,12 +11,12 @@ import { useShare } from "@/hooks/useShare";
 import { useDownload } from "@/hooks/useDownload";
 import Intro from "./Intro";
 import QuestionSection from "./QuestionSection";
+import ResultSection from "./ResultSection";
 import styles from "./MatchaGenerator.module.scss";
 
 export default function MatchaGenerator() {
     const {
         currentStep,
-        answers,
         handleAnswer,
         resetQuiz,
         startQuiz,
@@ -68,6 +70,17 @@ export default function MatchaGenerator() {
                         onPrev={handlePrev}
                     />
                 )}
+
+                {currentStep === 5 && recommendation && (
+                    <ResultSection
+                        recommendation={recommendation}
+                        menuInfo={menuData[recommendation]}
+                        onShare={handleShare}
+                        onDownload={handleDownload}
+                        onReset={resetQuiz}
+                    />
+                )}
+                <ToastContainer position="bottom-center" autoClose={2000} />
             </section>
         </main>
     );
