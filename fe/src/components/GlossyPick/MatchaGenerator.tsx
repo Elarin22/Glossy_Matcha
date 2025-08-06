@@ -18,8 +18,13 @@ export default function MatchaGenerator() {
         handleAnswer,
         resetQuiz,
         startQuiz,
+        goPrevStep,
         recommendation,
     } = useMatchaQuiz();
+
+    const handlePrev = () => {
+        goPrevStep();
+    };
 
     const { shareResult } = useShare();
 
@@ -60,6 +65,7 @@ export default function MatchaGenerator() {
                         question={questions[currentStep - 1]}
                         currentStep={currentStep}
                         onAnswer={handleAnswer}
+                        onPrev={handlePrev}
                     />
                 )}
             </section>
