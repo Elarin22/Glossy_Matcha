@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord, Suppliers
+from .models import Staff, WorkRecord, Suppliers, DailySales
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -145,5 +145,31 @@ class SuppliersForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 3,
                 'placeholder': '메모를 입력하세요. (선택사항)'
+            }),
+        }
+    
+class DailySalesForm(forms.ModelForm):
+    class Meta:
+        model = DailySales
+        fields = ['date', 'offline_sales', 'other_sales', 'memo']
+        widgets = {
+            'date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }),
+            'offline_sales': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '오프라인 매출을 입력하세요'
+            }),
+            'other_sales': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '기타 매출을 입력하세요'
+            }),
+            'memo': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': '메모를 입력하세요 (선택사항)'
             }),
         }
