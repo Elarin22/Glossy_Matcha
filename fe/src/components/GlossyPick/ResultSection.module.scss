@@ -16,6 +16,7 @@
     &__menu {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
     }
 
@@ -24,7 +25,7 @@
         max-width: 230px;
         height: auto;
         aspect-ratio: 230 / 360;
-        object-fit: cover;
+        object-fit: contain;
         margin-bottom: clamp(10px, 2vw, 30px);
     }
 
