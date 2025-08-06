@@ -1,0 +1,414 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}대시보드 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="mb-0">
+            <i class="bi bi-house-door me-2"></i>매장 운영 대시보드
+        </h2>
+        <p class="text-muted">오늘의 매장 운영 현황을 한눈에 확인하세요</p>
+    </div>
+</div>
+
+<!-- 요약 통계 카드 -->
+<div class="row mb-4">
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-people dashboard-icon mb-3"></i>
+                <h5 class="card-title">재직 직원</h5>
+                <div class="stat-number">{{ active_staff_count }}명</div>
+                <small class="text-muted">현재 재직 중인 직원 수</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-day dashboard-icon mb-3"></i>
+                <h5 class="card-title">오늘 매출</h5>
+                <div class="stat-number">{{ today_sales|floatformat:0|default:"0" }}원</div>
+                <small class="text-muted">{{ today|date:"m월 d일" }} 매출액</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up dashboard-icon mb-3"></i>
+                <h5 class="card-title">이번 달 매출</h5>
+                <div class="stat-number">{{ monthly_sales|floatformat:0|default:"0" }}원</div>
+                <small class="text-muted">{{ today|date:"Y년 m월" }} 누적 매출</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-building dashboard-icon mb-3"></i>
+                <h5 class="card-title">거래처</h5>
+                <div class="stat-number">{{ active_suppliers_count }}개</div>
+                <small class="text-muted">활성 거래처 수</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-chat-left dashboard-icon mb-3"></i>
+                <h5 class="card-title">고객 문의</h5>
+                <div class="stat-number">{{ total_inquiries|default:"0" }}건</div>
+                <small class="text-muted">총 접수된 문의</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 빠른 액션 버튼 -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>빠른 작업</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="{% url 'staff_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-person-plus me-2"></i>직원 등록
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="{% url 'sales_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-calendar-day me-2"></i>일별 매출
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="{% url 'monthly_sales_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-calendar3 me-2"></i>월별 매출
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="{% url 'yearly_sales_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-calendar-year me-2"></i>연별 매출
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="{% url 'suppliers_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="bi bi-building-add me-2"></i>거래처 등록
+                        </a>
+                    </div>
+                    <div class="col-lg-2 col-md-4 mb-2">
+                        <a href="#" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#workRecordModal">
+                            <i class="bi bi-cash me-2"></i>급여 기록
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 최근 활동 -->
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-clock-history me-2"></i>최근 매출 현황</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_sales %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>날짜</th>
+                                    <th>분류</th>
+                                    <th class="text-end">금액</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for sale in recent_sales %}
+                                <tr>
+                                    <td>{{ sale.year }}.{{ sale.month }}</td>
+                                    <td>
+                                        <span class="badge {% if sale.gross_profit >= 0 %}bg-success{% else %}bg-danger{% endif %}">
+                                            {% if sale.gross_profit >= 0 %}이익{% else %}손실{% endif %}
+                                        </span>
+                                    </td>
+                                    <td class="text-end">{{ sale.total_sales|floatformat:0 }}원</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'sales_list' %}" class="btn btn-sm btn-outline-primary">
+                            전체 매출 보기 <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-graph-up" style="font-size: 2rem;"></i>
+                        <p class="mt-2">등록된 매출 데이터가 없습니다.</p>
+                        <a href="{% url 'sales_create' %}" class="btn btn-sm btn-primary">첫 매출 입력하기</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-people me-2"></i>직원 현황</h5>
+            </div>
+            <div class="card-body">
+                {% if staff_list %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>구분</th>
+                                    <th>입사일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for staff in staff_list %}
+                                <tr>
+                                    <td>{{ staff.name }}</td>
+                                    <td>
+                                        <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% else %}bg-success{% endif %}">
+                                            {{ staff.get_employee_type_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ staff.hire_date|date:"Y.m.d" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'staff_list' %}" class="btn btn-sm btn-outline-primary">
+                            전체 직원 보기 <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-people" style="font-size: 2rem;"></i>
+                        <p class="mt-2">등록된 직원이 없습니다.</p>
+                        <a href="{% url 'staff_create' %}" class="btn btn-sm btn-primary">첫 직원 등록하기</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-chat-left me-2"></i>최근 고객 문의</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_inquiries %}
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>문의자</th>
+                                    <th>유형</th>
+                                    <th>문의일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for inquiry in recent_inquiries %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'inquiries_detail' inquiry.pk %}" class="text-decoration-none">
+                                            {{ inquiry.name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <span class="badge 
+                                            {% if inquiry.inquiry_type == 'general' %}bg-primary
+                                            {% elif inquiry.inquiry_type == 'product' %}bg-success
+                                            {% else %}bg-secondary{% endif %} badge-sm">
+                                            {{ inquiry.get_inquiry_type_display }}
+                                        </span>
+                                    </td>
+                                    <td>{{ inquiry.created_at|date:"m/d" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'inquiries_list' %}" class="btn btn-sm btn-outline-primary">
+                            전체 문의 보기 <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-chat-left" style="font-size: 2rem;"></i>
+                        <p class="mt-2">등록된 문의가 없습니다.</p>
+                        <small class="text-muted">고객 문의가 접수되면 여기에 표시됩니다.</small>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 급여 기록 입력 모달 -->
+<div class="modal fade" id="workRecordModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-cash me-2"></i>급여 기록 입력</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'work_record_create' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="staff_select" class="form-label">직원 선택</label>
+                        <select class="form-select" name="staff" id="staff_select" required>
+                            <option value="">직원을 선택하세요</option>
+                            {% for staff in staff_list %}
+                            <option value="{{ staff.id }}">{{ staff.name }} ({{ staff.nickname }}) - {{ staff.get_employee_type_display }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="total_hours" class="form-label">총 근무시간</label>
+                            <input type="number" class="form-control" name="total_hours" id="dashboard_total_hours" 
+                                   step="0.1" min="0" placeholder="160.0" required>
+                            <small class="text-muted">시간 단위로 입력</small>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pay_period_weeks" class="form-label">급여 기간(주)</label>
+                            <input type="number" class="form-control" name="pay_period_weeks" id="dashboard_pay_period_weeks" 
+                                   step="0.1" min="0.1" value="4.0" placeholder="4.0" required>
+                            <small class="text-muted">주 단위로 입력</small>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="hourly_rate" class="form-label">시급</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="hourly_rate" id="dashboard_hourly_rate" 
+                                       min="0" placeholder="10000" required>
+                                <span class="input-group-text">원</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="monthly_salary" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control bg-light" name="monthly_salary" id="dashboard_monthly_salary" 
+                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <span class="input-group-text">원</span>
+                            </div>
+                            <small class="text-muted">시급과 총근무시간으로 자동 계산됩니다</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="weekly_holiday_allowance" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control bg-light" name="weekly_holiday_allowance" id="dashboard_weekly_holiday_allowance" 
+                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <span class="input-group-text">원</span>
+                            </div>
+                            <small class="text-muted">주 15시간 이상 근무 시 법정 기준으로 자동 계산됩니다</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="memo" class="form-label">비고 (선택사항)</label>
+                        <textarea class="form-control" name="memo" id="memo" rows="2" 
+                                  placeholder="특이사항이 있으면 입력하세요"></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <small><i class="bi bi-info-circle me-1"></i>월급과 주휴수당이 자동으로 계산됩니다</small>
+                        <br><small>• 월급: 시급 × 총근무시간</small>
+                        <br><small>• 주휴수당: 주 15시간 이상 근무 시 법정 기준으로 자동 계산</small>
+                        <br><strong>• 예상 지급합계: <span id="dashboard_total_payment_display" class="text-primary">0원</span></strong>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-primary">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateDashboardSalary() {
+    const totalHours = parseFloat(document.getElementById('dashboard_total_hours').value) || 0;
+    const payPeriodWeeks = parseFloat(document.getElementById('dashboard_pay_period_weeks').value) || 1;
+    const hourlyRate = parseFloat(document.getElementById('dashboard_hourly_rate').value) || 0;
+    const monthlySalary = totalHours * hourlyRate;
+    
+    // 주휴수당 계산 (정확한 주별 근무시간 사용)
+    const weeklyHours = totalHours / payPeriodWeeks;
+    let weeklyHolidayAllowance = 0;
+    
+    if (weeklyHours >= 15) {  // 주 15시간 이상 근무 시 주휴수당 지급
+        if (weeklyHours < 40) {
+            // 주 40시간 미만: (1주 소정근로시간 / 40) * 8 * 시급
+            weeklyHolidayAllowance = (weeklyHours / 40) * 8 * hourlyRate;
+        } else {
+            // 주 40시간 이상: 1일 소정근로시간(최대 8시간) * 시급
+            weeklyHolidayAllowance = 8 * hourlyRate;
+        }
+    }
+    
+    document.getElementById('dashboard_monthly_salary').value = Math.round(monthlySalary);
+    document.getElementById('dashboard_weekly_holiday_allowance').value = Math.round(weeklyHolidayAllowance);
+    
+    // 지급합계도 업데이트 (실시간 표시용)
+    const totalPayment = monthlySalary + weeklyHolidayAllowance;
+    const totalPaymentElement = document.getElementById('dashboard_total_payment_display');
+    if (totalPaymentElement) {
+        totalPaymentElement.textContent = Math.round(totalPayment).toLocaleString() + '원';
+    }
+}
+
+// 페이지 로드 시 대시보드 이벤트 리스너 추가
+document.addEventListener('DOMContentLoaded', function() {
+    const dashboardTotalHours = document.getElementById('dashboard_total_hours');
+    const dashboardPayPeriodWeeks = document.getElementById('dashboard_pay_period_weeks');
+    const dashboardHourlyRate = document.getElementById('dashboard_hourly_rate');
+    
+    // 입력 필드에 이벤트 리스너 추가
+    if (dashboardTotalHours) {
+        dashboardTotalHours.addEventListener('input', calculateDashboardSalary);
+        dashboardTotalHours.addEventListener('change', calculateDashboardSalary);
+    }
+    
+    if (dashboardPayPeriodWeeks) {
+        dashboardPayPeriodWeeks.addEventListener('input', calculateDashboardSalary);
+        dashboardPayPeriodWeeks.addEventListener('change', calculateDashboardSalary);
+    }
+    
+    if (dashboardHourlyRate) {
+        dashboardHourlyRate.addEventListener('input', calculateDashboardSalary);
+        dashboardHourlyRate.addEventListener('change', calculateDashboardSalary);
+    }
+    
+    // 페이지 로드 시 초기 계산
+    calculateDashboardSalary();
+});
+</script>
+{% endblock %}
