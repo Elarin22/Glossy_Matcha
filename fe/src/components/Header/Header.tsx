@@ -18,12 +18,31 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen((prev) => !prev);
   }, []);
 
-  // 사이드바 열렸을때 esc 눌러도 나갈 수 있게
+  const closeSidebar = useCallback(() => {
+    setIsSidebarOpen(false);
+  }, []);
+
+  // 모바일 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
+  // esc로 사이드바 닫기
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape" && isSidebarOpen) {
@@ -47,10 +66,10 @@ export default function Header() {
       <header className={styles.header}>
         <div className={styles["header-box"]}>
           {/* logo */}
-          <Link href="/">
+          <Link href="/" onClick={closeSidebar}>
             <Image
               src="/images/logo/logo-1.png"
-              alt="Glossy Matcha"
+              alt=""
               className={styles["logo-pc"]}
               width={300}
               height={28}
@@ -58,19 +77,19 @@ export default function Header() {
             />
             <Image
               src="/images/logo/logo-c-b.png"
-              alt="Glossy Matcha"
+              alt=""
               className={styles["logo-mb"]}
               width={40}
               height={40}
               priority
             />
+            <h1 className="sr-only">Glossy Matcha</h1>
           </Link>
 
           {/* pc version */}
           <div className={styles["header-pc"]}>
             {/* left */}
             <nav>
-              {/* 여기 링크들은 각자 폴더 이름에 따라 바꿀 예정 */}
               <ul className={styles["header__list"]}>
                 {NAVIGATION_ITEMS.map((item) => (
                   <li key={item.href} className={styles["header__item"]}>
@@ -119,36 +138,39 @@ export default function Header() {
       </header>
 
       {/* sidebar */}
-      {isSidebarOpen && (
-        <div
-          className={styles.backdrop}
-          onClick={toggleSidebar}
-          tabIndex={0}
-          aria-label="사이드바 닫기"
-        />
+      {isMobile && (
+        <>
+          {isSidebarOpen && (
+            <div
+              className={styles.backdrop}
+              onClick={closeSidebar}
+              tabIndex={0}
+            />
+          )}
+          <aside
+            className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
+            role="navigation"
+            aria-hidden={!isSidebarOpen}
+          >
+            <nav>
+              <ul>
+                {NAVIGATION_ITEMS.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} onClick={closeSidebar}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href="/inquire" onClick={closeSidebar}>
+                    문의하기
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+        </>
       )}
-      <aside
-        className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
-        role="navigation"
-        aria-hidden={!isSidebarOpen}
-      >
-        <nav>
-          <ul>
-            {NAVIGATION_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} onClick={toggleSidebar}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/inquire" onClick={toggleSidebar}>
-                문의하기
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </aside>
     </>
   );
 }
