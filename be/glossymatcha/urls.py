@@ -18,4 +18,12 @@ urlpatterns = [
     # API Views for Products
     path('api/products/', views.ProductListView.as_view(), name='product_list'),               # GET: 제품 목록 조회
     path('api/products/<int:pk>/', views.ProductDetailView.as_view(), name='product_detail'),  # GET: 제품 상세 조회
+
+    # Django Template Views for staff management
+    path('staff/', views.StaffListView.as_view(), name='staff_list'),                           # 직원 목록
+    path('staff/create/', views.StaffCreateView.as_view(), name='staff_create'),                # 직원 등록
+    path('staff/<int:pk>/', views.StaffDetailView.as_view(), name='staff_detail'),              # 직원 상세
+    path('staff/<int:pk>/update/', views.StaffUpdateView.as_view(), name='staff_update'),       # 직원 수정
+    path('staff/<int:pk>/delete/', views.StaffDeleteView.as_view(), name='staff_delete'),       # 직원 삭제
+    path('work-record/create/', views.WorkRecordCreateView.as_view(), name='work_record_create'), # 근무시간 입력
 ]

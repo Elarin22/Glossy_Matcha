@@ -1,0 +1,335 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}{{ staff.name }} - 직원 상세 정보{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-0">
+            <i class="bi bi-person-circle me-2"></i>{{ staff.name }} ({{ staff.nickname }})
+            {% if staff.is_active %}
+                <span class="badge bg-success ms-2">재직중</span>
+            {% else %}
+                <span class="badge bg-secondary ms-2">퇴사</span>
+            {% endif %}
+        </h2>
+        <p class="text-muted">
+            {{ staff.get_employee_type_display }} · 입사: {{ staff.hire_date|date:"Y년 m월 d일" }}
+            {% if staff.resignation_date %} · 퇴사: {{ staff.resignation_date|date:"Y년 m월 d일" }}{% endif %}
+        </p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'staff_update' staff.pk %}" class="btn btn-primary">
+            <i class="bi bi-pencil me-2"></i>정보 수정
+        </a>
+        <a href="{% url 'staff_delete' staff.pk %}" class="btn" style="background-color: #373735; color: #f2efe8; border: none;">
+            <i class="bi bi-trash me-2"></i>삭제
+        </a>
+        <a href="{% url 'staff_list' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-list me-2"></i>목록
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- 기본 정보 -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>기본 정보</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td class="text-muted">이름</td>
+                        <td><strong>{{ staff.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">닉네임</td>
+                        <td><code>{{ staff.nickname }}</code></td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">근무 형태</td>
+                        <td>
+                            <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% else %}bg-success{% endif %}">
+                                {{ staff.get_employee_type_display }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">입사일</td>
+                        <td>{{ staff.hire_date|date:"Y년 m월 d일" }}</td>
+                    </tr>
+                    {% if staff.resignation_date %}
+                    <tr>
+                        <td class="text-muted">퇴사일</td>
+                        <td class="text-danger">{{ staff.resignation_date|date:"Y년 m월 d일" }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        <td class="text-muted">연락처</td>
+                        <td>{{ staff.contact }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">상태</td>
+                        <td>
+                            {% if staff.is_active %}
+                                <span class="badge bg-success">재직중</span>
+                            {% else %}
+                                <span class="badge bg-secondary">퇴사</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if staff.memo %}
+                    <tr>
+                        <td class="text-muted">비고</td>
+                        <td><small class="text-muted">{{ staff.memo }}</small></td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 급여 정보 -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-cash me-2"></i>급여 정보</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_work_records %}
+                    {% with latest_record=recent_work_records.0 %}
+                    <div class="text-center">
+                        <div class="stat-number text-primary">{{ latest_record.total_payment|floatformat:0 }}원</div>
+                        <small class="text-muted">최근 지급합계</small>
+                    </div>
+                    <hr>
+                    <div class="small text-muted">
+                        <div>총 근무시간: {{ latest_record.total_hours }}시간</div>
+                        <div>시급: {{ latest_record.hourly_rate|floatformat:0 }}원</div>
+                        {% if latest_record.monthly_salary %}
+                        <div>월급: {{ latest_record.monthly_salary|floatformat:0 }}원</div>
+                        {% endif %}
+                        {% if latest_record.weekly_holiday_allowance %}
+                        <div>주휴수당: {{ latest_record.weekly_holiday_allowance|floatformat:0 }}원</div>
+                        {% endif %}
+                    </div>
+                    {% endwith %}
+                {% else %}
+                    <div class="text-center text-muted">
+                        <i class="bi bi-cash-stack" style="font-size: 2rem;"></i>
+                        <p class="mt-2 mb-0">급여 기록이 없습니다</p>
+                    </div>
+                {% endif %}
+                
+                <hr>
+                
+                <div class="d-grid">
+                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#workRecordModal">
+                        <i class="bi bi-plus-circle me-2"></i>급여 기록 입력
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 급여 통계 -->
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-calculator me-2"></i>급여 통계</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_work_records %}
+                    {% with total_payments=0 total_records=recent_work_records|length %}
+                        <div class="text-center mb-3">
+                            <div class="stat-number text-success">{{ total_records }}</div>
+                            <small class="text-muted">총 급여 기록</small>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="text-muted">
+                                <div class="small">{{ staff.get_employee_type_display }} 직원</div>
+                            </div>
+                        </div>
+                    {% endwith %}
+                {% else %}
+                    <div class="text-center text-muted">
+                        <i class="bi bi-calculator" style="font-size: 2rem;"></i>
+                        <p class="mt-2 mb-0">급여 기록이 없습니다</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 최근 급여 기록 -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-cash-stack me-2"></i>최근 급여 기록</h5>
+    </div>
+    <div class="card-body">
+        {% if recent_work_records %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>총 근무시간</th>
+                            <th>시급</th>
+                            <th>월급</th>
+                            <th>주휴수당</th>
+                            <th>지급합계</th>
+                            <th>등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in recent_work_records %}
+                        <tr>
+                            <td>
+                                <span class="badge bg-info">{{ record.total_hours }}시간</span>
+                            </td>
+                            <td>{{ record.hourly_rate|floatformat:0 }}원</td>
+                            <td>
+                                {% if record.monthly_salary %}
+                                    {{ record.monthly_salary|floatformat:0 }}원
+                                {% else %}
+                                    <small class="text-muted">-</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if record.weekly_holiday_allowance %}
+                                    {{ record.weekly_holiday_allowance|floatformat:0 }}원
+                                {% else %}
+                                    <small class="text-muted">-</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <strong class="text-success">{{ record.total_payment|floatformat:0 }}원</strong>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ record.created_at|date:"m.d H:i" }}</small>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="bi bi-cash-stack" style="font-size: 3rem; color: #ddd;"></i>
+                <h5 class="mt-3 text-muted">급여 기록이 없습니다</h5>
+                <p class="text-muted">첫 번째 급여 기록을 입력해보세요.</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#workRecordModal">
+                    <i class="bi bi-cash me-2"></i>급여 기록 입력
+                </button>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 급여 기록 입력 모달 -->
+<div class="modal fade" id="workRecordModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ staff.name }} ({{ staff.nickname }}) 급여 기록 입력</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" action="{% url 'work_record_create' %}">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <input type="hidden" name="staff" value="{{ staff.id }}">
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="total_hours" class="form-label">총 근무시간</label>
+                            <input type="number" class="form-control" name="total_hours" id="total_hours" 
+                                   step="0.5" min="0" placeholder="160.0" required oninput="calculateModalSalary()">
+                            <small class="text-muted">시간 단위로 입력</small>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="pay_period_weeks" class="form-label">급여 기간(주)</label>
+                            <input type="number" class="form-control" name="pay_period_weeks" id="pay_period_weeks" 
+                                   step="0.1" min="0.1" placeholder="4.0" value="4.0" required oninput="calculateModalSalary()">
+                            <small class="text-muted">주 단위로 입력</small>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="hourly_rate" class="form-label">시급</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="hourly_rate" id="hourly_rate" 
+                                       min="0" placeholder="10000" required oninput="calculateModalSalary()">
+                                <span class="input-group-text">원</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="monthly_salary" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="monthly_salary" id="monthly_salary" 
+                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <span class="input-group-text">원</span>
+                            </div>
+                            <small class="text-muted">시급 × 총근무시간으로 자동 계산됩니다</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="weekly_holiday_allowance" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="weekly_holiday_allowance" id="weekly_holiday_allowance" 
+                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <span class="input-group-text">원</span>
+                            </div>
+                            <small class="text-muted">주 15시간 이상 근무 시 자동 계산됩니다</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="memo" class="form-label">비고 (선택사항)</label>
+                        <textarea class="form-control" name="memo" id="memo" rows="2" 
+                                  placeholder="특이사항이 있으면 입력하세요"></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <small><i class="bi bi-info-circle me-1"></i>월급과 주휴수당이 자동으로 계산됩니다</small>
+                        <br><small>• 월급: 시급 × 총근무시간</small>
+                        <br><small>• 주휴수당: 주 15시간 이상 근무 시 법정 기준으로 자동 계산</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="submit" class="btn btn-primary">저장</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateModalSalary() {
+    const totalHours = parseFloat(document.getElementById('total_hours').value) || 0;
+    const payPeriodWeeks = parseFloat(document.getElementById('pay_period_weeks').value) || 1;
+    const hourlyRate = parseFloat(document.getElementById('hourly_rate').value) || 0;
+    const monthlySalary = totalHours * hourlyRate;
+    
+    // 주휴수당 계산 (정확한 주별 근무시간 사용)
+    const weeklyHours = totalHours / payPeriodWeeks;
+    let weeklyHolidayAllowance = 0;
+    
+    if (weeklyHours >= 15) {  // 주 15시간 이상 근무 시 주휴수당 지급
+        if (weeklyHours < 40) {
+            // 주 40시간 미만: (1주 소정근로시간 / 40) * 8 * 시급
+            weeklyHolidayAllowance = (weeklyHours / 40) * 8 * hourlyRate;
+        } else {
+            // 주 40시간 이상: 1일 소정근로시간(최대 8시간) * 시급
+            weeklyHolidayAllowance = 8 * hourlyRate;
+        }
+    }
+    
+    document.getElementById('monthly_salary').value = Math.round(monthlySalary);
+    document.getElementById('weekly_holiday_allowance').value = Math.round(weeklyHolidayAllowance);
+}
+</script>
+{% endblock %}

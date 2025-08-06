@@ -1,0 +1,135 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}직원 관리 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2 class="mb-0">
+            <i class="bi bi-people me-2"></i>직원 관리
+        </h2>
+        <p class="text-muted">매장 직원 정보 및 근무 관리</p>
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="{% url 'staff_create' %}" class="btn btn-primary">
+            <i class="bi bi-person-plus me-2"></i>새 직원 등록
+        </a>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">전체 직원 목록</h5>
+    </div>
+    <div class="card-body">
+        {% if staff_list %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>이름</th>
+                            <th>닉네임</th>
+                            <th>근무 형태</th>
+                            <th>입사일</th>
+                            <th>퇴사일</th>
+                            <th>연락처</th>
+                            <th>상태</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for staff in staff_list %}
+                        <tr>
+                            <td>
+                                <strong>{{ staff.name }}</strong>
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ staff.nickname }}</small>
+                            </td>
+                            <td>
+                                <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% else %}bg-success{% endif %}">
+                                    {{ staff.get_employee_type_display }}
+                                </span>
+                            </td>
+                            <td>{{ staff.hire_date|date:"Y.m.d" }}</td>
+                            <td>
+                                {% if staff.resignation_date %}
+                                    {{ staff.resignation_date|date:"Y.m.d" }}
+                                {% else %}
+                                    <small class="text-muted">-</small>
+                                {% endif %}
+                            </td>
+                            <td>{{ staff.contact }}</td>
+                            <td>
+                                {% if staff.is_active %}
+                                    <span class="badge bg-success">재직중</span>
+                                {% else %}
+                                    <span class="badge bg-secondary">퇴사</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url 'staff_detail' staff.pk %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{% url 'staff_update' staff.pk %}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-people" style="font-size: 4rem; color: #ddd;"></i>
+                <h4 class="mt-3 text-muted">등록된 직원이 없습니다</h4>
+                <p class="text-muted">첫 번째 직원을 등록해보세요.</p>
+                <a href="{% url 'staff_create' %}" class="btn btn-primary">
+                    <i class="bi bi-person-plus me-2"></i>직원 등록하기
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 직원 통계 -->
+{% if staff_list %}
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="text-primary">{{ staff_list|length }}</h5>
+                <small class="text-muted">전체 직원</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="text-primary">
+                    {% for staff in staff_list %}
+                        {% if staff.employee_type == 'full_time' %}{{ forloop.counter0|add:1 }}{% endif %}
+                    {% empty %}0{% endfor %}
+                </h5>
+                <small class="text-muted">정직원</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="text-success">
+                    {% for staff in staff_list %}
+                        {% if staff.employee_type == 'part_time' %}{{ forloop.counter0|add:1 }}{% endif %}
+                    {% empty %}0{% endfor %}
+                </h5>
+                <small class="text-muted">파트타임</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
