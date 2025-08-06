@@ -1,0 +1,179 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}{{ supplier.name }} - 거래처 상세 정보{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-0">
+            <i class="bi bi-building me-2"></i>{{ supplier.name }}
+            {% if supplier.is_active %}
+                <span class="badge bg-success ms-2">거래중</span>
+            {% else %}
+                <span class="badge bg-secondary ms-2">거래중단</span>
+            {% endif %}
+        </h2>
+        <p class="text-muted">{{ supplier.contact_person }} 담당 · 등록일: {{ supplier.created_at|date:"Y년 m월 d일" }}</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'suppliers_update' supplier.pk %}" class="btn btn-primary">
+            <i class="bi bi-pencil me-2"></i>정보 수정
+        </a>
+        <a href="{% url 'suppliers_delete' supplier.pk %}" class="btn" style="background-color: #373735; color: #f2efe8; border: none;">
+            <i class="bi bi-trash me-2"></i>삭제
+        </a>
+        <a href="{% url 'suppliers_list' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-list me-2"></i>목록
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <!-- 기본 정보 -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>기본 정보</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr>
+                        <td class="text-muted" width="30%">업체명</td>
+                        <td><strong>{{ supplier.name }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">담당자</td>
+                        <td>{{ supplier.contact_person }}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">연락처</td>
+                        <td>
+                            {% if supplier.phone %}
+                                {{ supplier.phone }}
+                            {% else %}
+                                <small class="text-muted">등록된 연락처가 없습니다</small>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">이메일</td>
+                        <td>
+                            <a href="mailto:{{ supplier.email }}" class="text-decoration-none">
+                                {{ supplier.email }}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">결제방식</td>
+                        <td>
+                            <span class="badge 
+                                {% if supplier.payment_method == 'cash' %}bg-success
+                                {% elif supplier.payment_method == 'transfer' %}bg-primary
+                                {% elif supplier.payment_method == 'card' %}bg-info
+                                {% else %}bg-warning{% endif %}">
+                                {{ supplier.get_payment_method_display }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-muted">거래상태</td>
+                        <td>
+                            {% if supplier.is_active %}
+                                <span class="badge bg-success">거래중</span>
+                            {% else %}
+                                <span class="badge bg-secondary">거래중단</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 메모 및 관리 정보 -->
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-chat-text me-2"></i>메모</h5>
+            </div>
+            <div class="card-body">
+                {% if supplier.memo %}
+                    <p class="mb-0">{{ supplier.memo|linebreaks }}</p>
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-chat-text" style="font-size: 2rem;"></i>
+                        <p class="mt-2 mb-0">등록된 메모가 없습니다.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="bi bi-calendar me-2"></i>관리 정보</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td class="text-muted" width="40%">등록일</td>
+                        <td>{{ supplier.created_at|date:"Y년 m월 d일 H:i" }}</td>
+                    </tr>
+                    {% if supplier.updated_at != supplier.created_at %}
+                    <tr>
+                        <td class="text-muted">최종수정</td>
+                        <td>{{ supplier.updated_at|date:"Y년 m월 d일 H:i" }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 빠른 연락 -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-envelope me-2"></i>빠른 연락</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to={{ supplier.email }}" target="_blank" class="btn w-100" style="background-color: #00563f; color: #f2efe8; border: none;">
+                    <i class="bi bi-envelope me-2"></i>Gmail로 메일 보내기
+                </a>
+            </div>
+            <div class="col-md-6">
+                <button class="btn w-100" style="background-color: #DAE3D8; color: #373735; border: 1px solid #00563f;" onclick="copyToClipboard('{{ supplier.name }}\n{{ supplier.contact_person }}{% if supplier.phone %}\n{{ supplier.phone }}{% endif %}\n{{ supplier.email }}')">
+                    <i class="bi bi-clipboard me-2"></i>연락처 정보 복사
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 액션 버튼 -->
+<div class="row mt-4">
+    <div class="col-12 text-center">
+        <a href="{% url 'suppliers_create' %}" class="btn btn-success me-2">
+            <i class="bi bi-building-add me-2"></i>새 거래처 등록
+        </a>
+        <a href="{% url 'suppliers_update' supplier.pk %}" class="btn btn-primary me-2">
+            <i class="bi bi-pencil me-2"></i>이 거래처 수정
+        </a>
+        <a href="{% url 'suppliers_list' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>거래처 목록으로
+        </a>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // 성공 알림 (Bootstrap toast 등으로 개선 가능)
+        alert('거래처 정보가 클립보드에 복사되었습니다.');
+    }, function(err) {
+        console.error('클립보드 복사 실패: ', err);
+    });
+}
+</script>
+{% endblock %}
