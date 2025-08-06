@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord
+from .models import Staff, WorkRecord, Suppliers
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -113,3 +113,37 @@ class WorkRecordForm(forms.ModelForm):
         # monthly_salary와 weekly_holiday_allowance는 자동 계산되므로 필수가 아님
         self.fields['monthly_salary'].required = False
         self.fields['weekly_holiday_allowance'].required = False
+
+class SuppliersForm(forms.ModelForm):
+    class Meta:
+        model = Suppliers
+        fields = ['name', 'contact_person', 'phone', 'email', 'payment_method', 'is_active', 'memo']
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '업체명을 입력하세요.'
+            }),
+            'contact_person': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '담당자명을 입력하세요.'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '연락처를 입력하세요. (선택사항)'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': '이메일을 입력하세요.'
+            }),
+            'payment_method': forms.Select(attrs={
+                'class': 'form-select',
+            }),
+            'is_active': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+            'memo': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': '메모를 입력하세요. (선택사항)'
+            }),
+        }
