@@ -28,7 +28,9 @@ interface ScrollNavProps {
  * @param {ScrollNavProps} props - 메뉴 항목을 전달하는 props
  * @returns {JSX.Element} - ScrollNav 네비게이션 컴포넌트
  */
-export default function ScrollNav({ menuItems }: ScrollNavProps): JSX.Element {
+export default function ScrollNav({
+    menuItems,
+}: ScrollNavProps): React.JSX.Element {
     /** 현재 활성화된 섹션의 id */
     const [activeId, setActiveId] = useState<string | null>(null);
 
