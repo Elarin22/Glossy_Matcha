@@ -4,7 +4,11 @@ import Image from "next/image";
 import GlossyPickHeader from "./GlossyPickHeader";
 import styles from "./Intro.module.scss";
 
-export default function Intro() {
+interface IntroProps {
+    onStart: () => void;
+}
+
+export default function Intro({ onStart }: IntroProps) {
     return (
         <div className={styles.intro}>
             <GlossyPickHeader />
@@ -19,7 +23,9 @@ export default function Intro() {
                 width={970}
                 height={420}
             />
-            <button className="btn-g">시작하기</button>
+            <button className="btn-g" onClick={onStart}>
+                시작하기
+            </button>
         </div>
     );
 }
