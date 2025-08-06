@@ -1,0 +1,339 @@
+/* Glossy Matcha 브랜드 색상 */
+:root {
+    --beige: #f2efe8;
+    --green-light: #DAE3D8;
+    --green-dark: #00563f;
+    --white: #ffffff;
+    --black: #373735;
+}
+
+/* 기본 스타일 */
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: var(--black);
+    background-color: var(--beige) !important;
+}
+
+/* 카드 스타일 */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+}
+
+.card-header {
+    background-color: var(--green-light);
+    border-bottom: 1px solid #e0e0e0;
+    border-radius: 12px 12px 0 0 !important;
+    color: var(--black);
+    font-weight: 600;
+}
+
+/* 버튼 스타일 */
+.btn-primary {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+    border-radius: 8px;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #004532;
+    border-color: #004532;
+}
+
+.btn-outline-primary {
+    color: var(--green-dark);
+    border-color: var(--green-dark);
+    border-radius: 8px;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+.btn-success {
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+    color: var(--black);
+    border-radius: 8px;
+}
+
+.btn-success:hover {
+    background-color: #c5d4c0;
+    border-color: #c5d4c0;
+    color: var(--black);
+}
+
+/* 테이블 스타일 */
+.table {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background-color: var(--green-light);
+    color: var(--black);
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* 폼 스타일 */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--green-dark);
+    box-shadow: 0 0 0 0.2rem rgba(0, 86, 63, 0.25);
+}
+
+/* 네비게이션 활성 링크 */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+/* 대시보드 카드 */
+.dashboard-card {
+    transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+}
+
+.dashboard-icon {
+    font-size: 2.5rem;
+    color: var(--green-dark);
+}
+
+/* 통계 숫자 */
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--green-dark);
+}
+
+/* 페이지네이션 */
+.pagination .page-link {
+    color: var(--green-dark);
+    border-color: #dee2e6;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+.pagination .page-link:hover {
+    color: var(--white);
+    background-color: var(--green-dark);
+    border-color: var(--green-dark);
+}
+
+/* 알림 메시지 커스텀 */
+.alert-success {
+    background-color: var(--green-light);
+    border-color: var(--green-light);
+    color: var(--black);
+}
+
+/* 로그인 폼 */
+.login-container {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login-header {
+    background-color: var(--green-dark);
+    color: var(--white);
+    border-radius: 12px 12px 0 0;
+}
+
+/* 반응형 테이블 */
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.9rem;
+    }
+    
+    .btn-sm {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* 사이드바 스타일 (추후 확장용) */
+.sidebar {
+    background-color: var(--white);
+    border-right: 1px solid #e0e0e0;
+    min-height: calc(100vh - 56px);
+}
+
+/* 검색 폼 */
+.search-form {
+    background-color: var(--white);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* 액션 버튼 그룹 */
+.action-buttons {
+    gap: 0.5rem;
+}
+
+/* 로딩 스피너 */
+.spinner-border-custom {
+    color: var(--green-dark);
+}
+
+/* 브랜드 컬러 텍스트 클래스 */
+.text-brand-green {
+    color: var(--green-dark) !important;
+}
+
+.text-brand-green-light {
+    color: var(--green-light) !important;
+}
+
+.text-brand-beige {
+    color: var(--beige) !important;
+}
+
+.text-brand-black {
+    color: var(--black) !important;
+}
+
+/* 브랜드 컬러 배경 클래스 */
+.bg-brand-green {
+    background-color: var(--green-dark) !important;
+    color: var(--white) !important;
+}
+
+.bg-brand-green-light {
+    background-color: var(--green-light) !important;
+    color: var(--black) !important;
+}
+
+.bg-brand-beige {
+    background-color: var(--beige) !important;
+    color: var(--black) !important;
+}
+
+/* 기존 Bootstrap 색상을 브랜드 컬러로 오버라이드 */
+.text-primary {
+    color: var(--green-dark) !important;
+}
+
+.text-success {
+    color: var(--green-dark) !important;
+}
+
+.text-warning {
+    color: var(--black) !important;
+}
+
+.text-info {
+    color: var(--green-dark) !important;
+}
+
+.text-danger {
+    color: #dc3545 !important; /* 위험 색상은 빨간색 유지 */
+}
+
+/* 배경 색상 오버라이드 */
+.bg-primary {
+    background-color: var(--green-dark) !important;
+    color: var(--white) !important;
+}
+
+.bg-success {
+    background-color: var(--green-light) !important;
+    color: var(--black) !important;
+}
+
+.bg-warning {
+    background-color: var(--beige) !important;
+    color: var(--black) !important;
+}
+
+.bg-info {
+    background-color: var(--green-light) !important;
+    color: var(--black) !important;
+}
+
+.bg-light {
+    background-color: var(--beige) !important;
+    color: var(--black) !important;
+}
+
+/* 알림창 색상 오버라이드 */
+.alert-primary {
+    background-color: var(--green-light);
+    border-color: var(--green-dark);
+    color: var(--black);
+}
+
+.alert-info {
+    background-color: var(--green-light);
+    border-color: var(--green-dark);
+    color: var(--black);
+}
+
+.alert-warning {
+    background-color: var(--beige);
+    border-color: var(--black);
+    color: var(--black);
+}
+
+/* 버튼 추가 스타일 */
+.btn-secondary {
+    background-color: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: #2a2a28;
+    border-color: #2a2a28;
+    color: var(--white);
+}
+
+.btn-outline-secondary {
+    color: var(--black);
+    border-color: var(--black);
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+}
+
+/* 뱃지 색상 */
+.badge.bg-primary {
+    background-color: var(--green-dark) !important;
+}
+
+.badge.bg-success {
+    background-color: var(--green-light) !important;
+    color: var(--black) !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--black) !important;
+}
+
+.badge.bg-info {
+    background-color: var(--green-light) !important;
+    color: var(--black) !important;
+}
