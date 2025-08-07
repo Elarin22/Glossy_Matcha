@@ -6,6 +6,8 @@
     flex-direction: column;
     align-items: center;
     margin-bottom: clamp(40px, 8vw, 100px);
+    width: 100vw;
+    max-width: 1280px;
 
     &__title {
         @include myeongjo(clamp(18px, 3vw, 28px), 500);
@@ -67,9 +69,8 @@
             width: 100%;
             max-width: 200px;
             height: auto;
-            aspect-ratio: 150 / 240;
-            object-fit: contain;
-            margin-bottom: 0;
+            aspect-ratio: 150 / 200;
+            margin-bottom: 20px;
         }
 
         &__menuName {
