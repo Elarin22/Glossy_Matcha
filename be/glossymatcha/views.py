@@ -45,8 +45,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         ).first()
         monthly_sales = current_month_sales.total_sales if current_month_sales else 0
 
-        # 최근 매출 현황 (최근 5건)
-        recent_sales = Sales.objects.all()[:5]
+        # 최근 매출 현황 (최근 5건 - 일별 매출)
+        recent_sales = DailySales.objects.all()[:5]
 
         # 직원 목록 (재직중인 최근 5명)
         staff_list = Staff.objects.filter(
