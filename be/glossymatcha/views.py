@@ -367,7 +367,7 @@ class StaffUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = Staff
     form_class = StaffForm
-    template_name = 'glossymatcha/staff/update.html'
+    template_name = 'glossymatcha/staff/create.html'
 
     def get_success_url(self):
         return reverse_lazy('staff_detail', kwargs={'pk': self.object.pk})
