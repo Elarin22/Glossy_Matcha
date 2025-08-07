@@ -29,7 +29,7 @@ export default function ResultSection({
                     className={styles["result__image"]}
                     src={menuInfo.image}
                     alt={`${menuInfo.name} 이미지`}
-                    width={230}
+                    width={300}
                     height={360}
                 />
                 <p className={styles["result__menuName"]}>{menuInfo.name}</p>
