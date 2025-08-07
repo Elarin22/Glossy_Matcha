@@ -18,10 +18,10 @@ export default function Intro({ onStart }: IntroProps) {
             </p>
             <Image
                 className={styles["intro__image"]}
-                src="/images/glossy-pick/intro.svg"
+                src="/images/glossy-pick/intro.webp"
                 alt="글로시 말차 메뉴 이미지"
-                width={970}
-                height={420}
+                width={1920}
+                height={1764}
             />
             <button className="btn-g" onClick={onStart}>
                 시작하기
