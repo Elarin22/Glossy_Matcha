@@ -28,74 +28,157 @@ export const getRecommendation = (userAnswers: AnswerType): string => {
 
     // Q1: 말차 스타일
     if (style === "depth") {
-        scores[MENU_KEYS.JEJU_OREUM] += 3;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
-    } else if (style === "sweet") {
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.JEJU_OREUM] += 4;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 5;
         scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-    } else if (style === "visual") {
         scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 1;
         scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
-    } else if (style === "fresh") {
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+    } else if (style === "sweet") {
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
         scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 5;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 5;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+    } else if (style === "visual") {
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 5;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 5;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 4;
+    } else if (style === "fresh") {
+        scores[MENU_KEYS.JEJU_OREUM] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 3;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 5;
     }
 
     // Q2: 무드
     if (mood === "professional") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
-    } else if (mood === "natural") {
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
-    } else if (mood === "cheerful") {
+        scores[MENU_KEYS.JEJU_OREUM] += 5;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
         scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
         scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+    } else if (mood === "natural") {
+        scores[MENU_KEYS.JEJU_OREUM] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 5;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 4;
+    } else if (mood === "cheerful") {
+        scores[MENU_KEYS.JEJU_OREUM] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 5;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 4;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 5;
     } else if (mood === "minimal") {
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
+        scores[MENU_KEYS.JEJU_OREUM] += 4;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 5;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 1;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
     }
 
     // Q3: 목적
     if (purpose === "thirst") {
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 1;
-    } else if (purpose === "caffeine") {
-        scores[MENU_KEYS.JEJU_OREUM] += 3;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
-    } else if (purpose === "healing") {
+        scores[MENU_KEYS.JEJU_OREUM] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
         scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 3;
         scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 1;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 5;
+    } else if (purpose === "caffeine") {
+        scores[MENU_KEYS.JEJU_OREUM] += 5;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 5;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 1;
+    } else if (purpose === "healing") {
+        scores[MENU_KEYS.JEJU_OREUM] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 3;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 5;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
     } else if (purpose === "health") {
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
+        scores[MENU_KEYS.JEJU_OREUM] += 3;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 5;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
     }
 
     // Q4: 선호 음료
     if (favorite === "coffee") {
+        scores[MENU_KEYS.JEJU_OREUM] += 5;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 5;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+    } else if (favorite === "herbal") {
         scores[MENU_KEYS.JEJU_OREUM] += 2;
         scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-    } else if (favorite === "herbal") {
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 1;
-    } else if (favorite === "refreshing") {
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
         scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
         scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 2;
-    } else if (favorite === "milk") {
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 5;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+    } else if (favorite === "refreshing") {
+        scores[MENU_KEYS.JEJU_OREUM] += 1;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
         scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 5;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 3;
         scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 5;
+    } else if (favorite === "milk") {
+        scores[MENU_KEYS.JEJU_OREUM] += 2;
+        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
+        scores[MENU_KEYS.MATCHA_SCHPENER] += 5;
+        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 3;
+        scores[MENU_KEYS.COCONUT_MATCHA_SHAKE] += 4;
+        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
+        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
     }
 
     // 가장 높은 점수를 받은 메뉴 반환
