@@ -8,9 +8,9 @@ import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 
 export const sections: { title: string; source: string }[] = [
   { title: "브랜드 소개", source: "/videos/intro-pc.webm" },
-  { title: "카페 소개", source: "/images/home/glossy-matcha.png" },
-  { title: "제품 소개", source: "/images/home/glossy-signature.png" },
-  { title: "말차 테스트", source: "/images/home/matcha-test.png" },
+  { title: "카페 소개", source: "/images/home/cafe-glossy-matcha.webp" },
+  { title: "제품 소개", source: "/images/home/glossy-signature.webp" },
+  { title: "말차 테스트", source: "/images/home/matcha-test.webp" },
 ];
 
 export default function ImageSection({
@@ -62,7 +62,7 @@ export default function ImageSection({
                       zIndex: -1,
                     }}
                   >
-                    <source src="/videos/intro-pc.webm" type="video/webm" />
+                    <source src={section.source} type="video/webm" />
                     <source src="/videos/intro-pc.mp4" type="video/mp4" />
                     브라우저가 비디오를 지원하지 않습니다.
                   </video>

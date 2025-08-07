@@ -24,7 +24,7 @@
     max-width: 350px;
 
     &.fade-up {
-      animation: fadeUp 1s ease forwards;
+      animation: fadeUp 1.5s ease forwards;
     }
 
     @keyframes fadeUp {
@@ -56,6 +56,5 @@
   &-content {
     font-size: $font-size-18;
     word-break: keep-all;
-    margin-bottom: 2rem;
   }
 }
