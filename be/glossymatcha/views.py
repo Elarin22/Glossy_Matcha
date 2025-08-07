@@ -1,4 +1,4 @@
-from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord
+from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord, YearlySales
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
@@ -13,7 +13,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
-from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm
+from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm, YearlySalesForm
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -643,4 +643,79 @@ class SalesDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         messages.success(request, f'{self.object.year}년 {self.object.month}월 매출이 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
+    
+# Django Template Views for yearly sales management
+class YearlySalesListView(LoginRequiredMixin, ListView):
+    """
+    연별 매출 목록 조회
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 연별 매출 목록 페이지를 렌더링
+    """
+    model = YearlySales
+    template_name = 'glossymatcha/yearly_sales/list.html'
+    context_object_name = 'yearly_sales_list'
+
+class YearlySalesCreateView(LoginRequiredMixin, CreateView):
+    """
+    연별 매출 등록
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 연별 매출 등록 페이지를 렌더링
+    """
+    model = YearlySales
+    form_class = YearlySalesForm
+    template_name = 'glossymatcha/yearly_sales/create.html'
+    success_url = reverse_lazy('yearly_sales_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.year}년 연별 매출이 등록되었습니다.')
+        return response
+    
+class YearlySalesDetailView(LoginRequiredMixin, DetailView):
+    """
+    연별 매출 상세 정보
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 연별 매출 상세 페이지를 렌더링
+    """
+    model = YearlySales
+    template_name = 'glossymatcha/yearly_sales/detail.html'
+    context_object_name = 'yearly_sale'
+
+class YearlySalesUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    연별 매출 정보 수정
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 연별 매출 수정 페이지를 렌더링
+    """
+    model = YearlySales
+    form_class = YearlySalesForm
+    template_name = 'glossymatcha/yearly_sales/create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('yearly_sales_detail', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.year}년 연별 매출 정보가 수정되었습니다.')
+        return response
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['yearly_sale'] = self.object
+        return context
+    
+class YearlySalesDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    연별 매출 삭제
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 연별 매출 삭제 페이지를 렌더링
+    """
+    model = YearlySales
+    template_name = 'glossymatcha/yearly_sales/delete.html'
+    success_url = reverse_lazy('yearly_sales_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.year}년 연별 매출이 삭제되었습니다.')
         return super().delete(request, *args, **kwargs)
