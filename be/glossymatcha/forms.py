@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord, Suppliers, DailySales
+from .models import Staff, WorkRecord, Suppliers, DailySales, Sales
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -173,3 +173,70 @@ class DailySalesForm(forms.ModelForm):
                 'placeholder': '메모를 입력하세요 (선택사항)'
             }),
         }
+
+class SalesForm(forms.ModelForm):
+    class Meta:
+        model = Sales
+        fields = ['year', 'month', 'meterial_cost', 'labor_cost', 'supplies_expense', 'other_expense', 'inventory_amount', 'actual_usage_amount', 'memo']
+        widgets = {
+            'year': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '2000',
+                'max': '2100',
+                'placeholder': '연도를 입력하세요.'
+            }),
+            'month': forms.Select(
+                choices=[(i, f'{i}월') for i in range(1, 13)],
+                attrs = {'class': 'form-select'}
+            ),
+            'meterial_cost': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '재료비를 입력하세요.'
+            }),
+            'labor_cost': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '노무비를 입력하세요.'
+            }),
+            'supplies_expense': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '소모품비를 입력하세요.'
+            }),
+            'other_expense': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '기타 비용을 입력하세요.'
+            }),
+            'inventory_amount': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '재고 금액을 입력하세요.'
+            }),
+            'actual_usage_amount': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '0',
+                'placeholder': '실제 사용 금액을 입력하세요.'
+            }),
+            'memo': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': '메모를 입력하세요. (선택사항)'
+            }),
+        }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        year = cleaned_data.get('year')
+        month = cleaned_data.get('month')
+
+        if year and month:
+            existing_sales = Sales.objects.filter(year=year, month=month)
+            if self.instance.pk:
+                existing_sales = existing_sales.exclude(pk=self.instance.pk)
+            
+            if existing_sales.exists():
+                raise ValidationError(f'{year}년 {month}월의 매출 데이터는 이미 존재합니다. 다른 날짜를 선택해주세요.')
+        
+        return cleaned_data
