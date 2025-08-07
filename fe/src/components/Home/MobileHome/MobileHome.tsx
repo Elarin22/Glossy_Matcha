@@ -21,7 +21,7 @@ export default function MobileHome({
         <h2 className="sr-only">{contents[0].title}</h2>
         <div className={styles["video-background"]}>
           <video ref={videoRef} autoPlay muted loop playsInline>
-            <source src={contents[0].source} type="video/mp4" />
+            <source src={contents[0].sourceMb} type="video/mp4" />
           </video>
         </div>
         <div className={styles.overlay} />

@@ -17,6 +17,7 @@ export interface HomeContent {
   sideBarImage?: string;
   link?: string;
   linkText?: string;
+  sourceMb?: string; // Mobile version of the video
 }
 
 const homeContents: HomeContent[] = [
@@ -26,7 +27,8 @@ const homeContents: HomeContent[] = [
     subSlogan: "모든 일상을 빛나는 순간으로 만듭니다.",
     description:
       "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
-    source: "/videos/intro-mb.webm",
+    source: "/videos/intro-pc.webm",
+    sourceMb: "/videos/intro-mb.webm",
   },
   {
     title: "카페 소개",
