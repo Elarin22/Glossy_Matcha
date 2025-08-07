@@ -329,6 +329,26 @@ class StaffListView(LoginRequiredMixin, ListView):
     model = Staff
     template_name = 'glossymatcha/staff/list.html'
     context_object_name = 'staff_list'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        staff_list = context['staff_list']
+        
+        # 재직 중인 직원만 필터링
+        active_staff = [staff for staff in staff_list if staff.is_active]
+        
+        # 재직 중인 직원 수 계산
+        active_staff_count = len(active_staff)
+        active_full_time_count = len([staff for staff in active_staff if staff.employee_type == 'full_time'])
+        active_part_time_count = len([staff for staff in active_staff if staff.employee_type == 'part_time'])
+        
+        context.update({
+            'active_staff_count': active_staff_count,
+            'active_full_time_count': active_full_time_count,
+            'active_part_time_count': active_part_time_count,
+        })
+        
+        return context
 
 class StaffCreateView(LoginRequiredMixin, CreateView):
     """
