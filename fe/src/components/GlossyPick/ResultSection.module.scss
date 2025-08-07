@@ -58,7 +58,7 @@
         margin-bottom: 30px;
 
         &__title {
-            @include myeongjo($font-size-14, 500);
+            @include myeongjo($font-size-18, 500);
             margin-bottom: 20px;
             text-align: center;
         }
@@ -73,7 +73,7 @@
         }
 
         &__menuName {
-            @include pretendard($font-size-12, 500);
+            @include pretendard($font-size-16, 500);
             margin-bottom: 20px;
         }
 
@@ -83,7 +83,7 @@
         }
 
         &__menuDescription {
-            @include pretendard($font-size-10, 500);
+            @include pretendard($font-size-14, 500);
             margin-bottom: 20px;
             text-align: center;
         }

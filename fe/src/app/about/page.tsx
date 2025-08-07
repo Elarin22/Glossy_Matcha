@@ -29,7 +29,7 @@ export default function About() {
                 <h2 className="sr-only">브랜드 소개 페이지</h2>
                 <Image
                     className={styles["main-banner__image"]}
-                    src="/images/about/main-banner.svg"
+                    src="/images/about/main-banner.webp"
                     alt="브랜드 소개 매인 배너"
                     width={1920}
                     height={720}

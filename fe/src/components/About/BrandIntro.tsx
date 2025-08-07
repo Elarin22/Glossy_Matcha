@@ -14,7 +14,7 @@ export default function BrandIntro() {
             <h3 className="sr-only">브랜드 소개</h3>
             <Image
                 className={styles["brand-intro__image"]}
-                src="/images/about/brand-intro.svg"
+                src="/images/about/brand-intro.webp"
                 alt="물에 글로시말차 가루를 섞어 젓는 장면"
                 width={960}
                 height={800}
