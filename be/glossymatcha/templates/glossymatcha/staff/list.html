@@ -110,8 +110,9 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-primary">
-                    {% for staff in staff_list %}
-                        {% if staff.employee_type == 'full_time' %}{{ forloop.counter0|add:1 }}{% endif %}
+                    {% regroup staff_list by employee_type as grouped_staff %}
+                    {% for group in grouped_staff %}
+                        {% if group.grouper == 'full_time' %}{{ group.list|length }}{% endif %}
                     {% empty %}0{% endfor %}
                 </h5>
                 <small class="text-muted">정직원</small>
@@ -122,8 +123,9 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-success">
-                    {% for staff in staff_list %}
-                        {% if staff.employee_type == 'part_time' %}{{ forloop.counter0|add:1 }}{% endif %}
+                    {% regroup staff_list by employee_type as grouped_staff %}
+                    {% for group in grouped_staff %}
+                        {% if group.grouper == 'part_time' %}{{ group.list|length }}{% endif %}
                     {% empty %}0{% endfor %}
                 </h5>
                 <small class="text-muted">파트타임</small>
