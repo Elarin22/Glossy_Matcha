@@ -54,4 +54,11 @@ urlpatterns = [
     path('monthly-sales/<int:pk>/', views.SalesDetailView.as_view(), name='monthly_sales_detail'), # 월별 매출 상세
     path('monthly-sales/<int:pk>/update/', views.SalesUpdateView.as_view(), name='monthly_sales_update'), # 월별 매출 수정
     path('monthly-sales/<int:pk>/delete/', views.SalesDeleteView.as_view(), name='monthly_sales_delete'), # 월별 매출 삭제
+
+    # Django Template Views for yearly sales management
+    path('yearly-sales/', views.YearlySalesListView.as_view(), name='yearly_sales_list'),       # 연별 매출 목록
+    path('yearly-sales/create/', views.YearlySalesCreateView.as_view(), name='yearly_sales_create'), # 연별 매출 등록
+    path('yearly-sales/<int:pk>/', views.YearlySalesDetailView.as_view(), name='yearly_sales_detail'), # 연별 매출 상세
+    path('yearly-sales/<int:pk>/update/', views.YearlySalesUpdateView.as_view(), name='yearly_sales_update'), # 연별 매출 수정
+    path('yearly-sales/<int:pk>/delete/', views.YearlySalesDeleteView.as_view(), name='yearly_sales_delete'), # 연별 매출 삭제
 ]
