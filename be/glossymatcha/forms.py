@@ -242,12 +242,22 @@ class SalesForm(forms.ModelForm):
         month = cleaned_data.get('month')
 
         if year and month:
+            # 기존 월별 매출 데이터 중복 검사
             existing_sales = Sales.objects.filter(year=year, month=month)
             if self.instance.pk:
                 existing_sales = existing_sales.exclude(pk=self.instance.pk)
             
             if existing_sales.exists():
                 raise ValidationError(f'{year}년 {month}월의 매출 데이터는 이미 존재합니다. 다른 날짜를 선택해주세요.')
+            
+            # 해당 년월에 일별 매출 데이터가 있는지 검사
+            daily_sales_exists = DailySales.objects.filter(
+                date__year=year,
+                date__month=month
+            ).exists()
+            
+            if not daily_sales_exists:
+                raise ValidationError(f'{year}년 {month}월의 일별 매출 데이터가 없습니다. 먼저 일별 매출을 입력해주세요.')
         
         return cleaned_data
     
@@ -273,14 +283,22 @@ class YearlySalesForm(forms.ModelForm):
         """
         연도 필드의 유효성을 검사하는 메서드
         연도는 2000년부터 2100년 사이여야 하며, 중복된 연도는 허용하지 않음
+        해당 연도에 월별 매출 데이터가 있는지도 검사
         """
         year = self.cleaned_data.get('year')
         if year:
+            # 기존 연별 매출 데이터 중복 검사
             existing_yearly_sales = YearlySales.objects.filter(year=year)
             if self.instance.pk:
                 existing_yearly_sales = existing_yearly_sales.exclude(pk=self.instance.pk)
             
             if existing_yearly_sales.exists():
                 raise ValidationError(f'{year}년의 연간 매출 데이터는 이미 존재합니다. 다른 연도를 선택해주세요.')
+            
+            # 해당 연도에 월별 매출 데이터가 있는지 검사
+            monthly_sales_exists = Sales.objects.filter(year=year).exists()
+            
+            if not monthly_sales_exists:
+                raise ValidationError(f'{year}년의 월별 매출 데이터가 없습니다. 먼저 월별 매출을 입력해주세요.')
         
         return year
