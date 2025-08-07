@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
+import { useMobileDetect } from "@/hooks/useMobileDetect";
 
 interface NavigationItem {
   href: string;
@@ -18,7 +19,7 @@ const NAVIGATION_ITEMS: NavigationItem[] = [
 
 export default function Header() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const isMobile = useMobileDetect();
 
   const toggleSidebar = useCallback(() => {
     setIsSidebarOpen((prev) => !prev);
@@ -26,20 +27,6 @@ export default function Header() {
 
   const closeSidebar = useCallback(() => {
     setIsSidebarOpen(false);
-  }, []);
-
-  // 모바일 감지
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-
-    window.addEventListener("resize", checkMobile);
-
-    return () => {
-      window.removeEventListener("resize", checkMobile);
-    };
   }, []);
 
   // esc로 사이드바 닫기

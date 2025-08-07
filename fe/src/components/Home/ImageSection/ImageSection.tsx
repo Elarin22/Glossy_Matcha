@@ -1,40 +1,28 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef } from "react";
 import styles from "./ImageSection.module.scss";
 import ImageSubInfo from "../ImageSubInfo/ImageSubInfo";
 import Image from "next/image";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
-
-export const sections: { title: string; source: string }[] = [
-  { title: "브랜드 소개", source: "/videos/intro-pc.webm" },
-  { title: "카페 소개", source: "/images/home/cafe-glossy-matcha.webp" },
-  { title: "제품 소개", source: "/images/home/glossy-signature.webp" },
-  { title: "말차 테스트", source: "/images/home/matcha-test.webp" },
-];
+import { HomeContent } from "@/app/page";
+import SoundButton from "../SoundButton/SoundButton";
 
 export default function ImageSection({
   sectionRefs,
+  contents,
 }: {
   sectionRefs: React.RefObject<HTMLDivElement[]>;
+  contents: HomeContent[];
 }): React.JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isMuted, setIsMuted] = useState(true);
-
-  const toggleMute = useCallback(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = !video.muted;
-      setIsMuted(video.muted);
-    }
-  }, []);
 
   return (
     <div>
-      {sections.map((section, index) => {
+      {contents.map((content, index) => {
         return (
           <section key={index}>
-            {index !== 0 && index !== sections.length - 1 && (
+            {index !== 0 && index !== contents.length - 1 && (
               <ImageSubInfo index={index} />
             )}
             <div
@@ -43,7 +31,7 @@ export default function ImageSection({
               }}
               className={styles["section-item"]}
             >
-              <h2 className="sr-only">{section.title}</h2>
+              <h2 className="sr-only">{content.title}</h2>
               {index === 0 ? (
                 <>
                   <video
@@ -62,28 +50,16 @@ export default function ImageSection({
                       zIndex: -1,
                     }}
                   >
-                    <source src={section.source} type="video/webm" />
+                    <source src={content.source} type="video/webm" />
                     <source src="/videos/intro-pc.mp4" type="video/mp4" />
                     브라우저가 비디오를 지원하지 않습니다.
                   </video>
-
-                  <button
-                    onClick={toggleMute}
-                    className={styles["sound-toggle-button"]}
-                    aria-label={isMuted ? "소리 켜기" : "소리 끄기"}
-                  >
-                    {isMuted ? (
-                      <img src={"/images/icon/sound-off.svg"} alt="" />
-                    ) : (
-                      <img src={"/images/icon/sound-on.svg"} alt="" />
-                    )}
-                  </button>
-
+                  <SoundButton videoRef={videoRef} />
                   <ScrollIndicator extraMoveHeight={240} />
                 </>
               ) : (
                 <Image
-                  src={section.source}
+                  src={content.source}
                   alt=""
                   fill
                   sizes="70vw"
