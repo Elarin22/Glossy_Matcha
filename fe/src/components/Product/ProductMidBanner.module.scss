@@ -3,7 +3,7 @@
 
 .midBanner {
     width: 100%;
-    margin: 100px 0 0 0;
+    margin: 100px 0 100px 0; 
     padding: 0;
 }
 
@@ -65,7 +65,7 @@
     font-weight: $font-weight-medium;
     line-height: 1.6;
     letter-spacing: -0.01em;
-    color: $color-green-50;
+    color: $color-gray-100;
     margin: 0;
 
     p {
@@ -77,6 +77,7 @@
     width: 100%;
     overflow: hidden;
     background-color: $color-beige-100;
+    margin-bottom: 0;
 }
 
 .fullWidthImage {
@@ -150,7 +151,7 @@
 // Mobile
 @media (max-width: 768px) {
     .midBanner {
-        margin-top: 60px;
+        margin: 60px 0 60px 0; 
     }
 
     .textContent {
