@@ -58,7 +58,7 @@
         margin-bottom: 30px;
 
         &__title {
-            @include myeongjo($font-size-18, 500);
+            @include myeongjo($font-size-14, 500);
             margin-bottom: 20px;
             text-align: center;
         }
