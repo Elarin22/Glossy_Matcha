@@ -29,7 +29,9 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         today = date.today()
 
         # 통계 데이터 수집
-        active_staff_count = Staff.objects.filter(resignation_date__isnull=True).count()
+        active_staff_count = Staff.objects.filter(
+            Q(resignation_date__isnull=True) | Q(resignation_date__gt=today)
+        ).count()
         active_suppliers_count = Suppliers.objects.filter(is_active=True).count()
 
         # 오늘 매출 집계
@@ -46,8 +48,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         # 최근 매출 현황 (최근 5건)
         recent_sales = Sales.objects.all()[:5]
 
-        # 직원 목록 (최근 5명)
-        staff_list = Staff.objects.filter(resignation_date__isnull=True)[:5]
+        # 직원 목록 (재직중인 최근 5명)
+        staff_list = Staff.objects.filter(
+            Q(resignation_date__isnull=True) | Q(resignation_date__gt=today)
+        )[:5]
 
         # 최근 문의 현황 (최근 5건)
         recent_inquiries = Inquiries.objects.all()[:5]
