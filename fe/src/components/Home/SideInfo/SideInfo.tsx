@@ -68,7 +68,11 @@ export default function SideInfo({
           {slogans[currentIndex].content}
         </p>
         {slogans[currentIndex].link && (
-          <Link href={slogans[currentIndex].link} className="btn-g pc">
+          <Link
+            href={slogans[currentIndex].link}
+            className="btn-g pc"
+            style={{ marginTop: 36 }}
+          >
             {slogans[currentIndex].linkText}
           </Link>
         )}
