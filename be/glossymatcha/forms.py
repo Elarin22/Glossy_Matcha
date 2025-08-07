@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord, Suppliers, DailySales, Sales
+from .models import Staff, WorkRecord, Suppliers, DailySales, Sales, YearlySales
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -240,3 +240,37 @@ class SalesForm(forms.ModelForm):
                 raise ValidationError(f'{year}년 {month}월의 매출 데이터는 이미 존재합니다. 다른 날짜를 선택해주세요.')
         
         return cleaned_data
+    
+class YearlySalesForm(forms.ModelForm):
+    class Meta:
+        model = YearlySales
+        fields = ['year', 'memo']
+        widgets = {
+            'year': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'min': '2000',
+                'max': '2100',
+                'placeholder': '연도를 입력하세요.'
+            }),
+            'memo': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': '메모를 입력하세요. (선택사항)'
+            }),
+        }
+    
+    def clean_year(self):
+        """
+        연도 필드의 유효성을 검사하는 메서드
+        연도는 2000년부터 2100년 사이여야 하며, 중복된 연도는 허용하지 않음
+        """
+        year = self.cleaned_data.get('year')
+        if year:
+            existing_yearly_sales = YearlySales.objects.filter(year=year)
+            if self.instance.pk:
+                existing_yearly_sales = existing_yearly_sales.exclude(pk=self.instance.pk)
+            
+            if existing_yearly_sales.exists():
+                raise ValidationError(f'{year}년의 연간 매출 데이터는 이미 존재합니다. 다른 연도를 선택해주세요.')
+        
+        return year
