@@ -52,7 +52,7 @@ export default function MatchaGenerator() {
                 <h2 className="sr-only">글로시 말차 체험형 콘텐츠 페이지</h2>
                 <Image
                     className={styles["matcha-generator__banner"]}
-                    src="/images/glossy-pick/main-banner.svg"
+                    src="/images/glossy-pick/main-banner.webp"
                     alt="체험형 콘텐츠 메인 배너"
                     width={1920}
                     height={720}
