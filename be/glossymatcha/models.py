@@ -152,12 +152,15 @@ class Staff(models.Model):
     class Meta:
         verbose_name = "직원"
         verbose_name_plural = "직원"
-        ordering = ['-created_at']
+        ordering = ['resignation_date', 'employee_type', 'name']
     
     @property
     def is_active(self):
-        """퇴사일이 없으면 재직 중"""
-        return self.resignation_date is None
+        """퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중"""
+        from datetime import date
+        if self.resignation_date is None:
+            return True
+        return self.resignation_date > date.today()
     
     def clean(self):
         """주민번호 유효성 검사"""
