@@ -215,22 +215,24 @@ class WorkRecord(models.Model):
         주휴수당 = 15시간 이상 근무 시 자동 계산
         지급합계 = 월급 + 주휴수당
         """
+        from decimal import Decimal
+        
         # 월급 자동 계산 (시급 × 총근무시간)
         self.monthly_salary = self.hourly_rate * self.total_hours
         
         # 주휴수당 자동 계산 (주 15시간 이상 근무 시)
-        weekly_hours = float(self.total_hours) / float(self.pay_period_weeks)  # 정확한 주별 근무시간 계산
+        weekly_hours = self.total_hours / self.pay_period_weeks  # 정확한 주별 근무시간 계산
         
         if weekly_hours >= 15:  # 주 15시간 이상 근무 시 주휴수당 지급
             if weekly_hours < 40:
                 # 주 40시간 미만: (1주 소정근로시간 / 40) * 8 * 시급
-                self.weekly_holiday_allowance = (weekly_hours / 40) * 8 * float(self.hourly_rate)
+                self.weekly_holiday_allowance = (weekly_hours / Decimal('40')) * Decimal('8') * self.hourly_rate
             else:
                 # 주 40시간 이상: 1일 소정근로시간(최대 8시간) * 시급
-                self.weekly_holiday_allowance = 8 * float(self.hourly_rate)
+                self.weekly_holiday_allowance = Decimal('8') * self.hourly_rate
         else:
             # 주 15시간 미만은 주휴수당 없음
-            self.weekly_holiday_allowance = 0
+            self.weekly_holiday_allowance = Decimal('0')
         
         # 지급합계 계산
         self.total_payment = self.monthly_salary + self.weekly_holiday_allowance
