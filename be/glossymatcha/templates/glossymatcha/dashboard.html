@@ -136,11 +136,9 @@
                             <tbody>
                                 {% for sale in recent_sales %}
                                 <tr>
-                                    <td>{{ sale.year }}.{{ sale.month }}</td>
+                                    <td>{{ sale.date|date:"m.d" }}</td>
                                     <td>
-                                        <span class="badge {% if sale.gross_profit >= 0 %}bg-success{% else %}bg-danger{% endif %}">
-                                            {% if sale.gross_profit >= 0 %}이익{% else %}손실{% endif %}
-                                        </span>
+                                        <span class="badge bg-primary">일별</span>
                                     </td>
                                     <td class="text-end">{{ sale.total_sales|floatformat:0 }}원</td>
                                 </tr>
@@ -149,15 +147,15 @@
                         </table>
                     </div>
                     <div class="text-center">
-                        <a href="{% url 'sales_list' %}" class="btn btn-sm btn-outline-primary">
-                            전체 매출 보기 <i class="bi bi-arrow-right"></i>
+                        <a href="{% url 'daily_sales_list' %}" class="btn btn-sm btn-outline-primary">
+                            전체 일별 매출 보기 <i class="bi bi-arrow-right"></i>
                         </a>
                     </div>
                 {% else %}
                     <div class="text-center text-muted py-4">
                         <i class="bi bi-graph-up" style="font-size: 2rem;"></i>
-                        <p class="mt-2">등록된 매출 데이터가 없습니다.</p>
-                        <a href="{% url 'sales_create' %}" class="btn btn-sm btn-primary">첫 매출 입력하기</a>
+                        <p class="mt-2">등록된 일별 매출 데이터가 없습니다.</p>
+                        <a href="{% url 'daily_sales_create' %}" class="btn btn-sm btn-primary">첫 일별 매출 입력하기</a>
                     </div>
                 {% endif %}
             </div>
