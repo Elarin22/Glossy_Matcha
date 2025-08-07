@@ -412,6 +412,29 @@ class WorkRecordCreateView(LoginRequiredMixin, CreateView):
     template_name = 'glossymatcha/staff/work_record.html'
     success_url = reverse_lazy('dashboard')
 
+    def get_initial(self):
+        initial = super().get_initial()
+        # URL 파라미터에서 staff_id를 가져와서 초기값으로 설정
+        staff_id = self.request.GET.get('staff_id')
+        if staff_id:
+            try:
+                staff = Staff.objects.get(id=staff_id)
+                initial['staff'] = staff
+            except Staff.DoesNotExist:
+                pass
+        return initial
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # staff_id를 템플릿에 전달
+        staff_id = self.request.GET.get('staff_id')
+        if staff_id:
+            try:
+                context['selected_staff'] = Staff.objects.get(id=staff_id)
+            except Staff.DoesNotExist:
+                pass
+        return context
+
     def form_valid(self, form):
         response = super().form_valid(form)
         messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 등록되었습니다.')

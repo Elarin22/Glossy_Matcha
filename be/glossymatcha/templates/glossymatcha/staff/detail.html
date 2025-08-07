@@ -237,72 +237,13 @@
                 <h5 class="modal-title">{{ staff.name }} ({{ staff.nickname }}) 급여 기록 입력</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="{% url 'work_record_create' %}">
                 <div class="modal-body">
-                    {% csrf_token %}
-                    <input type="hidden" name="staff" value="{{ staff.id }}">
-                    
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="total_hours" class="form-label">총 근무시간</label>
-                            <input type="number" class="form-control" name="total_hours" id="total_hours" 
-                                   step="0.5" min="0" placeholder="160.0" required oninput="calculateModalSalary()">
-                            <small class="text-muted">시간 단위로 입력</small>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="pay_period_weeks" class="form-label">급여 기간(주)</label>
-                            <input type="number" class="form-control" name="pay_period_weeks" id="pay_period_weeks" 
-                                   step="0.1" min="0.1" placeholder="4.0" value="4.0" required oninput="calculateModalSalary()">
-                            <small class="text-muted">주 단위로 입력</small>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="hourly_rate" class="form-label">시급</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="hourly_rate" id="hourly_rate" 
-                                       min="0" placeholder="10000" required oninput="calculateModalSalary()">
-                                <span class="input-group-text">원</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="monthly_salary" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="monthly_salary" id="monthly_salary" 
-                                       min="0" placeholder="자동 계산됩니다" readonly>
-                                <span class="input-group-text">원</span>
-                            </div>
-                            <small class="text-muted">시급 × 총근무시간으로 자동 계산됩니다</small>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="weekly_holiday_allowance" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="weekly_holiday_allowance" id="weekly_holiday_allowance" 
-                                       min="0" placeholder="자동 계산됩니다" readonly>
-                                <span class="input-group-text">원</span>
-                            </div>
-                            <small class="text-muted">주 15시간 이상 근무 시 자동 계산됩니다</small>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="memo" class="form-label">비고 (선택사항)</label>
-                        <textarea class="form-control" name="memo" id="memo" rows="2" 
-                                  placeholder="특이사항이 있으면 입력하세요"></textarea>
-                    </div>
-                    
-                    <div class="alert alert-info">
-                        <small><i class="bi bi-info-circle me-1"></i>월급과 주휴수당이 자동으로 계산됩니다</small>
-                        <br><small>• 월급: 시급 × 총근무시간</small>
-                        <br><small>• 주휴수당: 주 15시간 이상 근무 시 법정 기준으로 자동 계산</small>
-                    </div>
+                    <p>{{ staff.name }} ({{ staff.nickname }}) 직원의 급여 기록을 입력하시겠습니까?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="submit" class="btn btn-primary">저장</button>
+                    <a href="{% url 'work_record_create' %}?staff_id={{ staff.id }}" class="btn btn-primary">급여 기록 입력</a>
                 </div>
-            </form>
         </div>
     </div>
 </div>

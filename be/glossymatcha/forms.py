@@ -108,8 +108,12 @@ class WorkRecordForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # 재직 중인 직원만 선택할 수 있도록 필터링
-        self.fields['staff'].queryset = Staff.objects.filter(resignation_date__isnull=True)
+        # 재직 중인 직원만 선택할 수 있도록 필터링 (퇴사일이 없거나 미래인 경우)
+        from django.db.models import Q
+        from datetime import date
+        self.fields['staff'].queryset = Staff.objects.filter(
+            Q(resignation_date__isnull=True) | Q(resignation_date__gt=date.today())
+        )
         # monthly_salary와 weekly_holiday_allowance는 자동 계산되므로 필수가 아님
         self.fields['monthly_salary'].required = False
         self.fields['weekly_holiday_allowance'].required = False
