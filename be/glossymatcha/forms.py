@@ -33,7 +33,10 @@ class StaffForm(forms.ModelForm):
             }),
             'contact': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '연락처를 입력하세요.'
+                'placeholder': '연락처를 입력하세요.',
+                'pattern': '[0-9-]+',
+                'inputmode': 'numeric',
+                'oninput': 'this.value = this.value.replace(/[^0-9-]/g, "")'
             }),
             'memo' : forms.Textarea(attrs={
                 'class': 'form-control',
@@ -133,7 +136,10 @@ class SuppliersForm(forms.ModelForm):
             }),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '연락처를 입력하세요. (선택사항)'
+                'placeholder': '연락처를 입력하세요. (선택사항)',
+                'pattern': '[0-9-]+',
+                'inputmode': 'numeric',
+                'oninput': 'this.value = this.value.replace(/[^0-9-]/g, "")'
             }),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control',
