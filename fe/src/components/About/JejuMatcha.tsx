@@ -18,7 +18,7 @@ export default function JejuMatcha() {
                 <h3 className="sr-only">제주 유기농 말차 첫번째 섹션</h3>
                 <Image
                     className={styles["jeju-matcha__image"]}
-                    src="/images/about/leaf.svg"
+                    src="/images/about/leaf.webp"
                     alt="제주 유기농 말차 잎 이미지"
                     width={960}
                     height={800}
@@ -117,7 +117,7 @@ export default function JejuMatcha() {
                 </div>
                 <Image
                     className={styles["jeju-matcha__feature-image"]}
-                    src="/images/about/leaf-2.svg"
+                    src="/images/about/leaf-2.webp"
                     alt="제주 유기농 말차 잎 이미지 모음"
                     width={960}
                     height={960}

@@ -71,7 +71,7 @@ export default function BrandPhilosophy() {
             </div>
             <Image
                 className={styles["brand-philosophy__image"]}
-                src="/images/about/straight.svg"
+                src="/images/about/straight.webp"
                 alt="글로시말차 스트레이트 이미지"
                 width={960}
                 height={800}

@@ -47,7 +47,7 @@ export default function BrandHistory() {
         <section id="history" className={styles["brand-history"]}>
             <Image
                 className={styles["brand-history__image"]}
-                src="/images/about/glossy-matcha.svg"
+                src="/images/about/glossy-matcha.webp"
                 alt="글로시말차 카페 전경 이미지"
                 width={960}
                 height={800}
