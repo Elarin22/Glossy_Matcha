@@ -1,0 +1,149 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}{{ yearly_sale.year }}년 연별 매출 상세 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-calendar-year me-2"></i>{{ yearly_sale.year }}년 연별 매출 상세
+                    </h5>
+                    <div>
+                        <a href="{% url 'yearly_sales_update' yearly_sale.pk %}" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-pencil me-1"></i>수정
+                        </a>
+                        <a href="{% url 'yearly_sales_delete' yearly_sale.pk %}" class="btn btn-sm" style="background-color: #373735; color: #f2efe8; border: none;">
+                            <i class="bi bi-trash me-1"></i>삭제
+                        </a>
+                        <a href="{% url 'yearly_sales_list' %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-list me-1"></i>목록
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- 연도 정보 -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">연도 정보</h6>
+                        <p class="fs-4"><strong>{{ yearly_sale.year }}년</strong></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted">등록 정보</h6>
+                        <p><small>등록일: {{ yearly_sale.created_at|date:"Y.m.d H:i" }}</small></p>
+                        <p><small>수정일: {{ yearly_sale.updated_at|date:"Y.m.d H:i" }}</small></p>
+                    </div>
+                </div>
+
+                <!-- 매출 요약 -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h6 class="text-primary mb-3"><i class="bi bi-graph-up me-2"></i>연간 매출 요약</h6>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card bg-brand-green">
+                            <div class="card-body text-center">
+                                <h6>연간 총 매출</h6>
+                                <h3><strong>{{ yearly_sale.total_sales|floatformat:0 }}원</strong></h3>
+                                <small>월별 매출 자동 합산</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="background-color: #373735; color: white;">
+                            <div class="card-body text-center">
+                                <h6>연간 총 원가</h6>
+                                <h3><strong>{{ yearly_sale.total_cost|floatformat:0 }}원</strong></h3>
+                                <small>월별 원가 자동 합산</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card {% if yearly_sale.gross_profit >= 0 %}bg-brand-green-light{% else %}bg-danger{% endif %}" style="color: #373735;">
+                            <div class="card-body text-center">
+                                <h6>연간 순이익</h6>
+                                <h3><strong>{{ yearly_sale.gross_profit|floatformat:0 }}원</strong></h3>
+                                <small>매출 - 원가</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세부 매출 정보 -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card bg-brand-beige">
+                            <div class="card-body">
+                                <h6 style="color: #00563f;" class="mb-3">연간 매출 구성 (자동 계산)</h6>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>오프라인 매출:</span>
+                                    <span style="color: #00563f;">{{ yearly_sale.offline_sales|floatformat:0 }}원</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>기타 매출:</span>
+                                    <span style="color: #00563f;">{{ yearly_sale.other_sales|floatformat:0 }}원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-brand-beige">
+                            <div class="card-body">
+                                <h6 style="color: #373735;" class="mb-3">연간 원가 구성 (자동 계산)</h6>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>재료비:</span>
+                                    <span>{{ yearly_sale.total_material_cost|floatformat:0 }}원</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>노무비:</span>
+                                    <span>{{ yearly_sale.total_labor_cost|floatformat:0 }}원</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>경비-소모품:</span>
+                                    <span>{{ yearly_sale.total_supplies_expense|floatformat:0 }}원</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>경비-기타:</span>
+                                    <span>{{ yearly_sale.total_other_expense|floatformat:0 }}원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 메모 -->
+                {% if yearly_sale.memo %}
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h6 class="text-muted mb-3"><i class="bi bi-chat-left-text me-2"></i>메모</h6>
+                        <div class="alert alert-light">
+                            <p class="mb-0">{{ yearly_sale.memo|linebreaks }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- 관련 정보 -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            <h6 class="alert-heading"><i class="bi bi-info-circle me-2"></i>데이터 구성</h6>
+                            <ul class="mb-0">
+                                <li><strong>매출 항목:</strong> {{ yearly_sale.year }}년의 모든 월별 매출 데이터를 자동 합산</li>
+                                <li><strong>원가 항목:</strong> 월별 매출원가 데이터를 자동 합산</li>
+                                <li><strong>이익 계산:</strong> 매출 - 원가로 자동 계산</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
