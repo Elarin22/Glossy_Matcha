@@ -177,7 +177,7 @@ class DailySalesForm(forms.ModelForm):
 class SalesForm(forms.ModelForm):
     class Meta:
         model = Sales
-        fields = ['year', 'month', 'meterial_cost', 'labor_cost', 'supplies_expense', 'other_expense', 'inventory_amount', 'actual_usage_amount', 'memo']
+        fields = ['year', 'month', 'material_cost', 'labor_cost', 'supplies_expense', 'other_expense', 'inventory_amount', 'actual_usage_amount', 'memo']
         widgets = {
             'year': forms.NumberInput(attrs={
                 'class': 'form-control',
@@ -189,7 +189,7 @@ class SalesForm(forms.ModelForm):
                 choices=[(i, f'{i}월') for i in range(1, 13)],
                 attrs = {'class': 'form-select'}
             ),
-            'meterial_cost': forms.NumberInput(attrs={
+            'material_cost': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'min': '0',
                 'placeholder': '재료비를 입력하세요.'
