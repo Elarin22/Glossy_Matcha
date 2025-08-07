@@ -45,7 +45,10 @@ export default function ResultSection({
                 </p>
             </section>
 
-            <div className={styles.result__actions}>
+            <div
+                className={styles.result__actions}
+                data-html2canvas-ignore="true"
+            >
                 <button onClick={onShare} className="btn-g">
                     공유하기
                 </button>
