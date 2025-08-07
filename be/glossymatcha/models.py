@@ -139,7 +139,7 @@ class Staff(models.Model):
     ]
     
     name = models.CharField(max_length=50, verbose_name="직원명")
-    nickname = models.CharField(max_length=50, verbose_name="영어 닉네임")
+    nickname = models.CharField(max_length=50, blank=True, verbose_name="영어 닉네임")
     employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE_CHOICES, verbose_name="근무 형태")
     hire_date = models.DateField(verbose_name="입사일")
     resignation_date = models.DateField(null=True, blank=True, verbose_name="퇴사일")
