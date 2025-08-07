@@ -1,0 +1,202 @@
+@import '@/styles/mixins.scss';
+@import '@/styles/variables.scss';
+
+.midBanner {
+    width: 100%;
+    margin: 100px 0 0 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.textContent {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    margin: 0 auto 40px auto;
+}
+
+.productName {
+    font-family: "YeolrinMyeongjo", serif;
+    font-size: $font-size-50;
+    font-weight: $font-weight-medium;
+    line-height: 1.6;
+    letter-spacing: -0.02em;
+    color: $color-green-500;
+    margin: 0 0 2rem 0;
+}
+
+.productSubtitle {
+    font-family: "Pretendard", sans-serif;
+    font-size: $font-size-24;
+    font-weight: $font-weight-medium;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: $color-black-200;
+    margin: 0 0 1.5rem 0;
+}
+
+.productDescription {
+    font-family: "Pretendard", sans-serif;
+    font-size: $font-size-18;
+    font-weight: $font-weight-medium;
+    line-height: 1.8;
+    letter-spacing: -0.01em;
+    color: $color-black-200;
+    margin: 0 0 1rem 0;
+
+    p {
+        margin: 0 0 0.5rem 0;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.productNote {
+    font-family: "Pretendard", sans-serif;
+    font-size: $font-size-14;
+    font-weight: $font-weight-medium;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: $color-green-50;
+    margin: 0;
+
+    p {
+        margin: 0;
+    }
+}
+
+.fullWidthImageContainer {
+    width: 100%;
+    overflow: hidden;
+    background-color: $color-beige-100;
+}
+
+.fullWidthImage {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+// 에러 메시지
+.errorMessage {
+    text-align: center;
+    width: 100%;
+    padding: 2rem;
+
+    p {
+        font-family: "Pretendard", sans-serif;
+        font-size: $font-size-16;
+        color: $color-gray-100;
+        margin: 0;
+    }
+}
+
+// 로딩 스켈레톤
+.skeletonTitle {
+    width: 70%;
+    height: 60px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+    margin: 0 auto 2rem auto;
+}
+
+.skeletonSubtitle {
+    width: 50%;
+    height: 32px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 6px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.skeletonDescription {
+    width: 90%;
+    height: 80px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 6px;
+    margin: 0 auto 1rem auto;
+}
+
+.skeletonImage {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+// Mobile
+@media (max-width: 768px) {
+    .midBanner {
+        margin-top: 60px;
+    }
+
+    .textContent {
+        padding: 0 20px;
+        margin-bottom: 20px;
+    }
+
+    .productName {
+        font-size: $font-size-36;
+        margin-bottom: 1.5rem;
+    }
+
+    .productSubtitle {
+        font-size: $font-size-18;
+        margin-bottom: 1rem;
+    }
+
+    .productDescription {
+        font-size: $font-size-16;
+        margin-bottom: 0.8rem;
+
+        p {
+            margin-bottom: 0.3rem;
+        }
+    }
+
+    .productNote {
+        font-size: $font-size-14;
+    }
+
+    .skeletonTitle {
+        height: 48px;
+        margin-bottom: 1.5rem;
+    }
+
+    .skeletonSubtitle {
+        height: 28px;
+        margin-bottom: 1rem;
+    }
+
+    .skeletonDescription {
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .skeletonImage {
+        height: 300px;
+    }
+}
