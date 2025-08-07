@@ -1,0 +1,156 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}
+    {% if sale %}매출 정보 수정{% else %}월별 매출 입력{% endif %} - Glossy Matcha
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-calculator me-2"></i>
+                    {% if sale %}{{ sale.year }}년 {{ sale.month }}월 매출 수정{% else %}월별 매출 입력{% endif %}
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!-- 기간 정보 -->
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.year.id_for_label }}" class="form-label">연도 *</label>
+                            {{ form.year }}
+                            {% if form.year.errors %}
+                                <div class="text-danger small">{{ form.year.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.month.id_for_label }}" class="form-label">월 *</label>
+                            {{ form.month }}
+                            {% if form.month.errors %}
+                                <div class="text-danger small">{{ form.month.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- 매출 정보 안내 -->
+                    <div class="alert alert-info mb-4">
+                        <h6 class="text-primary mb-2"><i class="bi bi-info-circle me-2"></i>매출 정보</h6>
+                        <p class="mb-1">월별 매출은 일별 매출 데이터에서 자동으로 계산됩니다.</p>
+                        <p class="mb-0">매출원가와 식재료 관련 정보만 입력하시면 됩니다.</p>
+                    </div>
+                    
+                    <!-- 매출원가 항목 -->
+                    <h6 class="text-warning mb-3"><i class="bi bi-graph-down me-2"></i>매출원가</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.material_cost.id_for_label }}" class="form-label">재료비</label>
+                            <div class="input-group">
+                                {{ form.material_cost }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.material_cost.errors %}
+                                <div class="text-danger small">{{ form.material_cost.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.labor_cost.id_for_label }}" class="form-label">노무비</label>
+                            <div class="input-group">
+                                {{ form.labor_cost }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.labor_cost.errors %}
+                                <div class="text-danger small">{{ form.labor_cost.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.supplies_expense.id_for_label }}" class="form-label">경비-소모품</label>
+                            <div class="input-group">
+                                {{ form.supplies_expense }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.supplies_expense.errors %}
+                                <div class="text-danger small">{{ form.supplies_expense.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.other_expense.id_for_label }}" class="form-label">경비-기타</label>
+                            <div class="input-group">
+                                {{ form.other_expense }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.other_expense.errors %}
+                                <div class="text-danger small">{{ form.other_expense.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- 식재료 관련 -->
+                    <h6 class="text-success mb-3"><i class="bi bi-basket me-2"></i>식재료 관련</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.inventory_amount.id_for_label }}" class="form-label">재고금액</label>
+                            <div class="input-group">
+                                {{ form.inventory_amount }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.inventory_amount.errors %}
+                                <div class="text-danger small">{{ form.inventory_amount.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.actual_usage_amount.id_for_label }}" class="form-label">실 사용금액</label>
+                            <div class="input-group">
+                                {{ form.actual_usage_amount }}
+                                <span class="input-group-text">원</span>
+                            </div>
+                            {% if form.actual_usage_amount.errors %}
+                                <div class="text-danger small">{{ form.actual_usage_amount.errors.0 }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="{{ form.memo.id_for_label }}" class="form-label">메모</label>
+                        {{ form.memo }}
+                        {% if form.memo.errors %}
+                            <div class="text-danger small">{{ form.memo.errors.0 }}</div>
+                        {% endif %}
+                        <small class="text-muted">특이사항이나 세부 내용을 입력하세요.</small>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <small><i class="bi bi-info-circle me-1"></i>총매출(일별 매출 합산), 총원가, 1차 매출이익은 자동으로 계산됩니다.</small>
+                    </div>
+                    
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'sales_list' %}" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left me-2"></i>목록으로
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>
+                            {% if sale %}수정하기{% else %}저장하기{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
