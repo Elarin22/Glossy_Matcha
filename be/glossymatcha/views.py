@@ -13,7 +13,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
-from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm
+from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -564,4 +564,83 @@ class DailySalesDeleteView(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         messages.success(request, f'{self.object.date} 일별 매출이 삭제되었습니다.')
+        return super().delete(request, *args, **kwargs)
+
+# Django Template Views for monthly sales management
+class SalesListView(LoginRequiredMixin, ListView):
+    """
+    월별 매출 목록 조회
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 월별 매출 목록 페이지를 렌더링
+    """
+    model = Sales
+    template_name = 'glossymatcha/sales/list.html'
+    context_object_name = 'sales_list'
+
+class SalesCreateView(LoginRequiredMixin, CreateView):
+    """
+    월별 매출 등록
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 월별 매출 등록 페이지를 렌더링
+    """
+    model = Sales
+    form_class = SalesForm
+    template_name = 'glossymatcha/sales/create.html'
+    success_url = reverse_lazy('monthly_sales_list')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.year}년 {self.object.month}월 매출이 등록되었습니다.')
+        return response
+    
+class SalesDetailView(LoginRequiredMixin, DetailView):
+    """
+    월별 매출 상세 정보
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 월별 매출 상세 페이지를 렌더링
+    """
+    model = Sales
+    template_name = 'glossymatcha/sales/detail.html'
+    context_object_name = 'sale'
+
+class SalesUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    월별 매출 정보 수정
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 월별 매출 수정 페이지를 렌더링
+    """
+    model = Sales
+    form_class = SalesForm
+    template_name = 'glossymatcha/sales/create.html'
+
+    def get_success_url(self):
+        return reverse_lazy('monthly_sales_detail', kwargs={'pk': self.object.pk})
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.year}년 {self.object.month}월 매출 정보가 수정되었습니다.')
+        return response
+    
+    def get_context_data(self, **kwargs):
+        """
+        월별 매출 수정 페이지의 컨텍스트 데이터 추가
+        - 현재 매출 객체를 컨텍스트에 추가
+        """
+        context = super().get_context_data(**kwargs)
+        context['sale'] = self.object
+        return context
+    
+class SalesDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    월별 매출 삭제
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 월별 매출 삭제 페이지를 렌더링
+    """
+    model = Sales
+    template_name = 'glossymatcha/sales/delete.html'
+    success_url = reverse_lazy('monthly_sales_list')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        messages.success(request, f'{self.object.year}년 {self.object.month}월 매출이 삭제되었습니다.')
         return super().delete(request, *args, **kwargs)
