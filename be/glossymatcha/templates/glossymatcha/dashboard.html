@@ -274,7 +274,7 @@
                 <h5 class="modal-title"><i class="bi bi-cash me-2"></i>급여 기록 입력</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form method="post" action="{% url 'work_record_create' %}">
+            <form id="workRecordForm" method="post" action="{% url 'work_record_create' %}">
                 <div class="modal-body">
                     {% csrf_token %}
                     <div class="mb-3">
@@ -291,20 +291,20 @@
                         <div class="col-md-4 mb-3">
                             <label for="total_hours" class="form-label">총 근무시간</label>
                             <input type="number" class="form-control" name="total_hours" id="dashboard_total_hours" 
-                                   step="0.1" min="0" placeholder="160.0" required>
+                                   step="0.1" min="0" placeholder="160.0" required oninput="calculateDashboardSalary()">
                             <small class="text-muted">시간 단위로 입력</small>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="pay_period_weeks" class="form-label">급여 기간(주)</label>
                             <input type="number" class="form-control" name="pay_period_weeks" id="dashboard_pay_period_weeks" 
-                                   step="0.1" min="0.1" value="4.0" placeholder="4.0" required>
+                                   step="0.1" min="0.1" value="4.0" placeholder="4.0" required oninput="calculateDashboardSalary()">
                             <small class="text-muted">주 단위로 입력</small>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="hourly_rate" class="form-label">시급</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" name="hourly_rate" id="dashboard_hourly_rate" 
-                                       min="0" placeholder="10000" required>
+                                       min="0" placeholder="10000" required oninput="calculateDashboardSalary()">
                                 <span class="input-group-text">원</span>
                             </div>
                         </div>
@@ -410,5 +410,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // 페이지 로드 시 초기 계산
     calculateDashboardSalary();
 });
+
 </script>
 {% endblock %}
