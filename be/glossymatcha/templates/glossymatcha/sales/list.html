@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-primary">
-                    {% for sale in sales_list %}{{ sale.total_sales|add:0 }}{% if not forloop.last %}+{% endif %}{% endfor %}원
+                    {{ total_sales_sum|floatformat:0 }}원
                 </h5>
                 <small class="text-muted">총 매출</small>
             </div>
@@ -46,7 +46,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-warning">
-                    {% for sale in sales_list %}{{ sale.total_cost|add:0 }}{% if not forloop.last %}+{% endif %}{% endfor %}원
+                    {{ total_cost_sum|floatformat:0 }}원
                 </h5>
                 <small class="text-muted">총 원가</small>
             </div>
@@ -56,7 +56,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-success">
-                    {% for sale in sales_list %}{{ sale.gross_profit|add:0 }}{% if not forloop.last %}+{% endif %}{% endfor %}원
+                    {{ total_profit_sum|floatformat:0 }}원
                 </h5>
                 <small class="text-muted">총 이익</small>
             </div>

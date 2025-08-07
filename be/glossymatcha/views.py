@@ -576,6 +576,23 @@ class SalesListView(LoginRequiredMixin, ListView):
     model = Sales
     template_name = 'glossymatcha/sales/list.html'
     context_object_name = 'sales_list'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # 총합 계산
+        queryset = self.get_queryset()
+        total_sales_sum = sum(sale.total_sales or 0 for sale in queryset)
+        total_cost_sum = sum(sale.total_cost or 0 for sale in queryset)
+        total_profit_sum = sum(sale.gross_profit or 0 for sale in queryset)
+        
+        context.update({
+            'total_sales_sum': total_sales_sum,
+            'total_cost_sum': total_cost_sum,
+            'total_profit_sum': total_profit_sum,
+        })
+        
+        return context
 
 class SalesCreateView(LoginRequiredMixin, CreateView):
     """
