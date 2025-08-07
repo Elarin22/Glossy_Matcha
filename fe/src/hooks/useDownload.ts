@@ -19,17 +19,17 @@ export const useDownload = () => {
                 /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent) &&
                 ("ontouchend" in document || navigator.maxTouchPoints > 0);
 
-            try {
-                // 로딩 표시
-                const loadingEl = document.createElement("div");
-                loadingEl.style.cssText = `
-                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                    background: rgba(0,0,0,0.8); color: white; padding: 20px;
-                    border-radius: 8px; z-index: 10000; font-size: 16px;
-                `;
-                loadingEl.textContent = "이미지 생성 중...";
-                document.body.appendChild(loadingEl);
+            // 로딩 표시
+            const loadingEl = document.createElement("div");
+            loadingEl.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: rgba(0,0,0,0.8); color: white; padding: 20px;
+                border-radius: 8px; z-index: 10000; font-size: 16px;
+            `;
+            loadingEl.textContent = "이미지 생성 중...";
+            document.body.appendChild(loadingEl);
 
+            try {
                 const canvas = await html2canvas(element, {
                     scale: 2,
                     useCORS: true,
@@ -38,17 +38,20 @@ export const useDownload = () => {
                     logging: false,
                 });
 
-                // 로딩 제거
-                document.body.removeChild(loadingEl);
-
                 if (isIOS) {
                     // iOS 전용 처리
                     try {
                         // 방법 1: Blob과 URL.createObjectURL 사용 (iOS에서 더 안정적)
                         canvas.toBlob(
                             (blob) => {
+                                // 로딩 제거 (콜백 내부에서)
+                                if (loadingEl.parentNode) {
+                                    document.body.removeChild(loadingEl);
+                                }
+
                                 if (!blob) {
-                                    throw new Error("Blob 생성 실패");
+                                    alert("이미지 생성에 실패했습니다.");
+                                    return;
                                 }
 
                                 const url = URL.createObjectURL(blob);
@@ -157,6 +160,11 @@ export const useDownload = () => {
                     } catch (iosError) {
                         console.warn("iOS 새창 방법 실패:", iosError);
 
+                        // 로딩 제거 (에러 발생시)
+                        if (loadingEl.parentNode) {
+                            document.body.removeChild(loadingEl);
+                        }
+
                         // 방법 2: 현재 페이지에 오버레이로 표시
                         const dataUrl = canvas.toDataURL("image/png", 0.95);
 
@@ -197,6 +205,11 @@ export const useDownload = () => {
                         }, 30000);
                     }
                 } else {
+                    // 로딩 제거 (PC/Android)
+                    if (loadingEl.parentNode) {
+                        document.body.removeChild(loadingEl);
+                    }
+
                     // PC/Android - 기존 방식
                     const dataUrl = canvas.toDataURL("image/png", 0.95);
                     const link = document.createElement("a");
@@ -209,6 +222,11 @@ export const useDownload = () => {
                     document.body.removeChild(link);
                 }
             } catch (e) {
+                // 로딩 제거 (에러 발생시)
+                if (loadingEl && loadingEl.parentNode) {
+                    document.body.removeChild(loadingEl);
+                }
+
                 console.error("이미지 저장 실패:", e);
 
                 // 최후의 수단: 간단한 안내 메시지
