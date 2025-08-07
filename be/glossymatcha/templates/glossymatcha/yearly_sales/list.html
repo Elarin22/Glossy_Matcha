@@ -1,0 +1,102 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}연별 매출 관리 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2 class="mb-0">
+            <i class="bi bi-calendar-year me-2"></i>연별 매출 관리
+        </h2>
+        <p class="text-muted">연별 매출 현황 및 관리 (월별 매출 자동 합산)</p>
+    </div>
+    <div class="col-md-6 text-end">
+        <div class="btn-group">
+            <a href="{% url 'yearly_sales_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>연별 매출 입력
+            </a>
+            <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                <span class="visually-hidden">더보기</span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'sales_list' %}"><i class="bi bi-calendar-day me-2"></i>일별 매출 목록</a></li>
+                <li><a class="dropdown-item" href="{% url 'monthly_sales_list' %}"><i class="bi bi-calendar3 me-2"></i>월별 매출 목록</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">연별 매출 내역</h5>
+    </div>
+    <div class="card-body">
+        {% if yearly_sales_list %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>연도</th>
+                            <th class="text-end">총 매출</th>
+                            <th class="text-end">총 원가</th>
+                            <th class="text-end">연간 이익</th>
+                            <th>메모</th>
+                            <th>등록일</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for yearly_sale in yearly_sales_list %}
+                        <tr>
+                            <td>
+                                <strong>{{ yearly_sale.year }}년</strong>
+                            </td>
+                            <td class="text-end">
+                                <strong style="color: #00563f;">{{ yearly_sale.total_sales|floatformat:0 }}원</strong>
+                            </td>
+                            <td class="text-end">
+                                <strong style="color: #373735;">{{ yearly_sale.total_cost|floatformat:0 }}원</strong>
+                            </td>
+                            <td class="text-end">
+                                <strong class="{% if yearly_sale.gross_profit >= 0 %}" style="color: #00563f;{% else %}text-danger{% endif %}">
+                                    {{ yearly_sale.gross_profit|floatformat:0 }}원
+                                </strong>
+                            </td>
+                            <td>
+                                {% if yearly_sale.memo %}
+                                    <small class="text-muted">{{ yearly_sale.memo|truncatechars:30 }}</small>
+                                {% else %}
+                                    <small class="text-muted">-</small>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <small class="text-muted">{{ yearly_sale.created_at|date:"Y.m.d" }}</small>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="{% url 'yearly_sales_detail' yearly_sale.pk %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="{% url 'yearly_sales_update' yearly_sale.pk %}" class="btn btn-sm btn-outline-secondary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="bi bi-calendar-year" style="font-size: 4rem; color: #ddd;"></i>
+                <h4 class="mt-3 text-muted">등록된 연별 매출이 없습니다</h4>
+                <p class="text-muted">첫 번째 연별 매출을 입력해보세요.</p>
+                <a href="{% url 'yearly_sales_create' %}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-2"></i>연별 매출 입력하기
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
