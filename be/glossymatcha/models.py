@@ -184,7 +184,8 @@ class Staff(models.Model):
     
     def __str__(self):
         status = "재직" if self.is_active else "퇴사"
-        return f"{self.name} ({self.nickname}) - {self.get_employee_type_display()} [{status}]"
+        nickname_part = f" ({self.nickname})" if self.nickname else ""
+        return f"{self.name}{nickname_part} - {self.get_employee_type_display()} [{status}]"
 
 
 class WorkRecord(models.Model):

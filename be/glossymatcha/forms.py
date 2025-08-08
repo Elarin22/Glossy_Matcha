@@ -13,7 +13,7 @@ class StaffForm(forms.ModelForm):
             }),
             'nickname' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '직원 닉네임을 입력하세요.'
+                'placeholder': '직원 닉네임을 입력하세요. (선택사항)'
             }),
             'employee_type': forms.Select(attrs={
                 'class': 'form-select',
@@ -44,6 +44,11 @@ class StaffForm(forms.ModelForm):
                 'rows': 3
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 닉네임을 선택사항으로 설정
+        self.fields['nickname'].required = False
 
     def clean_resident_number(self):
         """
