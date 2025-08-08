@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date
 from django.db.models import Sum, Q
+from django.db import models
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -330,6 +331,29 @@ class StaffListView(LoginRequiredMixin, ListView):
     template_name = 'glossymatcha/staff/list.html'
     context_object_name = 'staff_list'
     
+    def get_queryset(self):
+        """
+        직원 목록을 정렬하여 반환
+        - 재직 중인 직원은 먼저, 퇴사한 직원은 나중에
+        - 정직원은 먼저, 파트직원은 나중에
+        - hire_date 기준으로 정렬
+        """
+        return Staff.objects.annotate(
+            # 정렬 우선순위: 재직 > 퇴사
+            status_order=models.Case(
+                models.When(resignation_date__isnull=True, then=models.Value(0)),  # 재직중
+                default=models.Value(1),  # 퇴사
+                output_field=models.IntegerField(),
+            ),
+            # 직종 정렬 우선순위: 정직원 > 파트직원
+            employee_type_order=models.Case(
+                models.When(employee_type='full_time', then=models.Value(0)),  # 정직원
+                models.When(employee_type='part_time', then=models.Value(1)),   # 파트직원
+                default=models.Value(2),
+                output_field=models.IntegerField(),
+            )
+        ).order_by('status_order', 'employee_type_order', 'hire_date')
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         staff_list = context['staff_list']
