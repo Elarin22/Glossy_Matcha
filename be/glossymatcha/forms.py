@@ -189,12 +189,10 @@ class SalesForm(forms.ModelForm):
         model = Sales
         fields = ['year', 'month', 'material_cost', 'labor_cost', 'supplies_expense', 'other_expense', 'inventory_amount', 'actual_usage_amount', 'memo']
         widgets = {
-            'year': forms.NumberInput(attrs={
-                'class': 'form-control',
-                'min': '2000',
-                'max': '2100',
-                'placeholder': '연도를 입력하세요.'
-            }),
+            'year': forms.Select(
+                choices=[(year, f'{year}년') for year in range(2020, 2101)],
+                attrs={'class': 'form-select'}
+            ),
             'month': forms.Select(
                 choices=[(i, f'{i}월') for i in range(1, 13)],
                 attrs = {'class': 'form-select'}
@@ -266,12 +264,10 @@ class YearlySalesForm(forms.ModelForm):
         model = YearlySales
         fields = ['year', 'memo']
         widgets = {
-            'year': forms.NumberInput(attrs={
-                'class': 'form-control',
-                'min': '2000',
-                'max': '2100',
-                'placeholder': '연도를 입력하세요.'
-            }),
+            'year': forms.Select(
+                choices=[(year, f'{year}년') for year in range(2020, 2101)],
+                attrs={'class': 'form-select'}
+            ),
             'memo': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 3,
