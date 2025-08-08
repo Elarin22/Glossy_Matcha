@@ -62,7 +62,8 @@ const ProductMainBanner: React.FC = () => {
                 </h1>
                 <p className={styles.description}>
                     제주산 세레모니얼 등급 말차 원료와<br />
-                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한 은은한 단맛의 밸런스
+                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한 <br className={styles.mobileBreak} />
+                    은은한 단맛의 밸런스
                 </p>
             </div>
 

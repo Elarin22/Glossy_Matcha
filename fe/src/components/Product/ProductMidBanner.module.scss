@@ -3,7 +3,7 @@
 
 .midBanner {
     width: 100%;
-    margin: 100px 0 100px 0; 
+    margin: 100px 0;
     padding: 0;
 }
 
@@ -71,6 +71,16 @@
     p {
         margin: 0;
     }
+}
+
+// 단어별 래핑용
+.word {
+    display: inline;
+}
+
+// 줄바꿈 제어용 br (JS에서 삽입)
+.mobileBreak {
+    display: none;
 }
 
 .fullWidthImageContainer {
@@ -151,7 +161,7 @@
 // Mobile
 @media (max-width: 768px) {
     .midBanner {
-        margin: 60px 0 60px 0; 
+        margin: 60px 0;
     }
 
     .textContent {
@@ -160,17 +170,17 @@
     }
 
     .productName {
-        font-size: $font-size-36;
+        font-size: $font-size-28;
         margin-bottom: 1.5rem;
     }
 
     .productSubtitle {
-        font-size: $font-size-18;
+        font-size: $font-size-14;
         margin-bottom: 1rem;
     }
 
     .productDescription {
-        font-size: $font-size-16;
+        font-size: $font-size-14;
         margin-bottom: 0.8rem;
 
         p {
@@ -199,5 +209,9 @@
 
     .skeletonImage {
         height: 300px;
+    }
+
+    .mobileBreak {
+        display: inline;
     }
 }
