@@ -24,7 +24,6 @@ export const useDownload = () => {
                 const dataUrl = canvas.toDataURL("image/png");
 
                 if (newWindow) {
-                    // 새 탭에 기본 HTML과 로딩 메시지 먼저 작성
                     newWindow.document.write(`
                         <html>
                             <head><title>${fileName}</title></head>
@@ -35,8 +34,7 @@ export const useDownload = () => {
                     `);
                     newWindow.document.close();
 
-                    // 약간의 딜레이 후 이미지 삽입
-                    setTimeout(() => {
+                    const insertImage = () => {
                         if (newWindow.closed) return;
                         try {
                             newWindow.document.body.innerHTML = `
@@ -46,7 +44,11 @@ export const useDownload = () => {
                             newWindow.document.body.innerHTML =
                                 "<p style='color:red;'>이미지 생성 실패</p>";
                         }
-                    }, 500); // 500ms 딜레이
+                    };
+
+                    newWindow.onload = insertImage;
+
+                    setTimeout(insertImage, 1500);
                 } else {
                     // 새 탭 없이 바로 다운로드 링크 생성
                     const link = document.createElement("a");
