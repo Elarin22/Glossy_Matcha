@@ -84,6 +84,14 @@
     & span {
       line-height: 1;
     }
+
+    &:hover {
+      background-color: $color-green-700;
+    }
+
+    &:active {
+      background-color: $color-green-700;
+    }
   }
 }
 
