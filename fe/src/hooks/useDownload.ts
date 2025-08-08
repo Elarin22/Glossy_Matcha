@@ -18,6 +18,7 @@ export const useDownload = () => {
             try {
                 const dataUrl = await domtoimage.toPng(element, {
                     cacheBust: true, // 캐시 문제 방지 옵션
+                    bgcolor: "#F2EFE8",
                 });
 
                 const link = document.createElement("a");

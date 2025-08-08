@@ -1,6 +1,7 @@
 declare module "dom-to-image-more" {
     interface Options {
         cacheBust?: boolean;
+        bgcolor?: string | null;
     }
 
     function toPng(node: Node, options?: Options): Promise<string>;
