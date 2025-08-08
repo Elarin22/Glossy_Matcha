@@ -70,6 +70,20 @@ class StaffForm(forms.ModelForm):
             return resident_digits
         return resident_number
 
+    def clean(self):
+        cleaned_data = super().clean()
+        resignation_date = cleaned_data.get('resignation_date')
+        employee_type = cleaned_data.get('employee_type')
+        
+        # 퇴사일이 설정되면 자동으로 근무형태를 '퇴사'로 변경
+        if resignation_date and employee_type != 'resigned':
+            cleaned_data['employee_type'] = 'resigned'
+        # 퇴사일이 없는데 근무형태가 '퇴사'이면 정직원으로 변경
+        elif not resignation_date and employee_type == 'resigned':
+            cleaned_data['employee_type'] = 'full_time'
+            
+        return cleaned_data
+
 class WorkRecordForm(forms.ModelForm):
     class Meta:
         model = WorkRecord
