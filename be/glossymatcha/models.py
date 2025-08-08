@@ -142,6 +142,7 @@ class Staff(models.Model):
     name = models.CharField(max_length=50, verbose_name="직원명")
     nickname = models.CharField(max_length=50, blank=True, verbose_name="영어 닉네임")
     employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE_CHOICES, verbose_name="근무 형태")
+    original_employee_type = models.CharField(max_length=20, choices=EMPLOYEE_TYPE_CHOICES, blank=True, null=True, verbose_name="원래 근무 형태")
     hire_date = models.DateField(verbose_name="입사일")
     resignation_date = models.DateField(null=True, blank=True, verbose_name="퇴사일")
     resident_number = models.CharField(max_length=13, verbose_name="주민번호")
@@ -181,13 +182,49 @@ class Staff(models.Model):
     
     def save(self, *args, **kwargs):
         self.clean()
-        # 퇴사일이 설정되면 근무형태를 '퇴사'로 변경
-        if self.resignation_date and self.employee_type != 'resigned':
-            self.employee_type = 'resigned'
-        # 퇴사일이 제거되면 기본값으로 정직원으로 변경
-        elif not self.resignation_date and self.employee_type == 'resigned':
-            self.employee_type = 'full_time'  # 또는 원래 근무형태를 복원하는 로직
+        
+        # 기존 직원인지 신규 직원인지 확인
+        if self.pk:
+            # 기존 직원: DB에서 이전 상태 조회
+            try:
+                old_staff = Staff.objects.get(pk=self.pk)
+                old_resignation_date = old_staff.resignation_date
+                old_employee_type = old_staff.employee_type
+                
+                # 퇴사 처리: 퇴사일이 새로 설정되었고, 기존에는 퇴사가 아니었던 경우
+                if self.resignation_date and not old_resignation_date and old_employee_type != 'resigned':
+                    if not self.original_employee_type:
+                        self.original_employee_type = old_employee_type
+                    self.employee_type = 'resigned'
+                
+                # 퇴사 취소: 퇴사일이 제거되었고, 기존에는 퇴사였던 경우
+                elif not self.resignation_date and old_resignation_date and self.employee_type == 'resigned':
+                    if self.original_employee_type:
+                        self.employee_type = self.original_employee_type
+                        self.original_employee_type = None
+                    else:
+                        self.employee_type = 'full_time'  # 기본값
+                        
+            except Staff.DoesNotExist:
+                pass
+        else:
+            # 신규 직원: 퇴사일이 있으면서 근무형태가 퇴사가 아닌 경우
+            if self.resignation_date and self.employee_type != 'resigned':
+                if not self.original_employee_type:
+                    self.original_employee_type = self.employee_type
+                self.employee_type = 'resigned'
+        
         super().save(*args, **kwargs)
+    
+    def get_employee_type_with_original_display(self):
+        """
+        근무형태 표시 (퇴사자의 경우 원래 근무형태 포함)
+        """
+        if self.employee_type == 'resigned' and self.original_employee_type:
+            original_display = dict(self.EMPLOYEE_TYPE_CHOICES).get(self.original_employee_type, '알 수 없음')
+            return f"퇴사 (원 {original_display})"
+        else:
+            return self.get_employee_type_display()
     
     def __str__(self):
         status = "재직" if self.is_active else "퇴사"
