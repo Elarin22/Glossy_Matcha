@@ -18,7 +18,7 @@ export const useDownload = () => {
             // iOS 감지 (해결책 2번: MSStream 체크로 IE 제외)
             const iOS =
                 /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-                !(window as any).MSStream;
+                !(window as unknown as { MSStream?: unknown }).MSStream;
 
             // 뷰포트 조정 (해결책 1번: windowWidth = '1280px')
             if (screen.width < 1024) {
