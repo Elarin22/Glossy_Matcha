@@ -38,7 +38,29 @@ export default function MatchaGenerator() {
     };
 
     const handleDownload = () => {
-        if (recommendation) {
+        if (!recommendation) return;
+
+        // iOS 여부 체크
+        const isIOS =
+            /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+            !(window as unknown as { MSStream?: unknown }).MSStream;
+
+        if (isIOS) {
+            // iOS는 빈 새창을 먼저 열어줌
+            const newWindow = window.open("", "_blank");
+            if (newWindow) {
+                downloadImage(
+                    "result-section",
+                    `${menuData[recommendation].name}.png`,
+                    newWindow
+                );
+            } else {
+                alert(
+                    "새 창 열기가 차단되었습니다. 팝업 차단 해제 후 다시 시도해주세요."
+                );
+            }
+        } else {
+            // iOS 아니면 그냥 다운로드 실행
             downloadImage(
                 "result-section",
                 `${menuData[recommendation].name}.png`
