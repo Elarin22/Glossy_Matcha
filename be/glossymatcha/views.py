@@ -459,6 +459,30 @@ class WorkRecordCreateView(LoginRequiredMixin, CreateView):
         response = super().form_valid(form)
         messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 등록되었습니다.')
         return response
+
+class WorkRecordUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    직원 근무 기록 수정 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 근무 기록 수정 페이지를 렌더링
+    """
+    model = WorkRecord
+    form_class = WorkRecordForm
+    template_name = 'glossymatcha/staff/work_record.html'
+
+    def get_success_url(self):
+        return reverse_lazy('staff_detail', kwargs={'pk': self.object.staff.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_update'] = True
+        context['selected_staff'] = self.object.staff
+        return context
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 수정되었습니다.')
+        return response
     
 # Django Template Views for suppliers management
 class SuppliersListView(LoginRequiredMixin, ListView):
