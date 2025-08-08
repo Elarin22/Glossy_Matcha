@@ -126,10 +126,15 @@
                 
                 <hr>
                 
-                <div class="d-grid">
+                <div class="d-grid gap-2">
                     <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#workRecordModal">
                         <i class="bi bi-plus-circle me-2"></i>급여 기록 입력
                     </button>
+                    {% if recent_work_records %}
+                        <a href="{% url 'work_record_update' recent_work_records.0.pk %}" class="btn btn-outline-secondary btn-sm">
+                            <i class="bi bi-pencil me-2"></i>최근 기록 수정
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -183,6 +188,7 @@
                             <th>주휴수당</th>
                             <th>지급합계</th>
                             <th>등록일</th>
+                            <th>관리</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -211,6 +217,11 @@
                             </td>
                             <td>
                                 <small class="text-muted">{{ record.created_at|date:"m.d H:i" }}</small>
+                            </td>
+                            <td>
+                                <a href="{% url 'work_record_update' record.pk %}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
