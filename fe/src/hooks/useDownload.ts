@@ -42,15 +42,6 @@ export const useDownload = () => {
                             newWindow.document.body.innerHTML = `
                                 <img src="${dataUrl}" alt="${fileName}" style="max-width:100%; height:auto; display:block; margin:auto;" />
                             `;
-
-                            if (
-                                /iPhone|iPad|iPod/i.test(navigator.userAgent)
-                            ) {
-                                newWindow.document.body.insertAdjacentHTML(
-                                    "beforeend",
-                                    `<p style="text-align:center; font-family:sans-serif; margin-top:1rem;">이미지를 길게 눌러 저장하세요.</p>`
-                                );
-                            }
                         } catch (e) {
                             newWindow.document.body.innerHTML =
                                 "<p style='color:red;'>이미지 생성 실패</p>";
