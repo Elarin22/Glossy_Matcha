@@ -80,6 +80,11 @@
     color: $color-beige-100;
 }
 
+// PC에서는 모바일 줄바꿈 숨김
+.mobileBreak {
+    display: none;
+}
+
 .scrollIndicator {
     position: absolute;
     bottom: 80px;
@@ -179,6 +184,10 @@
     .description {
         @include pretendard($font-size-16, 300);
         max-width: 100%;
+    }
+
+    .mobileBreak {
+        display: inline;
     }
 
     .scrollIndicator {
