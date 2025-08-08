@@ -2,11 +2,6 @@ import { useCallback } from "react";
 import domtoimage from "dom-to-image-more";
 
 export const useDownload = () => {
-    /**
-     * id가 지정된 DOM 요소를 캡처하여 PNG 이미지로 저장
-     * @param elementId 캡처할 DOM 요소의 id
-     * @param fileName 저장할 파일명 (확장자 포함)
-     */
     const downloadImage = useCallback(
         async (elementId: string, fileName: string) => {
             const element = document.getElementById(elementId);
@@ -15,18 +10,28 @@ export const useDownload = () => {
                 return;
             }
 
+            const isIOS =
+                /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+                !(window as unknown as { MSStream?: unknown }).MSStream;
+
             try {
                 const dataUrl = await domtoimage.toPng(element, {
                     cacheBust: true, // 캐시 문제 방지 옵션
-                    bgcolor: "#F2EFE8",
+                    bgcolor: "#F2EFE8", // 배경색 지정
                 });
 
-                const link = document.createElement("a");
-                link.href = dataUrl;
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                if (isIOS) {
+                    // iOS는 새 탭에서 열어 사용자가 저장하도록 유도
+                    window.open(dataUrl, "_blank");
+                } else {
+                    // 일반 브라우저는 a 태그로 다운로드 트리거
+                    const link = document.createElement("a");
+                    link.href = dataUrl;
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
             } catch (e) {
                 console.error("이미지 저장 실패:", e);
             }
