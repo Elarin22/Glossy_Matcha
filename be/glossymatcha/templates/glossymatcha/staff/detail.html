@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}{{ staff.name }} - 직원 상세 정보{% endblock %}
 
@@ -101,18 +102,18 @@
                 {% if recent_work_records %}
                     {% with latest_record=recent_work_records.0 %}
                     <div class="text-center">
-                        <div class="stat-number text-primary">{{ latest_record.total_payment|floatformat:0 }}원</div>
+                        <div class="stat-number text-primary">{{ latest_record.total_payment|korean_won_with_unit }}</div>
                         <small class="text-muted">최근 지급합계</small>
                     </div>
                     <hr>
                     <div class="small text-muted">
                         <div>총 근무시간: {{ latest_record.total_hours }}시간</div>
-                        <div>시급: {{ latest_record.hourly_rate|floatformat:0 }}원</div>
+                        <div>시급: {{ latest_record.hourly_rate|korean_won_with_unit }}</div>
                         {% if latest_record.monthly_salary %}
-                        <div>월급: {{ latest_record.monthly_salary|floatformat:0 }}원</div>
+                        <div>월급: {{ latest_record.monthly_salary|korean_won_with_unit }}</div>
                         {% endif %}
                         {% if latest_record.weekly_holiday_allowance %}
-                        <div>주휴수당: {{ latest_record.weekly_holiday_allowance|floatformat:0 }}원</div>
+                        <div>주휴수당: {{ latest_record.weekly_holiday_allowance|korean_won_with_unit }}</div>
                         {% endif %}
                     </div>
                     {% endwith %}
@@ -190,23 +191,23 @@
                             <td>
                                 <span class="badge bg-info">{{ record.total_hours }}시간</span>
                             </td>
-                            <td>{{ record.hourly_rate|floatformat:0 }}원</td>
+                            <td>{{ record.hourly_rate|korean_won_with_unit }}</td>
                             <td>
                                 {% if record.monthly_salary %}
-                                    {{ record.monthly_salary|floatformat:0 }}원
+                                    {{ record.monthly_salary|korean_won_with_unit }}
                                 {% else %}
                                     <small class="text-muted">-</small>
                                 {% endif %}
                             </td>
                             <td>
                                 {% if record.weekly_holiday_allowance %}
-                                    {{ record.weekly_holiday_allowance|floatformat:0 }}원
+                                    {{ record.weekly_holiday_allowance|korean_won_with_unit }}
                                 {% else %}
                                     <small class="text-muted">-</small>
                                 {% endif %}
                             </td>
                             <td>
-                                <strong class="text-success">{{ record.total_payment|floatformat:0 }}원</strong>
+                                <strong class="text-success">{{ record.total_payment|korean_won_with_unit }}</strong>
                             </td>
                             <td>
                                 <small class="text-muted">{{ record.created_at|date:"m.d H:i" }}</small>

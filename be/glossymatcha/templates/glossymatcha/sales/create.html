@@ -50,7 +50,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.material_cost.id_for_label }}" class="form-label">재료비</label>
                             <div class="input-group">
-                                {{ form.material_cost }}
+                                <input type="text" name="material_cost" id="id_material_cost" class="form-control money-input" value="{{ form.material_cost.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.material_cost.errors %}
@@ -61,7 +61,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.labor_cost.id_for_label }}" class="form-label">노무비</label>
                             <div class="input-group">
-                                {{ form.labor_cost }}
+                                <input type="text" name="labor_cost" id="id_labor_cost" class="form-control money-input" value="{{ form.labor_cost.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.labor_cost.errors %}
@@ -74,7 +74,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.supplies_expense.id_for_label }}" class="form-label">경비-소모품</label>
                             <div class="input-group">
-                                {{ form.supplies_expense }}
+                                <input type="text" name="supplies_expense" id="id_supplies_expense" class="form-control money-input" value="{{ form.supplies_expense.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.supplies_expense.errors %}
@@ -85,7 +85,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.other_expense.id_for_label }}" class="form-label">경비-기타</label>
                             <div class="input-group">
-                                {{ form.other_expense }}
+                                <input type="text" name="other_expense" id="id_other_expense" class="form-control money-input" value="{{ form.other_expense.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.other_expense.errors %}
@@ -100,7 +100,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.inventory_amount.id_for_label }}" class="form-label">재고금액</label>
                             <div class="input-group">
-                                {{ form.inventory_amount }}
+                                <input type="text" name="inventory_amount" id="id_inventory_amount" class="form-control money-input" value="{{ form.inventory_amount.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.inventory_amount.errors %}
@@ -111,7 +111,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.actual_usage_amount.id_for_label }}" class="form-label">실 사용금액</label>
                             <div class="input-group">
-                                {{ form.actual_usage_amount }}
+                                <input type="text" name="actual_usage_amount" id="id_actual_usage_amount" class="form-control money-input" value="{{ form.actual_usage_amount.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.actual_usage_amount.errors %}
