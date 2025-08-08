@@ -1,14 +1,15 @@
 import "@/styles/reset.scss";
 import "@/styles/globals.scss";
 import "@/styles/fonts.scss";
-
 export default function RootLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { locale: string };
 }) {
   return (
-    <html>
+    <html lang={params.locale}>
       <body>{children}</body>
     </html>
   );
