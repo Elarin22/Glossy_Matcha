@@ -6,7 +6,7 @@
 <div class="row mb-4">
     <div class="col-md-6">
         <h2 class="mb-0">
-            <i class="bi bi-calendar-year me-2"></i>연별 매출 관리
+            <i class="bi bi-bar-chart me-2"></i>연별 매출 관리
         </h2>
         <p class="text-muted">연별 매출 현황 및 관리 (월별 매출 자동 합산)</p>
     </div>
@@ -92,7 +92,7 @@
             </div>
         {% else %}
             <div class="text-center py-5">
-                <i class="bi bi-calendar-year" style="font-size: 4rem; color: #ddd;"></i>
+                <i class="bi bi-bar-chart" style="font-size: 4rem; color: #ddd;"></i>
                 <h4 class="mt-3 text-muted">등록된 연별 매출이 없습니다</h4>
                 <p class="text-muted">첫 번째 연별 매출을 입력해보세요.</p>
                 <a href="{% url 'yearly_sales_create' %}" class="btn btn-primary">
