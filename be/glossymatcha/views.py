@@ -485,6 +485,29 @@ class WorkRecordUpdateView(LoginRequiredMixin, UpdateView):
         response = super().form_valid(form)
         messages.success(self.request, f'{self.object.staff.name}의 근무 기록이 수정되었습니다.')
         return response
+
+class WorkRecordDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    직원 근무 기록 삭제 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 근무 기록 삭제 페이지를 렌더링
+    """
+    model = WorkRecord
+    template_name = 'glossymatcha/staff/work_record_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('staff_detail', kwargs={'pk': self.object.staff.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['staff'] = self.object.staff
+        return context
+
+    def delete(self, request, *args, **kwargs):
+        staff_name = self.get_object().staff.name
+        response = super().delete(request, *args, **kwargs)
+        messages.success(request, f'{staff_name}의 근무 기록이 삭제되었습니다.')
+        return response
     
 # Django Template Views for suppliers management
 class SuppliersListView(LoginRequiredMixin, ListView):
