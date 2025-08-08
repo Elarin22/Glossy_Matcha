@@ -47,8 +47,8 @@
                                 <small class="text-muted">{{ staff.nickname }}</small>
                             </td>
                             <td>
-                                <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% else %}bg-success{% endif %}">
-                                    {{ staff.get_employee_type_display }}
+                                <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% elif staff.employee_type == 'part_time' %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {{ staff.get_employee_type_with_original_display }}
                                 </span>
                             </td>
                             <td>{{ staff.hire_date|date:"Y.m.d" }}</td>

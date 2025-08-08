@@ -38,7 +38,29 @@ export default function MatchaGenerator() {
     };
 
     const handleDownload = () => {
-        if (recommendation) {
+        if (!recommendation) return;
+
+        const isIOS =
+            /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+            !(window as unknown as { MSStream?: unknown }).MSStream;
+
+        if (isIOS) {
+            // iOS는 클릭 이벤트 핸들러에서 즉시 새 탭 열기 (팝업 차단 방지)
+            const newWindow = window.open("", "_blank");
+            if (!newWindow) {
+                alert(
+                    "팝업 차단이 되어 새 탭을 열 수 없습니다. 팝업 허용 후 다시 시도해주세요."
+                );
+                return;
+            }
+            // 새 탭 객체 넘겨서 이미지 렌더링 처리
+            downloadImage(
+                "result-section",
+                `${menuData[recommendation].name}.png`,
+                newWindow
+            );
+        } else {
+            // iOS 외는 그냥 다운로드 처리 (새 탭 없이)
             downloadImage(
                 "result-section",
                 `${menuData[recommendation].name}.png`

@@ -7,7 +7,7 @@
 <div class="row mb-4">
     <div class="col-md-8">
         <h2 class="mb-0">
-            <i class="bi bi-person-circle me-2"></i>{{ staff.name }} ({{ staff.nickname }})
+            <i class="bi bi-person-circle me-2"></i>{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %}
             {% if staff.is_active %}
                 <span class="badge bg-success ms-2">재직중</span>
             {% else %}
@@ -47,13 +47,13 @@
                     </tr>
                     <tr>
                         <td class="text-muted">닉네임</td>
-                        <td><code>{{ staff.nickname }}</code></td>
+                        <td>{% if staff.nickname %}<code>{{ staff.nickname }}</code>{% else %}<small class="text-muted">-</small>{% endif %}</td>
                     </tr>
                     <tr>
                         <td class="text-muted">근무 형태</td>
                         <td>
-                            <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% else %}bg-success{% endif %}">
-                                {{ staff.get_employee_type_display }}
+                            <span class="badge {% if staff.employee_type == 'full_time' %}bg-primary{% elif staff.employee_type == 'part_time' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ staff.get_employee_type_with_original_display }}
                             </span>
                         </td>
                     </tr>
@@ -126,10 +126,20 @@
                 
                 <hr>
                 
-                <div class="d-grid">
+                <div class="d-grid gap-2">
                     <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#workRecordModal">
                         <i class="bi bi-plus-circle me-2"></i>급여 기록 입력
                     </button>
+                    {% if recent_work_records %}
+                        <div class="btn-group w-100">
+                            <a href="{% url 'work_record_update' recent_work_records.0.pk %}" class="btn btn-outline-secondary btn-sm">
+                                <i class="bi bi-pencil me-2"></i>최근 기록 수정
+                            </a>
+                            <a href="{% url 'work_record_delete' recent_work_records.0.pk %}" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -183,6 +193,7 @@
                             <th>주휴수당</th>
                             <th>지급합계</th>
                             <th>등록일</th>
+                            <th>관리</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,6 +223,16 @@
                             <td>
                                 <small class="text-muted">{{ record.created_at|date:"m.d H:i" }}</small>
                             </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a href="{% url 'work_record_update' record.pk %}" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="{% url 'work_record_delete' record.pk %}" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -235,11 +256,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ staff.name }} ({{ staff.nickname }}) 급여 기록 입력</h5>
+                <h5 class="modal-title">{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %} 급여 기록 입력</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
                 <div class="modal-body">
-                    <p>{{ staff.name }} ({{ staff.nickname }}) 직원의 급여 기록을 입력하시겠습니까?</p>
+                    <p>{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %} 직원의 급여 기록을 입력하시겠습니까?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

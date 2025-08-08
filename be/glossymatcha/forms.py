@@ -13,7 +13,7 @@ class StaffForm(forms.ModelForm):
             }),
             'nickname' : forms.TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': '직원 닉네임을 입력하세요.'
+                'placeholder': '직원 닉네임을 입력하세요. (선택사항)'
             }),
             'employee_type': forms.Select(attrs={
                 'class': 'form-select',
@@ -45,6 +45,11 @@ class StaffForm(forms.ModelForm):
             }),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 닉네임을 선택사항으로 설정
+        self.fields['nickname'].required = False
+
     def clean_resident_number(self):
         """
         주민등록번호를 정제하고 유효성을 검사하는 메서드
@@ -64,6 +69,21 @@ class StaffForm(forms.ModelForm):
             
             return resident_digits
         return resident_number
+
+    def clean(self):
+        cleaned_data = super().clean()
+        resignation_date = cleaned_data.get('resignation_date')
+        employee_type = cleaned_data.get('employee_type')
+        
+        # 퇴사일이 설정되면 자동으로 근무형태를 '퇴사'로 변경
+        if resignation_date and employee_type != 'resigned':
+            cleaned_data['employee_type'] = 'resigned'
+        # 퇴사일이 없는데 근무형태가 '퇴사'이면 원래 근무형태로 복원 (모델에서 처리)
+        elif not resignation_date and employee_type == 'resigned':
+            # 모델의 save 메소드에서 원래 근무형태로 복원하므로 여기서는 건드리지 않음
+            pass
+            
+        return cleaned_data
 
 class WorkRecordForm(forms.ModelForm):
     class Meta:

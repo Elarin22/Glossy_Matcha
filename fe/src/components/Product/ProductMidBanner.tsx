@@ -52,6 +52,34 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         return lang === 'en' ? image.alt_text_en || '' : image.alt_text_ko || getProductName();
     };
 
+    const wrapWordsForMobile = (text: string, type: 'subtitle' | 'description' | 'shortDescription') => {
+        if (!text) return text;
+
+        const words = text.split(' ');
+        const breakpoints = (() => {
+            // 시그니처 제품
+            if (productId === 1 && type === 'subtitle') return [6]; // "100% 제주 새봄의 첫 순을 담은" 다음
+            if (productId === 1 && type === 'description') {
+                // "제주산 세레모니얼 등급 말차 원료와" 다음, "대체당, 대나무수액, 코코넛슈가를" 다음
+                return [5, 8];
+            }
+            if (productId === 1 && type === 'shortDescription') return [7]; // "글로시말차 시그니처는 실제 매장에서" 다음
+            
+            // 틴케이스 제품  
+            if (productId === 3 && type === 'shortDescription') return [5, 9, 14]; // "* 국산 말차에는 등급제가 없습니다만," 다음, "해외 등급표 기준을 만족하도록" 다음, "첫순 1번 잎을 가지고 만든" 다음
+            
+            return [];
+        })();
+
+        return words.map((word, index) => (
+            <React.Fragment key={index}>
+                <span className={styles.word}>{word}</span>
+                {index < words.length - 1 && ' '}
+                {breakpoints.includes(index + 1) && <br className={styles.mobileBreak} />}
+            </React.Fragment>
+        ));
+    };
+
     if (loading) {
         return (
             <section className={styles.midBanner}>
@@ -93,17 +121,23 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
             <div className={styles.container}>
                 <div className={styles.textContent}>
                     {productName && <h2 className={styles.productName}>{productName}</h2>}
-                    {productSubtitle && <h3 className={styles.productSubtitle}>{productSubtitle}</h3>}
+                    {productSubtitle && (
+                        <h3 className={styles.productSubtitle}>
+                            {wrapWordsForMobile(productSubtitle, 'subtitle')}
+                        </h3>
+                    )}
                     {productDescription && (
                         <div className={styles.productDescription}>
                             {productDescription.split('\n').map((line, index) => (
-                                <p key={index}>{line}</p>
+                                <p key={index}>
+                                    {wrapWordsForMobile(line, 'description')}
+                                </p>
                             ))}
                         </div>
                     )}
                     {productShortDescription && (
                         <div className={styles.productNote}>
-                            <p>{productShortDescription}</p>
+                            <p>{wrapWordsForMobile(productShortDescription, 'shortDescription')}</p>
                         </div>
                     )}
                 </div>

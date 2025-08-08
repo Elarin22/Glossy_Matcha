@@ -56,7 +56,7 @@ const mockProducts: Product[] = [
         subtitle_en: "100% Premium Jeju First Spring Harvest Smooth Matcha Pocket",
         description: "세레모니얼 말차 | 대나무 수액 | 코코넛슈가\n제주산 세레모니얼 등급 말차 원료와 대체당, 대나무수액, 코코넛슈가를 블렌딩한 은은한 단맛의 밸런스",
         description_en: "Ceremonial Matcha | Bamboo Sap | Coconut Sugar\nA subtle sweet balance blending Jeju ceremonial grade matcha with alternative sugar, bamboo sap, and coconut sugar",
-        short_description: "글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
+        short_description: "* 글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
         short_description_en: "GlossyMatcha Signature is made with the same ingredients as the matcha used in actual stores.",
 
         images: [
