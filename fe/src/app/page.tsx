@@ -1,12 +1,15 @@
 "use client";
 
-import styles from "./Home.module.scss";
-import { useEffect, useRef, useState } from "react";
-import SideInfo from "@/components/Home/SideInfo/SideInfo";
-import ImageSection from "@/components/Home/ImageSection/ImageSection";
+import dynamic from "next/dynamic";
 import { useMobileDetect } from "@/hooks/useMobileDetect";
-import MobileHome from "@/components/Home/MobileHome/MobileHome";
-import PcHome from "@/components/Home/PcHome/PcHome";
+
+const PcHome = dynamic(() => import("@/components/Home/PcHome/PcHome"), {
+  ssr: false,
+});
+const MobileHome = dynamic(
+  () => import("@/components/Home/MobileHome/MobileHome"),
+  { ssr: false }
+);
 
 export interface HomeContent {
   title: string;
@@ -65,9 +68,7 @@ const homeContents: HomeContent[] = [
 
 export default function Home() {
   const isMobile = useMobileDetect();
-
-  // mobile에서 순간적으로 pc가 보이는 문제 해결
-  // if (isMobile === null) return null;
+  if (isMobile === null) return null;
 
   return (
     <>
