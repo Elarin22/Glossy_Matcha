@@ -430,7 +430,9 @@ class WorkRecordCreateView(LoginRequiredMixin, CreateView):
     model = WorkRecord
     form_class = WorkRecordForm
     template_name = 'glossymatcha/staff/work_record.html'
-    success_url = reverse_lazy('dashboard')
+
+    def get_success_url(self):
+        return reverse_lazy('staff_detail', kwargs={'pk': self.object.staff.pk})
 
     def get_initial(self):
         initial = super().get_initial()
