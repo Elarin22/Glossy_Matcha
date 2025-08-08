@@ -42,9 +42,8 @@ export default function MatchaGenerator() {
 
         // iOS 여부 체크
         const isIOS =
-            typeof window !== "undefined" &&
             /iPad|iPhone|iPod/.test(navigator.userAgent) &&
-            !(window as any).MSStream;
+            !(window as unknown as { MSStream?: unknown }).MSStream;
 
         if (isIOS) {
             // iOS는 빈 새창을 먼저 열어줌
