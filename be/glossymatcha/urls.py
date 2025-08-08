@@ -26,6 +26,7 @@ urlpatterns = [
     path('staff/<int:pk>/update/', views.StaffUpdateView.as_view(), name='staff_update'),       # 직원 수정
     path('staff/<int:pk>/delete/', views.StaffDeleteView.as_view(), name='staff_delete'),       # 직원 삭제
     path('work-record/create/', views.WorkRecordCreateView.as_view(), name='work_record_create'), # 근무시간 입력
+    path('work-record/<int:pk>/update/', views.WorkRecordUpdateView.as_view(), name='work_record_update'), # 근무기록 수정
 
     # Django Template Views for suppliers management
     path('suppliers/', views.SuppliersListView.as_view(), name='suppliers_list'),               # 거래처 목록
