@@ -89,7 +89,12 @@ export default function Header() {
             {/* right */}
             <div className={styles["header__list"]}>
               <Link href="/inquire" aria-label="문의하기">
-                <img src="/images/icon/inquire.svg" alt="" />
+                <img
+                  src="/images/icon/inquire.svg"
+                  alt=""
+                  width={30}
+                  height={30}
+                />
               </Link>
               <button className={styles["lang-btn"]} aria-label="언어 변경">
                 <img src="/images/icon/world.svg" alt="" />
