@@ -136,6 +136,7 @@ class Staff(models.Model):
     EMPLOYEE_TYPE_CHOICES = [
         ('full_time', '정직원'),
         ('part_time', '파트타임'),
+        ('resigned', '퇴사'),
     ]
     
     name = models.CharField(max_length=50, verbose_name="직원명")
@@ -180,6 +181,12 @@ class Staff(models.Model):
     
     def save(self, *args, **kwargs):
         self.clean()
+        # 퇴사일이 설정되면 근무형태를 '퇴사'로 변경
+        if self.resignation_date and self.employee_type != 'resigned':
+            self.employee_type = 'resigned'
+        # 퇴사일이 제거되면 기본값으로 정직원으로 변경
+        elif not self.resignation_date and self.employee_type == 'resigned':
+            self.employee_type = 'full_time'  # 또는 원래 근무형태를 복원하는 로직
         super().save(*args, **kwargs)
     
     def __str__(self):
