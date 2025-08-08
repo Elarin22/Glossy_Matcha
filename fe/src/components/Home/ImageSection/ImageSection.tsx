@@ -5,7 +5,7 @@ import styles from "./ImageSection.module.scss";
 import ImageSubInfo from "../ImageSubInfo/ImageSubInfo";
 import Image from "next/image";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
-import { HomeContent } from "@/app/page";
+import { HomeContent } from "@/app/[locale]/page";
 import SoundButton from "../SoundButton/SoundButton";
 
 export default function ImageSection({

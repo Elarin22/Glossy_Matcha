@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { HomeContent } from "@/app/page";
+import { HomeContent } from "@/app/[locale]/page";
 import styles from "./MobileHome.module.scss";
 import SoundButton from "../SoundButton/SoundButton";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";

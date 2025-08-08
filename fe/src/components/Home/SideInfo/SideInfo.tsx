@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./SideInfo.module.scss";
 import Image from "next/image";
 import Link from "next/link";
-import { HomeContent } from "@/app/page";
+import { HomeContent } from "@/app/[locale]/page";
 
 export default function SideInfo({
   currentIndex,

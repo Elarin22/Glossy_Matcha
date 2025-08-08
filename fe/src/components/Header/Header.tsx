@@ -1,10 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { useMobileDetect } from "@/hooks/useMobileDetect";
+import LanguageButton from "./LanguageButton/LanguageButton";
 
 interface NavigationItem {
   href: string;
@@ -12,12 +14,14 @@ interface NavigationItem {
 }
 
 const NAVIGATION_ITEMS: NavigationItem[] = [
-  { href: "/about", label: "브랜드 소개" },
-  { href: "/products", label: "제품 소개" },
-  { href: "/test", label: "말차 테스트" },
+  { href: "/about", label: "about" },
+  { href: "/products", label: "products" },
+  { href: "/test", label: "test" },
 ];
 
-export default function Header() {
+export default function Header({ locale }: { locale: string }) {
+  const t = useTranslations("navigation");
+
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const isMobile = useMobileDetect();
 
@@ -53,7 +57,7 @@ export default function Header() {
       <header className={styles.header}>
         <div className={styles["header-box"]}>
           {/* logo */}
-          <Link href="/" onClick={closeSidebar}>
+          <Link href="/${locale}" onClick={closeSidebar}>
             <Image
               src="/images/logo/logo-1.png"
               alt=""
@@ -80,7 +84,7 @@ export default function Header() {
               <ul className={styles["header__list"]}>
                 {NAVIGATION_ITEMS.map((item) => (
                   <li key={item.href} className={styles["header__item"]}>
-                    <Link href={item.href}>{item.label}</Link>
+                    <Link href={`/${locale}${item.href}`}>{t(item.label)}</Link>
                   </li>
                 ))}
               </ul>
@@ -88,7 +92,7 @@ export default function Header() {
 
             {/* right */}
             <div className={styles["header__list"]}>
-              <Link href="/inquire" aria-label="문의하기">
+              <Link href={`/${locale}/inquire`} aria-label={t("contact")}>
                 <img
                   src="/images/icon/inquire.svg"
                   alt=""
@@ -96,10 +100,7 @@ export default function Header() {
                   height={30}
                 />
               </Link>
-              <button className={styles["lang-btn"]} aria-label="언어 변경">
-                <img src="/images/icon/world.svg" alt="" />
-                <span>en</span>
-              </button>
+              <LanguageButton locale={locale} />
             </div>
           </div>
 
@@ -108,7 +109,7 @@ export default function Header() {
             <div className={styles["header__list"]}>
               <button
                 onClick={toggleSidebar}
-                aria-label={isSidebarOpen ? "메뉴 닫기" : "메뉴 열기"}
+                aria-label={isSidebarOpen ? t("menuOpen") : t("menuClose")}
                 aria-expanded={isSidebarOpen}
               >
                 <img
@@ -120,10 +121,7 @@ export default function Header() {
                   alt=""
                 />
               </button>
-              <button className={styles["lang-btn"]} aria-label="언어 변경">
-                <img src="/images/icon/world.svg" alt="" />
-                <span>en</span>
-              </button>
+              <LanguageButton locale={locale} />
             </div>
           </div>
         </div>
@@ -148,14 +146,17 @@ export default function Header() {
               <ul>
                 {NAVIGATION_ITEMS.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} onClick={closeSidebar}>
-                      {item.label}
+                    <Link
+                      href={`/${locale}${item.href}`}
+                      onClick={closeSidebar}
+                    >
+                      {t(item.label)}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href="/inquire" onClick={closeSidebar}>
-                    문의하기
+                  <Link href={`/${locale}/inquire`} onClick={closeSidebar}>
+                    {t("contact")}
                   </Link>
                 </li>
               </ul>
