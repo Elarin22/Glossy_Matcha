@@ -24,17 +24,29 @@ export const useDownload = () => {
                 const dataUrl = canvas.toDataURL("image/png");
 
                 if (newWindow) {
-                    // 새 탭이 열려있으면 이미지 보여주기
-                    newWindow.document.body.innerHTML = `
-                        <img src="${dataUrl}" alt="${fileName}" style="max-width:100%; height:auto; display:block; margin:auto;" />
-                    `;
+                    // 새 탭에 기본 HTML과 로딩 메시지 먼저 작성
+                    newWindow.document.write(`
+                        <html>
+                            <head><title>${fileName}</title></head>
+                            <body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; font-family:sans-serif;">
+                                <p>이미지 생성 중...</p>
+                            </body>
+                        </html>
+                    `);
+                    newWindow.document.close();
 
-                    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                        newWindow.document.body.insertAdjacentHTML(
-                            "beforeend",
-                            `<p style="text-align:center; font-family:sans-serif; margin-top:1rem;">이미지를 길게 눌러 저장하세요.</p>`
-                        );
-                    }
+                    // 약간의 딜레이 후 이미지 삽입
+                    setTimeout(() => {
+                        if (newWindow.closed) return;
+                        try {
+                            newWindow.document.body.innerHTML = `
+                                <img src="${dataUrl}" alt="${fileName}" style="max-width:100%; height:auto; display:block; margin:auto;" />
+                            `;
+                        } catch (e) {
+                            newWindow.document.body.innerHTML =
+                                "<p style='color:red;'>이미지 생성 실패</p>";
+                        }
+                    }, 500); // 500ms 딜레이
                 } else {
                     // 새 탭 없이 바로 다운로드 링크 생성
                     const link = document.createElement("a");
