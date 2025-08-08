@@ -2,10 +2,10 @@
 @use "../../../styles/mixins.scss" as *;
 
 .mobile-container {
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
-  height: 100vh;
+  // scroll-snap-type: y mandatory;
+  // overflow-y: scroll;
+  // -webkit-overflow-scrolling: touch;
+  // height: 100vh;
 }
 
 /* common */
