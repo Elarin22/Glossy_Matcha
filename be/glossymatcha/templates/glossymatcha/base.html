@@ -95,6 +95,71 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- 한국 원화 콤마 포맷팅 함수 -->
+    <script>
+    // 숫자를 한국 원화 형식으로 포맷팅 (콤마 추가)
+    function formatKoreanWon(number) {
+        if (number === '' || number === null || number === undefined) return '';
+        return Number(number).toLocaleString('ko-KR');
+    }
+    
+    // 콤마가 포함된 문자열에서 숫자만 추출
+    function removeCommas(str) {
+        return str.replace(/,/g, '');
+    }
+    
+    // 입력 필드에 실시간 콤마 포맷팅 적용
+    function applyCommaFormatting(inputElement) {
+        inputElement.addEventListener('input', function(e) {
+            let value = e.target.value;
+            let numericValue = removeCommas(value);
+            
+            // 숫자만 입력 허용
+            if (!/^\d*$/.test(numericValue)) {
+                numericValue = numericValue.replace(/\D/g, '');
+            }
+            
+            e.target.value = formatKoreanWon(numericValue);
+        });
+        
+        // 포커스 아웃 시 빈 값이면 0으로 설정
+        inputElement.addEventListener('blur', function(e) {
+            if (e.target.value === '' || e.target.value === '0') {
+                e.target.value = '0';
+            }
+        });
+    }
+    
+    // 폼 제출 시 콤마 제거하여 서버로 전송
+    function removeCommasOnSubmit(formElement) {
+        formElement.addEventListener('submit', function(e) {
+            const moneyInputs = formElement.querySelectorAll('.money-input');
+            moneyInputs.forEach(function(input) {
+                input.value = removeCommas(input.value);
+            });
+        });
+    }
+    
+    // 페이지 로드 후 자동으로 money-input 클래스를 가진 모든 입력 필드에 적용
+    document.addEventListener('DOMContentLoaded', function() {
+        const moneyInputs = document.querySelectorAll('.money-input');
+        moneyInputs.forEach(function(input) {
+            applyCommaFormatting(input);
+            
+            // 기존 값이 있으면 포맷팅 적용
+            if (input.value) {
+                input.value = formatKoreanWon(removeCommas(input.value));
+            }
+        });
+        
+        const forms = document.querySelectorAll('form');
+        forms.forEach(function(form) {
+            removeCommasOnSubmit(form);
+        });
+    });
+    </script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>

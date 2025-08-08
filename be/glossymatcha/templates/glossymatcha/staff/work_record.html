@@ -45,7 +45,7 @@
                         <div class="col-md-4 mb-3">
                             <label for="{{ form.hourly_rate.id_for_label }}" class="form-label">시급 *</label>
                             <div class="input-group">
-                                {{ form.hourly_rate }}
+                                <input type="text" name="hourly_rate" id="id_hourly_rate" class="form-control money-input" value="{{ form.hourly_rate.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.hourly_rate.errors %}
@@ -58,7 +58,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.monthly_salary.id_for_label }}" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
                             <div class="input-group">
-                                {{ form.monthly_salary }}
+                                <input type="text" name="monthly_salary" id="id_monthly_salary" class="form-control money-input" value="{{ form.monthly_salary.value|default:'' }}" readonly>
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.monthly_salary.errors %}
@@ -70,7 +70,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.weekly_holiday_allowance.id_for_label }}" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
                             <div class="input-group">
-                                {{ form.weekly_holiday_allowance }}
+                                <input type="text" name="weekly_holiday_allowance" id="id_weekly_holiday_allowance" class="form-control money-input" value="{{ form.weekly_holiday_allowance.value|default:'' }}" readonly>
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.weekly_holiday_allowance.errors %}
@@ -113,7 +113,11 @@
 function calculateSalary() {
     const totalHours = parseFloat(document.getElementById('id_total_hours').value) || 0;
     const payPeriodWeeks = parseFloat(document.getElementById('id_pay_period_weeks').value) || 1;
-    const hourlyRate = parseFloat(document.getElementById('id_hourly_rate').value) || 0;
+    
+    // 콤마가 포함된 시급에서 숫자만 추출
+    const hourlyRateElement = document.getElementById('id_hourly_rate');
+    const hourlyRate = parseFloat(removeCommas(hourlyRateElement.value)) || 0;
+    
     const monthlySalary = totalHours * hourlyRate;
     
     // 주휴수당 계산 (정확한 주별 근무시간 사용)
@@ -130,14 +134,15 @@ function calculateSalary() {
         }
     }
     
-    document.getElementById('id_monthly_salary').value = Math.round(monthlySalary);
-    document.getElementById('id_weekly_holiday_allowance').value = Math.round(weeklyHolidayAllowance);
+    // 계산된 값을 콤마 포맷팅하여 표시
+    document.getElementById('id_monthly_salary').value = formatKoreanWon(Math.round(monthlySalary));
+    document.getElementById('id_weekly_holiday_allowance').value = formatKoreanWon(Math.round(weeklyHolidayAllowance));
     
     // 지급합계도 업데이트 (실시간 표시용)
     const totalPayment = monthlySalary + weeklyHolidayAllowance;
     const totalPaymentElement = document.getElementById('total_payment_display');
     if (totalPaymentElement) {
-        totalPaymentElement.textContent = Math.round(totalPayment).toLocaleString() + '원';
+        totalPaymentElement.textContent = formatKoreanWon(Math.round(totalPayment)) + '원';
     }
 }
 

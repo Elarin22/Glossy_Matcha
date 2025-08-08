@@ -289,20 +289,20 @@
                         <div class="col-md-4 mb-3">
                             <label for="total_hours" class="form-label">총 근무시간</label>
                             <input type="number" class="form-control" name="total_hours" id="dashboard_total_hours" 
-                                   step="0.1" min="0" placeholder="160.0" required oninput="calculateDashboardSalary()">
+                                   step="0.1" min="0" placeholder="160.0" required>
                             <small class="text-muted">시간 단위로 입력</small>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="pay_period_weeks" class="form-label">급여 기간(주)</label>
                             <input type="number" class="form-control" name="pay_period_weeks" id="dashboard_pay_period_weeks" 
-                                   step="0.1" min="0.1" value="4.0" placeholder="4.0" required oninput="calculateDashboardSalary()">
+                                   step="0.1" min="0.1" value="4.0" placeholder="4.0" required>
                             <small class="text-muted">주 단위로 입력</small>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="hourly_rate" class="form-label">시급</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="hourly_rate" id="dashboard_hourly_rate" 
-                                       min="0" placeholder="10000" required oninput="calculateDashboardSalary()">
+                                <input type="text" class="form-control money-input" name="hourly_rate" id="dashboard_hourly_rate" 
+                                       placeholder="10,000" required>
                                 <span class="input-group-text">원</span>
                             </div>
                         </div>
@@ -312,8 +312,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="monthly_salary" class="form-label">월급 <small class="text-primary">(자동계산)</small></label>
                             <div class="input-group">
-                                <input type="number" class="form-control bg-light" name="monthly_salary" id="dashboard_monthly_salary" 
-                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <input type="text" class="form-control bg-light money-input" name="monthly_salary" id="dashboard_monthly_salary" 
+                                       placeholder="자동 계산됩니다" readonly>
                                 <span class="input-group-text">원</span>
                             </div>
                             <small class="text-muted">시급과 총근무시간으로 자동 계산됩니다</small>
@@ -321,8 +321,8 @@
                         <div class="col-md-6 mb-3">
                             <label for="weekly_holiday_allowance" class="form-label">주휴수당 <small class="text-primary">(자동계산)</small></label>
                             <div class="input-group">
-                                <input type="number" class="form-control bg-light" name="weekly_holiday_allowance" id="dashboard_weekly_holiday_allowance" 
-                                       min="0" placeholder="자동 계산됩니다" readonly>
+                                <input type="text" class="form-control bg-light money-input" name="weekly_holiday_allowance" id="dashboard_weekly_holiday_allowance" 
+                                       placeholder="자동 계산됩니다" readonly>
                                 <span class="input-group-text">원</span>
                             </div>
                             <small class="text-muted">주 15시간 이상 근무 시 법정 기준으로 자동 계산됩니다</small>
@@ -355,7 +355,11 @@
 function calculateDashboardSalary() {
     const totalHours = parseFloat(document.getElementById('dashboard_total_hours').value) || 0;
     const payPeriodWeeks = parseFloat(document.getElementById('dashboard_pay_period_weeks').value) || 1;
-    const hourlyRate = parseFloat(document.getElementById('dashboard_hourly_rate').value) || 0;
+    
+    // 콤마가 포함된 시급에서 숫자만 추출
+    const hourlyRateElement = document.getElementById('dashboard_hourly_rate');
+    const hourlyRate = parseFloat(removeCommas(hourlyRateElement.value)) || 0;
+    
     const monthlySalary = totalHours * hourlyRate;
     
     // 주휴수당 계산 (정확한 주별 근무시간 사용)
@@ -372,14 +376,15 @@ function calculateDashboardSalary() {
         }
     }
     
-    document.getElementById('dashboard_monthly_salary').value = Math.round(monthlySalary);
-    document.getElementById('dashboard_weekly_holiday_allowance').value = Math.round(weeklyHolidayAllowance);
+    // 계산된 값을 콤마 포맷팅하여 표시
+    document.getElementById('dashboard_monthly_salary').value = formatKoreanWon(Math.round(monthlySalary));
+    document.getElementById('dashboard_weekly_holiday_allowance').value = formatKoreanWon(Math.round(weeklyHolidayAllowance));
     
     // 지급합계도 업데이트 (실시간 표시용)
     const totalPayment = monthlySalary + weeklyHolidayAllowance;
     const totalPaymentElement = document.getElementById('dashboard_total_payment_display');
     if (totalPaymentElement) {
-        totalPaymentElement.textContent = Math.round(totalPayment).toLocaleString() + '원';
+        totalPaymentElement.textContent = formatKoreanWon(Math.round(totalPayment)) + '원';
     }
 }
 
@@ -403,6 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (dashboardHourlyRate) {
         dashboardHourlyRate.addEventListener('input', calculateDashboardSalary);
         dashboardHourlyRate.addEventListener('change', calculateDashboardSalary);
+        dashboardHourlyRate.addEventListener('blur', calculateDashboardSalary);
     }
     
     // 페이지 로드 시 초기 계산

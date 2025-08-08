@@ -35,7 +35,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.offline_sales.id_for_label }}" class="form-label">오프라인 매출</label>
                             <div class="input-group">
-                                {{ form.offline_sales }}
+                                <input type="text" name="offline_sales" id="id_offline_sales" class="form-control money-input" value="{{ form.offline_sales.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.offline_sales.errors %}
@@ -46,7 +46,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.other_sales.id_for_label }}" class="form-label">기타 매출</label>
                             <div class="input-group">
-                                {{ form.other_sales }}
+                                <input type="text" name="other_sales" id="id_other_sales" class="form-control money-input" value="{{ form.other_sales.value|default:'' }}">
                                 <span class="input-group-text">원</span>
                             </div>
                             {% if form.other_sales.errors %}
