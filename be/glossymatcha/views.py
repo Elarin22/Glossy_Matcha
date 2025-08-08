@@ -345,11 +345,12 @@ class StaffListView(LoginRequiredMixin, ListView):
                 default=models.Value(1),  # 퇴사
                 output_field=models.IntegerField(),
             ),
-            # 직종 정렬 우선순위: 정직원 > 파트직원
+            # 직종 정렬 우선순위: 정직원 > 파트직원 > 퇴사
             employee_type_order=models.Case(
                 models.When(employee_type='full_time', then=models.Value(0)),  # 정직원
                 models.When(employee_type='part_time', then=models.Value(1)),   # 파트직원
-                default=models.Value(2),
+                models.When(employee_type='resigned', then=models.Value(2)),    # 퇴사
+                default=models.Value(3),
                 output_field=models.IntegerField(),
             )
         ).order_by('status_order', 'employee_type_order', 'hire_date')
