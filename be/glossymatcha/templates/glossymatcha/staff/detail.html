@@ -7,7 +7,7 @@
 <div class="row mb-4">
     <div class="col-md-8">
         <h2 class="mb-0">
-            <i class="bi bi-person-circle me-2"></i>{{ staff.name }} ({{ staff.nickname }})
+            <i class="bi bi-person-circle me-2"></i>{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %}
             {% if staff.is_active %}
                 <span class="badge bg-success ms-2">재직중</span>
             {% else %}
@@ -47,7 +47,7 @@
                     </tr>
                     <tr>
                         <td class="text-muted">닉네임</td>
-                        <td><code>{{ staff.nickname }}</code></td>
+                        <td>{% if staff.nickname %}<code>{{ staff.nickname }}</code>{% else %}<small class="text-muted">-</small>{% endif %}</td>
                     </tr>
                     <tr>
                         <td class="text-muted">근무 형태</td>
@@ -246,11 +246,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ staff.name }} ({{ staff.nickname }}) 급여 기록 입력</h5>
+                <h5 class="modal-title">{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %} 급여 기록 입력</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
                 <div class="modal-body">
-                    <p>{{ staff.name }} ({{ staff.nickname }}) 직원의 급여 기록을 입력하시겠습니까?</p>
+                    <p>{{ staff.name }}{% if staff.nickname %} ({{ staff.nickname }}){% endif %} 직원의 급여 기록을 입력하시겠습니까?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

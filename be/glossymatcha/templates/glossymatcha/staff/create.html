@@ -28,12 +28,12 @@
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label for="{{ form.nickname.id_for_label }}" class="form-label">영어 닉네임 *</label>
+                            <label for="{{ form.nickname.id_for_label }}" class="form-label">직원 닉네임</label>
                             {{ form.nickname }}
                             {% if form.nickname.errors %}
                                 <div class="text-danger small">{{ form.nickname.errors.0 }}</div>
                             {% endif %}
-                            <small class="text-muted">영어로 입력 (예: john, sarah)</small>
+                            <small class="text-muted">ex) jack, ash, jenny</small>
                         </div>
                     </div>
                     
