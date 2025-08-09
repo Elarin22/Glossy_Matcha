@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-cz0&-f+f=bn&bep2v@t&0eu6-&vsn8xit8828^xw=9$l1@qrfr
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = env.bool("DEBUG", default=False)
+# DEBUG = env.bool("DEBUG", default=False)
+DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ["*"]
 
@@ -144,11 +145,16 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://api.glossymatcha.com',
-    'https://admin.glossymatcha.com',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://127.0.0.1:8000',
+#     'https://api.glossymatcha.com',
+#     'https://admin.glossymatcha.com',
+# ]
+# if DEBUG:
+#     SECURE_SSL_REDIRECT = False
+# else:
+#     SECURE_SSL_REDIRECT = True
 
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
