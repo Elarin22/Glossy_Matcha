@@ -191,11 +191,13 @@ class Staff(models.Model):
                 old_resignation_date = old_staff.resignation_date
                 old_employee_type = old_staff.employee_type
                 
-                # 퇴사 처리: 퇴사일이 새로 설정되었고, 기존에는 퇴사가 아니었던 경우
+                # 퇴사 처리: 퇴사일이 새로 설정되었고, 퇴사일이 오늘 이전이거나 오늘인 경우에만
                 if self.resignation_date and not old_resignation_date and old_employee_type != 'resigned':
-                    if not self.original_employee_type:
-                        self.original_employee_type = old_employee_type
-                    self.employee_type = 'resigned'
+                    from datetime import date
+                    if self.resignation_date <= date.today():
+                        if not self.original_employee_type:
+                            self.original_employee_type = old_employee_type
+                        self.employee_type = 'resigned'
                 
                 # 퇴사 취소: 퇴사일이 제거되었고, 기존에는 퇴사였던 경우
                 elif not self.resignation_date and old_resignation_date and self.employee_type == 'resigned':
@@ -204,15 +206,48 @@ class Staff(models.Model):
                         self.original_employee_type = None
                     else:
                         self.employee_type = 'full_time'  # 기본값
+                
+                # 퇴사일 변경: 기존에 퇴사일이 있었고 새로운 퇴사일로 변경하는 경우
+                elif self.resignation_date and old_resignation_date and self.resignation_date != old_resignation_date:
+                    from datetime import date
+                    if self.resignation_date <= date.today():
+                        # 퇴사일이 오늘 이전이거나 오늘인 경우 퇴사 처리
+                        if self.employee_type != 'resigned':
+                            if not self.original_employee_type:
+                                self.original_employee_type = self.employee_type
+                            self.employee_type = 'resigned'
+                    else:
+                        # 퇴사일이 미래인 경우, 현재 퇴사 상태라면 원래 근무형태로 복원
+                        if self.employee_type == 'resigned' and self.original_employee_type:
+                            self.employee_type = self.original_employee_type
+                            self.original_employee_type = None
+                
+                # 근무형태 수동 변경: 퇴사일은 그대로 두고 근무형태만 변경된 경우
+                elif self.resignation_date == old_resignation_date and self.employee_type != old_employee_type:
+                    # 사용자가 의도적으로 근무형태를 변경한 경우는 항상 허용
+                    if self.employee_type == 'resigned' and old_employee_type != 'resigned':
+                        # 퇴사로 변경하는 경우: 직전 근무형태를 original_employee_type에 저장
+                        self.original_employee_type = old_employee_type
+                    elif self.employee_type != 'resigned' and old_employee_type == 'resigned':
+                        # 퇴사에서 다른 상태로 변경하는 경우: 사용자 의도대로 허용
+                        # 퇴사일이 있으면 새로운 근무형태를 original_employee_type으로 업데이트
+                        if self.resignation_date:
+                            self.original_employee_type = self.employee_type
+                    elif self.employee_type != 'resigned' and old_employee_type != 'resigned':
+                        # 정직원 ↔ 파트타임 변경: original_employee_type 업데이트
+                        if self.original_employee_type == old_employee_type:
+                            self.original_employee_type = self.employee_type
                         
             except Staff.DoesNotExist:
                 pass
         else:
-            # 신규 직원: 퇴사일이 있으면서 근무형태가 퇴사가 아닌 경우
+            # 신규 직원: 퇴사일이 있고 퇴사일이 오늘 이전이거나 오늘인 경우에만 퇴사 처리
             if self.resignation_date and self.employee_type != 'resigned':
-                if not self.original_employee_type:
-                    self.original_employee_type = self.employee_type
-                self.employee_type = 'resigned'
+                from datetime import date
+                if self.resignation_date <= date.today():
+                    if not self.original_employee_type:
+                        self.original_employee_type = self.employee_type
+                    self.employee_type = 'resigned'
         
         super().save(*args, **kwargs)
     
