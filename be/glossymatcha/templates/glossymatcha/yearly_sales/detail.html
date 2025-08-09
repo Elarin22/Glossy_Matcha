@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}{{ yearly_sale.year }}년 연별 매출 상세 - Glossy Matcha{% endblock %}
 
@@ -50,7 +51,7 @@
                         <div class="card bg-brand-green">
                             <div class="card-body text-center">
                                 <h6>연간 총 매출</h6>
-                                <h3><strong>{{ yearly_sale.total_sales|floatformat:0 }}원</strong></h3>
+                                <h3><strong>{{ yearly_sale.total_sales|korean_won_with_unit }}</strong></h3>
                                 <small>월별 매출 자동 합산</small>
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                         <div class="card" style="background-color: #373735; color: white;">
                             <div class="card-body text-center">
                                 <h6>연간 총 원가</h6>
-                                <h3><strong>{{ yearly_sale.total_cost|floatformat:0 }}원</strong></h3>
+                                <h3><strong>{{ yearly_sale.total_cost|korean_won_with_unit }}</strong></h3>
                                 <small>월별 원가 자동 합산</small>
                             </div>
                         </div>
@@ -68,7 +69,7 @@
                         <div class="card {% if yearly_sale.gross_profit >= 0 %}bg-brand-green-light{% else %}bg-danger{% endif %}" style="color: #373735;">
                             <div class="card-body text-center">
                                 <h6>연간 순이익</h6>
-                                <h3><strong>{{ yearly_sale.gross_profit|floatformat:0 }}원</strong></h3>
+                                <h3><strong>{{ yearly_sale.gross_profit|korean_won_with_unit }}</strong></h3>
                                 <small>매출 - 원가</small>
                             </div>
                         </div>
@@ -83,11 +84,11 @@
                                 <h6 style="color: #00563f;" class="mb-3">연간 매출 구성 (자동 계산)</h6>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>오프라인 매출:</span>
-                                    <span style="color: #00563f;">{{ yearly_sale.offline_sales|floatformat:0 }}원</span>
+                                    <span style="color: #00563f;">{{ yearly_sale.offline_sales|korean_won_with_unit }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span>기타 매출:</span>
-                                    <span style="color: #00563f;">{{ yearly_sale.other_sales|floatformat:0 }}원</span>
+                                    <span style="color: #00563f;">{{ yearly_sale.other_sales|korean_won_with_unit }}</span>
                                 </div>
                             </div>
                         </div>
@@ -98,19 +99,19 @@
                                 <h6 style="color: #373735;" class="mb-3">연간 원가 구성 (자동 계산)</h6>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>재료비:</span>
-                                    <span>{{ yearly_sale.total_material_cost|floatformat:0 }}원</span>
+                                    <span>{{ yearly_sale.total_material_cost|korean_won_with_unit }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>노무비:</span>
-                                    <span>{{ yearly_sale.total_labor_cost|floatformat:0 }}원</span>
+                                    <span>{{ yearly_sale.total_labor_cost|korean_won_with_unit }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between mb-2">
                                     <span>경비-소모품:</span>
-                                    <span>{{ yearly_sale.total_supplies_expense|floatformat:0 }}원</span>
+                                    <span>{{ yearly_sale.total_supplies_expense|korean_won_with_unit }}</span>
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <span>경비-기타:</span>
-                                    <span>{{ yearly_sale.total_other_expense|floatformat:0 }}원</span>
+                                    <span>{{ yearly_sale.total_other_expense|korean_won_with_unit }}</span>
                                 </div>
                             </div>
                         </div>
