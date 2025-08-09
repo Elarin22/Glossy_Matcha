@@ -2,10 +2,11 @@
 @use "../../../styles/mixins.scss" as *;
 
 .mobile-container {
-  // scroll-snap-type: y mandatory;
-  // overflow-y: scroll;
-  // -webkit-overflow-scrolling: touch;
-  // height: 100vh;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
 }
 
 /* common */
@@ -61,8 +62,8 @@
   display: flex;
   width: 100%;
   height: 100vh;
-  scroll-snap-align: start;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 .video-background {
@@ -88,9 +89,9 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  scroll-snap-align: start;
   overflow: hidden;
   z-index: 100;
+  scroll-snap-align: start;
 }
 
 .top-right-link {
@@ -99,9 +100,21 @@
   align-self: flex-end;
   color: $color-green-50;
   transition: transform 0.3s ease;
-  transform: translateX(-4px);
+  transform: translateX(-6px);
+
+  &:hover {
+    transform: translateX(0);
+  }
 
   &:active {
     transform: translateX(0);
   }
+}
+
+/* Footer section for mobile */
+.footer-section {
+  min-height: auto;
+  height: auto;
+  scroll-snap-align: end; // 요소의 끝점에서 스냅 (bottom 맞춤)
+  scroll-snap-stop: always; // Footer에서 멈춤
 }

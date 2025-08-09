@@ -15,27 +15,27 @@ import styles from "./page.module.scss";
  * @returns 브랜드 소개 페이지 컴포넌트
  */
 export default function About() {
-    /** 스크롤 네비게이션에 표시될 메뉴 항목들 */
-    const menuKeys = ["intro", "philosophy", "jeju-matcha", "history"];
+  /** 스크롤 네비게이션에 표시될 메뉴 항목들 */
+  const menuKeys = ["intro", "philosophy", "jeju-matcha", "history"];
 
-    return (
-        <main>
-            <section className="main-banner">
-                <h2 className="sr-only">브랜드 소개 페이지</h2>
-                <Image
-                    className={styles["main-banner__image"]}
-                    src="/images/about/main-banner.webp"
-                    alt="브랜드 소개 매인 배너"
-                    width={1920}
-                    height={720}
-                    priority
-                />
-            </section>
-            <ScrollNav menuKeys={menuKeys} />
-            <BrandIntro />
-            <BrandPhilosophy />
-            <JejuMatcha />
-            <BrandHistory />
-        </main>
-    );
+  return (
+    <main>
+      <section className="main-banner">
+        <h2 className="sr-only">브랜드 소개 페이지</h2>
+        <Image
+          className={styles["main-banner__image"]}
+          src="/images/about/main-banner.webp"
+          alt="브랜드 소개 매인 배너"
+          width={1920}
+          height={720}
+          priority
+        />
+      </section>
+      <ScrollNav menuKeys={menuKeys} />
+      <BrandIntro />
+      <BrandPhilosophy />
+      <JejuMatcha />
+      <BrandHistory />
+    </main>
+  );
 }

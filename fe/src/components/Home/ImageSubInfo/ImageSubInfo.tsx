@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
 import styles from "./ImageSubInfo.module.scss";
+import { useLocale } from "next-intl";
 
 type TypeImageSubInfo = {
   title: string;
@@ -38,6 +39,7 @@ export default function ImageSubInfo({
 }: {
   index: number;
 }): React.JSX.Element {
+  const locale = useLocale();
   const i = index - 1;
 
   return (
@@ -54,7 +56,7 @@ export default function ImageSubInfo({
           ))}
         </p>
       </div>
-      <Link href={imageSubInfos[i].link} className="btn-g">
+      <Link href={`/${locale}${imageSubInfos[i].link}`} className="btn-g">
         {imageSubInfos[i].btnText}
       </Link>
     </div>

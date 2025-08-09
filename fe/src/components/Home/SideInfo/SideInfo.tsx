@@ -3,6 +3,7 @@ import styles from "./SideInfo.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 import { HomeContent } from "@/app/[locale]/page";
+import { useLocale } from "next-intl";
 
 export default function SideInfo({
   currentIndex,
@@ -11,9 +12,11 @@ export default function SideInfo({
   currentIndex: number;
   contents: HomeContent[];
 }): React.JSX.Element {
+  const locale = useLocale();
+
   return (
     <aside className={styles["info-box"]}>
-      <h2 className="sr-only">글로시 말차 슬로건</h2>
+      <h2 className="sr-only">소개 글</h2>
       <div
         key={currentIndex}
         className={`${styles["info-item"]} ${styles["fade-up"]}`}
@@ -39,7 +42,7 @@ export default function SideInfo({
         </p>
         {currentIndex === contents.length - 1 && (
           <Link
-            href={contents[currentIndex].link!}
+            href={`/${locale}${contents[currentIndex].link!}`}
             className="btn-g"
             style={{ marginTop: 36 }}
           >

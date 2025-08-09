@@ -12,40 +12,40 @@ import styles from "./BrandIntro.module.scss";
  * @returns 브랜드 소개 섹션 컴포넌트
  */
 export default function BrandIntro() {
-    const t = useTranslations("about.intro");
+  const t = useTranslations("about.intro");
 
-    return (
-        <section id="brand-intro" className={styles["brand-intro"]}>
-            <h3 className="sr-only">브랜드 소개</h3>
-            <Image
-                className={styles["brand-intro__image"]}
-                src="/images/about/brand-intro.webp"
-                alt="물에 글로시말차 가루를 섞어 젓는 장면"
-                width={960}
-                height={800}
-            />
+  return (
+    <section id="brand-intro" className={styles["brand-intro"]}>
+      <h3 className="sr-only">브랜드 소개</h3>
+      <Image
+        className={styles["brand-intro__image"]}
+        src="/images/about/brand-intro.webp"
+        alt="물에 글로시말차 가루를 섞어 젓는 장면"
+        width={960}
+        height={800}
+      />
 
-            <div className={styles["brand-intro__content"]}>
-                <h4 className={styles["brand-intro__title"]}>{t("title")}</h4>
-                <p className={styles["brand-intro__slogan"]}>
-                    &ldquo;{t("slogan")}&rdquo;
-                </p>
+      <div className={styles["brand-intro__content"]}>
+        <h4 className={styles["brand-intro__title"]}>{t("title")}</h4>
+        <p className={styles["brand-intro__slogan"]}>
+          &ldquo;{t("slogan")}&rdquo;
+        </p>
 
-                <div className={styles["brand-intro__description"]}>
-                    <p className={styles["brand-intro__paragraph"]}>
-                        {t("description.paragraph-1")}
-                    </p>
-                    <p className={styles["brand-intro__paragraph"]}>
-                        {t("description.paragraph-2")}
-                    </p>
-                    <p className={styles["brand-intro__paragraph"]}>
-                        {t("description.paragraph-3")}
-                    </p>
-                    <p className={styles["brand-intro__paragraph"]}>
-                        {t("description.paragraph-4")}
-                    </p>
-                </div>
-            </div>
-        </section>
-    );
+        <div className={styles["brand-intro__description"]}>
+          <p className={styles["brand-intro__paragraph"]}>
+            {t("description.paragraph-1")}
+          </p>
+          <p className={styles["brand-intro__paragraph"]}>
+            {t("description.paragraph-2")}
+          </p>
+          <p className={styles["brand-intro__paragraph"]}>
+            {t("description.paragraph-3")}
+          </p>
+          <p className={styles["brand-intro__paragraph"]}>
+            {t("description.paragraph-4")}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
 }

@@ -57,7 +57,7 @@ export default function Header({ locale }: { locale: string }) {
       <header className={styles.header}>
         <div className={styles["header-box"]}>
           {/* logo */}
-          <Link href="/${locale}" onClick={closeSidebar}>
+          <Link href={`/${locale}`} onClick={closeSidebar}>
             <Image
               src="/images/logo/logo-1.png"
               alt=""

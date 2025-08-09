@@ -92,3 +92,11 @@ body {
   white-space: nowrap;
   border: 0;
 }
+
+// only for mobile home
+body:has(.mobile-home-page) > div > footer:last-child {
+  display: block;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
