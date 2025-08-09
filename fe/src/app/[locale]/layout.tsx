@@ -4,19 +4,20 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 export default async function LocaleLayout({
-  children,
-  params,
+    children,
+    params,
 }: {
-  children: React.ReactNode;
-  params: { locale: string };
+    children: React.ReactNode;
+    params: Promise<{ locale: string }>;
 }) {
-  const messages = await getMessages({ locale: params.locale });
+    const { locale } = await params;
+    const messages = await getMessages({ locale });
 
-  return (
-    <NextIntlClientProvider messages={messages}>
-      <Header locale={params.locale} />
-      {children}
-      <Footer />
-    </NextIntlClientProvider>
-  );
+    return (
+        <NextIntlClientProvider messages={messages}>
+            <Header locale={locale} />
+            {children}
+            <Footer />
+        </NextIntlClientProvider>
+    );
 }
