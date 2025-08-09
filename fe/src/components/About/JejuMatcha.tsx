@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import styles from "./JejuMatcha.module.scss";
 
 /**
@@ -11,6 +14,8 @@ import styles from "./JejuMatcha.module.scss";
  * @returns 제주 유기농 말차 소개 컴포넌트
  */
 export default function JejuMatcha() {
+    const t = useTranslations("about.jeju-matcha");
+
     return (
         <>
             {/* 말차 소개 및 브랜드 메시지 섹션 */}
@@ -26,29 +31,24 @@ export default function JejuMatcha() {
 
                 <div className={styles["jeju-matcha__content"]}>
                     <h4 className={styles["jeju-matcha__title"]}>
-                        RELAX WITH GLOSSY
+                        {t("intro.title")}
                     </h4>
                     <p className={styles["jeju-matcha__slogan"]}>
-                        &ldquo;글로시말차는 진정한 휴식을 선물합니다.&rdquo;
+                        &ldquo;{t("intro.slogan")}&rdquo;
                     </p>
 
                     <div className={styles["jeju-matcha__description"]}>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            말차는 제주에서 가장 우수한 차입니다. 글로시말차는
-                            최고 품질의 100% 유기농 말차만을 사용하고 있습니다.
+                            {t("intro.description.paragraph-1")}
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            제주의 청정 자연이 빚어낸 푸른 생명력을 그대로
-                            담았습니다. 편안함을 선사하는 초록색의 향기는
-                            모두에게 편안한 휴식을 선사합니다.
+                            {t("intro.description.paragraph-2")}
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            말차 특유의 감미롭고 진한 향은 신선하면서도 쓴맛의
-                            조화로 느껴집니다.
+                            {t("intro.description.paragraph-3")}
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            우리 몸과 마음을 건강하고 초록 기운으로 가득
-                            채워보세요.
+                            {t("intro.description.paragraph-4")}
                         </p>
                     </div>
                 </div>
@@ -60,43 +60,40 @@ export default function JejuMatcha() {
                 <div className={styles["jeju-matcha__feature-list"]}>
                     <article className={styles["jeju-matcha__feature-item"]}>
                         <h4 className={styles["jeju-matcha__feature-title"]}>
-                            유기농 첫순 1번 잎
+                            {t("feature.item-1.title")}
                         </h4>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            서귀포 생태농원에서 재배한 100% 유기농 첫순 1번
-                            잎으로 생산해 더 부드럽고 진한 맛을 담아냅니다.
+                            {t("feature.item-1.description")}
                         </p>
                     </article>
 
                     <article className={styles["jeju-matcha__feature-item"]}>
                         <h4 className={styles["jeju-matcha__feature-title"]}>
-                            지속 가능한 미래
+                            {t("feature.item-2.title")}
                         </h4>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            환경을 생각하는 현지 농부 및 장인과 협력해 더
-                            건강하고 지속 가능한 미래를 향해 함께 나아갑니다.
+                            {t("feature.item-2.description")}
                         </p>
                     </article>
 
                     <article className={styles["jeju-matcha__feature-item"]}>
                         <h4 className={styles["jeju-matcha__feature-title"]}>
-                            품질에 대한 약속
+                            {t("feature.item-3.title")}
                         </h4>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            오랜 노하우를 이용한 가공 기법과 유통 관리를 통해
-                            최고 품질의 말차를 만들어 냅니다.
+                            {t("feature.item-3.description")}
                         </p>
                     </article>
                 </div>
