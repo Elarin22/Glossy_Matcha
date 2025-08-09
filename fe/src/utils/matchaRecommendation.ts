@@ -164,8 +164,10 @@ export const getRecommendation = (userAnswers: AnswerType): string => {
         scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
         scores[MENU_KEYS.GREEN_LEMONADE] += 0;
     }
-    // 가장 높은 점수를 받은 메뉴 반환
-    return (Object.keys(scores) as MenuKey[]).reduce((a, b) =>
-        scores[a] > scores[b] ? a : b
-    );
+
+    const keys = Object.keys(scores) as MenuKey[];
+    const maxScore = Math.max(...Object.values(scores));
+    const topItems = keys.filter((key) => scores[key] === maxScore);
+
+    return topItems[Math.floor(Math.random() * topItems.length)];
 };
