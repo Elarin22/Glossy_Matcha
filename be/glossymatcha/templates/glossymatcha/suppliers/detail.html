@@ -143,8 +143,8 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <button class="btn w-100" style="background-color: #DAE3D8; color: #373735; border: 1px solid #00563f;" onclick="copyToClipboard('{{ supplier.name }}\n{{ supplier.contact_person }}{% if supplier.phone %}\n{{ supplier.phone }}{% endif %}\n{{ supplier.email }}')">
-                    <i class="bi bi-clipboard me-2"></i>연락처 정보 복사
+                <button class="btn w-100" style="background-color: #DAE3D8; color: #373735; border: 1px solid #00563f;" onclick="copyToClipboard('{% if supplier.phone %}{{ supplier.phone }}{% else %}연락처 정보 없음{% endif %}')">
+                    <i class="bi bi-clipboard me-2"></i>연락처 복사
                 </button>
             </div>
         </div>
