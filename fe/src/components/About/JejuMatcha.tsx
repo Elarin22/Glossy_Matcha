@@ -34,24 +34,17 @@ export default function JejuMatcha() {
 
                     <div className={styles["jeju-matcha__description"]}>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            말차는 제주에서 가장 우수한 차입니다.
-                            <br />
-                            글로시말차는 최고 품질의 100% 유기농 말차만을
-                            <br />
-                            사용하고 있습니다.
+                            말차는 제주에서 가장 우수한 차입니다. 글로시말차는
+                            최고 품질의 100% 유기농 말차만을 사용하고 있습니다.
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
                             제주의 청정 자연이 빚어낸 푸른 생명력을 그대로
-                            담았습니다.
-                            <br />
-                            편안함을 선사하는 초록색의 향기는
-                            <br />
+                            담았습니다. 편안함을 선사하는 초록색의 향기는
                             모두에게 편안한 휴식을 선사합니다.
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
-                            말차 특유의 감미롭고 진한 향은
-                            <br />
-                            신선하면서도 쓴맛의 조화로 느껴집니다.
+                            말차 특유의 감미롭고 진한 향은 신선하면서도 쓴맛의
+                            조화로 느껴집니다.
                         </p>
                         <p className={styles["jeju-matcha__paragraph"]}>
                             우리 몸과 마음을 건강하고 초록 기운으로 가득
@@ -74,10 +67,8 @@ export default function JejuMatcha() {
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            서귀포 생태농원에서 재배한 100%
-                            <br />
-                            유기농 첫순 1번 잎으로 생산해
-                            <br />더 부드럽고 진한 맛을 담아냅니다.
+                            서귀포 생태농원에서 재배한 100% 유기농 첫순 1번
+                            잎으로 생산해 더 부드럽고 진한 맛을 담아냅니다.
                         </p>
                     </article>
 
@@ -90,11 +81,8 @@ export default function JejuMatcha() {
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            환경을 생각하는 현지 농부 및 장인과
-                            <br />
-                            협력해 더 건강하고 지속 가능한 미래를
-                            <br />
-                            향해 함께 나아갑니다.
+                            환경을 생각하는 현지 농부 및 장인과 협력해 더
+                            건강하고 지속 가능한 미래를 향해 함께 나아갑니다.
                         </p>
                     </article>
 
@@ -107,10 +95,7 @@ export default function JejuMatcha() {
                                 styles["jeju-matcha__feature-description"]
                             }
                         >
-                            오랜 노하우를 이용한
-                            <br />
-                            가공 기법과 유통 관리를 통해
-                            <br />
+                            오랜 노하우를 이용한 가공 기법과 유통 관리를 통해
                             최고 품질의 말차를 만들어 냅니다.
                         </p>
                     </article>

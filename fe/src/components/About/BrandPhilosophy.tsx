@@ -28,9 +28,7 @@ export default function BrandPhilosophy() {
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            제주, 그리고 일상의
-                            <br />
-                            빛나는 순간을 지향합니다.
+                            제주, 그리고 일상의 빛나는 순간을 지향합니다.
                         </p>
                     </article>
 
@@ -45,9 +43,8 @@ export default function BrandPhilosophy() {
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            자연과 함께할 수 있는 방향을
-                            <br />
-                            항상 고민하고 연구합니다.
+                            자연과 함께할 수 있는 방향을 항상 고민하고
+                            연구합니다.
                         </p>
                     </article>
 
@@ -62,9 +59,7 @@ export default function BrandPhilosophy() {
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            여행과 함께 할 수 있는
-                            <br />
-                            라이프스타일을 제공합니다.
+                            여행과 함께 할 수 있는 라이프스타일을 제공합니다.
                         </p>
                     </article>
                 </div>
