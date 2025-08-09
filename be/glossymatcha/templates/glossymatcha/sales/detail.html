@@ -18,7 +18,7 @@
         <a href="{% url 'sales_update' sale.pk %}" class="btn btn-primary">
             <i class="bi bi-pencil me-2"></i>수정
         </a>
-        <a href="{% url 'monthly_sales_delete' sale.pk %}" class="btn" style="background-color: #373735; color: #f2efe8; border: none;">
+        <a href="{% url 'sales_delete' sale.pk %}" class="btn" style="background-color: #373735; color: #f2efe8; border: none;">
             <i class="bi bi-trash me-2"></i>삭제
         </a>
         <a href="{% url 'sales_list' %}" class="btn btn-outline-secondary">

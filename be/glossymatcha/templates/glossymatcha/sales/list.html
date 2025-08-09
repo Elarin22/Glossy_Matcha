@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-6 text-end">
         <div class="btn-group">
-            <a href="{% url 'monthly_sales_create' %}" class="btn btn-primary">
+            <a href="{% url 'sales_create' %}" class="btn btn-primary">
                 <i class="bi bi-plus-circle me-2"></i>월별 매출 입력
             </a>
             <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
@@ -119,13 +119,13 @@
                             </td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="{% url 'monthly_sales_detail' sale.pk %}" class="btn btn-sm btn-outline-primary">
+                                    <a href="{% url 'sales_detail' sale.pk %}" class="btn btn-sm btn-outline-primary">
                                         <i class="bi bi-eye"></i>
                                     </a>
-                                    <a href="{% url 'monthly_sales_update' sale.pk %}" class="btn btn-sm btn-outline-secondary">
+                                    <a href="{% url 'sales_update' sale.pk %}" class="btn btn-sm btn-outline-secondary">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="{% url 'monthly_sales_delete' sale.pk %}" class="btn btn-sm btn-outline-danger">
+                                    <a href="{% url 'sales_delete' sale.pk %}" class="btn btn-sm btn-outline-danger">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>
@@ -140,7 +140,7 @@
                 <i class="bi bi-graph-up" style="font-size: 4rem; color: #ddd;"></i>
                 <h4 class="mt-3 text-muted">등록된 월별 매출이 없습니다</h4>
                 <p class="text-muted">첫 번째 월별 매출을 입력해보세요.</p>
-                <a href="{% url 'monthly_sales_create' %}" class="btn btn-primary">
+                <a href="{% url 'sales_create' %}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-2"></i>월별 매출 입력하기
                 </a>
             </div>

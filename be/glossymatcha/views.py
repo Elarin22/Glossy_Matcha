@@ -745,7 +745,7 @@ class SalesCreateView(LoginRequiredMixin, CreateView):
     model = Sales
     form_class = SalesForm
     template_name = 'glossymatcha/sales/create.html'
-    success_url = reverse_lazy('monthly_sales_list')
+    success_url = reverse_lazy('sales_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -773,7 +773,7 @@ class SalesUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'glossymatcha/sales/create.html'
 
     def get_success_url(self):
-        return reverse_lazy('monthly_sales_detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('sales_detail', kwargs={'pk': self.object.pk})
     
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -797,7 +797,7 @@ class SalesDeleteView(LoginRequiredMixin, DeleteView):
     """
     model = Sales
     template_name = 'glossymatcha/sales/delete.html'
-    success_url = reverse_lazy('monthly_sales_list')
+    success_url = reverse_lazy('sales_list')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
