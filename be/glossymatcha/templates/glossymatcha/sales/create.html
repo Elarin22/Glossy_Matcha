@@ -41,11 +41,11 @@
                     <div class="alert alert-info mb-4">
                         <h6 class="text-primary mb-2"><i class="bi bi-info-circle me-2"></i>매출 정보</h6>
                         <p class="mb-1">월별 매출은 일별 매출 데이터에서 자동으로 계산됩니다.</p>
-                        <p class="mb-0">매출원가와 식재료 관련 정보만 입력하시면 됩니다.</p>
+                        <p class="mb-0">매출원가와 식재료 관련 정보는 선택사항입니다. 필요한 항목만 입력하세요.</p>
                     </div>
                     
                     <!-- 매출원가 항목 -->
-                    <h6 class="text-warning mb-3"><i class="bi bi-graph-down me-2"></i>매출원가</h6>
+                    <h6 class="text-warning mb-3"><i class="bi bi-graph-down me-2"></i>매출원가 <small class="text-muted">(선택사항)</small></h6>
                     <div class="row mb-4">
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.material_cost.id_for_label }}" class="form-label">재료비</label>
@@ -95,7 +95,7 @@
                     </div>
                     
                     <!-- 식재료 관련 -->
-                    <h6 class="text-success mb-3"><i class="bi bi-basket me-2"></i>식재료 관련</h6>
+                    <h6 class="text-success mb-3"><i class="bi bi-basket me-2"></i>식재료 관련 <small class="text-muted">(선택사항)</small></h6>
                     <div class="row mb-4">
                         <div class="col-md-6 mb-3">
                             <label for="{{ form.inventory_amount.id_for_label }}" class="form-label">재고금액</label>
