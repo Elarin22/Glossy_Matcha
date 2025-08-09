@@ -143,3 +143,12 @@ CORS_ALLOW_ALL_ORIGINS = True
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://api.glossymatcha.com',
+    'https://admin.glossymatcha.com',
+]
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
