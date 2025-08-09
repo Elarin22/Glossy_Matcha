@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import styles from "./BrandPhilosophy.module.scss";
 
 /**
@@ -9,11 +12,13 @@ import styles from "./BrandPhilosophy.module.scss";
  * @returns 브랜드 철학 섹션 컴포넌트
  */
 export default function BrandPhilosophy() {
+    const t = useTranslations("about.philosophy");
+
     return (
         <section id="philosophy" className={styles["brand-philosophy"]}>
             <div className={styles["brand-philosophy__content"]}>
                 <h3 className={styles["brand-philosophy__title"]}>
-                    GLOSSY LIFE, GLOSSY MATCHA
+                    {t("title")}
                 </h3>
 
                 <div className={styles["brand-philosophy__list"]}>
@@ -24,11 +29,11 @@ export default function BrandPhilosophy() {
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
-                                LIGHT
+                                {t("list.item-1.title")}
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            제주, 그리고 일상의 빛나는 순간을 지향합니다.
+                            {t("list.item-1.desc")}
                         </p>
                     </article>
 
@@ -39,12 +44,11 @@ export default function BrandPhilosophy() {
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
-                                NATURAL
+                                {t("list.item-2.title")}
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            자연과 함께할 수 있는 방향을 항상 고민하고
-                            연구합니다.
+                            {t("list.item-2.desc")}
                         </p>
                     </article>
 
@@ -55,11 +59,11 @@ export default function BrandPhilosophy() {
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
-                                TRAVEL
+                                {t("list.item-3.title")}
                             </h4>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
-                            여행과 함께 할 수 있는 라이프스타일을 제공합니다.
+                            {t("list.item-3.desc")}
                         </p>
                     </article>
                 </div>
