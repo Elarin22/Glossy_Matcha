@@ -100,7 +100,7 @@
 <!-- 거래처 통계 -->
 {% if suppliers_list %}
 <div class="row mt-4">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-primary">{{ suppliers_list|length }}</h5>
@@ -108,38 +108,42 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="text-success">
-                    {% for supplier in suppliers_list %}
-                        {% if supplier.is_active %}{{ forloop.counter0|add:1 }}{% endif %}
-                    {% empty %}0{% endfor %}
-                </h5>
+                <h5 class="text-success">{{ active_count }}</h5>
                 <small class="text-muted">거래중</small>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="text-info">
-                    {% for supplier in suppliers_list %}
-                        {% if supplier.payment_method == 'transfer' %}{{ forloop.counter0|add:1 }}{% endif %}
-                    {% empty %}0{% endfor %}
-                </h5>
+                <h5 class="text-success">{{ cash_count }}</h5>
+                <small class="text-muted">현금</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="text-info">{{ card_count }}</h5>
+                <small class="text-muted">카드</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <h5 class="text-info">{{ transfer_count }}</h5>
                 <small class="text-muted">계좌이체</small>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card">
             <div class="card-body text-center">
-                <h5 class="text-warning">
-                    {% for supplier in suppliers_list %}
-                        {% if supplier.payment_method == 'credit' %}{{ forloop.counter0|add:1 }}{% endif %}
-                    {% empty %}0{% endfor %}
-                </h5>
+                <h5 class="text-warning">{{ credit_count }}</h5>
                 <small class="text-muted">외상거래</small>
             </div>
         </div>
