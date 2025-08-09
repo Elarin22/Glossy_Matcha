@@ -21,6 +21,7 @@
         flex-direction: column;
         justify-content: center;
         margin: 0 auto;
+        padding: 0 clamp(20px, 10vw, 190px);
     }
 
     &__title {
@@ -38,6 +39,7 @@
         display: flex;
         flex-direction: column;
         gap: clamp(24px, 2.5vw, 50px);
+        word-break: keep-all;
     }
 
     &__paragraph {
@@ -58,6 +60,7 @@
             align-items: center;
             width: 100%;
             max-width: 50vw;
+            padding: 0 clamp(20px, 10vw, 190px);
         }
 
         &-item {
@@ -77,6 +80,7 @@
         &-description {
             @include pretendard(clamp(14px, 1.05vw, 20px), 500);
             text-align: center;
+            word-break: keep-all;
         }
 
         &-image {
@@ -149,6 +153,7 @@
 
             &-description {
                 @include pretendard($font-size-12, 500);
+                padding: 0 50px;
             }
 
             &-image {
