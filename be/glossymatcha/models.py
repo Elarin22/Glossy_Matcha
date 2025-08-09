@@ -158,8 +158,12 @@ class Staff(models.Model):
     
     @property
     def is_active(self):
-        """퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중"""
+        """근무형태가 '퇴사'가 아니고, 퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중"""
         from datetime import date
+        # 근무형태가 '퇴사'이면 무조건 비활성 상태
+        if self.employee_type == 'resigned':
+            return False
+        # 퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중
         if self.resignation_date is None:
             return True
         return self.resignation_date > date.today()
