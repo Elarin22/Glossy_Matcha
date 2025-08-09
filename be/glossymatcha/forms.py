@@ -208,6 +208,15 @@ class DailySalesForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['other_sales'].required = False
 
+    def clean(self):
+        cleaned_data = super().clean()
+        
+        # other_sales가 빈 값이면 0으로 처리
+        if not cleaned_data.get('other_sales'):
+            cleaned_data['other_sales'] = 0
+            
+        return cleaned_data
+
 class SalesForm(forms.ModelForm):
     class Meta:
         model = Sales
@@ -258,10 +267,30 @@ class SalesForm(forms.ModelForm):
             }),
         }
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 매출원가 관련 필드들을 선택사항으로 설정
+        self.fields['material_cost'].required = False
+        self.fields['labor_cost'].required = False
+        self.fields['supplies_expense'].required = False
+        self.fields['other_expense'].required = False
+        self.fields['inventory_amount'].required = False
+        self.fields['actual_usage_amount'].required = False
+    
     def clean(self):
         cleaned_data = super().clean()
         year = cleaned_data.get('year')
         month = cleaned_data.get('month')
+
+        # 선택사항 필드들의 빈 값을 0으로 처리
+        optional_fields = [
+            'material_cost', 'labor_cost', 'supplies_expense', 
+            'other_expense', 'inventory_amount', 'actual_usage_amount'
+        ]
+        
+        for field_name in optional_fields:
+            if not cleaned_data.get(field_name):
+                cleaned_data[field_name] = 0
 
         if year and month:
             # 기존 월별 매출 데이터 중복 검사
