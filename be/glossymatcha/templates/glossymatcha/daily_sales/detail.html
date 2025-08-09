@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}{{ daily_sale.date }} 일별 매출 상세 - Glossy Matcha{% endblock %}
 
@@ -51,7 +52,7 @@
                         <div class="card bg-brand-beige">
                             <div class="card-body text-center">
                                 <h6 style="color: #00563f;">오프라인 매출</h6>
-                                <h4 style="color: #00563f;">{{ daily_sale.offline_sales|floatformat:0 }}원</h4>
+                                <h4 style="color: #00563f;">{{ daily_sale.offline_sales|korean_won_with_unit }}</h4>
                             </div>
                         </div>
                     </div>
@@ -59,7 +60,7 @@
                         <div class="card bg-brand-green-light">
                             <div class="card-body text-center">
                                 <h6 style="color: #373735;">기타 매출</h6>
-                                <h4 style="color: #373735;">{{ daily_sale.other_sales|floatformat:0 }}원</h4>
+                                <h4 style="color: #373735;">{{ daily_sale.other_sales|korean_won_with_unit }}</h4>
                             </div>
                         </div>
                     </div>
@@ -67,7 +68,7 @@
                         <div class="card bg-brand-green">
                             <div class="card-body text-center">
                                 <h6>총 매출</h6>
-                                <h4><strong>{{ daily_sale.total_sales|floatformat:0 }}원</strong></h4>
+                                <h4><strong>{{ daily_sale.total_sales|korean_won_with_unit }}</strong></h4>
                             </div>
                         </div>
                     </div>

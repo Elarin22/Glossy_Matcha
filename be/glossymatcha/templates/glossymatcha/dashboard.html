@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}대시보드 - Glossy Matcha{% endblock %}
 
@@ -30,7 +31,7 @@
             <div class="card-body text-center">
                 <i class="bi bi-calendar-day dashboard-icon mb-3"></i>
                 <h5 class="card-title">오늘 매출</h5>
-                <div class="stat-number">{{ today_sales|floatformat:0|default:"0" }}원</div>
+                <div class="stat-number">{{ today_sales|korean_won_with_unit|default:"0원" }}</div>
                 <small class="text-muted">{{ today|date:"m월 d일" }} 매출액</small>
             </div>
         </div>
@@ -41,7 +42,7 @@
             <div class="card-body text-center">
                 <i class="bi bi-graph-up dashboard-icon mb-3"></i>
                 <h5 class="card-title">이번 달 매출</h5>
-                <div class="stat-number">{{ monthly_sales|floatformat:0|default:"0" }}원</div>
+                <div class="stat-number">{{ monthly_sales|korean_won_with_unit|default:"0원" }}</div>
                 <small class="text-muted">{{ today|date:"Y년 m월" }} 누적 매출</small>
             </div>
         </div>
@@ -140,7 +141,7 @@
                                     <td>
                                         <span class="badge bg-primary">일별</span>
                                     </td>
-                                    <td class="text-end">{{ sale.total_sales|floatformat:0 }}원</td>
+                                    <td class="text-end">{{ sale.total_sales|korean_won_with_unit }}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
