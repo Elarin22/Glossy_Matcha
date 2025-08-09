@@ -112,32 +112,37 @@
         "history": {
             "title": "GLOSSY HISTORY",
             "location": "112, Johamhaean-ro, Jocheon-eup, Jeju-si, Jeju-do (Approx. 3,300㎡)",
-            "list": {
-                "item-1": {
-                    "date": "2023.09",
-                    "desc-1": "'GLOSSY MATCHA' OPENING"
-                },
-                "item-2": {
+            "items": [
+                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' OPENING"] },
+                {
                     "date": "2024.09",
-                    "desc-1": "Select shop 'WITH GLOSSY' OPENING"
+                    "desc": ["Select shop 'WITH GLOSSY' OPENING"]
                 },
-                "item-3": {
+                {
                     "date": "2024.12",
-                    "desc": "Achieved $20,000 export record for the year (including GLOSSY MATCHA products)"
+                    "desc": [
+                        "Achieved $20,000 export record for the year (including GLOSSY MATCHA products)"
+                    ]
                 },
-                "item-4": {
+                {
                     "date": "2025.01",
-                    "desc": "Participated in 2025 SIRHA (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
+                    "desc": [
+                        "Participated in 2025 SIRHA (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
+                    ]
                 },
-                "item-5": {
+                {
                     "date": "2025.05",
-                    "desc": "Held POP-UP events in the USA and France and discussed follow-up export volumes"
+                    "desc": [
+                        "Held POP-UP events in the USA and France and discussed follow-up export volumes"
+                    ]
                 },
-                "item-6": {
+                {
                     "date": "2025.06",
-                    "desc": "Planned release of lifestyle shoe collaboration products (with Muleboy, green matcha color slippers)"
+                    "desc": [
+                        "Planned release of lifestyle shoe collaboration products (with Muleboy, green matcha color slippers)"
+                    ]
                 }
-            }
+            ]
         }
     }
 }

@@ -112,32 +112,35 @@
         "history": {
             "title": "GLOSSY HISTORY",
             "location": "제주특별자치도 제주시 조천읍 조함해안로 112 일대 (약 1천평)",
-            "list": {
-                "item-1": {
-                    "date": "2023.09",
-                    "desc-1": "'GLOSSY MATCHA' OPENING"
-                },
-                "item-2": {
+            "items": [
+                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' OPENING"] },
+                {
                     "date": "2024.09",
-                    "desc-1": "Select shop 'WITH GLOSSY' OPENING"
+                    "desc": ["Select shop 'WITH GLOSSY' OPENING"]
                 },
-                "item-3": {
+                {
                     "date": "2024.12",
-                    "desc": "당 해년도 수출실적 2만불 달성 (GLOSSY MATCHA 제품 포함)"
+                    "desc": [
+                        "당 해년도 수출실적 2만불 달성 (GLOSSY MATCHA 제품 포함)"
+                    ]
                 },
-                "item-4": {
+                {
                     "date": "2025.01",
-                    "desc": "2025 SIRHA 참여 (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
+                    "desc": [
+                        "2025 SIRHA 참여 (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
+                    ]
                 },
-                "item-5": {
+                {
                     "date": "2025.05",
-                    "desc": "미국, 프랑스 POP-UP 진행 및 후속 수출 물량 협의"
+                    "desc": ["미국, 프랑스 POP-UP 진행 및 후속 수출 물량 협의"]
                 },
-                "item-6": {
+                {
                     "date": "2025.06",
-                    "desc": "Lifestyle shoes collabo' 제품 출시 예정 (w 뮬보이, 초록색 말차color 슬리퍼)"
+                    "desc": [
+                        "Lifestyle shoes collabo' 제품 출시 예정 (w 뮬보이, 초록색 말차color 슬리퍼)"
+                    ]
                 }
-            }
+            ]
         }
     }
 }
