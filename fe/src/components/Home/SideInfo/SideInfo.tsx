@@ -13,7 +13,7 @@ export default function SideInfo({
 }): React.JSX.Element {
   return (
     <aside className={styles["info-box"]}>
-      <h2 className="sr-only">글로시 말차 슬로건</h2>
+      <h2 className="sr-only">소개 글</h2>
       <div
         key={currentIndex}
         className={`${styles["info-item"]} ${styles["fade-up"]}`}

@@ -15,32 +15,32 @@ import styles from "./page.module.scss";
  * @returns 브랜드 소개 페이지 컴포넌트
  */
 export default function About() {
-    /** 스크롤 네비게이션에 표시될 메뉴 항목들 */
-    const mainMenuItems = [
-        { label: "브랜드 소개", href: "#brand-intro" },
-        { label: "브랜드 철학", href: "#philosophy" },
-        { label: "제주 유기농 말차", href: "#jeju-matcha" },
-        { label: "연혁", href: "#history" },
-    ];
+  /** 스크롤 네비게이션에 표시될 메뉴 항목들 */
+  const mainMenuItems = [
+    { label: "브랜드 소개", href: "#brand-intro" },
+    { label: "브랜드 철학", href: "#philosophy" },
+    { label: "제주 유기농 말차", href: "#jeju-matcha" },
+    { label: "연혁", href: "#history" },
+  ];
 
-    return (
-        <main>
-            <section className="main-banner">
-                <h2 className="sr-only">브랜드 소개 페이지</h2>
-                <Image
-                    className={styles["main-banner__image"]}
-                    src="/images/about/main-banner.webp"
-                    alt="브랜드 소개 매인 배너"
-                    width={1920}
-                    height={720}
-                    priority
-                />
-            </section>
-            <ScrollNav menuItems={mainMenuItems} />
-            <BrandIntro />
-            <BrandPhilosophy />
-            <JejuMatcha />
-            <BrandHistory />
-        </main>
-    );
+  return (
+    <main>
+      <section className="main-banner">
+        <h2 className="sr-only">브랜드 소개 페이지</h2>
+        <Image
+          className={styles["main-banner__image"]}
+          src="/images/about/main-banner.webp"
+          alt="브랜드 소개 매인 배너"
+          width={1920}
+          height={720}
+          priority
+        />
+      </section>
+      <ScrollNav menuItems={mainMenuItems} />
+      <BrandIntro />
+      <BrandPhilosophy />
+      <JejuMatcha />
+      <BrandHistory />
+    </main>
+  );
 }

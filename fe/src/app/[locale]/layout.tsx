@@ -8,13 +8,15 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>; // Promise 타입으로 변경
 }) {
-  const messages = await getMessages({ locale: params.locale });
+  // params를 await로 받아서 사용
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Header locale={params.locale} />
+      <Header locale={locale} />
       {children}
       <Footer />
     </NextIntlClientProvider>
