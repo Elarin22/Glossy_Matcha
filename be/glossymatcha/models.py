@@ -158,8 +158,12 @@ class Staff(models.Model):
     
     @property
     def is_active(self):
-        """퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중"""
+        """근무형태가 '퇴사'가 아니고, 퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중"""
         from datetime import date
+        # 근무형태가 '퇴사'이면 무조건 비활성 상태
+        if self.employee_type == 'resigned':
+            return False
+        # 퇴사일이 없거나 퇴사일이 오늘보다 미래면 재직 중
         if self.resignation_date is None:
             return True
         return self.resignation_date > date.today()
@@ -554,10 +558,9 @@ def auto_delete_monthly_sales_when_no_daily_sales(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Sales)
-@receiver(post_delete, sender=Sales)
-def auto_update_yearly_sales_costs(sender, instance, **kwargs):
+def auto_update_yearly_sales_costs_on_save(sender, instance, **kwargs):
     """
-    월별 매출 생성/수정/삭제 시 연별 매출의 매출원가 자동 업데이트
+    월별 매출 생성/수정 시 연별 매출의 매출원가 자동 업데이트
     """
     year = instance.year
     
@@ -571,3 +574,31 @@ def auto_update_yearly_sales_costs(sender, instance, **kwargs):
         yearly_sales = YearlySales.objects.create(year=year)
         yearly_sales.update_annual_costs()
         print(f"{year}년 연별 매출이 자동으로 생성되고 매출원가가 계산되었습니다.")
+
+@receiver(post_delete, sender=Sales)
+def auto_update_yearly_sales_costs_on_delete(sender, instance, **kwargs):
+    """
+    월별 매출 삭제 시 연별 매출의 매출원가 자동 업데이트
+    해당 연도에 월별 매출이 없으면 연별 매출도 삭제
+    """
+    year = instance.year
+    
+    # 해당 연도의 남은 월별 매출이 있는지 확인
+    remaining_monthly_sales = Sales.objects.filter(year=year).exists()
+    
+    if not remaining_monthly_sales:
+        # 해당 연도에 월별 매출이 모두 없어진 경우 연별 매출도 삭제
+        try:
+            yearly_sales = YearlySales.objects.get(year=year)
+            yearly_sales.delete()
+            print(f"{year}년 월별 매출이 모두 삭제되어 연별 매출도 자동 삭제되었습니다.")
+        except YearlySales.DoesNotExist:
+            pass  # 연별 매출이 없으면 무시
+    else:
+        # 월별 매출이 남아있으면 연별 매출원가만 업데이트
+        try:
+            yearly_sales = YearlySales.objects.get(year=year)
+            yearly_sales.update_annual_costs()
+            print(f"{year}년 연별 매출원가가 자동으로 업데이트되었습니다.")
+        except YearlySales.DoesNotExist:
+            pass  # 연별 매출이 없으면 무시

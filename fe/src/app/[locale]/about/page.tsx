@@ -16,12 +16,7 @@ import styles from "./page.module.scss";
  */
 export default function About() {
   /** 스크롤 네비게이션에 표시될 메뉴 항목들 */
-  const mainMenuItems = [
-    { label: "브랜드 소개", href: "#brand-intro" },
-    { label: "브랜드 철학", href: "#philosophy" },
-    { label: "제주 유기농 말차", href: "#jeju-matcha" },
-    { label: "연혁", href: "#history" },
-  ];
+  const menuKeys = ["intro", "philosophy", "jeju-matcha", "history"];
 
   return (
     <main>
@@ -36,7 +31,7 @@ export default function About() {
           priority
         />
       </section>
-      <ScrollNav menuItems={mainMenuItems} />
+      <ScrollNav menuKeys={menuKeys} />
       <BrandIntro />
       <BrandPhilosophy />
       <JejuMatcha />

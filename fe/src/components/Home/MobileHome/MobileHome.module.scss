@@ -117,8 +117,4 @@
   height: auto;
   scroll-snap-align: end; // 요소의 끝점에서 스냅 (bottom 맞춤)
   scroll-snap-stop: always; // Footer에서 멈춤
-
-  :global(.mobile-container:has(&)) {
-    scroll-snap-type: none;
-  }
 }

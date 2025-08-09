@@ -544,6 +544,27 @@ class SuppliersListView(LoginRequiredMixin, ListView):
     model = Suppliers
     template_name = 'glossymatcha/suppliers/list.html'
     context_object_name = 'suppliers_list'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        suppliers_list = context['suppliers_list']
+        
+        # 거래처 통계 계산
+        active_count = suppliers_list.filter(is_active=True).count()
+        cash_count = suppliers_list.filter(payment_method='cash', is_active=True).count()
+        card_count = suppliers_list.filter(payment_method='card', is_active=True).count()
+        transfer_count = suppliers_list.filter(payment_method='transfer', is_active=True).count()
+        credit_count = suppliers_list.filter(payment_method='credit', is_active=True).count()
+        
+        context.update({
+            'active_count': active_count,
+            'cash_count': cash_count,
+            'card_count': card_count,
+            'transfer_count': transfer_count,
+            'credit_count': credit_count,
+        })
+        
+        return context
 
 class SuppliersCreateView(LoginRequiredMixin, CreateView):
     """
@@ -724,7 +745,7 @@ class SalesCreateView(LoginRequiredMixin, CreateView):
     model = Sales
     form_class = SalesForm
     template_name = 'glossymatcha/sales/create.html'
-    success_url = reverse_lazy('monthly_sales_list')
+    success_url = reverse_lazy('sales_list')
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -752,7 +773,7 @@ class SalesUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'glossymatcha/sales/create.html'
 
     def get_success_url(self):
-        return reverse_lazy('monthly_sales_detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('sales_detail', kwargs={'pk': self.object.pk})
     
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -776,7 +797,7 @@ class SalesDeleteView(LoginRequiredMixin, DeleteView):
     """
     model = Sales
     template_name = 'glossymatcha/sales/delete.html'
-    success_url = reverse_lazy('monthly_sales_list')
+    success_url = reverse_lazy('sales_list')
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
