@@ -11,14 +11,12 @@ const historyItems: HistoryItem[] = [
     { date: "2024.09", desc: ["Select shop 'WITH GLOSSY' OPENING"] },
     {
         date: "2024.12",
-        desc: ["당 해년도 수출실적 2만불 달성", "(GLOSSY MATCHA 제품 포함)"],
+        desc: ["당 해년도 수출실적 2만불 달성 (GLOSSY MATCHA 제품 포함)"],
     },
     {
         date: "2025.01",
         desc: [
-            "2025 SIRHA 참여",
-            "(Salon International de la Restauration,",
-            "de l'Hôtellerie et de l'Alimentation)",
+            "2025 SIRHA 참여 (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)",
         ],
     },
     {
@@ -28,8 +26,7 @@ const historyItems: HistoryItem[] = [
     {
         date: "2025.06",
         desc: [
-            "Lifestyle shoes collabo' 제품 출시 예정",
-            "(w 뮬보이, 초록색 말차color 슬리퍼)",
+            "Lifestyle shoes collabo' 제품 출시 예정 (w 뮬보이, 초록색 말차color 슬리퍼)",
         ],
     },
 ];
