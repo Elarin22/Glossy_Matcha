@@ -58,16 +58,14 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         const words = text.split(' ');
         const breakpoints = (() => {
             // 시그니처 제품
-            if (productId === 1 && type === 'subtitle') return [6]; // "100% 제주 새봄의 첫 순을 담은" 다음
+            if (productId === 1 && type === 'subtitle') return [6]; 
             if (productId === 1 && type === 'description') {
-                // "제주산 세레모니얼 등급 말차 원료와" 다음, "대체당, 대나무수액, 코코넛슈가를" 다음
                 return [5, 8];
             }
-            if (productId === 1 && type === 'shortDescription') return [7]; // "글로시말차 시그니처는 실제 매장에서" 다음
+            if (productId === 1 && type === 'shortDescription') return [7]; 
             
             // 틴케이스 제품  
-            if (productId === 3 && type === 'shortDescription') return [5, 9, 14]; // "* 국산 말차에는 등급제가 없습니다만," 다음, "해외 등급표 기준을 만족하도록" 다음, "첫순 1번 잎을 가지고 만든" 다음
-            
+            if (productId === 3 && type === 'shortDescription') return [5, 9, 14]; 
             return [];
         })();
 
