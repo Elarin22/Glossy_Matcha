@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { HomeContent } from "@/app/[locale]/page";
 import styles from "./MobileHome.module.scss";
 import SoundButton from "../SoundButton/SoundButton";
-import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
+import { useLocale } from "next-intl";
 
 export default function MobileHome({
   contents,
 }: {
   contents: HomeContent[];
 }): React.JSX.Element {
+  const locale = useLocale();
   const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
@@ -47,7 +48,10 @@ export default function MobileHome({
               <h2 className="sr-only">{content.title}</h2>
               <div className={styles.overlay} />
               <div className={styles["content-box"]}>
-                <Link href={content.link!} className={styles["top-right-link"]}>
+                <Link
+                  href={`/${locale}${content.link!}`}
+                  className={styles["top-right-link"]}
+                >
                   {content.linkText}
                   <img src={"../images/icon/icon-Right-arrow.svg"} />
                 </Link>
