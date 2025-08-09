@@ -195,7 +195,7 @@ class DailySalesForm(forms.ModelForm):
             'other_sales': forms.NumberInput(attrs={
                 'class': 'form-control',
                 'min': '0',
-                'placeholder': '기타 매출을 입력하세요'
+                'placeholder': '기타 매출을 입력하세요 (ex : 온라인 매출, 배달 매출 등)',
             }),
             'memo': forms.Textarea(attrs={
                 'class': 'form-control',
@@ -203,6 +203,10 @@ class DailySalesForm(forms.ModelForm):
                 'placeholder': '메모를 입력하세요 (선택사항)'
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['other_sales'].required = False
 
 class SalesForm(forms.ModelForm):
     class Meta:
