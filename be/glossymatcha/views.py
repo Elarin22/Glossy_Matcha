@@ -551,10 +551,10 @@ class SuppliersListView(LoginRequiredMixin, ListView):
         
         # 거래처 통계 계산
         active_count = suppliers_list.filter(is_active=True).count()
-        cash_count = suppliers_list.filter(payment_method='cash').count()
-        card_count = suppliers_list.filter(payment_method='card').count()
-        transfer_count = suppliers_list.filter(payment_method='transfer').count()
-        credit_count = suppliers_list.filter(payment_method='credit').count()
+        cash_count = suppliers_list.filter(payment_method='cash', is_active=True).count()
+        card_count = suppliers_list.filter(payment_method='card', is_active=True).count()
+        transfer_count = suppliers_list.filter(payment_method='transfer', is_active=True).count()
+        credit_count = suppliers_list.filter(payment_method='credit', is_active=True).count()
         
         context.update({
             'active_count': active_count,
