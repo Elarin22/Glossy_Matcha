@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}매출 관리 - Glossy Matcha{% endblock %}
 
@@ -33,7 +34,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-primary">
-                    {{ total_sales_sum|floatformat:0 }}원
+                    {{ total_sales_sum|korean_won_with_unit }}
                 </h5>
                 <small class="text-muted">총 매출</small>
             </div>
@@ -43,7 +44,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-warning">
-                    {{ total_cost_sum|floatformat:0 }}원
+                    {{ total_cost_sum|korean_won_with_unit }}
                 </h5>
                 <small class="text-muted">총 원가</small>
             </div>
@@ -53,7 +54,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <h5 class="text-success">
-                    {{ total_profit_sum|floatformat:0 }}원
+                    {{ total_profit_sum|korean_won_with_unit }}
                 </h5>
                 <small class="text-muted">총 이익</small>
             </div>
@@ -96,14 +97,14 @@
                                 <strong>{{ sale.year }}년 {{ sale.month }}월</strong>
                             </td>
                             <td class="text-end">
-                                <strong class="text-primary">{{ sale.total_sales|floatformat:0 }}원</strong>
+                                <strong class="text-primary">{{ sale.total_sales|korean_won_with_unit }}</strong>
                             </td>
                             <td class="text-end">
-                                <strong class="text-warning">{{ sale.total_cost|floatformat:0 }}원</strong>
+                                <strong class="text-warning">{{ sale.total_cost|korean_won_with_unit }}</strong>
                             </td>
                             <td class="text-end">
                                 <strong class="{% if sale.gross_profit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                    {{ sale.gross_profit|floatformat:0 }}원
+                                    {{ sale.gross_profit|korean_won_with_unit }}
                                 </strong>
                             </td>
                             <td>

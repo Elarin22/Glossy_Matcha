@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}
     {% if yearly_sale %}연별 매출 수정{% else %}연별 매출 입력{% endif %} - Glossy Matcha
@@ -43,7 +44,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">연간 총 재료비</label>
                             <div class="p-2 bg-light border rounded">
-                                <strong>{{ yearly_sale.total_material_cost|floatformat:0 }}원</strong>
+                                <strong>{{ yearly_sale.total_material_cost|korean_won_with_unit }}</strong>
                                 <small class="text-muted d-block">월별 재료비 합계</small>
                             </div>
                         </div>
@@ -51,7 +52,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">연간 총 노무비</label>
                             <div class="p-2 bg-light border rounded">
-                                <strong>{{ yearly_sale.total_labor_cost|floatformat:0 }}원</strong>
+                                <strong>{{ yearly_sale.total_labor_cost|korean_won_with_unit }}</strong>
                                 <small class="text-muted d-block">월별 노무비 합계</small>
                             </div>
                         </div>
@@ -61,7 +62,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">연간 총 경비-소모품</label>
                             <div class="p-2 bg-light border rounded">
-                                <strong>{{ yearly_sale.total_supplies_expense|floatformat:0 }}원</strong>
+                                <strong>{{ yearly_sale.total_supplies_expense|korean_won_with_unit }}</strong>
                                 <small class="text-muted d-block">월별 소모품비 합계</small>
                             </div>
                         </div>
@@ -69,7 +70,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="form-label">연간 총 경비-기타</label>
                             <div class="p-2 bg-light border rounded">
-                                <strong>{{ yearly_sale.total_other_expense|floatformat:0 }}원</strong>
+                                <strong>{{ yearly_sale.total_other_expense|korean_won_with_unit }}</strong>
                                 <small class="text-muted d-block">월별 기타경비 합계</small>
                             </div>
                         </div>

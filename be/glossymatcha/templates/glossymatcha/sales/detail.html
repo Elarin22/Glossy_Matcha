@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}{{ sale.year }}년 {{ sale.month }}월 매출 상세 - Glossy Matcha{% endblock %}
 
@@ -37,15 +38,15 @@
                 <table class="table table-borderless">
                     <tr>
                         <td class="text-muted" width="50%">오프라인 매출</td>
-                        <td class="text-end"><strong>{{ sale.offline_sales|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.offline_sales|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr>
                         <td class="text-muted">기타 매출</td>
-                        <td class="text-end"><strong>{{ sale.other_sales|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.other_sales|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr class="border-top">
                         <td class="text-muted"><strong>소계</strong></td>
-                        <td class="text-end"><strong class="text-primary">{{ sale.total_sales|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong class="text-primary">{{ sale.total_sales|korean_won_with_unit }}</strong></td>
                     </tr>
                 </table>
             </div>
@@ -62,23 +63,23 @@
                 <table class="table table-borderless">
                     <tr>
                         <td class="text-muted" width="50%">재료비</td>
-                        <td class="text-end"><strong>{{ sale.material_cost|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.material_cost|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr>
                         <td class="text-muted">노무비</td>
-                        <td class="text-end"><strong>{{ sale.labor_cost|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.labor_cost|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr>
                         <td class="text-muted">경비-소모품</td>
-                        <td class="text-end"><strong>{{ sale.supplies_expense|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.supplies_expense|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr>
                         <td class="text-muted">경비-기타</td>
-                        <td class="text-end"><strong>{{ sale.other_expense|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.other_expense|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr class="border-top">
                         <td class="text-muted"><strong>소계</strong></td>
-                        <td class="text-end"><strong class="text-warning">{{ sale.total_cost|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong class="text-warning">{{ sale.total_cost|korean_won_with_unit }}</strong></td>
                     </tr>
                 </table>
             </div>
@@ -97,17 +98,17 @@
                         <td class="text-muted" width="50%">1차 매출이익</td>
                         <td class="text-end">
                             <strong class="{% if sale.gross_profit >= 0 %}text-success{% else %}text-danger{% endif %}">
-                                {{ sale.gross_profit|floatformat:0 }}원
+                                {{ sale.gross_profit|korean_won_with_unit }}
                             </strong>
                         </td>
                     </tr>
                     <tr>
                         <td class="text-muted">재고금액</td>
-                        <td class="text-end"><strong>{{ sale.inventory_amount|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.inventory_amount|korean_won_with_unit }}</strong></td>
                     </tr>
                     <tr>
                         <td class="text-muted">실 사용금액</td>
-                        <td class="text-end"><strong>{{ sale.actual_usage_amount|floatformat:0 }}원</strong></td>
+                        <td class="text-end"><strong>{{ sale.actual_usage_amount|korean_won_with_unit }}</strong></td>
                     </tr>
                 </table>
             </div>

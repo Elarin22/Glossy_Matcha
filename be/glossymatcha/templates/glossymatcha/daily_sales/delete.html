@@ -1,4 +1,5 @@
 {% extends 'glossymatcha/base.html' %}
+{% load money_filters %}
 
 {% block title %}일별 매출 삭제{% endblock %}
 
@@ -23,9 +24,9 @@
                         <strong style="color: #373735;">매출 정보:</strong>
                         <ul class="list-unstyled mt-2" style="color: #373735;">
                             <li><strong>날짜:</strong> {{ object.date }}</li>
-                            <li><strong>총 매출:</strong> {{ object.total_sales|floatformat:0 }}원</li>
-                            <li><strong>현금 매출:</strong> {{ object.cash_sales|floatformat:0 }}원</li>
-                            <li><strong>카드 매출:</strong> {{ object.card_sales|floatformat:0 }}원</li>
+                            <li><strong>총 매출:</strong> {{ object.total_sales|korean_won_with_unit }}</li>
+                            <li><strong>현금 매출:</strong> {{ object.cash_sales|korean_won_with_unit }}</li>
+                            <li><strong>카드 매출:</strong> {{ object.card_sales|korean_won_with_unit }}</li>
                         </ul>
                     </div>
                     
