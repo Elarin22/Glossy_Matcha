@@ -31,17 +31,11 @@ export const menuData: MenuData = {
         tags: ["달콤함", "비주얼", "특별함"],
         image: "/images/glossy-pick/menu/matcha-spanner.svg",
     },
-    "코코넛 말차 쉐이크": {
-        name: "코코넛 말차 쉐이크",
-        description: "열대 코코넛과 말차의 이색적인 만남",
-        tags: ["이색적", "쉐이크", "코코넛"],
-        image: "/images/glossy-pick/menu/coconut-shake.svg",
-    },
     "보리크림 말차 라떼": {
         name: "보리크림 말차 라떼",
         description: "고소한 보리크림이 더해진 말차 라떼",
         tags: ["고소함", "크림", "독특함"],
-        image: "/images/glossy-pick/menu/barley-cream.svg",
+        image: "/images/glossy-pick/menu/matcha-barley.svg",
     },
     "그린 레몬에이드": {
         name: "그린 레몬에이드",
