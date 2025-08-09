@@ -154,7 +154,7 @@ class Staff(models.Model):
     class Meta:
         verbose_name = "직원"
         verbose_name_plural = "직원"
-        ordering = ['resignation_date', 'employee_type', 'name']
+        ordering = ['resignation_date', 'employee_type', 'hire_date', 'name']
     
     @property
     def is_active(self):
