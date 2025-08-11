@@ -1,7 +1,7 @@
 from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord, YearlySales
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from datetime import date
+from datetime import date, datetime, timedelta
 from django.db.models import Sum, Q
 from django.db import models
 from django.contrib import messages
@@ -15,6 +15,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
 from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm, YearlySalesForm
+from django.http import HttpResponse
+from openpyxl import Workbook
+from openpyxl.styles import Font, Alignment, PatternFill, NamedStyle
+from openpyxl.styles.numbers import FORMAT_NUMBER_COMMA_SEPARATED1
+from openpyxl.utils.dataframe import dataframe_to_rows
+import json, calendar
 
 class DashboardView(LoginRequiredMixin, TemplateView):
     """
@@ -57,6 +63,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         # 최근 문의 현황 (최근 5건)
         recent_inquiries = Inquiries.objects.all()[:5]
         total_inquiries = Inquiries.objects.count()
+
+        # chart data creation
+        chart_data = self.get_chart_data()
+        sales_analysis = self.get_sales_analysis()
         
         context.update({
             'today': today,
@@ -68,9 +78,68 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             'staff_list': staff_list,
             'recent_inquiries': recent_inquiries,
             'total_inquiries': total_inquiries,
+            'chart_data': json.dumps(chart_data),
+            'sales_analysis': sales_analysis,
         })
 
         return context
+    
+    def get_chart_data(self):
+        """차트 데이터 생성 - 최근 12개월간의 월별 매출 데이터"""
+        today = date.today()
+        # 최근 12개월 데이터
+        months_data = []
+        labels = []
+
+        for i in range(11, -1, -1):
+            """12개월 전부터 현재까지의 월별 매출 데이터 생성"""
+            # 월을 직접 계산
+            year = today.year
+            month = today.month - i
+
+            # 월이 0 이하가 되면 이전 년도로
+            while month <= 0:
+                month += 12
+                year -= 1
+
+            # 해당 월의 매출 데이터 조회
+            monthly_sales = Sales.objects.filter(year=year, month=month).first()
+            sales_amount = monthly_sales.total_sales if monthly_sales else 0
+            cost_amount = monthly_sales.total_cost if monthly_sales else 0
+            profit_amount = monthly_sales.gross_profit if monthly_sales else 0
+
+            labels.append(f"{year}년 {month}월")
+            months_data.append({
+                'sales': float(sales_amount),
+                'cost': float(cost_amount),
+                'profit': float(profit_amount)
+            })
+    
+        # 최근 30일 일별 매출 데이터
+        daily_data = []
+        daily_labels = []
+        for i in range(29, -1, -1):
+            """30일 전부터 현재까지의 일별 매출 데이터 생성"""
+            target_date = today - timedelta(days=i)
+            daily_sales = DailySales.objects.filter(date=target_date).first()
+            sales_amount = daily_sales.total_sales if daily_sales else 0
+
+            daily_labels.append(target_date.strftime('%m/%d'))
+            daily_data.append(float(sales_amount))
+
+        return {
+            'monthly': {
+                'labels': labels,
+                'sales': [item['sales'] for item in months_data],
+                'cost': [item['cost'] for item in months_data],
+                'profits': [item['profit'] for item in months_data]
+            },
+            'daily': {
+                'labels': daily_labels,
+                'sales': daily_data
+            }
+        }
+
     
 # API Views for Inquiries
 class CreateInquiryView(generics.CreateAPIView):
