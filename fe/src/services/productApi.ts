@@ -128,7 +128,7 @@ const mockProducts: Product[] = [
     }
 ];
 
-const API_BASE_URL = 'http://api.glossymatcha.com/api';
+const API_BASE_URL = 'https://api.glossymatcha.com/api/products/';
 
 class ProductApi {
     /**
