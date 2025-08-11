@@ -923,6 +923,86 @@ class SalesDeleteView(LoginRequiredMixin, DeleteView):
         messages.success(request, f'{self.object.year}년 {self.object.month}월 매출이 삭제되었습니다.')
         return super().delete(request, *args, **kwargs)
     
+class MonthlySalesExcelExportView(LoginRequiredMixin, TemplateView):
+    """
+    월별 매출 현황 엑셀 파일 다운로드
+    - 로그인한 사용자만 접근 가능
+    - 월별 매출 데이터를 엑셀 파일로 생성하여 다운로드"""
+    def get(self, request, *args, **kwargs):
+        wb = Workbook()
+        ws = wb.active
+        ws.title = '월별 매출 현황'
+
+        # 헤더 스타일 설정
+        header_font = Font(bold=True, color='FFFFFF')
+        header_fill = PatternFill(start_color='366092', end_color='366092', fill_type='solid')
+        header_alignment = Alignment(horizontal='center', vertical='center')
+
+        # 콤마 포맷팅 설정
+        number_style = NamedStyle(name='number_comma')
+        number_style.number_format = '#,##0'
+
+        # 퍼센트 포맷 설정
+        percent_style = NamedStyle(name='percent')
+        percent_style.number_format = '0.0%'
+
+        # 헤더 작성
+        headers = [
+            '연도', '월', '오프라인 매출', '기타 매출', '총 매출',
+            '재료비', '노무비', '경비-소모품', '경비-기타', '총 원가', '매출 총이익', '수익률(%)'
+        ]
+
+        for col, header in enumerate(headers, 1):
+            cell = ws.cell(row=1, column=col, value=header)
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = header_alignment
+
+        # 데이터 작성
+        sales_data = Sales.objects.all().order_by('-year', '-month')
+
+        for row, sale in enumerate(sales_data, 2):
+            profit_margin = (sale.gross_profit / sale.total_sales) if sale.total_sales > 0 else 0
+
+            # 기본 데이터 작성
+            ws.cell(row=row, column=1, value=sale.year)
+            ws.cell(row=row, column=2, value=sale.month)
+
+            # 금액 데이터 작성
+            money_cells = [
+                (3, int(sale.offline_sales)),
+                (4, int(sale.other_sales)),
+                (5, int(sale.total_sales)),
+                (6, int(sale.material_cost)),
+                (7, int(sale.labor_cost)),
+                (8, int(sale.supplies_expense)),
+                (9, int(sale.other_expense)),
+                (10, int(sale.total_cost)),
+                (11, int(sale.gross_profit))
+            ]
+
+            for col, value in money_cells:
+                cell = ws.cell(row=row, column=col, value=value)
+                cell.number_format = '#,##0'
+            
+            # % 데이터 작성
+            percent_cell = ws.cell(row=row, column=12, value=profit_margin)
+            percent_cell.number_format = '0.0%'
+        
+        # 열(col) 너비 조정
+        column_widths = [8, 6, 15, 12, 15, 12, 12, 12, 12, 12, 15, 12]
+        for col, width in enumerate(column_widths, 1):
+            ws.column_dimensions[ws.cell(row=1, column=col).column_letter].width = width
+
+        # HTTP 응답 생성
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = 'attachment; filename="월별 매출 현황.xlsx"'
+
+        wb.save(response)
+        return response
+
 # Django Template Views for yearly sales management
 class YearlySalesListView(LoginRequiredMixin, ListView):
     """
