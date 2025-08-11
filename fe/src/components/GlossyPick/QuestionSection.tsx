@@ -17,6 +17,7 @@ export default function QuestionSection({
     onPrev,
 }: QuestionSectionProps) {
     const t = useTranslations("test.questions");
+    const tPrev = useTranslations("test.question");
 
     return (
         <div className={styles.question}>
@@ -39,7 +40,7 @@ export default function QuestionSection({
             <span className={styles.question__step}>{currentStep}/4</span>
             {currentStep > 1 && (
                 <button type="button" onClick={onPrev} className="btn-g">
-                    이전
+                    {tPrev("prev")}
                 </button>
             )}
         </div>

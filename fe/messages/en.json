@@ -148,10 +148,10 @@
     "test": {
         "header": {
             "title": "Glossy Pick",
-            "sub-title": "The one and only, your personalized Glossy Matcha"
+            "sub-title": "The one and only, Your personalized Glossy Matcha"
         },
         "intro": {
-            "desc": "Answer a few questions and we'll recommend the Glossy Matcha menu that suits you.",
+            "desc": "Answer a few questions and We'll recommend the Glossy Matcha Menu that suits you.",
             "start": "Start"
         },
         "question": {
@@ -166,43 +166,43 @@
         "menu": {
             "jejuOreum": {
                 "name": "Jeju, Oreum",
-                "description": "Deep and rich taste of premium Jeju matcha",
-                "tags": ["Premium", "Rich flavor", "Jeju-grown"]
+                "description": "Deep and Rich taste of Premium Jeju Matcha",
+                "tags": ["Premium", "Rich flavor", "Jeju-Grown"]
             },
             "matchaStraight": {
                 "name": "Matcha Straight",
-                "description": "Pure original taste and aroma of matcha",
+                "description": "Pure Original Taste and Aroma of Matcha",
                 "tags": ["Pure", "Traditional", "Authentic"]
             },
             "matchaMojito": {
                 "name": "Glossy Matcha Mojito",
-                "description": "Perfect harmony of fresh mint and matcha",
+                "description": "Perfect harmony of Fresh Mint and Matcha",
                 "tags": ["Refreshing", "Cool", "Trendy"]
             },
             "matchaLatte": {
                 "name": "Glossy Matcha Latte",
-                "description": "Classic meeting of smooth milk and matcha",
+                "description": "Classic meeting of Smooth Milk and Matcha",
                 "tags": ["Smooth", "Classic", "Popular"]
             },
             "matchaSpanner": {
                 "name": "Matcha Spanner",
-                "description": "Sweet whipped cream on top of matcha",
+                "description": "Sweet whipped Cream on Top of Matcha",
                 "tags": ["Sweet", "Visual", "Special"]
             },
             "matchaBarley": {
                 "name": "Barley Cream Matcha Latte",
-                "description": "Matcha latte enhanced with nutty barley cream",
+                "description": "Matcha Latte enhanced with Nutty Barley Cream",
                 "tags": ["Nutty", "Creamy", "Unique"]
             },
             "greenLemonade": {
                 "name": "Green Lemonade",
-                "description": "Refreshing encounter of lemon and matcha",
+                "description": "Refreshing encounter of Lemon and Matcha",
                 "tags": ["Refreshing", "Tangy", "Summer"]
             }
         },
         "questions": {
             "style": {
-                "title": "What's your favorite matcha style?",
+                "title": "What's your favorite Matcha Style?",
                 "options": {
                     "depth": "Flavor Depth",
                     "sweet": "Harmonious Sweetness",
@@ -223,7 +223,7 @@
                 "title": "What's important when choosing a drink?",
                 "options": {
                     "thirst": "Quench Thirst",
-                    "caffeine": "Caffeine Boost",
+                    "caffeine": "Need Caffeine",
                     "healing": "Rest & Healing",
                     "health": "Health Management"
                 }
