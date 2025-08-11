@@ -40,10 +40,21 @@
     <div class="col-xl-2 col-md-4 mb-3">
         <div class="card dashboard-card h-100">
             <div class="card-body text-center">
-                <i class="bi bi-graph-up dashboard-icon mb-3"></i>
+                <i class="bi bi-calendar3 dashboard-icon mb-3"></i>
                 <h5 class="card-title">이번 달 매출</h5>
                 <div class="stat-number">{{ monthly_sales|korean_won_with_unit|default:"0원" }}</div>
                 <small class="text-muted">{{ today|date:"Y년 m월" }} 누적 매출</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bar-chart dashboard-icon mb-3"></i>
+                <h5 class="card-title">올해 매출</h5>
+                <div class="stat-number">{{ yearly_sales|korean_won_with_unit|default:"0원" }}</div>
+                <small class="text-muted">{{ today|date:"Y년" }} 누적 매출</small>
             </div>
         </div>
     </div>
