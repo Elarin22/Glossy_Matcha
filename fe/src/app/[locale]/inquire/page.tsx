@@ -76,6 +76,11 @@ export default function Inquire() {
     };
 
     try {
+      console.log(
+        "전송 url: ",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`
+      );
+
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`,
         {
@@ -100,11 +105,6 @@ export default function Inquire() {
       } else {
         alert("문의 접수에 실패했습니다. 다시 시도해주세요.");
       }
-
-      console.log(
-        "전송 url: ",
-        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`
-      );
       console.log("response: ", response);
     } catch (error) {
       alert("네트워크 오류가 발생했습니다.");

@@ -40,15 +40,6 @@ export default function SideInfo({
         <p className={styles["info-content"]}>
           {contents[currentIndex].description}
         </p>
-        {currentIndex === contents.length - 1 && (
-          <Link
-            href={`/${locale}${contents[currentIndex].link!}`}
-            className="btn-g"
-            style={{ marginTop: 36 }}
-          >
-            {contents[currentIndex].linkText}
-          </Link>
-        )}
       </div>
     </aside>
   );

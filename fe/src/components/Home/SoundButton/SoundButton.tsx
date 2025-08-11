@@ -5,10 +5,10 @@ import styles from "./SoundButton.module.scss";
 
 export default function SoundButton({
   videoRef,
-  bottom = 16,
+  isBottom = true,
 }: {
   videoRef: React.RefObject<HTMLVideoElement | null>;
-  bottom?: number;
+  isBottom?: boolean;
 }): React.JSX.Element {
   const [isMuted, setIsMuted] = useState(true);
 
@@ -25,7 +25,11 @@ export default function SoundButton({
       onClick={toggleMute}
       className={styles["sound-toggle-button"]}
       aria-label={isMuted ? "소리 켜기" : "소리 끄기"}
-      style={{ bottom: bottom }}
+      style={
+        isBottom
+          ? { bottom: 20 }
+          : { width: "auto", backgroundColor: "transparent", top: 70 }
+      }
     >
       {isMuted ? (
         <img src={"/images/icon/sound-off.svg"} alt="" />
