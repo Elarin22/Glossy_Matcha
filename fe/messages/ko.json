@@ -144,6 +144,23 @@
         }
     },
     "test": {
+        "header": {
+            "title": "Glossy Pick",
+            "sub-title": "단 하나, 당신만을 위한 글로시 말차"
+        },
+        "intro": {
+            "desc": "몇 가지 질문에 답하면, 당신에게 어울리는 글로시 말차 메뉴를 추천해드려요.",
+            "start": "시작하기"
+        },
+        "question": {
+            "prev": "이전"
+        },
+        "result": {
+            "title": "글로시 말차가 제안하는 당신만을 위한 한 잔",
+            "share": "공유하기",
+            "download": "저장하기",
+            "reset": "다시하기"
+        },
         "menu": {
             "jejuOreum": {
                 "name": "제주, 오름",

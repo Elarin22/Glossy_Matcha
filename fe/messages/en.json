@@ -146,6 +146,23 @@
         }
     },
     "test": {
+        "header": {
+            "title": "Glossy Pick",
+            "sub-title": "The one and only, your personalized Glossy Matcha"
+        },
+        "intro": {
+            "desc": "Answer a few questions and we'll recommend the Glossy Matcha menu that suits you.",
+            "start": "Start"
+        },
+        "question": {
+            "prev": "Previous"
+        },
+        "result": {
+            "title": "A cup of Glossy Matcha made just for you",
+            "share": "Share",
+            "download": "Save",
+            "reset": "Try Again"
+        },
         "menu": {
             "jejuOreum": {
                 "name": "Jeju, Oreum",
