@@ -6,7 +6,7 @@ from django.db.models import Sum, Q
 from django.db import models
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
@@ -999,6 +999,88 @@ class MonthlySalesExcelExportView(LoginRequiredMixin, TemplateView):
             content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )
         response['Content-Disposition'] = 'attachment; filename="월별 매출 현황.xlsx"'
+
+        wb.save(response)
+        return response
+    
+class IndividualMonthlySalesExcelExportView(LoginRequiredMixin, TemplateView):
+    """
+    월별 매출 상세 엑셀 파일 다운로드
+    - 로그인한 사용자만 접근 가능
+    - 특정 월별 매출 데이터를 엑셀 파일로 생성하여 다운로드
+    """
+    def get(self, request, *args, **kwargs):
+        # url에서 pk 파라미터 추출
+        sale_pk = kwargs.get('pk')
+        try:
+            sale = Sales.objects.get(pk=sale_pk)
+        except Sales.DoesNotExist:
+            messages.error(request, '해당 월별 매출이 존재하지 않습니다.')
+            return redirect('sales_list')
+        
+        # 워크북 생성
+        wb = Workbook()
+        ws = wb.active
+        ws.title = f'{sale.year}년 {sale.month}월 매출'
+
+        # 헤더 스타일 설정
+        header_font = Font(bold=True, color='FFFFFF')
+        header_fill = PatternFill(start_color='366092', end_color='366092', fill_type='solid')
+        header_alignment = Alignment(horizontal='center', vertical='center')
+
+        # 헤더 작성
+        headers = [
+            '연도', '월', '오프라인 매출', '기타 매출', '총 매출',
+            '재료비', '노무비', '경비-소모품', '경비-기타', '총 원가', '매출이익', '수익률(%)', '메모'
+        ]
+
+        for col, header in enumerate(headers, 1):
+            cell = ws.cell(row=1, column=col, value=header)
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = header_alignment
+
+        # 데이터 작성
+        profit_margin = (sale.gross_profit / sale.total_sales) if sale.total_sales > 0 else 0
+
+        # 기본 데이터 작성
+        ws.cell(row=2, column=1, value=sale.year)
+        ws.cell(row=2, column=2, value=sale.month)
+
+        # 금액 데이터 작성
+        money_cells = [
+            (3, int(sale.offline_sales)),
+            (4, int(sale.other_sales)),
+            (5, int(sale.total_sales)),
+            (6, int(sale.material_cost)),
+            (7, int(sale.labor_cost)),
+            (8, int(sale.supplies_expense)),
+            (9, int(sale.other_expense)),
+            (10, int(sale.total_cost)),
+            (11, int(sale.gross_profit))
+        ]
+
+        for col, value in money_cells:
+            cell = ws.cell(row=2, column=col, value=value)
+            cell.number_format = '#,##0'
+
+        # % 데이터 작성
+        percent_cell = ws.cell(row=2, column=12, value=profit_margin)
+        percent_cell.number_format = '0.0%'
+
+        # 메모 작성
+        ws.cell(row=2, column=13, value=sale.memo or '')
+
+        # 열(col) 너비 조정
+        column_widths = [8, 6, 15, 12, 15, 12, 12, 12, 12, 12, 15, 12, 20]
+        for col, width in enumerate(column_widths, 1):
+            ws.column_dimensions[ws.cell(row=1, column=col).column_letter].width = width
+
+        # HTTP 응답 생성
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = f'attachment; filename="{sale.year}년_{sale.month}월_매출.xlsx"'
 
         wb.save(response)
         return response
