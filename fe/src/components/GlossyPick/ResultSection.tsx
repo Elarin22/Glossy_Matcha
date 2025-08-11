@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { MenuInfo } from "@/types/matcha";
 import Image from "next/image";
 import styles from "./ResultSection.module.scss";
@@ -16,6 +17,8 @@ export default function ResultSection({
     onDownload,
     onReset,
 }: ResultSectionProps) {
+    const t = useTranslations("test.menu");
+
     return (
         <div id="result-section" className={styles.result}>
             <GlossyPickHeader />
@@ -32,16 +35,18 @@ export default function ResultSection({
                     width={300}
                     height={360}
                 />
-                <p className={styles["result__menuName"]}>{menuInfo.name}</p>
+                <p className={styles["result__menuName"]}>
+                    {t(menuInfo.name)}
+                </p>
                 <div className={styles.result__tags}>
                     {menuInfo.tags.map((tag, index) => (
                         <span key={index} className="tag">
-                            {tag}
+                            {t(tag)}
                         </span>
                     ))}
                 </div>
                 <p className={styles.result__menuDescription}>
-                    {menuInfo.description}
+                    {t(menuInfo.description)}
                 </p>
             </section>
 
