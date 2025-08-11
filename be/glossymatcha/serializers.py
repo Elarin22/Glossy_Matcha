@@ -205,10 +205,10 @@ class ProductListSerializer(serializers.ModelSerializer):
     - short_description_en: 제품 안내사항 (영어)
     - sub_description: 제품 부가 설명 (한국어)
     - sub_description_en: 제품 부가 설명 (영어)
-    - main_image: 제품의 대표 이미지
+    - images: 제품의 모든 이미지 목록
     - created_at: 생성 일시
     """
-    main_image = serializers.SerializerMethodField()
+    images = ProductImageSerializer(many=True, read_only=True)
 
     class Meta:
         model = Products
@@ -216,16 +216,9 @@ class ProductListSerializer(serializers.ModelSerializer):
             'id', 'name', 'name_en', 'subtitle', 'subtitle_en',
             'description', 'description_en', 'short_description', 'short_description_en',
             'sub_description', 'sub_description_en',
-            'main_image', 'created_at'
+            'images', 'created_at'
         ]
         read_only_fields = ['id', 'created_at']
-    
-    def get_main_image(self, obj):
-        main_image = obj.images.first()
-        if main_image:
-            serializer = ProductImageSerializer(main_image, context=self.context)
-            return serializer.data
-        return None
     
     def to_representation(self, instance):
         data = super().to_representation(instance)
