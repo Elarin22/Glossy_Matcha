@@ -143,6 +143,45 @@
                     ]
                 }
             ]
+        },
+        "test": {
+            "menu": {
+                "jejuOreum": {
+                    "name": "Jeju, Oreum",
+                    "description": "Deep and rich taste of premium Jeju matcha",
+                    "tags": ["Premium", "Rich flavor", "Jeju-grown"]
+                },
+                "matchaStraight": {
+                    "name": "Matcha Straight",
+                    "description": "Pure original taste and aroma of matcha",
+                    "tags": ["Pure", "Traditional", "Authentic"]
+                },
+                "matchaMojito": {
+                    "name": "Glossy Matcha Mojito",
+                    "description": "Perfect harmony of fresh mint and matcha",
+                    "tags": ["Refreshing", "Cool", "Trendy"]
+                },
+                "matchaLatte": {
+                    "name": "Glossy Matcha Latte",
+                    "description": "Classic meeting of smooth milk and matcha",
+                    "tags": ["Smooth", "Classic", "Popular"]
+                },
+                "matchaSpanner": {
+                    "name": "Matcha Spanner",
+                    "description": "Sweet whipped cream on top of matcha",
+                    "tags": ["Sweet", "Visual", "Special"]
+                },
+                "matchaBarley": {
+                    "name": "Barley Cream Matcha Latte",
+                    "description": "Matcha latte enhanced with nutty barley cream",
+                    "tags": ["Nutty", "Creamy", "Unique"]
+                },
+                "greenLemonade": {
+                    "name": "Green Lemonade",
+                    "description": "Refreshing encounter of lemon and matcha",
+                    "tags": ["Refreshing", "Tangy", "Summer"]
+                }
+            }
         }
     }
 }
