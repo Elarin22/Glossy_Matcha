@@ -25,16 +25,21 @@ interface ProductDescriptionProps {
 
 // API 호출 함수
 const fetchProducts = async (): Promise<Product[]> => {
-    try {
-    const response = await fetch('https://api.glossymatcha.com/api/products/');
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    if (!apiUrl) {
+        throw new Error('API URL이 설정되지 않았습니다.');
     }
-    const data = await response.json();
-    return data;
+
+    try {
+        const response = await fetch(`${apiUrl}/api/products/`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        return data;
     } catch (error) {
-    console.error('API 호출 실패:', error);
-    throw error;
+        console.error('API 호출 실패:', error);
+        throw error;
     }
 };
 
