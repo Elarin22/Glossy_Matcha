@@ -88,6 +88,7 @@
                             <th>메모</th>
                             <th>등록일</th>
                             <th>관리</th>
+                            <th>매출 다운로드</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +130,11 @@
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>
+                            </td>
+                            <td>
+                                <a href="{% url 'individual_monthly_sales_excel_export' sale.pk %}" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-file-earmark-excel me-1"></i>{{ sale.year }}년 {{ sale.month }}월
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}

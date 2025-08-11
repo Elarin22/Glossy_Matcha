@@ -1,46 +1,70 @@
 import { MenuData } from "@/types/matcha";
 
 export const menuData: MenuData = {
-    "제주, 오름": {
-        name: "제주, 오름",
-        description: "제주산 프리미엄 말차의 깊고 진한 맛",
-        tags: ["프리미엄", "깊은맛", "제주산"],
+    "jeju-oreum": {
+        name: "jejuOreum.name",
+        description: "jejuOreum.description",
+        tags: ["jejuOreum.tags.0", "jejuOreum.tags.1", "jejuOreum.tags.2"],
         image: "/images/glossy-pick/menu/jeju-oreum.svg",
     },
-    "말차 스트레이트": {
-        name: "말차 스트레이트",
-        description: "순수한 말차 본연의 맛과 향",
-        tags: ["순수", "전통", "본격"],
+    "matcha-straight": {
+        name: "matchaStraight.name",
+        description: "matchaStraight.description",
+        tags: [
+            "matchaStraight.tags.0",
+            "matchaStraight.tags.1",
+            "matchaStraight.tags.2",
+        ],
         image: "/images/glossy-pick/menu/matcha-straight.svg",
     },
-    "글로시 말차 모히또": {
-        name: "글로시 말차 모히또",
-        description: "상큼한 민트와 말차의 완벽한 조화",
-        tags: ["상큼", "시원함", "트렌디"],
+    "matcha-mojito": {
+        name: "matchaMojito.name",
+        description: "matchaMojito.description",
+        tags: [
+            "matchaMojito.tags.0",
+            "matchaMojito.tags.1",
+            "matchaMojito.tags.2",
+        ],
         image: "/images/glossy-pick/menu/matcha-mojito.svg",
     },
-    "글로시 말차 라떼": {
-        name: "글로시 말차 라떼",
-        description: "부드러운 우유와 말차의 클래식한 만남",
-        tags: ["부드러움", "클래식", "인기"],
+    "matcha-latte": {
+        name: "matchaLatte.name",
+        description: "matchaLatte.description",
+        tags: [
+            "matchaLatte.tags.0",
+            "matchaLatte.tags.1",
+            "matchaLatte.tags.2",
+        ],
         image: "/images/glossy-pick/menu/matcha-latte.svg",
     },
-    "말차 슈페너": {
-        name: "말차 슈페너",
-        description: "말차 위에 올린 달콤한 휘핑크림",
-        tags: ["달콤함", "비주얼", "특별함"],
+    "matcha-spanner": {
+        name: "matchaSpanner.name",
+        description: "matchaSpanner.description",
+        tags: [
+            "matchaSpanner.tags.0",
+            "matchaSpanner.tags.1",
+            "matchaSpanner.tags.2",
+        ],
         image: "/images/glossy-pick/menu/matcha-spanner.svg",
     },
-    "보리크림 말차 라떼": {
-        name: "보리크림 말차 라떼",
-        description: "고소한 보리크림이 더해진 말차 라떼",
-        tags: ["고소함", "크림", "독특함"],
+    "matcha-barley": {
+        name: "matchaBarley.name",
+        description: "matchaBarley.description",
+        tags: [
+            "matchaBarley.tags.0",
+            "matchaBarley.tags.1",
+            "matchaBarley.tags.2",
+        ],
         image: "/images/glossy-pick/menu/matcha-barley.svg",
     },
-    "그린 레몬에이드": {
-        name: "그린 레몬에이드",
-        description: "상큼한 레몬과 말차의 청량한 만남",
-        tags: ["청량함", "상큼함", "여름"],
+    "green-lemonade": {
+        name: "greenLemonade.name",
+        description: "greenLemonade.description",
+        tags: [
+            "greenLemonade.tags.0",
+            "greenLemonade.tags.1",
+            "greenLemonade.tags.2",
+        ],
         image: "/images/glossy-pick/menu/green-lemonade.svg",
     },
 };

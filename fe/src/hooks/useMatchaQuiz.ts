@@ -82,6 +82,7 @@ export const useMatchaQuiz = () => {
 
     return {
         ...quizState,
+        setQuizState,
         handleAnswer,
         resetQuiz,
         startQuiz,

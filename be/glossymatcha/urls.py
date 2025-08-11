@@ -56,4 +56,10 @@ urlpatterns = [
     path('yearly-sales/<int:pk>/', views.YearlySalesDetailView.as_view(), name='yearly_sales_detail'), # 연별 매출 상세
     path('yearly-sales/<int:pk>/update/', views.YearlySalesUpdateView.as_view(), name='yearly_sales_update'), # 연별 매출 수정
     path('yearly-sales/<int:pk>/delete/', views.YearlySalesDeleteView.as_view(), name='yearly_sales_delete'), # 연별 매출 삭제
+
+    # Excel Export Views
+    path('monthly-sales/export/', views.MonthlySalesExcelExportView.as_view(), name='monthly_sales_excel_export'), # 월간 매출 엑셀 내보내기
+    path('yearly-sales/export/', views.YearlySalesExcelExportView.as_view(), name='yearly_sales_excel_export'),   # 연간 매출 엑셀 내보내기
+    path('monthly-sales/<int:pk>/export/', views.IndividualMonthlySalesExcelExportView.as_view(), name='individual_monthly_sales_excel_export'), # 개별 월별 매출 엑셀 내보내기
+    path('yearly-sales/<int:pk>/export/', views.IndividualYearlySalesExcelExportView.as_view(), name='individual_yearly_sales_excel_export'),     # 개별 연별 매출 엑셀 내보내기
 ]

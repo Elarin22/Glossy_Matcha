@@ -20,6 +20,7 @@ export default function BrandHistory() {
 
     return (
         <section id="history" className={styles["brand-history"]}>
+            <h3 className="sr-only">연혁</h3>
             <Image
                 className={styles["brand-history__image"]}
                 src="/images/about/glossy-matcha.webp"
@@ -29,9 +30,9 @@ export default function BrandHistory() {
             />
 
             <div className={styles["brand-history__content"]}>
-                <h3 className={styles["brand-history__title"]}>
+                <h4 className={styles["brand-history__title"]}>
                     {t("title")}
-                </h3>
+                </h4>
                 <p className={styles["brand-history__location"]}>
                     {t("location")}
                 </p>

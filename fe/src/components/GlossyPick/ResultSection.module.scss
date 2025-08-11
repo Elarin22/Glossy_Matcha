@@ -29,6 +29,7 @@
         aspect-ratio: 300 / 360;
         object-fit: cover;
         margin-bottom: clamp(10px, 2vw, 30px);
+        border-radius: 18px;
     }
 
     &__menuName {

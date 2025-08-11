@@ -142,5 +142,99 @@
                 }
             ]
         }
+    },
+    "test": {
+        "header": {
+            "title": "Glossy Pick",
+            "sub-title": "단 하나, 당신만을 위한 글로시 말차"
+        },
+        "intro": {
+            "desc": "몇 가지 질문에 답하면, 당신에게 어울리는 글로시 말차 메뉴를 추천해드려요.",
+            "start": "시작하기"
+        },
+        "question": {
+            "prev": "이전"
+        },
+        "result": {
+            "title": "글로시 말차가 제안하는 당신만을 위한 한 잔",
+            "share": "공유하기",
+            "download": "저장하기",
+            "reset": "다시하기"
+        },
+        "menu": {
+            "jejuOreum": {
+                "name": "제주, 오름",
+                "description": "제주산 프리미엄 말차의 깊고 진한 맛",
+                "tags": ["프리미엄", "깊은맛", "제주산"]
+            },
+            "matchaStraight": {
+                "name": "말차 스트레이트",
+                "description": "순수한 말차 본연의 맛과 향",
+                "tags": ["순수", "전통", "본격"]
+            },
+            "matchaMojito": {
+                "name": "글로시 말차 모히또",
+                "description": "상큼한 민트와 말차의 완벽한 조화",
+                "tags": ["상큼", "시원함", "트렌디"]
+            },
+            "matchaLatte": {
+                "name": "글로시 말차 라떼",
+                "description": "부드러운 우유와 말차의 클래식한 만남",
+                "tags": ["부드러움", "클래식", "인기"]
+            },
+            "matchaSpanner": {
+                "name": "말차 슈페너",
+                "description": "말차 위에 올린 달콤한 휘핑크림",
+                "tags": ["달콤함", "비주얼", "특별함"]
+            },
+            "matchaBarley": {
+                "name": "보리크림 말차 라떼",
+                "description": "고소한 보리크림이 더해진 말차 라떼",
+                "tags": ["고소함", "크림", "독특함"]
+            },
+            "greenLemonade": {
+                "name": "그린 레몬에이드",
+                "description": "상큼한 레몬과 말차의 청량한 만남",
+                "tags": ["청량함", "상큼함", "여름"]
+            }
+        },
+        "questions": {
+            "style": {
+                "title": "당신이 좋아하는 말차 스타일은?",
+                "options": {
+                    "depth": "맛의 깊이",
+                    "sweet": "조화로운 단 맛",
+                    "visual": "비주얼 / 무드",
+                    "fresh": "신선함과 향"
+                }
+            },
+            "mood": {
+                "title": "오늘 하루 나의 키워드는?",
+                "options": {
+                    "professional": "프로페셔널하고 세련된",
+                    "natural": "자연스럽고 편안한",
+                    "cheerful": "유쾌하고 발랄한",
+                    "minimal": "미니멀하고 심플한"
+                }
+            },
+            "purpose": {
+                "title": "음료를 고를 때 중요하게 생각하는 목적은?",
+                "options": {
+                    "thirst": "갈증 해소",
+                    "caffeine": "카페인 충전",
+                    "healing": "휴식 & 힐링",
+                    "health": "건강 관리"
+                }
+            },
+            "favorite": {
+                "title": "기분 좋을 때 생각나는 음료는?",
+                "options": {
+                    "coffee": "커피",
+                    "herbal": "허브티",
+                    "refreshing": "청량한 음료",
+                    "milk": "우유 기반 음료"
+                }
+            }
+        }
     }
 }

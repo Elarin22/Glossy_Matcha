@@ -40,10 +40,21 @@
     <div class="col-xl-2 col-md-4 mb-3">
         <div class="card dashboard-card h-100">
             <div class="card-body text-center">
-                <i class="bi bi-graph-up dashboard-icon mb-3"></i>
+                <i class="bi bi-calendar3 dashboard-icon mb-3"></i>
                 <h5 class="card-title">이번 달 매출</h5>
                 <div class="stat-number">{{ monthly_sales|korean_won_with_unit|default:"0원" }}</div>
                 <small class="text-muted">{{ today|date:"Y년 m월" }} 누적 매출</small>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xl-2 col-md-4 mb-3">
+        <div class="card dashboard-card h-100">
+            <div class="card-body text-center">
+                <i class="bi bi-bar-chart dashboard-icon mb-3"></i>
+                <h5 class="card-title">올해 매출</h5>
+                <div class="stat-number">{{ yearly_sales|korean_won_with_unit|default:"0원" }}</div>
+                <small class="text-muted">{{ today|date:"Y년" }} 누적 매출</small>
             </div>
         </div>
     </div>
@@ -109,6 +120,108 @@
                         <a href="#" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#workRecordModal">
                             <i class="bi bi-cash me-2"></i>급여 기록
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 매출 분석 대시보드 -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="bi bi-graph-up-arrow me-2"></i>매출 분석</h5>
+                <div>
+                    <a href="{% url 'monthly_sales_excel_export' %}" class="btn btn-sm btn-outline-success me-2">
+                        <i class="bi bi-file-earmark-excel me-1"></i>월간 매출 현황
+                    </a>
+                    <a href="{% url 'yearly_sales_excel_export' %}" class="btn btn-sm btn-outline-success">
+                        <i class="bi bi-file-earmark-excel me-1"></i>연간 매출 현황
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- 매출 지표 -->
+                <div class="row mb-4">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">전월 대비</h6>
+                                <div class="h4 {% if sales_analysis.mom_change >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {% if sales_analysis.mom_change >= 0 %}↑{% else %}↓{% endif %} {{ sales_analysis.mom_change|floatformat:1 }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">전년 동월 대비</h6>
+                                <div class="h4 {% if sales_analysis.yoy_change >= 0 %}text-success{% else %}text-danger{% endif %}">
+                                    {% if sales_analysis.yoy_change >= 0 %}↑{% else %}↓{% endif %} {{ sales_analysis.yoy_change|floatformat:1 }}%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">수익률</h6>
+                                <div class="h4 text-primary">{{ sales_analysis.profit_margin|floatformat:1 }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">원가율</h6>
+                                <div class="h4 text-info">{{ sales_analysis.cost_ratio|floatformat:1 }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 차트 영역 -->
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="monthly-tab" data-bs-toggle="tab" data-bs-target="#monthly-chart" type="button" role="tab">
+                                            월별 매출 트렌드
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="daily-tab" data-bs-toggle="tab" data-bs-target="#daily-chart" type="button" role="tab">
+                                            최근 30일 매출
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="monthly-chart" role="tabpanel">
+                                        <canvas id="monthlyChart" height="100"></canvas>
+                                    </div>
+                                    <div class="tab-pane fade" id="daily-chart" role="tabpanel">
+                                        <canvas id="dailyChart" height="100"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">매출 구성</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="salesCompositionChart" height="200"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -414,6 +527,147 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 페이지 로드 시 초기 계산
     calculateDashboardSalary();
+});
+
+// Chart.js 스크립트
+const chartData = {{ chart_data|safe }};
+
+// 월별 매출 트렌드 차트
+const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+const monthlyChart = new Chart(monthlyCtx, {
+    type: 'line',
+    data: {
+        labels: chartData.monthly.labels,
+        datasets: [{
+            label: '매출',
+            data: chartData.monthly.sales,
+            borderColor: 'rgb(54, 162, 235)',
+            backgroundColor: 'rgba(54, 162, 235, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: '원가',
+            data: chartData.monthly.costs,
+            borderColor: 'rgb(255, 99, 132)',
+            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+            tension: 0.4,
+            fill: false
+        }, {
+            label: '수익',
+            data: chartData.monthly.profits,
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return value.toLocaleString() + '원';
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + '원';
+                    }
+                }
+            }
+        }
+    }
+});
+
+// 일별 매출 차트
+const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+const dailyChart = new Chart(dailyCtx, {
+    type: 'bar',
+    data: {
+        labels: chartData.daily.labels,
+        datasets: [{
+            label: '일별 매출',
+            data: chartData.daily.sales,
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgb(54, 162, 235)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return value.toLocaleString() + '원';
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.parsed.y.toLocaleString() + '원';
+                    }
+                }
+            }
+        }
+    }
+});
+
+// 매출 구성 도넛 차트
+const compositionCtx = document.getElementById('salesCompositionChart').getContext('2d');
+const salesAnalysis = {
+    current_month: {{ sales_analysis.current_month }},
+    current_cost: {{ sales_analysis.current_cost }},
+    current_profit: {{ sales_analysis.current_profit }}
+};
+
+const compositionChart = new Chart(compositionCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['원가', '수익'],
+        datasets: [{
+            data: [salesAnalysis.current_cost, salesAnalysis.current_profit],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(75, 192, 192, 0.8)'
+            ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(75, 192, 192)'
+            ],
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                        const percentage = ((context.parsed / total) * 100).toFixed(1);
+                        return context.label + ': ' + context.parsed.toLocaleString() + '원 (' + percentage + '%)';
+                    }
+                }
+            }
+        }
+    }
 });
 
 </script>
