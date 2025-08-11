@@ -114,6 +114,31 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 'cost': float(cost_amount),
                 'profit': float(profit_amount)
             })
+    
+        # 최근 30일 일별 매출 데이터
+        daily_data = []
+        daily_labels = []
+        for i in range(29, -1, -1):
+            """30일 전부터 현재까지의 일별 매출 데이터 생성"""
+            target_date = today - timedelta(days=i)
+            daily_sales = DailySales.objects.filter(date=target_date).first()
+            sales_amount = daily_sales.total_sales if daily_sales else 0
+
+            daily_labels.append(target_date.strftime('%m/%d'))
+            daily_data.append(float(sales_amount))
+
+        return {
+            'monthly': {
+                'labels': labels,
+                'sales': [item['sales'] for item in months_data],
+                'cost': [item['cost'] for item in months_data],
+                'profits': [item['profit'] for item in months_data]
+            },
+            'daily': {
+                'labels': daily_labels,
+                'sales': daily_data
+            }
+        }
 
     
 # API Views for Inquiries
