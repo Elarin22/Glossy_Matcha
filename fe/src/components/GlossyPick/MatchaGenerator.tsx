@@ -9,20 +9,40 @@ import { menuData } from "@/data/menuData";
 import { useMatchaQuiz } from "@/hooks/useMatchaQuiz";
 import { useShare } from "@/hooks/useShare";
 import { useDownload } from "@/hooks/useDownload";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 import Intro from "./Intro";
 import QuestionSection from "./QuestionSection";
 import ResultSection from "./ResultSection";
 import styles from "./MatchaGenerator.module.scss";
 
 export default function MatchaGenerator() {
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+
     const {
         currentStep,
+        setQuizState,
         handleAnswer,
         resetQuiz,
         startQuiz,
         goPrevStep,
         recommendation,
     } = useMatchaQuiz();
+
+    const recommendedMenu = searchParams.get("recommendation");
+
+    useEffect(() => {
+        if (recommendedMenu) {
+            setQuizState({
+                currentStep: 5,
+                answers: {},
+            });
+        }
+    }, [recommendedMenu, setQuizState]);
+
+    const displayedRecommendation = recommendedMenu || recommendation;
 
     const handlePrev = () => {
         goPrevStep();
@@ -33,8 +53,8 @@ export default function MatchaGenerator() {
     const { downloadImage } = useDownload();
 
     const handleShare = () => {
-        if (!recommendation) return;
-        shareResult(recommendation);
+        if (!displayedRecommendation) return;
+        shareResult(displayedRecommendation);
     };
 
     const handleDownload = () => {
@@ -68,6 +88,11 @@ export default function MatchaGenerator() {
         }
     };
 
+    const handleReset = () => {
+        resetQuiz();
+        router.replace(pathname);
+    };
+
     return (
         <main className={styles["matcha-generator"]}>
             <section>
@@ -93,12 +118,12 @@ export default function MatchaGenerator() {
                     />
                 )}
 
-                {currentStep === 5 && recommendation && (
+                {currentStep === 5 && displayedRecommendation && (
                     <ResultSection
-                        menuInfo={menuData[recommendation]}
+                        menuInfo={menuData[displayedRecommendation]}
                         onShare={handleShare}
                         onDownload={handleDownload}
-                        onReset={resetQuiz}
+                        onReset={handleReset}
                     />
                 )}
                 <ToastContainer position="bottom-center" autoClose={2000} />
