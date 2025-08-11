@@ -7,14 +7,12 @@ import GlossyPickHeader from "./GlossyPickHeader";
 interface ResultSectionProps {
     menuInfo: MenuInfo;
     onShare: () => void;
-    onDownload: () => void;
     onReset: () => void;
 }
 
 export default function ResultSection({
     menuInfo,
     onShare,
-    onDownload,
     onReset,
 }: ResultSectionProps) {
     const tMenu = useTranslations("test.menu");
@@ -55,9 +53,6 @@ export default function ResultSection({
             >
                 <button onClick={onShare} className="btn-g">
                     {tResult("share")}
-                </button>
-                <button onClick={onDownload} className="btn-g">
-                    {tResult("download")}
                 </button>
                 <button onClick={onReset} className="btn-g">
                     {tResult("reset")}
