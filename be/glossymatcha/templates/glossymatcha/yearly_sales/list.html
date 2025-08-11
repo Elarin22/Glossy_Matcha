@@ -88,8 +88,8 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="{% url 'yearly_sales_excel_export' %}" class="btn btn-sm btn-outline-success">
-                                    <i class="bi bi-file-earmark-excel me-1"></i>엑셀 다운로드
+                                <a href="{% url 'individual_yearly_sales_excel_export' yearly_sale.pk %}" class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-file-earmark-excel me-1"></i>{{ yearly_sale.year }}년
                                 </a>
                             </td>
                         </tr>
