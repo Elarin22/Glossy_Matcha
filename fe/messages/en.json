@@ -113,10 +113,10 @@
             "title": "GLOSSY HISTORY",
             "location": "112, Johamhaean-ro, Jocheon-eup, Jeju-si, Jeju-do (Approx. 3,300㎡)",
             "items": [
-                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' OPENING"] },
+                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' Opening"] },
                 {
                     "date": "2024.09",
-                    "desc": ["Select shop 'WITH GLOSSY' OPENING"]
+                    "desc": ["Select Shop 'WITH GLOSSY' Opening"]
                 },
                 {
                     "date": "2024.12",
@@ -133,7 +133,7 @@
                 {
                     "date": "2025.05",
                     "desc": [
-                        "Held POP-UP events in the USA and France and discussed follow-up export volumes"
+                        "Held Pop-Up events in the USA and France and discussed Follow-Up export volumes"
                     ]
                 },
                 {
@@ -143,6 +143,100 @@
                     ]
                 }
             ]
+        }
+    },
+    "test": {
+        "header": {
+            "title": "Glossy Pick",
+            "sub-title": "The one and only, Your personalized Glossy Matcha"
+        },
+        "intro": {
+            "desc": "Answer a few questions and We'll recommend the Glossy Matcha Menu that suits you.",
+            "start": "Start"
+        },
+        "question": {
+            "prev": "Previous"
+        },
+        "result": {
+            "title": "A cup of Glossy Matcha made just for you",
+            "share": "Share",
+            "download": "Save",
+            "reset": "Again"
+        },
+        "menu": {
+            "jejuOreum": {
+                "name": "Jeju, Oreum",
+                "description": "Deep and Rich taste of Premium Jeju Matcha",
+                "tags": ["Premium", "Rich flavor", "Jeju-Grown"]
+            },
+            "matchaStraight": {
+                "name": "Matcha Straight",
+                "description": "Pure Original Taste and Aroma of Matcha",
+                "tags": ["Pure", "Traditional", "Authentic"]
+            },
+            "matchaMojito": {
+                "name": "Glossy Matcha Mojito",
+                "description": "Perfect harmony of Fresh Mint and Matcha",
+                "tags": ["Refreshing", "Cool", "Trendy"]
+            },
+            "matchaLatte": {
+                "name": "Glossy Matcha Latte",
+                "description": "Classic meeting of Smooth Milk and Matcha",
+                "tags": ["Smooth", "Classic", "Popular"]
+            },
+            "matchaSpanner": {
+                "name": "Matcha Spanner",
+                "description": "Sweet whipped Cream on Top of Matcha",
+                "tags": ["Sweet", "Visual", "Special"]
+            },
+            "matchaBarley": {
+                "name": "Barley Cream Matcha Latte",
+                "description": "Matcha Latte enhanced with Nutty Barley Cream",
+                "tags": ["Nutty", "Creamy", "Unique"]
+            },
+            "greenLemonade": {
+                "name": "Green Lemonade",
+                "description": "Refreshing encounter of Lemon and Matcha",
+                "tags": ["Refreshing", "Tangy", "Summer"]
+            }
+        },
+        "questions": {
+            "style": {
+                "title": "What's your favorite Matcha Style?",
+                "options": {
+                    "depth": "Flavor Depth",
+                    "sweet": "Harmonious Sweetness",
+                    "visual": "Visual / Mood",
+                    "fresh": "Freshness & Aroma"
+                }
+            },
+            "mood": {
+                "title": "What's your keyword for today?",
+                "options": {
+                    "professional": "Professional & Sophisticated",
+                    "natural": "Natural & Comfortable",
+                    "cheerful": "Cheerful & Lively",
+                    "minimal": "Minimal & Simple"
+                }
+            },
+            "purpose": {
+                "title": "What's important when choosing a drink?",
+                "options": {
+                    "thirst": "Quench Thirst",
+                    "caffeine": "Need Caffeine",
+                    "healing": "Rest & Healing",
+                    "health": "Health Management"
+                }
+            },
+            "favorite": {
+                "title": "What drink comes to mind when you're happy?",
+                "options": {
+                    "coffee": "Coffee",
+                    "herbal": "Herbal Tea",
+                    "refreshing": "Refreshing Beverage",
+                    "milk": "Milk-based Drink"
+                }
+            }
         }
     }
 }

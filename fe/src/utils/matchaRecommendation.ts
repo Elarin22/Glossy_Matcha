@@ -6,13 +6,13 @@ type MenuKey = keyof typeof menuData;
 
 // 메뉴 키들을 상수로 정의 (타입 체크 + 자동완성 지원)
 const MENU_KEYS: Record<string, MenuKey> = {
-    JEJU_OREUM: "제주, 오름",
-    MATCHA_STRAIGHT: "말차 스트레이트",
-    GLOSSY_MATCHA_LATTE: "글로시 말차 라떼",
-    MATCHA_SCHPENER: "말차 슈페너",
-    BARLEY_CREAM_MATCHA_LATTE: "보리크림 말차 라떼",
-    GLOSSY_MATCHA_MOJITO: "글로시 말차 모히또",
-    GREEN_LEMONADE: "그린 레몬에이드",
+    JEJU_OREUM: "jeju-oreum",
+    MATCHA_STRAIGHT: "matcha-straight",
+    GLOSSY_MATCHA_LATTE: "matcha-latte",
+    MATCHA_SCHPENER: "matcha-spanner",
+    BARLEY_CREAM_MATCHA_LATTE: "matcha-barley",
+    GLOSSY_MATCHA_MOJITO: "matcha-mojito",
+    GREEN_LEMONADE: "green-lemonade",
 } as const;
 
 export const getRecommendation = (userAnswers: AnswerType): string => {

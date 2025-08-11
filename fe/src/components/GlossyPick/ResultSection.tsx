@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { MenuInfo } from "@/types/matcha";
 import Image from "next/image";
 import styles from "./ResultSection.module.scss";
@@ -16,12 +17,13 @@ export default function ResultSection({
     onDownload,
     onReset,
 }: ResultSectionProps) {
+    const tMenu = useTranslations("test.menu");
+    const tResult = useTranslations("test.result");
+
     return (
         <div id="result-section" className={styles.result}>
             <GlossyPickHeader />
-            <p className={styles.result__title}>
-                글로시 말차가 제안하는 당신만을 위한 한 잔
-            </p>
+            <p className={styles.result__title}>{tResult("title")}</p>
 
             <section className={styles["result__menu"]}>
                 <h4 className="sr-only">글로시 메뉴 추천</h4>
@@ -32,16 +34,18 @@ export default function ResultSection({
                     width={300}
                     height={360}
                 />
-                <p className={styles["result__menuName"]}>{menuInfo.name}</p>
+                <p className={styles["result__menuName"]}>
+                    {tMenu(menuInfo.name)}
+                </p>
                 <div className={styles.result__tags}>
                     {menuInfo.tags.map((tag, index) => (
                         <span key={index} className="tag">
-                            {tag}
+                            {tMenu(tag)}
                         </span>
                     ))}
                 </div>
                 <p className={styles.result__menuDescription}>
-                    {menuInfo.description}
+                    {tMenu(menuInfo.description)}
                 </p>
             </section>
 
@@ -50,13 +54,13 @@ export default function ResultSection({
                 data-html2canvas-ignore="true"
             >
                 <button onClick={onShare} className="btn-g">
-                    공유하기
+                    {tResult("share")}
                 </button>
                 <button onClick={onDownload} className="btn-g">
-                    저장하기
+                    {tResult("download")}
                 </button>
                 <button onClick={onReset} className="btn-g">
-                    다시하기
+                    {tResult("reset")}
                 </button>
             </div>
         </div>

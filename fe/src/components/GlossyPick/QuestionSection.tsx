@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Question, AnswerType } from "@/types/matcha";
 import GlossyPickHeader from "./GlossyPickHeader";
 import styles from "./QuestionSection.module.scss";
@@ -15,11 +16,14 @@ export default function QuestionSection({
     onAnswer,
     onPrev,
 }: QuestionSectionProps) {
+    const t = useTranslations("test.questions");
+    const tPrev = useTranslations("test.question");
+
     return (
         <div className={styles.question}>
             <GlossyPickHeader />
 
-            <p className={styles.question__title}>{question.title}</p>
+            <p className={styles.question__title}>{t(question.title)}</p>
 
             <div className={styles.question__options}>
                 {question.options.map((option) => (
@@ -28,7 +32,7 @@ export default function QuestionSection({
                         onClick={() => onAnswer(question.id, option.key)}
                         className="btn-choice"
                     >
-                        {option.text}
+                        {t(option.text)}
                     </button>
                 ))}
             </div>
@@ -36,7 +40,7 @@ export default function QuestionSection({
             <span className={styles.question__step}>{currentStep}/4</span>
             {currentStep > 1 && (
                 <button type="button" onClick={onPrev} className="btn-g">
-                    이전
+                    {tPrev("prev")}
                 </button>
             )}
         </div>
