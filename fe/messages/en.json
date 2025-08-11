@@ -182,6 +182,44 @@
                 "description": "Refreshing encounter of lemon and matcha",
                 "tags": ["Refreshing", "Tangy", "Summer"]
             }
+        },
+        "questions": {
+            "style": {
+                "title": "What's your favorite matcha style?",
+                "options": {
+                    "depth": "Flavor Depth",
+                    "sweet": "Harmonious Sweetness",
+                    "visual": "Visual / Mood",
+                    "fresh": "Freshness & Aroma"
+                }
+            },
+            "mood": {
+                "title": "What's your keyword for today?",
+                "options": {
+                    "professional": "Professional & Sophisticated",
+                    "natural": "Natural & Comfortable",
+                    "cheerful": "Cheerful & Lively",
+                    "minimal": "Minimal & Simple"
+                }
+            },
+            "purpose": {
+                "title": "What's important when choosing a drink?",
+                "options": {
+                    "thirst": "Quench Thirst",
+                    "caffeine": "Caffeine Boost",
+                    "healing": "Rest & Healing",
+                    "health": "Health Management"
+                }
+            },
+            "favorite": {
+                "title": "What drink comes to mind when you're happy?",
+                "options": {
+                    "coffee": "Coffee",
+                    "herbal": "Herbal Tea",
+                    "refreshing": "Refreshing Beverage",
+                    "milk": "Milk-based Drink"
+                }
+            }
         }
     }
 }
