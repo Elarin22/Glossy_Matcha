@@ -113,10 +113,10 @@
             "title": "GLOSSY HISTORY",
             "location": "112, Johamhaean-ro, Jocheon-eup, Jeju-si, Jeju-do (Approx. 3,300㎡)",
             "items": [
-                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' OPENING"] },
+                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' Opening"] },
                 {
                     "date": "2024.09",
-                    "desc": ["Select shop 'WITH GLOSSY' OPENING"]
+                    "desc": ["Select Shop 'WITH GLOSSY' Opening"]
                 },
                 {
                     "date": "2024.12",
@@ -133,7 +133,7 @@
                 {
                     "date": "2025.05",
                     "desc": [
-                        "Held POP-UP events in the USA and France and discussed follow-up export volumes"
+                        "Held Pop-Up events in the USA and France and discussed Follow-Up export volumes"
                     ]
                 },
                 {
@@ -161,7 +161,7 @@
             "title": "A cup of Glossy Matcha made just for you",
             "share": "Share",
             "download": "Save",
-            "reset": "Try Again"
+            "reset": "Again"
         },
         "menu": {
             "jejuOreum": {
