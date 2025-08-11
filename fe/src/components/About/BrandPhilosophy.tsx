@@ -16,21 +16,22 @@ export default function BrandPhilosophy() {
 
     return (
         <section id="philosophy" className={styles["brand-philosophy"]}>
+            <h3 className="sr-only">브랜드 철학</h3>
             <div className={styles["brand-philosophy__content"]}>
-                <h3 className={styles["brand-philosophy__title"]}>
+                <h4 className={styles["brand-philosophy__title"]}>
                     {t("title")}
-                </h3>
+                </h4>
 
                 <div className={styles["brand-philosophy__list"]}>
                     <article className={styles["brand-philosophy__item"]}>
                         <div className={styles["brand-philosophy__circle"]}>
-                            <h4
+                            <h5
                                 className={
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
                                 {t("list.item-1.title")}
-                            </h4>
+                            </h5>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
                             {t("list.item-1.desc")}
@@ -39,13 +40,13 @@ export default function BrandPhilosophy() {
 
                     <article className={styles["brand-philosophy__item"]}>
                         <div className={styles["brand-philosophy__circle"]}>
-                            <h4
+                            <h5
                                 className={
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
                                 {t("list.item-2.title")}
-                            </h4>
+                            </h5>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
                             {t("list.item-2.desc")}
@@ -54,13 +55,13 @@ export default function BrandPhilosophy() {
 
                     <article className={styles["brand-philosophy__item"]}>
                         <div className={styles["brand-philosophy__circle"]}>
-                            <h4
+                            <h5
                                 className={
                                     styles["brand-philosophy__item-title"]
                                 }
                             >
                                 {t("list.item-3.title")}
-                            </h4>
+                            </h5>
                         </div>
                         <p className={styles["brand-philosophy__item-desc"]}>
                             {t("list.item-3.desc")}

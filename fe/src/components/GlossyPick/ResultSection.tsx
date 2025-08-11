@@ -21,10 +21,9 @@ export default function ResultSection({
     return (
         <div id="result-section" className={styles.result}>
             <GlossyPickHeader />
-            <p className={styles.result__title}>{tResult("title")}</p>
 
             <section className={styles["result__menu"]}>
-                <h4 className="sr-only">글로시 메뉴 추천</h4>
+                <h4 className={styles.result__title}>{tResult("title")}</h4>
                 <Image
                     className={styles["result__image"]}
                     src={menuInfo.image}

@@ -18,9 +18,9 @@ export default function JejuMatcha() {
 
     return (
         <>
-            {/* 말차 소개 및 브랜드 메시지 섹션 */}
+            <h3 className="sr-only">제주 유기농 말차</h3>
             <section id="jeju-matcha" className={styles["jeju-matcha__intro"]}>
-                <h3 className="sr-only">제주 유기농 말차 첫번째 섹션</h3>
+                <h4 className="sr-only">말차 소개 및 브랜드 메시지</h4>
                 <Image
                     className={styles["jeju-matcha__image"]}
                     src="/images/about/leaf.webp"
@@ -30,9 +30,9 @@ export default function JejuMatcha() {
                 />
 
                 <div className={styles["jeju-matcha__content"]}>
-                    <h4 className={styles["jeju-matcha__title"]}>
+                    <h5 className={styles["jeju-matcha__title"]}>
                         {t("intro.title")}
-                    </h4>
+                    </h5>
                     <p className={styles["jeju-matcha__slogan"]}>
                         &ldquo;{t("intro.slogan")}&rdquo;
                     </p>
@@ -54,14 +54,13 @@ export default function JejuMatcha() {
                 </div>
             </section>
 
-            {/* 말차 주요 특징 소개 섹션 */}
             <section className={styles["jeju-matcha__feature"]}>
-                <h3 className="sr-only">제주 유기농 말차 두번째 섹션</h3>
+                <h4 className="sr-only">제주 유기농 말차 주요 특징</h4>
                 <div className={styles["jeju-matcha__feature-list"]}>
                     <article className={styles["jeju-matcha__feature-item"]}>
-                        <h4 className={styles["jeju-matcha__feature-title"]}>
+                        <h5 className={styles["jeju-matcha__feature-title"]}>
                             {t("feature.item-1.title")}
-                        </h4>
+                        </h5>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
@@ -72,9 +71,9 @@ export default function JejuMatcha() {
                     </article>
 
                     <article className={styles["jeju-matcha__feature-item"]}>
-                        <h4 className={styles["jeju-matcha__feature-title"]}>
+                        <h5 className={styles["jeju-matcha__feature-title"]}>
                             {t("feature.item-2.title")}
-                        </h4>
+                        </h5>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
@@ -85,9 +84,9 @@ export default function JejuMatcha() {
                     </article>
 
                     <article className={styles["jeju-matcha__feature-item"]}>
-                        <h4 className={styles["jeju-matcha__feature-title"]}>
+                        <h5 className={styles["jeju-matcha__feature-title"]}>
                             {t("feature.item-3.title")}
-                        </h4>
+                        </h5>
                         <p
                             className={
                                 styles["jeju-matcha__feature-description"]
