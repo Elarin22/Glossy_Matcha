@@ -1,0 +1,105 @@
+// SCSS 변수 정의 (프로젝트의 변수 파일에서 import해서 사용)
+$font-size-24: 24px;
+$font-size-18: 18px;
+$color-green-500: #22c55e; // 예시 색상값, 실제 프로젝트 색상으로 조정
+$color-black-200: #e5e7eb; // 예시 색상값, 실제 프로젝트 색상으로 조정
+
+.productDescription {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  
+  .descriptionItem {
+    margin-bottom: 100px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .imageWrapper {
+      width: 100%;
+      margin-bottom: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      .descriptionImage {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+    
+    .textContent {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      
+      .descriptionTitle {
+        font-family: 'YeolrinMyeongjo', serif;
+        font-size: $font-size-24;
+        color: $color-green-500;
+        font-weight: 400;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        word-break: keep-all;
+        
+        @media (max-width: 768px) {
+          font-size: 20px;
+          margin-bottom: 16px;
+        }
+      }
+      
+      .descriptionText {
+        font-family: 'Pretendard', sans-serif;
+        font-size: $font-size-18;
+        color: $color-black-200;
+        font-weight: 400;
+        line-height: 1.6;
+        margin: 0;
+        word-break: keep-all;
+        
+        @media (max-width: 768px) {
+          font-size: 16px;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 1024px) {
+  .productDescription {
+    padding: 40px 16px;
+    
+    .descriptionItem {
+      margin-bottom: 80px;
+      
+      .imageWrapper {
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .productDescription {
+    padding: 32px 16px;
+    
+    .descriptionItem {
+      margin-bottom: 60px;
+      
+      .imageWrapper {
+        margin-bottom: 24px;
+      }
+      
+      .textContent {
+        .descriptionTitle {
+          margin-bottom: 12px;
+        }
+      }
+    }
+  }
+}
