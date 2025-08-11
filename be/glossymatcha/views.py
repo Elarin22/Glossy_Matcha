@@ -1240,3 +1240,79 @@ class YearlySalesExcelExportView(LoginRequiredMixin, TemplateView):
 
         wb.save(response)
         return response
+    
+class IndividualYearlySalesExcelExportView(LoginRequiredMixin, TemplateView):
+    def get(self, request, *args, **kwargs):
+        # url에서 pk 파라미터 추출
+        yearly_sale_pk = kwargs.get('pk')
+        try:
+            yearly_sale = YearlySales.objects.get(pk=yearly_sale_pk)
+        except YearlySales.DoesNotExist:
+            messages.error(request, '해당 연별 매출이 존재하지 않습니다.')
+            return redirect('yearly_sales_list')
+        
+        # 워크북 생성
+        wb = Workbook()
+        ws = wb.active
+        ws.title = f'{yearly_sale.year}년 매출'
+
+        # 헤더 스타일 설정
+        header_font = Font(bold=True, color='FFFFFF')
+        header_fill = PatternFill(start_color='366092', end_color='366092', fill_type='solid')
+        header_alignment = Alignment(horizontal='center', vertical='center')
+
+        # 헤더 작성
+        headers = [
+            '연도', '오프라인 매출', '기타 매출', '총 매출',
+            '총 재료비', '총 노무비', '총 경비-소모품', '총 경비-기타', '총 원가', '매출 총이익', '수익률(%)', '메모'
+        ]
+
+        for col, header in enumerate(headers, 1):
+            cell = ws.cell(row=1, column=col, value=header)
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = header_alignment
+
+        # 데이터 작성
+        profit_margin = (yearly_sale.gross_profit / yearly_sale.total_sales) if yearly_sale.total_sales > 0 else 0
+
+        # 기본 데이터 작성
+        ws.cell(row=2, column=1, value=yearly_sale.year)
+
+        # 금액 데이터 작성
+        money_cells = [
+            (2, int(yearly_sale.offline_sales)),
+            (3, int(yearly_sale.other_sales)),
+            (4, int(yearly_sale.total_sales)),
+            (5, int(yearly_sale.total_material_cost)),
+            (6, int(yearly_sale.total_labor_cost)),
+            (7, int(yearly_sale.total_supplies_expense)),
+            (8, int(yearly_sale.total_other_expense)),
+            (9, int(yearly_sale.total_cost)),
+            (10, int(yearly_sale.gross_profit))
+        ]
+
+        for col, value in money_cells:
+            cell = ws.cell(row=2, column=col, value=value)
+            cell.number_format = '#,##0'
+
+        # % 데이터 작성
+        percent_cell = ws.cell(row=2, column=11, value=profit_margin)
+        percent_cell.number_format = '0.0%'
+
+        # 메모 작성
+        ws.cell(row=2, column=12, value=yearly_sale.memo or '')
+
+        # 열(col) 너비 조정
+        column_widths = [8, 15, 12, 15, 12, 12, 12, 12, 12, 15, 12, 20]
+        for col, width in enumerate(column_widths, 1):
+            ws.column_dimensions[ws.cell(row=1, column=col).column_letter].width = width
+
+        # HTTP 응답 생성
+        response = HttpResponse(
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = f'attachment; filename="{yearly_sale.year}년_매출.xlsx"'
+
+        wb.save(response)
+        return response
