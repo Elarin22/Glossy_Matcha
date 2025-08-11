@@ -139,8 +139,58 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                 'sales': daily_data
             }
         }
-
     
+    def get_sales_analysis(self):
+        """매출 분석 데이터 생성"""
+        today = date.today()
+        
+        # 이번 달
+        current_year = today.year
+        current_month_num = today.month
+
+        # 저번 달 매출 계산
+        previous_month_num = current_month_num - 1
+        previous_year = current_year
+        if previous_month_num <= 0:
+            previous_month_num = 12
+            previous_year -= 1
+        
+        # 작년 동월
+        last_year = current_year - 1
+        same_month_last_year = current_month_num
+
+        # 이번 달 매출
+        current_sales = Sales.objects.filter(year=current_year, month=current_month_num).first()
+        current_amount = current_sales.total_sales if current_sales else 0
+        current_cost = current_sales.total_cost if current_sales else 0
+        current_profit = current_sales.gross_profit if current_sales else 0
+
+        # 저번 달 매출
+        previous_sales = Sales.objects.filter(year=previous_year, month=previous_month_num).first()
+        previous_amount = previous_sales.total_sales if previous_sales else 0
+
+        # 작년 동월 매출
+        last_year_sales = Sales.objects.filter(year=last_year, month=same_month_last_year).first()
+        last_year_amount = last_year_sales.total_sales if last_year_sales else 0
+
+        # 매출 증감 계산
+        mom_change = ((current_amount - previous_amount) / previous_amount * 100) if previous_amount > 0 else 0
+        yoy_change = ((current_amount - last_year_amount) / last_year_amount * 100) if last_year_amount > 0 else 0
+
+        # 수익률 계산
+        profit_margin = (current_profit / current_amount * 100) if current_amount > 0 else 0
+        cost_ratio = (current_cost / current_amount * 100) if current_amount > 0 else 0
+
+        return {
+            'current_month': current_amount,
+            'current_profit': current_profit,
+            'current_cost': current_cost,
+            'mom_change': round(mom_change, 1),
+            'yoy_change': round(yoy_change, 1),
+            'profit_margin': round(profit_margin, 1),
+            'cost_ratio': round(cost_ratio, 1),
+        }
+
 # API Views for Inquiries
 class CreateInquiryView(generics.CreateAPIView):
     """
