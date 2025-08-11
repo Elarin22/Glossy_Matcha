@@ -22,9 +22,8 @@ export default function MobileHome({
       <section className={styles["video-section"]}>
         <h2 className="sr-only">{contents[0].title}</h2>
         <div className={styles["video-background"]}>
-          <video ref={videoRef} autoPlay muted loop playsInline>
-            <source src={contents[0].sourceMb} type="video/webm" />
-            <source src="/videos/intro-mb.mp4" type="video/mp4" />
+          <video ref={videoRef} preload="auto" autoPlay muted loop playsInline>
+            <source src={contents[0].sourceMb} type="video/mp4" />
           </video>
         </div>
         <div className={styles.overlay} />
@@ -33,7 +32,7 @@ export default function MobileHome({
           <p className={styles.subTitle}>{contents[0].subSlogan}</p>
           <p className={styles.description}>{contents[0].description}</p>
         </div>
-        <SoundButton videoRef={videoRef} />
+        <SoundButton videoRef={videoRef} bottom={50} />
       </section>
 
       {/* second section - end */}

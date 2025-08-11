@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useMobileDetect } from "@/hooks/useMobileDetect";
+import { useMessages, useTranslations } from "next-intl";
 
 const PcHome = dynamic(() => import("@/components/Home/PcHome/PcHome"), {
   ssr: false,
@@ -31,7 +32,7 @@ const homeContents: HomeContent[] = [
     description:
       "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
     source: "/videos/intro-pc.webm",
-    sourceMb: "/videos/intro-mb.webm",
+    sourceMb: "/videos/intro-mb.mp4",
   },
   {
     title: "카페 소개",
@@ -69,6 +70,10 @@ const homeContents: HomeContent[] = [
 export default function Home() {
   const isMobile = useMobileDetect();
   if (isMobile === null) return null;
+
+  // const messages = useMessages() as { home: { homeContent: HomeContent[] } };
+
+  // const homeContents = messages.home.homeContent;
 
   return (
     <>

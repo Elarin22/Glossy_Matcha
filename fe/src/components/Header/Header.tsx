@@ -94,10 +94,10 @@ export default function Header({ locale }: { locale: string }) {
             <div className={styles["header__list"]}>
               <Link href={`/${locale}/inquire`} aria-label={t("contact")}>
                 <img
-                  src="/images/icon/inquire.svg"
+                  src="/images/icon/headset.svg"
                   alt=""
-                  width={30}
-                  height={30}
+                  width={20}
+                  height={20}
                 />
               </Link>
               <LanguageButton locale={locale} />
