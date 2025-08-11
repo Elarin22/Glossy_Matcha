@@ -51,6 +51,10 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             month=today.month
         ).first()
         monthly_sales = current_month_sales.total_sales if current_month_sales else 0
+        
+        # 이번 연도 매출 집계
+        current_year_sales = YearlySales.objects.filter(year=today.year).first()
+        yearly_sales = current_year_sales.total_sales if current_year_sales else 0
 
         # 최근 매출 현황 (최근 5건 - 일별 매출)
         recent_sales = DailySales.objects.all()[:5]
@@ -74,6 +78,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             'active_suppliers_count': active_suppliers_count,
             'today_sales': today_sales,
             'monthly_sales': monthly_sales,
+            'yearly_sales': yearly_sales,
             'recent_sales': recent_sales,
             'staff_list': staff_list,
             'recent_inquiries': recent_inquiries,
