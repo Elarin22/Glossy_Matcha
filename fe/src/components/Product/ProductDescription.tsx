@@ -35,6 +35,8 @@ interface Product {
     description_en?: string;
     short_description?: string;
     short_description_en?: string;
+    sub_description?: string;
+    sub_description_en?: string;
     images: ProductImage[];
     specifications: ProductSpecification[];
     body_sections?: ProductBodySection[];
@@ -67,6 +69,24 @@ const mockProducts: Product[] = [
         description_en: "Ceremonial Matcha | Bamboo Sap | Coconut Sugar",
         short_description: "* 글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
         short_description_en: "GlossyMatcha Signature is made with the same ingredients as the matcha used in actual stores.",
+        sub_description: `말차, 이젠 쉽고 간편하게 즐겨요||귀찮고 복잡한 차선과 차완 대신, 오직 10g. 단 한 포로 손쉽게 말차 음료를 완성하세요.
+        ---
+        제주의 봄, 첫순으로만 만든 유기농 말차||국내에는 세레모니얼 등급의 인증기관이 없는 대신, 글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순', 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.
+        ---
+        떫은 맛은 줄이고, 신선한 향을 살린 깔끔한 피니쉬||말차는 고유의 떫고 쓴 맛으로 호불호가 있으나, 글로시말차의 원료는 신선한 원료와 가공 노하우로 떫은 맛은 적고, 크림처럼 부드러운 텍스쳐와 끝맛이 일품입니다.
+        ---
+        자연의 은은한 단 맛을 부담없이||대체당과 코코넛슈가, 대나무수액 원당의 블랜딩으로 당류 부담은 낮추고, 인위적인 대체당의 맛 대신에 원당의 자연스런 단맛과 풍미를 즐기세요. (1회 섭취량 기준 당류 1g)
+        ---
+        휴대성과 간편성은 더 강화한 감각적인 디자인||꽂아두기 쉬운 세로형 스틱과 슬라이드형 패키지. 그리고 이지컷 방식으로 제작된 상단부로 더 편리해요`,
+        sub_description_en: `Enjoy Matcha Easily, Anytime||Skip the whisk and bowl—just one 10g stick makes the perfect cup of matcha.
+        ---
+        Organic Matcha from Jeju's First Spring Leaves||Using only the first leaves of spring, Glossy Matcha meets Japan's ceremonial-grade standards for true organic matcha.
+        ---
+        Smooth Finish with Reduced Bitterness||Less bitterness, more freshness—creamy texture with a clean finish.
+        ---
+        Naturally Gentle Sweetness||A low-sugar blend of natural sweeteners and bamboo sap for a light, pleasant sweetness. Only 1g sugar per serving.
+        ---
+        Stylish, Portable Design||Vertical sticks, slide-out packaging, and easy-cut tops for ultimate convenience.`,
         images: [
             {
                 id: 1,
@@ -502,14 +522,25 @@ const ProductDescriptionTest: React.FC = () => {
                             <TextFormatter text={getLocalizedField(currentProduct, 'subtitle', lang)} />
                         </p>
                     </div>
-
-                    {/* ProductDescription 컴포넌트 */}
-                    {currentProduct.body_sections && currentProduct.body_sections.length > 0 && (
-                        <ProductDescription 
-                            bodySections={currentProduct.body_sections}
-                            isEnglish={isEnglish}
-                        />
-                    )}
+                    {(() => {
+                        // body_sections가 있으면 그대로 사용, 없으면 sub_description을 파싱
+                        let bodySections: ProductBodySection[] = [];
+                        
+                        if (currentProduct.body_sections && currentProduct.body_sections.length > 0) {
+                            bodySections = currentProduct.body_sections;
+                        } else {
+                            // sub_description 필드에서 파싱
+                            const subDescText = getLocalizedField(currentProduct as any, 'sub_description', lang);
+                            bodySections = parseSubDescription(subDescText);
+                        }
+                        
+                        return bodySections.length > 0 && (
+                            <ProductDescription 
+                                bodySections={bodySections}
+                                isEnglish={isEnglish}
+                            />
+                        );
+                    })()}
                 </>
             )}
         </div>
