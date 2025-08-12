@@ -9,18 +9,19 @@ import { Product } from '@/components/Product/ProductDescription';
 import styles from './page.module.scss';
 
 interface ProductsPageProps {
-    params: {
+    params: Promise<{
         locale: string;
-    };
+    }>;
 }
 
 const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
+    const resolvedParams = React.use(params);
     const [activeProductId, setActiveProductId] = useState<number>(1);
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     
-    const lang = params?.locale || 'ko';
+    const lang = resolvedParams?.locale || 'ko';
 
     useEffect(() => {
         const fetchProducts = async () => {

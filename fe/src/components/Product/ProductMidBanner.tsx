@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ProductApi, { type Product } from '../../services/productApi';
 import styles from './ProductMidBanner.module.scss';
+import { TextFormatter } from '../../utils/textFormatter';
 import '../../data/mockProducts';
 
 interface ProductMidBannerProps {
@@ -51,8 +52,7 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         const image = product?.images?.[0];
         if (!image) return '';
         
-        const altText = lang === 'en' ? image.alt_text_en : image.alt_text_ko;
-        return altText || getProductName();
+        return image.alt_text || getProductName();
     };
 
     const wrapWordsForMobile = (text: string, type: 'subtitle' | 'description' | 'shortDescription') => {
@@ -121,24 +121,24 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         <section className={styles.midBanner}>
             <div className={styles.container}>
                 <div className={styles.textContent}>
-                    {productName && <h2 className={styles.productName}>{productName}</h2>}
+                    {productName && (
+                        <h2 className={styles.productName}>
+                            <TextFormatter text={productName} />
+                        </h2>
+                    )}
                     {productSubtitle && (
                         <h3 className={styles.productSubtitle}>
-                            {wrapWordsForMobile(productSubtitle, 'subtitle')}
+                            <TextFormatter text={productSubtitle} />
                         </h3>
                     )}
                     {productDescription && (
                         <div className={styles.productDescription}>
-                            {productDescription.split('\n').map((line, index) => (
-                                <p key={index}>
-                                    {wrapWordsForMobile(line, 'description')}
-                                </p>
-                            ))}
+                            <TextFormatter text={productDescription} />
                         </div>
                     )}
                     {productShortDescription && (
                         <div className={styles.productNote}>
-                            <p>{wrapWordsForMobile(productShortDescription, 'shortDescription')}</p>
+                            <p><TextFormatter text={productShortDescription} /></p>
                         </div>
                     )}
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ProductDescription.module.scss';
+import { TextFormatter } from '../../utils/textFormatter';
 
 // 기본 타입 정의들
 interface ProductImage {
@@ -292,13 +293,13 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
                         <div className={styles.textContent}>
                             {title && (
                                 <h3 className={styles.descriptionTitle}>
-                                    {title}
+                                    <TextFormatter text={title} />
                                 </h3>
                             )}
                             
                             {content && (
                                 <p className={styles.descriptionText}>
-                                    {content}
+                                    <TextFormatter text={content} />
                                 </p>
                             )}
                         </div>
@@ -463,7 +464,7 @@ const ProductDescriptionTest: React.FC = () => {
                             {getLocalizedField(currentProduct, 'name', lang)}
                         </h1>
                         <p style={{ fontSize: '18px', color: '#666' }}>
-                            {getLocalizedField(currentProduct, 'subtitle', lang)}
+                            <TextFormatter text={getLocalizedField(currentProduct, 'subtitle', lang)} />
                         </p>
                     </div>
 
