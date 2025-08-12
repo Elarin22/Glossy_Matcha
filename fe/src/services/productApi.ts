@@ -1,4 +1,4 @@
-// 제품 이미지 타입
+// 제품 이미지 타입 (백엔드 API 응답 구조)
 interface ProductImage {
   id: number;
   image: string;
@@ -137,7 +137,7 @@ const mockProducts: Product[] = [
   },
 ];
 
-const API_BASE_URL = "https://api.glossymatcha.com/api/products/";
+const API_BASE_URL = "https://api.glossymatcha.com/api/products";
 
 class ProductApi {
   /**
@@ -147,7 +147,7 @@ class ProductApi {
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
-      const url = `${API_BASE_URL}/products/?lang=${lang}`;
+      const url = `${API_BASE_URL}/?lang=${lang}`;
       const response = await fetch(url, {
         method: "GET",
         headers: {
