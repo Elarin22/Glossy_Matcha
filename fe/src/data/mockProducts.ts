@@ -60,7 +60,7 @@ export const mockTeaSet = {
     name_en: "Matcha Tea Set",
     subtitle: "차 한 잔의 격을 더하다",
     subtitle_en: "Elevate Your Tea Experience",
-    description: "차선 | 사발 | 스픈 | 차탁<br>글로시말차 매장의 감도를 담은 정제된 구성",
+    description: "차선 | 사발 | 스픈 | 차탁글로시말차 매장의 감도를 담은 정제된 구성",
     description_en: "Whisk | Bowl | Spoon | Tea Tray — A refined set inspired by the elegance of Glossy Matcha stores",
     mid_banner_img: "||BANNER:/images/product/teacase-mid-banner.jpg",
 
