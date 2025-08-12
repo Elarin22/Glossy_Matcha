@@ -20,7 +20,6 @@ export default function BrandIntro() {
     <section id="brand-intro" className={styles["brand-intro"]}>
       <h3 className="sr-only">브랜드 소개</h3>
 
-      {/* 이미지 애니메이션 */}
       <FadeInUp delay={0}>
         <Image
           className={styles["brand-intro__image"]}
@@ -32,12 +31,10 @@ export default function BrandIntro() {
       </FadeInUp>
 
       <div className={styles["brand-intro__content"]}>
-        {/* 타이틀 애니메이션 */}
         <FadeInUp delay={200}>
           <h4 className={styles["brand-intro__title"]}>{t("title")}</h4>
         </FadeInUp>
 
-        {/* 슬로건 애니메이션 */}
         <FadeInUp delay={400}>
           <p className={styles["brand-intro__slogan"]}>
             &ldquo;{t("slogan")}&rdquo;
@@ -45,7 +42,6 @@ export default function BrandIntro() {
         </FadeInUp>
 
         <div className={styles["brand-intro__description"]}>
-          {/* 각 문단별로 순차적 애니메이션 */}
           <FadeInUp delay={600}>
             <p className={styles["brand-intro__paragraph"]}>
               {t("description.paragraph-1")}
