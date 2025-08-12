@@ -9,7 +9,6 @@
   position: relative;
 }
 
-/* common */
 .overlay {
   position: absolute;
   top: 0;
@@ -24,22 +23,41 @@
   );
 }
 
+.section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100vh;
+  padding: 90px 1.25rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  z-index: 100;
+  scroll-snap-align: start;
+}
+
 .content-box {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
 
   width: 100%;
-  height: 100vh;
-  padding: 96px 1.25rem 40px;
+  height: 100%;
   color: white;
   word-break: keep-all;
+
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
 }
 
-/* first section .content-box */
-.video-section .content-box {
-  justify-content: flex-start;
+.content-box.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .title {
@@ -54,16 +72,6 @@
 .description {
   font-size: $font-size-14;
   color: $color-green-50;
-}
-
-/* first section */
-.video-section {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  scroll-snap-align: start;
 }
 
 .video-background {
@@ -81,34 +89,27 @@
   }
 }
 
-/* second section - end */
-.product-section {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  overflow: hidden;
-  z-index: 100;
-  scroll-snap-align: start;
-}
-
 .top-right-link {
   display: flex;
   align-items: center;
-  align-self: flex-end;
+  justify-content: flex-end;
   color: $color-green-50;
   transition: transform 0.3s ease;
-  transform: translateX(-6px);
+  transform: translateX(0);
 
   &:hover {
-    transform: translateX(0);
+    transform: translateX(4px);
   }
 
   &:active {
-    transform: translateX(0);
+    transform: translateX(4px);
   }
+}
+
+.inquire-section {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
 }
 
 /* Footer section for mobile */
@@ -117,4 +118,9 @@
   height: auto;
   scroll-snap-align: end; // 요소의 끝점에서 스냅 (bottom 맞춤)
   scroll-snap-stop: always; // Footer에서 멈춤
+}
+
+/* 기존 Footer */
+.mobile-container ~ footer {
+  display: none !important;
 }

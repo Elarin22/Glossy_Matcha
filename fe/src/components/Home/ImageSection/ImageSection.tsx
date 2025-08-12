@@ -22,9 +22,6 @@ export default function ImageSection({
       {contents.map((content, index) => {
         return (
           <section key={index}>
-            {index !== 0 && index !== contents.length - 1 && (
-              <ImageSubInfo index={index} />
-            )}
             <div
               ref={(el) => {
                 sectionRefs.current[index] = el as HTMLDivElement;
@@ -67,6 +64,7 @@ export default function ImageSection({
                 />
               )}
             </div>
+            <ImageSubInfo index={index} />
           </section>
         );
       })}
