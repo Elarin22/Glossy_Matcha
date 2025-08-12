@@ -355,12 +355,12 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
 
     return (
         <div className={styles.productDescription}>
-            {sortedSections.map((section) => {
+            {sortedSections.map((section, index) => {
                 const title = getLocalizedSectionField(section, 'title', lang);
                 const content = getLocalizedSectionField(section, 'content', lang);
                 
                 return (
-                    <div key={section.id || section.sort_order} className={styles.descriptionItem}>
+                    <div key={`section-${section.id || section.sort_order || index}-${index}`} className={styles.descriptionItem}>
                         {section.image && (
                             <div className={styles.imageWrapper}>
                                 <img 
