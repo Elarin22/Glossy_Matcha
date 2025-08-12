@@ -90,9 +90,33 @@ const mockProducts: Product[] = [
         images: [
             {
                 id: 1,
-                image: "/images/product/signature-mid-banner.png",
-                alt_text_ko: "시그니처 제품 메인 이미지",
-                alt_text_en: "Signature product main image",
+                image: "/images/product/signature1.jpg",
+                alt_text_ko: "말차 간편 음용",
+                alt_text_en: "Easy Matcha Drinking",
+            },
+            {
+                id: 2,
+                image: "/images/product/signature2.jpg",
+                alt_text_ko: "제주 유기농 말차",
+                alt_text_en: "Jeju Organic Matcha",
+            },
+            {
+                id: 3,
+                image: "/images/product/signature3.jpg",
+                alt_text_ko: "깔끔한 피니쉬",
+                alt_text_en: "Clean Finish",
+            },
+            {
+                id: 4,
+                image: "/images/product/signature4.jpg",
+                alt_text_ko: "자연스러운 단맛",
+                alt_text_en: "Natural Sweetness",
+            },
+            {
+                id: 5,
+                image: "/images/product/signature5.jpg",
+                alt_text_ko: "감각적인 디자인",
+                alt_text_en: "Stylish Design",
             }
         ],
         specifications: [
@@ -267,7 +291,7 @@ const getLocalizedField = (
 };
 
 // sub_description 텍스트를 --- 구분자로 파싱하는 유틸리티 함수
-const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
+const parseSubDescription = (subDescriptionText: string, productImages: ProductImage[] = []): ProductBodySection[] => {
     if (!subDescriptionText || !subDescriptionText.trim()) {
         return [];
     }
@@ -287,9 +311,11 @@ const parseSubDescription = (subDescriptionText: string): ProductBodySection[] =
         const content = parts[1]?.trim() || "";
 
         if (!title) return; // title이 없으면 섹션 생성하지 않음
-
+        // 각 섹션에 해당하는 이미지 찾기 (인덱스 순서대로 매핑)
+        const sectionImage = productImages[index];
         sections.push({
             id: index,
+            image: sectionImage?.image || undefined,
             title: title,
             title_en: title, // 동일한 값 사용 (언어별 처리는 getLocalizedField에서)
             content: content,
@@ -531,7 +557,7 @@ const ProductDescriptionTest: React.FC = () => {
                         } else {
                             // sub_description 필드에서 파싱
                             const subDescText = getLocalizedField(currentProduct, 'sub_description', lang);
-                            bodySections = parseSubDescription(subDescText);
+                            bodySections = parseSubDescription(subDescText, currentProduct.images);
                         }
                         
                         return bodySections.length > 0 && (
