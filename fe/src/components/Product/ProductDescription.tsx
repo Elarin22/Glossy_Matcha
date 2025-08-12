@@ -530,7 +530,7 @@ const ProductDescriptionTest: React.FC = () => {
                             bodySections = currentProduct.body_sections;
                         } else {
                             // sub_description 필드에서 파싱
-                            const subDescText = getLocalizedField(currentProduct as any, 'sub_description', lang);
+                            const subDescText = getLocalizedField(currentProduct, 'sub_description', lang);
                             bodySections = parseSubDescription(subDescText);
                         }
                         
