@@ -6,6 +6,7 @@ import { TextFormatter } from '../../utils/textFormatter';
 interface ProductImage {
     id: number;
     image: string;
+    alt_text?: string;
     alt_text_ko?: string;
     alt_text_en?: string;
 }

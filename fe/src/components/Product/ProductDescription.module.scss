@@ -1,8 +1,5 @@
-// SCSS 변수 정의 (프로젝트의 변수 파일에서 import해서 사용)
-$font-size-24: 24px;
-$font-size-18: 18px;
-$color-green-500: #22c55e; // 예시 색상값, 실제 프로젝트 색상으로 조정
-$color-black-200: #e5e7eb; // 예시 색상값, 실제 프로젝트 색상으로 조정
+@import '@/styles/mixins.scss';
+@import '@/styles/variables.scss';
 
 .productDescription {
   width: 100%;
