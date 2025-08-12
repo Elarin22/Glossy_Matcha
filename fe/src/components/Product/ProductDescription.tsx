@@ -533,7 +533,7 @@ const ProductDescriptionTest: React.FC = () => {
                         } else {
                             // sub_description 필드에서 파싱
                             const subDescText = getLocalizedField(currentProduct, 'sub_description', lang);
-                            bodySections = parseSubDescription(subDescText);
+                            bodySections = parseSubDescription(subDescText, currentProduct.images);
                         }
                         
                         return bodySections.length > 0 && (
