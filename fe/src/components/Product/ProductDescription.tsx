@@ -267,7 +267,7 @@ const getLocalizedField = (
 };
 
 // sub_description 텍스트를 --- 구분자로 파싱하는 유틸리티 함수
-const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
+const parseSubDescription = (subDescriptionText: string, productImages: ProductImage[] = []): ProductBodySection[] => {
     if (!subDescriptionText || !subDescriptionText.trim()) {
         return [];
     }
@@ -287,9 +287,11 @@ const parseSubDescription = (subDescriptionText: string): ProductBodySection[] =
         const content = parts[1]?.trim() || "";
 
         if (!title) return; // title이 없으면 섹션 생성하지 않음
-
+        // 각 섹션에 해당하는 이미지 찾기 (인덱스 순서대로 매핑)
+        const sectionImage = productImages[index];
         sections.push({
             id: index,
+            image: sectionImage?.image || undefined,
             title: title,
             title_en: title, // 동일한 값 사용 (언어별 처리는 getLocalizedField에서)
             content: content,
