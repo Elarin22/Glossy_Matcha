@@ -60,7 +60,7 @@ export default function BrandPhilosophy() {
           </div>
         </FadeInUp>
       </div>
-      <FadeInUp delay={200}>
+      <FadeInUp delay={0}>
         <Image
           className={styles["brand-philosophy__image"]}
           src="/images/about/straight.webp"

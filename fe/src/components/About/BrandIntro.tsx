@@ -41,31 +41,25 @@ export default function BrandIntro() {
           </p>
         </FadeInUp>
 
-        <div className={styles["brand-intro__description"]}>
-          <FadeInUp delay={600}>
+        <FadeInUp delay={600}>
+          <div className={styles["brand-intro__description"]}>
             <p className={styles["brand-intro__paragraph"]}>
               {t("description.paragraph-1")}
             </p>
-          </FadeInUp>
 
-          <FadeInUp delay={600}>
             <p className={styles["brand-intro__paragraph"]}>
               {t("description.paragraph-2")}
             </p>
-          </FadeInUp>
 
-          <FadeInUp delay={600}>
             <p className={styles["brand-intro__paragraph"]}>
               {t("description.paragraph-3")}
             </p>
-          </FadeInUp>
 
-          <FadeInUp delay={600}>
             <p className={styles["brand-intro__paragraph"]}>
               {t("description.paragraph-4")}
             </p>
-          </FadeInUp>
-        </div>
+          </div>
+        </FadeInUp>
       </div>
     </section>
   );
