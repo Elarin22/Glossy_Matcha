@@ -5,8 +5,8 @@ import ProductNav from '@/components/Nav/ProductNav';
 import ProductMainBanner from '@/components/Product/ProductMainBanner';
 import ProductMidBanner from '@/components/Product/ProductMidBanner';
 import ProductDescription from '@/components/Product/ProductDescription';
-import ProductApi from '@/services/productApi';
 import { Product } from '@/components/Product/ProductDescription';
+import ProductApi, { ProductBodySection } from '@/services/productApi';
 import styles from './page.module.scss';
 
 interface ProductsPageProps {
@@ -81,7 +81,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
             return [];
         }
 
-        const sections: any[] = [];
+        const sections: ProductBodySection[] = [];
         // --- 구분자로 나누기 (첫 번째와 마지막 빈 문자열 제거)
         const rawSections = subDescriptionText.trim().split('---').filter(section => section.trim());
 
