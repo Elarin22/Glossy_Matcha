@@ -7,7 +7,6 @@ import { questions } from "@/data/questions";
 import { menuData } from "@/data/menuData";
 import { useMatchaQuiz } from "@/hooks/useMatchaQuiz";
 import { useShare } from "@/hooks/useShare";
-import { useDownload } from "@/hooks/useDownload";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Intro from "./Intro";
@@ -49,16 +48,9 @@ export default function MatchaGenerator() {
 
   const { shareResult } = useShare();
 
-  const { downloadImage } = useDownload();
-
   const handleShare = () => {
     if (!displayedRecommendation) return;
     shareResult(displayedRecommendation);
-  };
-
-  const handleDownload = () => {
-    if (!recommendation) return;
-    downloadImage("result-section", "recommend");
   };
 
   const handleReset = () => {
@@ -95,7 +87,6 @@ export default function MatchaGenerator() {
           <ResultSection
             menuInfo={menuData[displayedRecommendation]}
             onShare={handleShare}
-            onDownload={handleDownload}
             onReset={handleReset}
           />
         )}
