@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import ProductApi, { type Product } from '../../services/productApi';
 import styles from './ProductMidBanner.module.scss';
+import '../../data/mockProducts';
 
 interface ProductMidBannerProps {
     productId?: number;
@@ -41,15 +42,17 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         fetchProduct();
     }, [productId, lang]);
 
-    const getProductName = () => product ? ProductApi.getLocalizedField(product, 'name', lang) : '';
-    const getProductSubtitle = () => product ? ProductApi.getLocalizedField(product, 'subtitle', lang) : '';
-    const getProductDescription = () => product ? ProductApi.getLocalizedField(product, 'description', lang) : '';
-    const getProductShortDescription = () => product ? ProductApi.getLocalizedField(product, 'short_description', lang) : '';
+    const getProductName = () => product ? ProductApi.getLocalizedField(product, 'name') : '';
+    const getProductSubtitle = () => product ? ProductApi.getLocalizedField(product, 'subtitle') : '';
+    const getProductDescription = () => product ? ProductApi.getLocalizedField(product, 'description') : '';
+    const getProductShortDescription = () => product ? ProductApi.getLocalizedField(product, 'short_description') : '';
     const getMainImage = () => product?.images?.[0]?.image ?? null;
     const getImageAltText = () => {
         const image = product?.images?.[0];
         if (!image) return '';
-        return lang === 'en' ? image.alt_text_en || '' : image.alt_text_ko || getProductName();
+        
+        const altText = lang === 'en' ? image.alt_text_en : image.alt_text_ko;
+        return altText || getProductName();
     };
 
     const wrapWordsForMobile = (text: string, type: 'subtitle' | 'description' | 'shortDescription') => {
