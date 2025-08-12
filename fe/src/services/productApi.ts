@@ -34,6 +34,8 @@ interface Product {
     description_en?: string;
     short_description?: string;
     short_description_en?: string;
+    sub_description?: string;
+    sub_description_en?: string;
     images: ProductImage[];
     specifications: ProductSpecification[];
     body_sections?: ProductBodySection[];
