@@ -20,15 +20,13 @@ export default function BrandIntro() {
     <section id="brand-intro" className={styles["brand-intro"]}>
       <h3 className="sr-only">브랜드 소개</h3>
 
-      <FadeInUp delay={0}>
-        <Image
-          className={styles["brand-intro__image"]}
-          src="/images/about/brand-intro.webp"
-          alt="물에 글로시말차 가루를 섞어 젓는 장면"
-          width={960}
-          height={800}
-        />
-      </FadeInUp>
+      <Image
+        className={styles["brand-intro__image"]}
+        src="/images/about/brand-intro.webp"
+        alt="물에 글로시말차 가루를 섞어 젓는 장면"
+        width={960}
+        height={800}
+      />
 
       <div className={styles["brand-intro__content"]}>
         <FadeInUp delay={200}>

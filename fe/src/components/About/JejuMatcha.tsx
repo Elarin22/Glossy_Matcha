@@ -22,15 +22,13 @@ export default function JejuMatcha() {
       <h3 className="sr-only">제주 유기농 말차</h3>
       <section id="jeju-matcha" className={styles["jeju-matcha__intro"]}>
         <h4 className="sr-only">말차 소개 및 브랜드 메시지</h4>
-        <FadeInUp delay={0}>
-          <Image
-            className={styles["jeju-matcha__image"]}
-            src="/images/about/leaf.webp"
-            alt="제주 유기농 말차 잎 이미지"
-            width={960}
-            height={800}
-          />
-        </FadeInUp>
+        <Image
+          className={styles["jeju-matcha__image"]}
+          src="/images/about/leaf.webp"
+          alt="제주 유기농 말차 잎 이미지"
+          width={960}
+          height={800}
+        />
 
         <div className={styles["jeju-matcha__content"]}>
           <FadeInUp delay={200}>
@@ -100,15 +98,13 @@ export default function JejuMatcha() {
             </article>
           </FadeInUp>
         </div>
-        <FadeInUp delay={0}>
-          <Image
-            className={styles["jeju-matcha__feature-image"]}
-            src="/images/about/leaf-2.webp"
-            alt="제주 유기농 말차 잎 이미지 모음"
-            width={960}
-            height={960}
-          />
-        </FadeInUp>
+        <Image
+          className={styles["jeju-matcha__feature-image"]}
+          src="/images/about/leaf-2.webp"
+          alt="제주 유기농 말차 잎 이미지 모음"
+          width={960}
+          height={960}
+        />
       </section>
     </>
   );
