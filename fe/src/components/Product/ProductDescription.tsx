@@ -90,9 +90,33 @@ const mockProducts: Product[] = [
         images: [
             {
                 id: 1,
-                image: "/images/product/signature-mid-banner.png",
-                alt_text_ko: "시그니처 제품 메인 이미지",
-                alt_text_en: "Signature product main image",
+                image: "/images/product/signature1.jpg",
+                alt_text_ko: "말차 간편 음용",
+                alt_text_en: "Easy Matcha Drinking",
+            },
+            {
+                id: 2,
+                image: "/images/product/signature2.jpg",
+                alt_text_ko: "제주 유기농 말차",
+                alt_text_en: "Jeju Organic Matcha",
+            },
+            {
+                id: 3,
+                image: "/images/product/signature3.jpg",
+                alt_text_ko: "깔끔한 피니쉬",
+                alt_text_en: "Clean Finish",
+            },
+            {
+                id: 4,
+                image: "/images/product/signature4.jpg",
+                alt_text_ko: "자연스러운 단맛",
+                alt_text_en: "Natural Sweetness",
+            },
+            {
+                id: 5,
+                image: "/images/product/signature5.jpg",
+                alt_text_ko: "감각적인 디자인",
+                alt_text_en: "Stylish Design",
             }
         ],
         specifications: [
