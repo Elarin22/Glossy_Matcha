@@ -17,6 +17,14 @@ export interface ProductSpecification {
     updated_at: string;
 }
 
+// 제품 부가 설명 섹션 타입
+export interface ProductSubDescriptionSection {
+    id: number;
+    title: string;
+    detail: string;
+    sort_order: number;
+}
+
 // 메인 제품 타입
 export interface Product {
     id: number;

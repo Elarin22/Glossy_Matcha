@@ -25,18 +25,20 @@ interface ProductBodySection {
 
 // 제품 메인 타입
 interface Product {
-  id: number;
-  name: string;
-  name_en?: string;
-  subtitle?: string;
-  subtitle_en?: string;
-  description: string;
-  description_en?: string;
-  short_description?: string;
-  short_description_en?: string;
-  images: ProductImage[];
-  specifications: ProductSpecification[];
-  body_sections?: ProductBodySection[];
+    id: number;
+    name: string;
+    name_en?: string;
+    subtitle?: string;
+    subtitle_en?: string;
+    description: string;
+    description_en?: string;
+    short_description?: string;
+    short_description_en?: string;
+    sub_description?: string;
+    sub_description_en?: string;
+    images: ProductImage[];
+    specifications: ProductSpecification[];
+    body_sections?: ProductBodySection[];
 }
 
 interface ProductApiResponse {

@@ -246,6 +246,40 @@ const getLocalizedField = (
     return (product[fieldName] as string) || '';
 };
 
+// sub_description 텍스트를 --- 구분자로 파싱하는 유틸리티 함수
+const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
+    if (!subDescriptionText || !subDescriptionText.trim()) {
+        return [];
+    }
+
+    const sections: ProductBodySection[] = [];
+    // --- 구분자로 나누기
+    const rawSections = subDescriptionText.trim().split('---');
+
+    rawSections.forEach((section, index) => {
+        const trimmedSection = section.trim();
+        if (!trimmedSection) return;
+
+        const lines = trimmedSection.split('\n').map(line => line.trim()).filter(line => line);
+        if (lines.length === 0) return;
+
+        // 첫 번째 줄은 title, 나머지는 content로 처리
+        const title = lines[0] || "";
+        const content = lines.slice(1).join('\n') || "";
+
+        sections.push({
+            id: index,
+            title: title,
+            title_en: title, // 동일한 값 사용 (언어별 처리는 getLocalizedField에서)
+            content: content,
+            content_en: content, // 동일한 값 사용
+            sort_order: index + 1
+        });
+    });
+
+    return sections;
+};
+
 const getLocalizedSectionField = (
     section: ProductBodySection,
     fieldName: 'title' | 'content',
