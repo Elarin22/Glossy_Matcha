@@ -25,9 +25,10 @@ export default function BrandHistory() {
       <Image
         className={styles["brand-history__image"]}
         src="/images/about/glossy-matcha.webp"
-        alt={t("title") + " 카페 전경 이미지"}
+        alt="글로시 말차 카페 전경 이미지"
         width={960}
         height={800}
+        sizes="(max-width: 768px) 100vw, 960px"
       />
 
       <div className={styles["brand-history__content"]}>

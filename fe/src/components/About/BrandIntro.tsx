@@ -26,6 +26,7 @@ export default function BrandIntro() {
         alt="물에 글로시말차 가루를 섞어 젓는 장면"
         width={960}
         height={800}
+        sizes="(max-width: 768px) 100vw, 960px"
       />
 
       <div className={styles["brand-intro__content"]}>

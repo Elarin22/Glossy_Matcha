@@ -28,6 +28,7 @@ export default function JejuMatcha() {
           alt="제주 유기농 말차 잎 이미지"
           width={960}
           height={800}
+          sizes="(max-width: 768px) 100vw, 960px"
         />
 
         <div className={styles["jeju-matcha__content"]}>
@@ -104,6 +105,7 @@ export default function JejuMatcha() {
           alt="제주 유기농 말차 잎 이미지 모음"
           width={960}
           height={960}
+          sizes="(max-width: 768px) 100vw, 960px"
         />
       </section>
     </>

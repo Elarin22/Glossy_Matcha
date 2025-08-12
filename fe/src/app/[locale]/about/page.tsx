@@ -27,7 +27,8 @@ export default function About() {
           src="/images/about/main-banner.webp"
           alt="브랜드 소개 매인 배너"
           width={1920}
-          height={720}
+          height={1280}
+          sizes="(max-width: 768px) 100vw, 1920px"
           priority
         />
       </section>

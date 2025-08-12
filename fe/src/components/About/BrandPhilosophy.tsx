@@ -67,6 +67,7 @@ export default function BrandPhilosophy() {
         alt="글로시말차 스트레이트 이미지"
         width={960}
         height={800}
+        sizes="(max-width: 768px) 100vw, 960px"
       />
     </section>
   );
