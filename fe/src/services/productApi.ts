@@ -127,6 +127,8 @@ const mockProducts: Product[] = [
       description_en: "Tea Whisk | Bowl | Spoon | Tea Stand",
       short_description: "",
       short_description_en: "",
+      sub_description: "",           
+      sub_description_en: "",       
       images: [
         {
           id: 2,
@@ -150,6 +152,8 @@ const mockProducts: Product[] = [
       subtitle_en: "100% HIGH QUALITY organic matcha containing the nature of Jeju",
       description: "틴케이스 SET",
       description_en: "Tin Case SET",
+      sub_description: "",          
+      sub_description_en: "",        
       short_description: "* 국산 말차에는 등급제가 없습니다만, 해외 등급표 기준을 만족하도록 첫순 1번 잎을 가지고 만든 세레모니얼 급 '유기농 말차' 입니다.",
       short_description_en: "* Although there is no grading system for domestic matcha, this is ceremonial grade 'organic matcha' made from first-harvest leaves to meet international grading standards.",
       images: [
