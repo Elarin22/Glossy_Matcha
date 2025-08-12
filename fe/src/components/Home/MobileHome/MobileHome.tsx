@@ -8,22 +8,30 @@ import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import { useLocale } from "next-intl";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
+import { useParams, usePathname } from "next/navigation";
 
 const ArrowLink = ({
   locale,
   link,
   linkText,
   isExternalSite = false,
+  isLeft = false,
 }: {
   locale: string;
   link: string;
   linkText: string;
   isExternalSite?: boolean;
+  isLeft?: boolean;
 }) => {
   return (
     <Link
       href={!isExternalSite ? `/${locale}${link}` : link}
       className={styles["top-right-link"]}
+      style={
+        isLeft
+          ? { justifyContent: "flex-start" }
+          : { justifyContent: "flex-end" }
+      }
     >
       {linkText}
       <img src={"../images/icon/icon-Right-arrow.svg"} />
@@ -36,11 +44,16 @@ export default function MobileHome({
 }: {
   contents: HomeContent[];
 }): React.JSX.Element {
-  const locale = useLocale();
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const params = useParams();
+  const locale = params.locale as string;
 
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    console.log("Locale changed to:", locale);
+  }, [locale]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,7 +86,6 @@ export default function MobileHome({
 
   return (
     <main className={`${styles["mobile-container"]} mobile-home-page`}>
-      {/* second section - end */}
       {contents.map((content, index) => {
         return (
           <section
@@ -113,11 +125,13 @@ export default function MobileHome({
               link={content.link!}
               linkText={content.linkText!}
               isExternalSite={index === 1 ? true : false}
+              isLeft={index === 0 ? true : false}
             />
             <div
               className={`${styles["content-box"]} ${
                 visibleIndexes.includes(index) ? styles.visible : ""
               }`}
+              style={index === 0 ? { justifyContent: "flex-start" } : undefined}
             >
               <h3 className={styles.title}>{content.slogan}</h3>
               <p className={styles.subTitle}>{content.subSlogan}</p>
