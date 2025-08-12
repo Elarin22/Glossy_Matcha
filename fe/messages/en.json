@@ -1,242 +1,242 @@
 {
-    "navigation": {
-        "about": "About",
-        "products": "Products",
-        "test": "Matcha Test",
-        "contact": "Contact",
-        "language": "Language Change",
+  "navigation": {
+    "about": "About",
+    "products": "Products",
+    "test": "MatchaTEST",
+    "contact": "Contact",
+    "language": "Language Change",
 
-        "menuOpen": "Menu Open",
-        "menuClose": "Menu Close"
+    "menuOpen": "Menu Open",
+    "menuClose": "Menu Close"
+  },
+  "home": {
+    "homeContent": [
+      {
+        "title": "브랜드 소개",
+        "slogan": "Life With Glossy",
+        "subSlogan": "It makes every day a shining moment.",
+        "description": "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
+        "source": "/videos/intro-pc.webm",
+        "sourceMb": "/videos/intro-mb.webm"
+      },
+      {
+        "title": "카페 소개",
+        "slogan": "Cafe Glossy Matcha",
+        "subSlogan": "제주의 동쪽, 가장 뜨는 핫플",
+        "sideBarImage": "/images/home/cafe-location.webp",
+        "description": "제주특별자치도 조천읍 조함해안로 112 에서 제주산 최상급 말차를 사용한 음료와 디저트를 맛보며 멋진 바다 전경과 편안함 '쉼'을 경험해보세요.",
+        "source": "/images/home/cafe-glossy-matcha.webp",
+        "link": "/about",
+        "linkText": "브랜드 소개"
+      },
+      {
+        "title": "제품 소개",
+        "slogan": "Glossy Signature",
+        "subSlogan": "자연의 원당과 대체당으로 블랜딩한 최적의 달콤함",
+        "description": "선조들로부터 이어진 전통 가공방식을 고수해 떫은 맛은 줄고 섬세하고 부드러운 깔끔한 끝맛으로 초심자들도 맛있게 드실 수 있어요.",
+        "source": "/images/home/glossy-signature.webp",
+        "link": "/products",
+        "linkText": "제품 소개"
+      },
+      {
+        "title": "말차 테스트",
+        "slogan": "Glossy Pick",
+        "subSlogan": "단 하나, 당신만을 위한 글로시 말차",
+        "description": "말차 스트레이트? 말차 모히또? 말차 라떼? 나와 어울리는 말차 메뉴를 찾고 글로시 말차에서 즐겨보세요!",
+        "source": "/images/home/matcha-test.webp",
+        "link": "/test",
+        "linkText": "테스트 바로가기"
+      }
+    ]
+  },
+  "about": {
+    "sub-nav": {
+      "intro": "About Us",
+      "philosophy": "Brand Philosophy",
+      "jeju-matcha": "Jeju Organic Matcha",
+      "history": "History"
     },
-    "home": {
-        "homeContent": [
-            {
-                "title": "브랜드 소개",
-                "slogan": "Life With Glossy",
-                "subSlogan": "It makes every day a shining moment.",
-                "description": "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
-                "source": "/videos/intro-pc.webm",
-                "sourceMb": "/videos/intro-mb.webm"
-            },
-            {
-                "title": "카페 소개",
-                "slogan": "Cafe Glossy Matcha",
-                "subSlogan": "제주의 동쪽, 가장 뜨는 핫플",
-                "sideBarImage": "/images/home/cafe-location.webp",
-                "description": "제주특별자치도 조천읍 조함해안로 112 에서 제주산 최상급 말차를 사용한 음료와 디저트를 맛보며 멋진 바다 전경과 편안함 '쉼'을 경험해보세요.",
-                "source": "/images/home/cafe-glossy-matcha.webp",
-                "link": "/about",
-                "linkText": "브랜드 소개"
-            },
-            {
-                "title": "제품 소개",
-                "slogan": "Glossy Signature",
-                "subSlogan": "자연의 원당과 대체당으로 블랜딩한 최적의 달콤함",
-                "description": "선조들로부터 이어진 전통 가공방식을 고수해 떫은 맛은 줄고 섬세하고 부드러운 깔끔한 끝맛으로 초심자들도 맛있게 드실 수 있어요.",
-                "source": "/images/home/glossy-signature.webp",
-                "link": "/products",
-                "linkText": "제품 소개"
-            },
-            {
-                "title": "말차 테스트",
-                "slogan": "Glossy Pick",
-                "subSlogan": "단 하나, 당신만을 위한 글로시 말차",
-                "description": "말차 스트레이트? 말차 모히또? 말차 라떼? 나와 어울리는 말차 메뉴를 찾고 글로시 말차에서 즐겨보세요!",
-                "source": "/images/home/matcha-test.webp",
-                "link": "/test",
-                "linkText": "테스트 바로가기"
-            }
-        ]
+    "intro": {
+      "title": "LIFE WITH GLOSSY",
+      "slogan": "We make every day a Shining Moment.",
+      "description": {
+        "paragraph-1": "Glossy Matcha provides Sparkling Energy for everyone, helping them find their own Joy and Happiness, and making every moment of their lives shine.",
+        "paragraph-2": "Glossy Matcha promises to grow into a Relational Brand filled with Diverse Emotions and content ─ not just a brand that sells matcha, but one that brightens Everyday life.",
+        "paragraph-3": "At Glossy Matcha, we help you discover the sparkle in life's Everyday Moments, starting with the little things we share together.",
+        "paragraph-4": "Our genuine products, engaging content, and thoughtful campaigns are designed to be part of your daily life, fostering Sustainable Coexistence."
+      }
     },
-    "about": {
-        "sub-nav": {
-            "intro": "About Us",
-            "philosophy": "Brand Philosophy",
-            "jeju-matcha": "Jeju Organic Matcha",
-            "history": "History"
+    "philosophy": {
+      "title": "GLOSSY LIFE, GLOSSY MATCHA",
+      "list": {
+        "item-1": {
+          "title": "LIGHT",
+          "desc": "We pursue the shining moments of Jeju and everyday life."
         },
-        "intro": {
-            "title": "LIFE WITH GLOSSY",
-            "slogan": "We make every day a shining moment.",
-            "description": {
-                "paragraph-1": "Glossy Matcha provides sparkling energy for everyone, helping them find their own joy and happiness, and making every moment of their lives shine.",
-                "paragraph-2": "Glossy Matcha promises to grow into a relational brand filled with diverse emotions and content, not just a brand that sells matcha, but one that brightens everyday life.",
-                "paragraph-3": "Glossy Matcha aims to help you find sparkle in your life, in the small everyday moments, starting with the little things together.",
-                "paragraph-4": "We are a brand that offers genuine products, content, and campaigns that can become a part of your daily life, promoting sustainable coexistence."
-            }
+        "item-2": {
+          "title": "NATURAL",
+          "desc": "We constantly seek and research ways to live in harmony with nature."
         },
-        "philosophy": {
-            "title": "GLOSSY LIFE, GLOSSY MATCHA",
-            "list": {
-                "item-1": {
-                    "title": "LIGHT",
-                    "desc": "We pursue the shining moments of Jeju and everyday life."
-                },
-                "item-2": {
-                    "title": "NATURAL",
-                    "desc": "We constantly seek and research ways to live in harmony with nature."
-                },
-                "item-3": {
-                    "title": "TRAVEL",
-                    "desc": "We offer a lifestyle that can be enjoyed alongside travel."
-                }
-            }
-        },
-        "jeju-matcha": {
-            "intro": {
-                "title": "RELAX WITH GLOSSY",
-                "slogan": "Glossy Matcha gifts you true relaxation.",
-                "description": {
-                    "paragraph-1": "Matcha is the finest tea from Jeju. Glossy Matcha uses only 100% organic matcha of the highest quality.",
-                    "paragraph-2": "It captures the vibrant green vitality created by Jeju's pristine nature. The calming green aroma offers comfort and relaxation to all.",
-                    "paragraph-3": "The unique sweet yet rich aroma of matcha is a harmonious blend of freshness and gentle bitterness.",
-                    "paragraph-4": "Fill your body and mind with health and the refreshing spirit of green."
-                }
-            },
-            "feature": {
-                "item-1": {
-                    "title": "Organic First Flush Leaves",
-                    "description": "Made from 100% organic first flush tea leaves grown in Seogwipo Eco Farm, delivering a smoother and richer taste."
-                },
-                "item-2": {
-                    "title": "Sustainable Future",
-                    "description": "We collaborate with local farmers and artisans who care for the environment, moving toward a healthier and more sustainable future."
-                },
-                "item-3": {
-                    "title": "Commitment to Quality",
-                    "description": "Through processing techniques and distribution management backed by years of expertise, we produce matcha of the highest quality."
-                }
-            }
-        },
-        "history": {
-            "title": "GLOSSY HISTORY",
-            "location": "112, Johamhaean-ro, Jocheon-eup, Jeju-si, Jeju-do (Approx. 3,300㎡)",
-            "items": [
-                { "date": "2023.09", "desc": ["'GLOSSY MATCHA' Opening"] },
-                {
-                    "date": "2024.09",
-                    "desc": ["Select Shop 'WITH GLOSSY' Opening"]
-                },
-                {
-                    "date": "2024.12",
-                    "desc": [
-                        "Achieved $20,000 export record for the year (including GLOSSY MATCHA products)"
-                    ]
-                },
-                {
-                    "date": "2025.01",
-                    "desc": [
-                        "Participated in 2025 SIRHA (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
-                    ]
-                },
-                {
-                    "date": "2025.05",
-                    "desc": [
-                        "Held Pop-Up events in the USA and France and discussed Follow-Up export volumes"
-                    ]
-                },
-                {
-                    "date": "2025.06",
-                    "desc": [
-                        "Planned release of lifestyle shoe collaboration products (with Muleboy, green matcha color slippers)"
-                    ]
-                }
-            ]
+        "item-3": {
+          "title": "TRAVEL",
+          "desc": "We offer a lifestyle that can be enjoyed alongside travel."
         }
+      }
     },
-    "test": {
-        "header": {
-            "title": "Glossy Pick",
-            "sub-title": "The one and only, Your personalized Glossy Matcha"
-        },
-        "intro": {
-            "desc": "Answer a few questions and We'll recommend the Glossy Matcha Menu that suits you.",
-            "start": "Start"
-        },
-        "question": {
-            "prev": "Previous"
-        },
-        "result": {
-            "title": "A cup of Glossy Matcha made just for you",
-            "share": "Share",
-            "download": "Save",
-            "reset": "Again"
-        },
-        "menu": {
-            "jejuOreum": {
-                "name": "Jeju, Oreum",
-                "description": "Deep and Rich taste of Premium Jeju Matcha",
-                "tags": ["Premium", "Rich flavor", "Jeju-Grown"]
-            },
-            "matchaStraight": {
-                "name": "Matcha Straight",
-                "description": "Pure Original Taste and Aroma of Matcha",
-                "tags": ["Pure", "Traditional", "Authentic"]
-            },
-            "matchaMojito": {
-                "name": "Glossy Matcha Mojito",
-                "description": "Perfect harmony of Fresh Mint and Matcha",
-                "tags": ["Refreshing", "Cool", "Trendy"]
-            },
-            "matchaLatte": {
-                "name": "Glossy Matcha Latte",
-                "description": "Classic meeting of Smooth Milk and Matcha",
-                "tags": ["Smooth", "Classic", "Popular"]
-            },
-            "matchaSpanner": {
-                "name": "Matcha Spanner",
-                "description": "Sweet whipped Cream on Top of Matcha",
-                "tags": ["Sweet", "Visual", "Special"]
-            },
-            "matchaBarley": {
-                "name": "Barley Cream Matcha Latte",
-                "description": "Matcha Latte enhanced with Nutty Barley Cream",
-                "tags": ["Nutty", "Creamy", "Unique"]
-            },
-            "greenLemonade": {
-                "name": "Green Lemonade",
-                "description": "Refreshing encounter of Lemon and Matcha",
-                "tags": ["Refreshing", "Tangy", "Summer"]
-            }
-        },
-        "questions": {
-            "style": {
-                "title": "What's your favorite Matcha Style?",
-                "options": {
-                    "depth": "Flavor Depth",
-                    "sweet": "Harmonious Sweetness",
-                    "visual": "Visual / Mood",
-                    "fresh": "Freshness & Aroma"
-                }
-            },
-            "mood": {
-                "title": "What's your keyword for today?",
-                "options": {
-                    "professional": "Professional & Sophisticated",
-                    "natural": "Natural & Comfortable",
-                    "cheerful": "Cheerful & Lively",
-                    "minimal": "Minimal & Simple"
-                }
-            },
-            "purpose": {
-                "title": "What's important when choosing a drink?",
-                "options": {
-                    "thirst": "Quench Thirst",
-                    "caffeine": "Need Caffeine",
-                    "healing": "Rest & Healing",
-                    "health": "Health Management"
-                }
-            },
-            "favorite": {
-                "title": "What drink comes to mind when you're happy?",
-                "options": {
-                    "coffee": "Coffee",
-                    "herbal": "Herbal Tea",
-                    "refreshing": "Refreshing Beverage",
-                    "milk": "Milk-based Drink"
-                }
-            }
+    "jeju-matcha": {
+      "intro": {
+        "title": "RELAX WITH GLOSSY",
+        "slogan": "Glossy Matcha gifts you true relaxation.",
+        "description": {
+          "paragraph-1": "Matcha is the Finest Tea from Jeju. Glossy Matcha uses only 100% Organic Matcha of the Highest Quality.",
+          "paragraph-2": "It captures the Vibrant Green Vitality created by Jeju's pristine nature. The Calming Green Aroma offers comfort and relaxation to all.",
+          "paragraph-3": "The unique Sweet yet Rich Aroma of matcha is a harmonious blend of Freshness and Gentle Bitterness.",
+          "paragraph-4": "Fill your body and mind with Health and the Refreshing Spirit of Green."
         }
+      },
+      "feature": {
+        "item-1": {
+          "title": "Organic First Flush Leaves",
+          "description": "Made from 100% Organic First Flush Tea Leaves grown in Seogwipo Eco Farm, delivering a Smoother and Richer Taste."
+        },
+        "item-2": {
+          "title": "Sustainable Future",
+          "description": "We collaborate with Local Farmers and Artisans who care for the Environment, moving toward a healthier and more Sustainable Future."
+        },
+        "item-3": {
+          "title": "Commitment to Quality",
+          "description": "Through Processing Techniques and Distribution Management backed by years of expertise, we produce matcha of the Highest Quality."
+        }
+      }
+    },
+    "history": {
+      "title": "GLOSSY HISTORY",
+      "location": "112, Johamhaean-ro, Jocheon-eup, Jeju-si, Jeju-do (Approx. 3,300㎡)",
+      "items": [
+        { "date": "2023.09", "desc": ["Opening of 'GLOSSY MATCHA'"] },
+        {
+          "date": "2024.09",
+          "desc": ["Opening of Select Shop 'WITH GLOSSY'"]
+        },
+        {
+          "date": "2024.12",
+          "desc": [
+            "Achieved $20,000 export record for the year (including GLOSSY MATCHA products)"
+          ]
+        },
+        {
+          "date": "2025.01",
+          "desc": [
+            "Participated in 2025 SIRHA (Salon International de la Restauration, de l'Hôtellerie et de l'Alimentation)"
+          ]
+        },
+        {
+          "date": "2025.05",
+          "desc": [
+            "Held Pop-Up Events in the USA and France and discussed follow-Up export volumes"
+          ]
+        },
+        {
+          "date": "2025.06",
+          "desc": [
+            "Planned release of Lifestyle Shoe Collaboration Products (with Muleboy, green matcha color slippers)"
+          ]
+        }
+      ]
     }
+  },
+  "test": {
+    "header": {
+      "title": "Glossy Pick",
+      "sub-title": "The one and only, Your personalized Glossy Matcha"
+    },
+    "intro": {
+      "desc": "Answer a few questions and We'll recommend the Glossy Matcha Menu that suits you.",
+      "start": "Start"
+    },
+    "question": {
+      "prev": "Previous"
+    },
+    "result": {
+      "title": "A cup of Glossy Matcha made just for you",
+      "share": "Share",
+      "download": "Save",
+      "reset": "Again"
+    },
+    "menu": {
+      "jejuOreum": {
+        "name": "Jeju, Oreum",
+        "description": "Deep and Rich taste of Premium Jeju Matcha",
+        "tags": ["Premium", "Rich flavor", "Jeju-Grown"]
+      },
+      "matchaStraight": {
+        "name": "Matcha Straight",
+        "description": "Pure Original Taste and Aroma of Matcha",
+        "tags": ["Pure", "Traditional", "Authentic"]
+      },
+      "matchaMojito": {
+        "name": "Glossy Matcha Mojito",
+        "description": "Perfect harmony of Fresh Mint and Matcha",
+        "tags": ["Refreshing", "Cool", "Trendy"]
+      },
+      "matchaLatte": {
+        "name": "Glossy Matcha Latte",
+        "description": "Classic meeting of Smooth Milk and Matcha",
+        "tags": ["Smooth", "Classic", "Popular"]
+      },
+      "matchaSpanner": {
+        "name": "Matcha Spanner",
+        "description": "Sweet whipped Cream on Top of Matcha",
+        "tags": ["Sweet", "Visual", "Special"]
+      },
+      "matchaBarley": {
+        "name": "Barley Cream Matcha Latte",
+        "description": "Matcha Latte enhanced with Nutty Barley Cream",
+        "tags": ["Nutty", "Creamy", "Unique"]
+      },
+      "greenLemonade": {
+        "name": "Green Lemonade",
+        "description": "Refreshing encounter of Lemon and Matcha",
+        "tags": ["Refreshing", "Tangy", "Summer"]
+      }
+    },
+    "questions": {
+      "style": {
+        "title": "What's your favorite Matcha Style?",
+        "options": {
+          "depth": "Flavor Depth",
+          "sweet": "Harmonious Sweetness",
+          "visual": "Visual / Mood",
+          "fresh": "Freshness & Aroma"
+        }
+      },
+      "mood": {
+        "title": "What's your keyword for today?",
+        "options": {
+          "professional": "Professional & Sophisticated",
+          "natural": "Natural & Comfortable",
+          "cheerful": "Cheerful & Lively",
+          "minimal": "Minimal & Simple"
+        }
+      },
+      "purpose": {
+        "title": "What's important when choosing a drink?",
+        "options": {
+          "thirst": "Quench Thirst",
+          "caffeine": "Need Caffeine",
+          "healing": "Rest & Healing",
+          "health": "Health Management"
+        }
+      },
+      "favorite": {
+        "title": "What drink comes to mind when you're happy?",
+        "options": {
+          "coffee": "Coffee",
+          "herbal": "Herbal Tea",
+          "refreshing": "Refreshing Beverage",
+          "milk": "Milk-based Drink"
+        }
+      }
+    }
+  }
 }
