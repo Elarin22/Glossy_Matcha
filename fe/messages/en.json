@@ -3,51 +3,74 @@
     "about": "About",
     "products": "Products",
     "test": "MatchaTEST",
-    "contact": "Contact",
+    "inquire": "Contact",
     "language": "Language Change",
 
     "menuOpen": "Menu Open",
     "menuClose": "Menu Close"
   },
   "home": {
-    "homeContent": [
-      {
-        "title": "브랜드 소개",
-        "slogan": "Life With Glossy",
-        "subSlogan": "It makes every day a shining moment.",
-        "description": "사람들의 모든 순간들을 반짝이는 순간들로 만들어 줄 글로시 말차는 단순히 말차를 판매하는 브랜드가 아닌 다양한 감성과 컨텐츠가 담긴 관계적 브랜드로 성장할 것을 약속합니다.",
-        "source": "/videos/intro-pc.webm",
-        "sourceMb": "/videos/intro-mb.webm"
-      },
-      {
-        "title": "카페 소개",
-        "slogan": "Cafe Glossy Matcha",
-        "subSlogan": "제주의 동쪽, 가장 뜨는 핫플",
-        "sideBarImage": "/images/home/cafe-location.webp",
-        "description": "제주특별자치도 조천읍 조함해안로 112 에서 제주산 최상급 말차를 사용한 음료와 디저트를 맛보며 멋진 바다 전경과 편안함 '쉼'을 경험해보세요.",
-        "source": "/images/home/cafe-glossy-matcha.webp",
-        "link": "/about",
-        "linkText": "브랜드 소개"
-      },
-      {
-        "title": "제품 소개",
-        "slogan": "Glossy Signature",
-        "subSlogan": "자연의 원당과 대체당으로 블랜딩한 최적의 달콤함",
-        "description": "선조들로부터 이어진 전통 가공방식을 고수해 떫은 맛은 줄고 섬세하고 부드러운 깔끔한 끝맛으로 초심자들도 맛있게 드실 수 있어요.",
-        "source": "/images/home/glossy-signature.webp",
-        "link": "/products",
-        "linkText": "제품 소개"
-      },
-      {
-        "title": "말차 테스트",
-        "slogan": "Glossy Pick",
-        "subSlogan": "단 하나, 당신만을 위한 글로시 말차",
-        "description": "말차 스트레이트? 말차 모히또? 말차 라떼? 나와 어울리는 말차 메뉴를 찾고 글로시 말차에서 즐겨보세요!",
-        "source": "/images/home/matcha-test.webp",
-        "link": "/test",
-        "linkText": "테스트 바로가기"
+    "brand": {
+      "title": "Brand Introduction",
+      "slogan": "Life With Glossy",
+      "subSlogan": "Making every day a shining moment.",
+      "description": "Glossy Matcha promises to grow not just as a brand selling matcha, but as a relational brand filled with diverse emotions and content that make every moment of people's lives shine.",
+      "linkText": "Go to Brand Introduction",
+      "subContents": {
+        "title": "Relax with Glossy",
+        "subTitle": "\"Glossy Matcha offers you true relaxation\"",
+        "contents": [
+          "Glossy Matcha uses only the highest quality 100% organic matcha grown in Jeju.",
+          "Experience true relaxation with Glossy Matcha, capturing the fresh vitality of Jeju’s pristine nature."
+        ]
       }
-    ]
+    },
+    "cafe": {
+      "title": "Cafe Introduction",
+      "slogan": "Cafe Glossy Matcha",
+      "subSlogan": "The hottest spot in the east of Jeju",
+      "sideBarImage": "/images/home/cafe-location.webp",
+      "description": "At 112 Johamhaean-ro, Jocheon-eup, Jeju Special Self-Governing Province, enjoy drinks and desserts made with the finest Jeju-grown matcha while taking in the beautiful ocean view and peaceful atmosphere.",
+      "linkText": "Visit the Cafe",
+      "subContents": {
+        "title": "Enjoy Matcha",
+        "subTitle": "\"Organic Matcha enjoyed in Jeju\"",
+        "contents": [
+          "Jeju’s hills, straight matcha, Glossy Matcha mojito, Ang matcha butter toast, barley cream matcha latte, and more.",
+          "Discover a variety of matcha menu items exclusive to Cafe Glossy Matcha."
+        ]
+      }
+    },
+    "product": {
+      "title": "Product Introduction",
+      "slogan": "Glossy Signature",
+      "subSlogan": "The perfect sweetness blended with natural and alternative sugars",
+      "description": "Following traditional processing methods passed down from ancestors, Glossy Matcha reduces bitterness and offers a delicate, smooth, clean finish, making it enjoyable even for beginners.",
+      "linkText": "Go to Product Introduction",
+      "subContents": {
+        "title": "Ease to use, Glossy",
+        "subTitle": "\"From Glossy Matcha signature to tea sets\"",
+        "contents": [
+          "The possibilities are endless with a single pack of Glossy Matcha Signature, made from the first new leaves of Jeju’s early spring.",
+          "Enjoy matcha straight, matcha latte, lemonade, and more at home."
+        ]
+      }
+    },
+    "test": {
+      "title": "Matcha Test",
+      "slogan": "Glossy Pick",
+      "subSlogan": "The one and only Glossy Matcha just for you",
+      "description": "Matcha straight? Matcha mojito? Matcha latte? Find the matcha menu that suits you and enjoy it at Glossy Matcha!",
+      "linkText": "Take the Test",
+      "subContents": {
+        "title": "Find your matcha",
+        "subTitle": "\"Looking for a recommended menu?\"",
+        "contents": [
+          "It’s not easy to find a menu that fits your mood and taste today.",
+          "We recommend the perfect menu tailored to your preferences."
+        ]
+      }
+    }
   },
   "about": {
     "sub-nav": {

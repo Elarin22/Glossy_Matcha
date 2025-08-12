@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { HomeContent } from "@/app/[locale]/page";
 import styles from "./MobileHome.module.scss";
 import SoundButton from "../SoundButton/SoundButton";
