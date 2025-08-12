@@ -22,6 +22,7 @@ export interface HomeContent {
   link?: string;
   linkText?: string;
   sourceMb?: string; // Mobile version of the video
+  isExternal?: boolean;
 }
 
 const homeContents: HomeContent[] = [
@@ -46,6 +47,7 @@ const homeContents: HomeContent[] = [
     source: "/images/home/cafe-glossy-matcha.webp",
     link: "https://www.google.com/maps/place/%EA%B8%80%EB%A1%9C%EC%8B%9C%EB%A7%90%EC%B0%A8(Glossy+matcha)/data=!3m1!4b1!4m6!3m5!1s0x350d1dc1714db5c1:0x999e71da31e8bd0b!8m2!3d33.5456823!4d126.6395823!16s%2Fg%2F11spxjp6gy?entry=ttu&g_ep=EgoyMDI1MDgwNi4wIKXMDSoASAFQAw%3D%3D",
     linkText: "카페 구경가기",
+    isExternal: true,
   },
   {
     title: "제품 소개",
