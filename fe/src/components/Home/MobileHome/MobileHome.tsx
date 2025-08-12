@@ -14,27 +14,36 @@ const ArrowLink = ({
   link,
   linkText,
   isExternalSite = false,
-  isLeft = false,
 }: {
   locale: string;
   link: string;
   linkText: string;
   isExternalSite?: boolean;
-  isLeft?: boolean;
 }) => {
-  return (
-    <Link
-      href={!isExternalSite ? `/${locale}${link}` : link}
-      className={styles["top-right-link"]}
-      style={
-        isLeft
-          ? { justifyContent: "flex-start" }
-          : { justifyContent: "flex-end" }
-      }
-    >
+  const content = (
+    <>
       {linkText}
-      <img src={"../images/icon/icon-Right-arrow.svg"} alt="" />
-    </Link>
+      <img src="/images/icon/icon-Right-arrow.svg" alt="화살표 아이콘" />
+    </>
+  );
+
+  return (
+    <>
+      {isExternalSite ? (
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles["top-right-link"]}
+        >
+          {content}
+        </a>
+      ) : (
+        <Link href={`/${locale}${link}`} className={styles["top-right-link"]}>
+          {content}
+        </Link>
+      )}
+    </>
   );
 };
 
@@ -62,7 +71,7 @@ export default function MobileHome({
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.3 }
     );
 
     sectionRefs.current.forEach((el) => {
@@ -101,20 +110,19 @@ export default function MobileHome({
                     loop
                     playsInline
                   >
-                    <source src={contents[0].sourceMb} type="video/mp4" />
+                    <source src={content.sourceMb} type="video/mp4" />
                   </video>
                 </div>
                 <ScrollIndicator bottom={100} isDisabled={true} />
                 <SoundButton videoRef={videoRef} isBottom={false} />
               </>
             )}
-            {index !== 0 && (
+            {index !== 0 && content.link && content.linkText && (
               <ArrowLink
                 locale={locale}
-                link={content.link!}
-                linkText={content.linkText!}
-                isExternalSite={index === 1 ? true : false}
-                isLeft={index === 0 ? true : false}
+                link={content.link}
+                linkText={content.linkText}
+                isExternalSite={content.isExternal ?? false}
               />
             )}
             <div
