@@ -52,16 +52,16 @@ export default function ImageSection({
                     브라우저가 비디오를 지원하지 않습니다.
                   </video>
                   <SoundButton videoRef={videoRef} />
-                  <ScrollIndicator extraMoveHeight={240} />
+                  <ScrollIndicator bottom={30} />
                 </>
               ) : (
-                <Image
-                  src={content.source}
-                  alt=""
-                  fill
-                  sizes="70vw"
-                  className={styles["section-image"]}
-                />
+                <div
+                  className={styles["section-item"]}
+                  style={{ backgroundImage: `url(${content.source})` }}
+                  ref={(el) => {
+                    sectionRefs.current[index] = el as HTMLDivElement;
+                  }}
+                ></div>
               )}
             </div>
             <ImageSubInfo index={index} />
