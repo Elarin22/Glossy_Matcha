@@ -260,12 +260,13 @@ const parseSubDescription = (subDescriptionText: string): ProductBodySection[] =
         const trimmedSection = section.trim();
         if (!trimmedSection) return;
 
-        const lines = trimmedSection.split('\n').map(line => line.trim()).filter(line => line);
-        if (lines.length === 0) return;
 
-        // 첫 번째 줄은 title, 나머지는 content로 처리
-        const title = lines[0] || "";
-        const content = lines.slice(1).join('\n') || "";
+        // || 구분자로 title과 content 분리
+        const parts = trimmedSection.split('||');
+        const title = parts[0]?.trim() || "";
+        const content = parts[1]?.trim() || "";
+
+        if (!title) return; // title이 없으면 섹션 생성하지 않음
 
         sections.push({
             id: index,
