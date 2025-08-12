@@ -6,9 +6,8 @@ import styles from "./MobileHome.module.scss";
 import SoundButton from "../SoundButton/SoundButton";
 import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
-import { useLocale } from "next-intl";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 
 const ArrowLink = ({
   locale,
@@ -34,7 +33,7 @@ const ArrowLink = ({
       }
     >
       {linkText}
-      <img src={"../images/icon/icon-Right-arrow.svg"} />
+      <img src={"../images/icon/icon-Right-arrow.svg"} alt="" />
     </Link>
   );
 };
@@ -48,29 +47,18 @@ export default function MobileHome({
   const locale = params.locale as string;
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [visibleIndexes, setVisibleIndexes] = useState<number[]>([]);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
-
-  useEffect(() => {
-    console.log("Locale changed to:", locale);
-  }, [locale]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const index = sectionRefs.current.findIndex(
-            (el) => el === entry.target
-          );
-          if (index === -1) return;
-
           if (entry.isIntersecting) {
-            setVisibleIndexes((prev) => {
-              if (!prev.includes(index)) return [...prev, index];
-              return prev;
-            });
-          } else {
-            setVisibleIndexes((prev) => prev.filter((i) => i !== index));
+            entry.target
+              .querySelector(`.${styles["content-box"]}`)
+              ?.classList.add(styles.visible);
+
+            observer.unobserve(entry.target);
           }
         });
       },
@@ -116,21 +104,21 @@ export default function MobileHome({
                     <source src={contents[0].sourceMb} type="video/mp4" />
                   </video>
                 </div>
-                <ScrollIndicator bottom={40} isDisabled={true} />
+                <ScrollIndicator bottom={100} isDisabled={true} />
                 <SoundButton videoRef={videoRef} isBottom={false} />
               </>
             )}
-            <ArrowLink
-              locale={locale}
-              link={content.link!}
-              linkText={content.linkText!}
-              isExternalSite={index === 1 ? true : false}
-              isLeft={index === 0 ? true : false}
-            />
+            {index !== 0 && (
+              <ArrowLink
+                locale={locale}
+                link={content.link!}
+                linkText={content.linkText!}
+                isExternalSite={index === 1 ? true : false}
+                isLeft={index === 0 ? true : false}
+              />
+            )}
             <div
-              className={`${styles["content-box"]} ${
-                visibleIndexes.includes(index) ? styles.visible : ""
-              }`}
+              className={styles["content-box"]}
               style={index === 0 ? { justifyContent: "flex-start" } : undefined}
             >
               <h3 className={styles.title}>{content.slogan}</h3>
@@ -140,6 +128,18 @@ export default function MobileHome({
           </section>
         );
       })}
+
+      <section className={styles["inquire-section"]}>
+        <h3 className="sr-only">문의 안내</h3>
+        <p className={styles.subTitle}>
+          문의사항이 있으신 경우,
+          <br />
+          아래 ‘문의하기’ 버튼을 클릭하여 내용을 작성해 주세요.
+          <br />
+          검토 후 빠르게 연락드리겠습니다.
+        </p>
+        <button className={`btn-g ${styles.button}`}>✉ 문의하기</button>
+      </section>
 
       {/* Footer - mobile home only (for scroll snap behavior) */}
       <section className={styles["footer-section"]}>
