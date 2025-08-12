@@ -6,7 +6,6 @@ import { TextFormatter } from '../../utils/textFormatter';
 interface ProductImage {
     id: number;
     image: string;
-    alt_text?: string;
     alt_text_ko?: string;
     alt_text_en?: string;
 }
@@ -559,6 +558,15 @@ const ProductDescriptionTest: React.FC = () => {
                             // sub_description 필드에서 파싱
                             const subDescText = getLocalizedField(currentProduct, 'sub_description', lang);
                             bodySections = parseSubDescription(subDescText, currentProduct.images);
+                            // 디버깅 로그
+                            console.log('=== 디버깅 정보 ===');
+                            console.log('제품명:', currentProduct.name);
+                            console.log('이미지 개수:', currentProduct.images.length);
+                            console.log('파싱된 섹션 개수:', bodySections.length);
+                            console.log('각 섹션의 이미지:');
+                            bodySections.forEach((section, i) => {
+                                console.log(`  섹션 ${i}: ${section.title} -> ${section.image ? '이미지 있음' : '이미지 없음'}`);
+                            });
                         }
                         
                         return bodySections.length > 0 && (
