@@ -138,7 +138,7 @@ export default function MobileHome({
           <br />
           검토 후 빠르게 연락드리겠습니다.
         </p>
-        <button className={`btn-g ${styles.button}`}>✉ 문의하기</button>
+        <button className="btn-g">✉ 문의하기</button>
       </section>
 
       {/* Footer - mobile home only (for scroll snap behavior) */}
