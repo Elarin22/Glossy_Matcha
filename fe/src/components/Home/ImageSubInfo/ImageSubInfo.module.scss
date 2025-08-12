@@ -7,17 +7,17 @@
   justify-content: space-between;
   gap: 20px;
 
-  padding: 3.125rem;
+  height: 20vh;
+  padding: 2rem 3rem;
   background-color: white;
 }
 
 .title {
-  @include myeongjo($font-size-32, 700);
+  @include myeongjo($font-size-32, 500);
   color: $color-green-500;
 }
 
-.subtitle {
-  font-size: $font-size-18;
-  color: $color-green-500;
-  margin-bottom: 1rem;
+.contents {
+  max-width: 780px;
+  word-break: keep-all;
 }
