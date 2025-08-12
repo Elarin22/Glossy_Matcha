@@ -351,7 +351,8 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
     const lang = isEnglish ? 'en' : 'ko';
     
     // sort_order에 따라 정렬
-    const sortedSections = [...bodySections].sort((a, b) => a.sort_order - b.sort_order);
+    // id에 따라 정렬 (admin에서 추가한 순서)
+    const sortedSections = [...bodySections].sort((a, b) => (a.id || 0) - (b.id || 0));  
 
     return (
         <div className={styles.productDescription}>
@@ -360,7 +361,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
                 const content = getLocalizedSectionField(section, 'content', lang);
                 
                 return (
-                    <div key={`section-${section.id || section.sort_order || index}-${index}`} className={styles.descriptionItem}>
+                    <div key={`section-${section.sort_order}-${index}`} className={styles.descriptionItem}>
                         {section.image && (
                             <div className={styles.imageWrapper}>
                                 <img 

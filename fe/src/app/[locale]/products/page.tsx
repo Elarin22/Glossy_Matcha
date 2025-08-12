@@ -76,14 +76,18 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
     };
 
     // sub_description을 파싱해서 ProductBodySection 배열로 변환하는 함수
-    const parseSubDescription = (subDescriptionText: string) => {
+    const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
         if (!subDescriptionText || !subDescriptionText.trim()) {
             return [];
         }
 
         const sections: ProductBodySection[] = [];
         // --- 구분자로 나누기 (첫 번째와 마지막 빈 문자열 제거)
-        const rawSections = subDescriptionText.trim().split('---').filter(section => section.trim());
+        const rawSections = subDescriptionText.trim().split('---').filter((section: string) => section.trim());
+
+        console.log('=== 파싱 디버깅 ===');
+        console.log('전체 이미지 개수:', currentProduct?.images?.length || 0);
+        console.log('파싱된 섹션 개수:', rawSections.length);
 
         rawSections.forEach((section, index) => {
             const trimmedSection = section.trim();
@@ -96,10 +100,18 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
 
             if (!title) return; // title이 없으면 섹션 생성하지 않음
 
-            // 각 섹션에 해당하는 이미지 찾기 (인덱스 순서대로 매핑)
-            // 첫 번째 이미지는 mid banner용이므로 제외하고 인덱스 1부터 시작
-            const sectionImage = currentProduct?.images?.[index + 1];
+            // 정확한 이미지 매핑:
+            // Django에서 업로드한 순서:
+            // images[0] = mid banner용 
+            // images[1] = 첫 번째 섹션용 (index 0에 해당)
+            // images[2] = 두 번째 섹션용 (index 1에 해당)
+            // images[3] = 세 번째 섹션용 (index 2에 해당) ...
+            // 따라서: 섹션의 이미지 = images[index + 1]
+            const imageIndex = index + 1;
+            const sectionImage = currentProduct?.images?.[imageIndex];
             
+            console.log(`섹션 ${index}: "${title}" -> 이미지 인덱스 ${imageIndex}:`, sectionImage?.image || '없음');
+
             sections.push({
                 id: index,
                 image: sectionImage?.image || undefined,
@@ -111,6 +123,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
             });
         });
 
+        console.log('최종 섹션들:', sections);
         return sections;
     };
 
@@ -161,10 +174,10 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
                     activeProductId={activeProductId}
                 />
                 
-                {/* MidBanner - 선택된 제품만 표시 */}
+                {/* MidBanner - 선택된 제품만 표시 (images[0] 사용) */}
                 <ProductMidBanner productId={activeProductId} lang={lang} />
                 
-                {/* ProductDescription - 제품 상세 설명 */}
+                {/* ProductDescription - 제품 상세 설명 (images[1]부터 사용) */}
                 {bodySections.length > 0 && (
                     <ProductDescription 
                         bodySections={bodySections}
