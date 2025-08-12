@@ -32,6 +32,30 @@ export const useDownload = () => {
         scale: getOptimalScale(),
       });
 
+      // iOS + Web Share API 지원
+      if (isIOS() && navigator.share) {
+        try {
+          canvas.toBlob(async (blob) => {
+            if (!blob) {
+              toast.error("이미지 변환에 실패했습니다.");
+              return;
+            }
+            const file = new File([blob], `${fileName}.png`, {
+              type: "image/png",
+            });
+            await navigator.share({
+              files: [file],
+              title: "추천 결과 이미지",
+              text: "추천 결과를 확인하세요!",
+            });
+            toast.success("이미지가 공유되었습니다!");
+          }, "image/png");
+          return;
+        } catch (error) {
+          toast.error("이미지 공유에 실패했습니다. 다시 시도해주세요.");
+        }
+      }
+
       // iOS + Web Share API 미지원 → 새 탭
       if (isIOS()) {
         const dataUrl = canvas.toDataURL("image/png");
