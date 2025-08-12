@@ -22,7 +22,7 @@ export default function PcHome({ contents }: { contents: HomeContent[] }) {
           }
         });
       },
-      { threshold: 0.7 }
+      { threshold: 0.6 }
     );
 
     sectionRefs.current.forEach((el) => {

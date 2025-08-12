@@ -17,13 +17,14 @@ body {
   justify-content: center;
   align-items: center;
   width: 200px;
-  padding: 14px 0;
+  padding: 14px;
   background-color: $color-green-500;
   color: #fff;
   border-radius: 10px;
   font-size: $font-size-18;
   font-weight: $font-weight-medium;
   line-height: 28px;
+  word-break: keep-all;
 
   &:hover {
     background-color: $color-green-700;
