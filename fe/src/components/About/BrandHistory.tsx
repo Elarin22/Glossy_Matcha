@@ -22,15 +22,13 @@ export default function BrandHistory() {
   return (
     <section id="history" className={styles["brand-history"]}>
       <h3 className="sr-only">연혁</h3>
-      <FadeInUp delay={0}>
-        <Image
-          className={styles["brand-history__image"]}
-          src="/images/about/glossy-matcha.webp"
-          alt={t("title") + " 카페 전경 이미지"}
-          width={960}
-          height={800}
-        />
-      </FadeInUp>
+      <Image
+        className={styles["brand-history__image"]}
+        src="/images/about/glossy-matcha.webp"
+        alt={t("title") + " 카페 전경 이미지"}
+        width={960}
+        height={800}
+      />
 
       <div className={styles["brand-history__content"]}>
         <FadeInUp delay={200}>

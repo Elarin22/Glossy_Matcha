@@ -2,166 +2,167 @@
 @use "@/styles/mixins" as *;
 
 .jeju-matcha {
+  &__intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    margin-bottom: 10vw;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 960 / 800;
+    object-fit: cover;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 10vw, 190px);
+  }
+
+  &__title {
+    @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
+    color: $color-green-500;
+    margin-bottom: clamp(12px, 1.5vw, 20px);
+  }
+
+  &__slogan {
+    @include pretendard(clamp(16px, 1.25vw, 24px), 500);
+    margin-bottom: clamp(24px, 3vw, 50px);
+    font-style: italic;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 2.5vw, 50px);
+    word-break: keep-all;
+  }
+
+  &__paragraph {
+    @include pretendard(clamp(14px, 1.05vw, 20px), 500);
+  }
+
+  &__feature {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 10vw;
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      max-width: 50vw;
+      padding: 0 clamp(20px, 5vw, 150px);
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 16.67vw;
+      gap: 1.56vw;
+    }
+
+    &-title {
+      @include myeongjo(clamp(20px, 2.6vw, 50px), 500);
+      color: $color-green-500;
+    }
+
+    &-description {
+      @include pretendard(clamp(14px, 1.05vw, 20px), 500);
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    &-image {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 960 / 960;
+      object-fit: cover;
+    }
+  }
+
+  @media (max-width: 768px) {
     &__intro {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-items: stretch;
-        margin-bottom: 10vw;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 30px;
     }
 
     &__image {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 960 / 800;
-        object-fit: cover;
+      max-width: 100%;
+      aspect-ratio: 360 / 200;
     }
 
     &__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0 auto;
-        padding: 0 clamp(20px, 10vw, 190px);
+      align-items: center;
     }
 
     &__title {
-        @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
-        color: $color-green-500;
-        margin-bottom: clamp(12px, 1.5vw, 20px);
+      @include myeongjo($font-size-24, 500);
+      margin-bottom: 10px;
     }
 
     &__slogan {
-        @include pretendard(clamp(16px, 1.25vw, 24px), 500);
-        margin-bottom: clamp(24px, 3vw, 50px);
+      @include pretendard($font-size-14, 500);
+      margin-bottom: 20px;
     }
 
     &__description {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(24px, 2.5vw, 50px);
-        word-break: keep-all;
+      align-items: center;
+      gap: 10px;
     }
 
     &__paragraph {
-        @include pretendard(clamp(14px, 1.05vw, 20px), 500);
+      @include pretendard($font-size-12, 500);
+      max-width: 300px;
+      text-align: center;
+      word-break: keep-all;
     }
 
     &__feature {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        justify-content: space-between;
-        align-items: stretch;
-        margin-bottom: 10vw;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      margin-bottom: 30px;
 
-        &-list {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            max-width: 50vw;
-            padding: 0 clamp(20px, 5vw, 150px);
-        }
+      &-list {
+        order: 2;
+        max-width: 100%;
+        gap: 20px;
+      }
 
-        &-item {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 16.67vw;
-            gap: 1.56vw;
-        }
+      &-item {
+        height: auto;
+        gap: 10px;
+      }
 
-        &-title {
-            @include myeongjo(clamp(20px, 2.6vw, 50px), 500);
-            color: $color-green-500;
-        }
+      &-title {
+        @include myeongjo($font-size-22, 500);
+      }
 
-        &-description {
-            @include pretendard(clamp(14px, 1.05vw, 20px), 500);
-            text-align: center;
-            word-break: keep-all;
-        }
+      &-description {
+        @include pretendard($font-size-12, 500);
+        padding: 0 50px;
+      }
 
-        &-image {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 960 / 960;
-            object-fit: cover;
-        }
+      &-image {
+        content: url("/images/about/leaf-2-mb.webp");
+        order: 1;
+        max-width: 100%;
+        aspect-ratio: 360 / 200;
+      }
     }
-
-    @media (max-width: 768px) {
-        &__intro {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        &__image {
-            max-width: 100%;
-            aspect-ratio: 360 / 200;
-        }
-
-        &__content {
-            align-items: center;
-        }
-
-        &__title {
-            @include myeongjo($font-size-24, 500);
-            margin-bottom: 10px;
-        }
-
-        &__slogan {
-            @include pretendard($font-size-14, 500);
-            margin-bottom: 20px;
-        }
-
-        &__description {
-            align-items: center;
-            gap: 10px;
-        }
-
-        &__paragraph {
-            @include pretendard($font-size-12, 500);
-            max-width: 300px;
-            text-align: center;
-            word-break: keep-all;
-        }
-
-        &__feature {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            margin-bottom: 30px;
-
-            &-list {
-                order: 2;
-                max-width: 100%;
-                gap: 20px;
-            }
-
-            &-item {
-                height: auto;
-                gap: 10px;
-            }
-
-            &-title {
-                @include myeongjo($font-size-22, 500);
-            }
-
-            &-description {
-                @include pretendard($font-size-12, 500);
-                padding: 0 50px;
-            }
-
-            &-image {
-                content: url("/images/about/leaf-2-mb.webp");
-                order: 1;
-                max-width: 100%;
-                aspect-ratio: 360 / 200;
-            }
-        }
-    }
+  }
 }

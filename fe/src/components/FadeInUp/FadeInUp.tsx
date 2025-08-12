@@ -75,7 +75,7 @@ export default function FadeInUp({
 
     const observer = new IntersectionObserver(handleIntersection, {
       threshold,
-      rootMargin: "0px 0px -50px 0px",
+      rootMargin: "0px 0px -80px 0px",
     });
 
     observer.observe(element);

@@ -61,15 +61,13 @@ export default function BrandPhilosophy() {
         </FadeInUp>
       </div>
 
-      <FadeInUp delay={0}>
-        <Image
-          className={styles["brand-philosophy__image"]}
-          src="/images/about/straight.webp"
-          alt="글로시말차 스트레이트 이미지"
-          width={960}
-          height={800}
-        />
-      </FadeInUp>
+      <Image
+        className={styles["brand-philosophy__image"]}
+        src="/images/about/straight.webp"
+        alt="글로시말차 스트레이트 이미지"
+        width={960}
+        height={800}
+      />
     </section>
   );
 }
