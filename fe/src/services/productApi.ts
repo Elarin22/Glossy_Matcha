@@ -36,6 +36,7 @@ interface Product {
     short_description_en?: string;
     sub_description?: string;
     sub_description_en?: string;
+    mid_banner_img?: string;
     images: ProductImage[];
     specifications: ProductSpecification[];
     body_sections?: ProductBodySection[];
@@ -56,10 +57,11 @@ const mockProducts: Product[] = [
       name_en: "Signature",
       subtitle: "100% 제주 새봄의 첫 순을 담은 부드러운 말차 포켓",
       subtitle_en: "100% Premium Jeju First Spring Harvest Smooth Matcha Pocket",
-      description: "세레모니얼 말차 | 대나무 수액 | 코코넛슈가",
+      description: "세레모니얼 말차 | 대나무 수액 | 코코넛슈가 \n 제주산 세레모니얼 등급 말차 원료와 대체당, 대나무수액, 코코넛슈가를 블렌딩한 은은한 단맛의 밸런스",
       description_en: "Ceremonial Matcha | Bamboo Sap | Coconut Sugar",
       short_description: "* 글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
       short_description_en: "GlossyMatcha Signature is made with the same ingredients as the matcha used in actual stores.",
+      mid_banner_img: "||BANNER:/images/product/signature-mid-banner.png",
       sub_description: `말차, 이젠 쉽고 간편하게 즐겨요||귀찮고 복잡한 차선과 차완 대신, 오직 10g. 단 한 포로 손쉽게 말차 음료를 완성하세요.
   ---
   제주의 봄, 첫순으로만 만든 유기농 말차||국내에는 세레모니얼 등급의 인증기관이 없는 대신, 글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순', 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.
@@ -127,14 +129,45 @@ const mockProducts: Product[] = [
       description_en: "Tea Whisk | Bowl | Spoon | Tea Stand",
       short_description: "",
       short_description_en: "",
-      sub_description: "",           
-      sub_description_en: "",       
+      mid_banner_img: "||BANNER:/images/product/teaset-mid-banner.png",
+      sub_description: `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성 백자 제품. 초보자도 쉽게 사용할 수 있도록 설계되었습니다.
+  ---
+  차선꽂이 | 차선 거치대||차선을 깔끔하게 건조하고 형태를 유지하는 안정적인 거치대
+  ---
+  차선 | 말차용 대나무 거품기||100갈래 대나무 차선으로 부드럽고 풍부한 거품을 만듭니다.
+  ---
+  차시 | 말차 긴 스픈||길고 가는 디자인으로 말차를 쉽게 덜어낼 수 있습니다.`,           
+      sub_description_en: `Matcha Bowl||High-fired porcelain crafted in collaboration with a Jeju local artist, designed for both beginners and experts.
+  ---
+  Chasen Stand||A stable stand to dry your whisk neatly and maintain its shape.
+  ---
+  Bamboo Whisk||100-prong bamboo whisk for smooth, stable foam.
+  ---
+  Bamboo Tea Scoop||Long, slender bamboo scoop for easy matcha measuring.`,       
       images: [
         {
           id: 2,
-          image: "/images/product/teaset-mid-banner.png",
-          alt_text_ko: "말차다구세트 메인 이미지",
-          alt_text_en: "Matcha tea set main image",
+          image: "/images/product/teaset1.webp",
+          alt_text_ko: "차완 말차 그릇",
+          alt_text_en: "Matcha Bowl",
+        },
+        {
+          id: 3,
+          image: "/images/product/teaset2.webp",
+          alt_text_ko: "차선꽂이 거치대",
+          alt_text_en: "Chasen Stand",
+        },
+        {
+          id: 4,
+          image: "/images/product/teaset3.webp",
+          alt_text_ko: "차선 대나무 거품기",
+          alt_text_en: "Bamboo Whisk",
+        },
+        {
+          id: 5,
+          image: "/images/product/teaset4.webp",
+          alt_text_ko: "차시 말차 긴 스픈",
+          alt_text_en: "Bamboo Tea Scoop",
         }
       ],
       specifications: [
@@ -150,18 +183,29 @@ const mockProducts: Product[] = [
       name_en: "Tin Case",
       subtitle: "제주의 자연을 담은 100% HIGH QUALITY 유기농 말차",
       subtitle_en: "100% HIGH QUALITY organic matcha containing the nature of Jeju",
-      description: "틴케이스 SET",
-      description_en: "Tin Case SET",
-      sub_description: "",          
-      sub_description_en: "",        
-      short_description: "* 국산 말차에는 등급제가 없습니다만, 해외 등급표 기준을 만족하도록 첫순 1번 잎을 가지고 만든 세레모니얼 급 '유기농 말차' 입니다.",
-      short_description_en: "* Although there is no grading system for domestic matcha, this is ceremonial grade 'organic matcha' made from first-harvest leaves to meet international grading standards.",
+      description: "틴케이스 SET \n 최상급 말차 50g + 우드스픈 + 틴케이스",
+      description_en: "Tin Case Set — 50g Premium Matcha + Wooden Spoon + Tin Case",
+      mid_banner_img: "||BANNER:/images/product/case-mid-banner.png",
+      sub_description: `GRADE||제주 청정 자연에서 첫 순, 첫 번째 잎으로 만든 최상급 말차. 환경과 지속 가능성을 생각하며 재배합니다.
+  ---
+  PRICE||최고 품질의 말차를 합리적인 가격에 제공합니다.`,          
+      sub_description_en: `GRADE||Premium matcha made from the very first leaves in Jeju's pristine nature, grown with care for sustainability.
+  ---
+  PRICE||Premium quality matcha at a fair price, without compromise.`,        
+      short_description: "* 국산 말차에는 등급제가 없지만, 해외 기준을 만족하도록 첫순 1번 잎으로 만든 세레모니얼급 유기농 말차입니다.",
+      short_description_en: "While Korea has no official matcha grading system, this ceremonial-grade organic matcha meets international standards using only the first leaves of spring.",
       images: [
         {
           id: 3,
-          image: "/images/product/case-mid-banner.png",
-          alt_text_ko: "틴케이스 메인 이미지",
-          alt_text_en: "Tin case main image",
+          image: "/images/product/case1.webp",
+          alt_text_ko: "틴케이스 등급",
+          alt_text_en: "Tin case grade",
+        },
+        {
+          id: 4,
+          image: "/images/product/case2.webp",
+          alt_text_ko: "틴케이스 가격",
+          alt_text_en: "Tin case price",
         }
       ],
       specifications: [

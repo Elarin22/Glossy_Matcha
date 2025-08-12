@@ -100,14 +100,13 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
 
             if (!title) return; // title이 없으면 섹션 생성하지 않음
 
-            // 정확한 이미지 매핑:
-            // Django에서 업로드한 순서:
-            // images[0] = mid banner용 
-            // images[1] = 첫 번째 섹션용 (index 0에 해당)
-            // images[2] = 두 번째 섹션용 (index 1에 해당)
-            // images[3] = 세 번째 섹션용 (index 2에 해당) ...
-            // 따라서: 섹션의 이미지 = images[index + 1]
-            const imageIndex = index + 1;
+            // 이미지 매핑:
+            // mid_banner_img를 따로 사용하므로 images 배열은 모두 섹션용
+            // images[0] = 첫 번째 섹션용 (index 0에 해당)
+            // images[1] = 두 번째 섹션용 (index 1에 해당)
+            // images[2] = 세 번째 섹션용 (index 2에 해당) ...
+            // 따라서: 섹션의 이미지 = images[index]
+            const imageIndex = index;
             const sectionImage = currentProduct?.images?.[imageIndex];
             
             console.log(`섹션 ${index}: "${title}" -> 이미지 인덱스 ${imageIndex}:`, sectionImage?.image || '없음');
@@ -174,10 +173,10 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
                     activeProductId={activeProductId}
                 />
                 
-                {/* MidBanner - 선택된 제품만 표시 (images[0] 사용) */}
+                {/* MidBanner - 선택된 제품만 표시 (mid_banner_img 사용) */}
                 <ProductMidBanner productId={activeProductId} lang={lang} />
                 
-                {/* ProductDescription - 제품 상세 설명 (images[1]부터 사용) */}
+                {/* ProductDescription - 제품 상세 설명 (images[0]부터 사용) */}
                 {bodySections.length > 0 && (
                     <ProductDescription 
                         bodySections={bodySections}

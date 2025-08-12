@@ -51,7 +51,17 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
     product
       ? ProductApi.getLocalizedField(product, "short_description", lang)
       : "";
-  const getMainImage = () => product?.images?.[0]?.image ?? null;
+  const getMainImage = () => {
+    if (product?.mid_banner_img) {
+      // mid_banner_img가 있으면 ||BANNER: 형태를 파싱
+      if (product.mid_banner_img.includes('||BANNER:')) {
+        return product.mid_banner_img.split('||BANNER:')[1];
+      }
+      return product.mid_banner_img;
+    }
+    // fallback으로 첫 번째 이미지 사용
+    return product?.images?.[0]?.image ?? null;
+  };
   const getImageAltText = () => {
     const image = product?.images?.[0];
     if (!image) return "";
