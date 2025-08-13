@@ -7,6 +7,12 @@
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
   position: relative;
+
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
 .overlay {
@@ -152,7 +158,9 @@
   }
 }
 
-/* 기존 Footer */
-.mobile-container ~ footer {
-  display: none !important;
+@media (max-width: 768px) {
+  /* 기존 Footer */
+  .mobile-container ~ footer {
+    display: none !important;
+  }
 }

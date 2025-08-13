@@ -4,7 +4,7 @@ import styles from "./PcHome.module.scss";
 import { useEffect, useRef, useState } from "react";
 import SideInfo from "@/components/Home/SideInfo/SideInfo";
 import ImageSection from "@/components/Home/ImageSection/ImageSection";
-import { HomeContent } from "@/app/[locale]/page"; // 혹은 props로 받기
+import { HomeContent } from "@/app/[locale]/page";
 
 export default function PcHome({ contents }: { contents: HomeContent[] }) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -33,7 +33,11 @@ export default function PcHome({ contents }: { contents: HomeContent[] }) {
   }, []);
 
   return (
-    <main className={styles["pc-container"]}>
+    <main
+      className={styles["pc-container"]}
+      aria-label="PC 버전 메인 콘텐츠"
+      role="main"
+    >
       <SideInfo currentIndex={currentIndex} contents={contents} />
       <ImageSection sectionRefs={sectionRefs} contents={contents} />
     </main>

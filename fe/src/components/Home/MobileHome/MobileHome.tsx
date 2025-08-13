@@ -85,7 +85,11 @@ export default function MobileHome({
   }, []);
 
   return (
-    <main className={`${styles["mobile-container"]} mobile-home-page`}>
+    <main
+      className={`${styles["mobile-container"]}`}
+      aria-label="모바일 버전 메인 콘텐츠"
+      role="main"
+    >
       {contents.map((content, index) => {
         return (
           <section

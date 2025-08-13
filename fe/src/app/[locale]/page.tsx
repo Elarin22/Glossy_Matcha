@@ -1,16 +1,6 @@
-"use client";
-
-import dynamic from "next/dynamic";
-import { useMobileDetect } from "@/hooks/useMobileDetect";
-import { useMessages } from "next-intl";
-
-const PcHome = dynamic(() => import("@/components/Home/PcHome/PcHome"), {
-  ssr: false,
-});
-const MobileHome = dynamic(
-  () => import("@/components/Home/MobileHome/MobileHome"),
-  { ssr: false }
-);
+import PcHome from "@/components/Home/PcHome/PcHome";
+import MobileHome from "@/components/Home/MobileHome/MobileHome";
+import { getMessages } from "next-intl/server";
 
 export interface SubContent {
   title: string;
@@ -32,11 +22,13 @@ export interface HomeContent {
   subContent: SubContent;
 }
 
-export default function Home() {
-  const isMobile = useMobileDetect();
-  const messages = useMessages();
-
-  if (isMobile === null) return null;
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
 
   const homeContents: HomeContent[] = [
     {
@@ -86,11 +78,8 @@ export default function Home() {
 
   return (
     <>
-      {!isMobile ? (
-        <PcHome contents={homeContents} />
-      ) : (
-        <MobileHome contents={homeContents} />
-      )}
+      <PcHome contents={homeContents} />
+      <MobileHome contents={homeContents} />
     </>
   );
 }
