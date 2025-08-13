@@ -4,11 +4,14 @@
 // 제품 페이지 상단의 자동 이미지 슬라이더 배너
 
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import styles from './ProductMainBanner.module.scss';
 
 const ProductMainBanner: React.FC = () => {
     // === 상태 관리 ===
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const params = useParams();
+    const currentLocale = params?.locale as string || 'ko';
     
     // === 비주얼 데이터 ===
     const images = [
@@ -17,6 +20,33 @@ const ProductMainBanner: React.FC = () => {
         '/images/product/signature-main-banner3.jpg',
         '/images/product/signature-main-banner4.jpg'
     ];
+
+    // === 다국어 텍스트 데이터 ===
+    const getDescription = () => {
+        if (currentLocale === 'en') {
+            return {
+                korean: false,
+                content: (
+                    <>
+                        A balanced, subtle sweetness <br className={styles.mobileBreak} /> from a blend of Jeju <br />
+                        ceremonial-grade matcha,<br className={styles.mobileBreak} /> alternative sweeteners,<br />
+                        bamboo sap, and coconut sugar.
+                    </>
+                )
+            };
+        }
+        
+        return {
+            korean: true,
+            content: (
+                <>
+                    제주산 세레모니얼 등급 말차 원료와<br />
+                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한<br className={styles.mobileBreak} />
+                    은은한 단맛의 밸런스
+                </>
+            )
+        };
+    };
 
     // === 자동 슬라이드 기능 ===
     // 4초마다 이미지 자동 전환
@@ -71,9 +101,7 @@ const ProductMainBanner: React.FC = () => {
                     Glossy
                 </h1>
                 <p className={styles.description}>
-                    제주산 세레모니얼 등급 말차 원료와<br />
-                    대체당, 대나무 수액, 코코넥 슈가를 블렌딩한 <br className={styles.mobileBreak} />
-                    은은한 단맛의 밸런스
+                    {getDescription().content}
                 </p>
             </div>
 

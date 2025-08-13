@@ -18,6 +18,7 @@ interface ProductBodySection {
 interface ProductDescriptionProps {
     bodySections: ProductBodySection[];
     isEnglish: boolean;
+    midBannerImg?: string;
 }
 
 // === 언어별 필드 값 추출 헬퍼 함수 ===
@@ -40,13 +41,25 @@ const getLocalizedSectionField = (
 // === 메인 컴포넌트 ===
 const ProductDescription: React.FC<ProductDescriptionProps> = ({ 
     bodySections, 
-    isEnglish 
+    isEnglish,
+    midBannerImg 
 }) => {
     const lang = isEnglish ? 'en' : 'ko';
     
     // === 섹션 정렬 ===
     // id 순서로 정렬
     const sortedSections = [...bodySections].sort((a, b) => (a.id || 0) - (b.id || 0));  
+
+    // === MidBanner 이미지 파싱 함수 ===
+    const parseMidBannerImg = (imgString?: string): string | null => {
+        if (!imgString) return null;
+        if (imgString.includes('||BANNER:')) {
+            return imgString.split('||BANNER:')[1];
+        }
+        return imgString;
+    };
+
+    const midBannerImageUrl = parseMidBannerImg(midBannerImg);
 
     // === 렌더링 ===
     return (
@@ -56,10 +69,13 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
                 const title = getLocalizedSectionField(section, 'title', lang);
                 const content = getLocalizedSectionField(section, 'content', lang);
                 
+                // MidBanner와 같은 이미지인지 확인
+                const isDuplicateImage = section.image === midBannerImageUrl;
+                
                 return (
                     <div key={`section-${section.sort_order}-${index}`} className={styles.descriptionItem}>
-                        {/* 섹션 이미지 */}
-                        {section.image && (
+                        {/* 섹션 이미지 (MidBanner와 중복되지 않을 때만 표시) */}
+                        {section.image && !isDuplicateImage && (
                             <div className={styles.imageWrapper}>
                                 <img 
                                     src={section.image} 
