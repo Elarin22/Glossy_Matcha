@@ -27,6 +27,14 @@ export async function generateMetadata() {
       description:
         "글로시 말차 브랜드 소개 페이지 - 철학, 제주 유기농 말차, 연혁 등을 확인하세요.",
       url: "https://www.glossymatcha.com/ko/about",
+      images: [
+        {
+          url: "/images/logo/logo-BI.png",
+          width: 1200,
+          height: 630,
+          alt: "Glossy Matcha",
+        },
+      ],
     },
   };
 }

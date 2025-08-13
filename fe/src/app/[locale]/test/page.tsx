@@ -20,6 +20,14 @@ export async function generateMetadata() {
       title: "Glossy Pick | Glossy Matcha",
       description: "단 하나, 당신만을 위한 글로시 말차",
       url: "https://www.glossymatcha.com/ko/test",
+      images: [
+        {
+          url: "/images/logo/logo-BI.png",
+          width: 1200,
+          height: 630,
+          alt: "Glossy Matcha",
+        },
+      ],
     },
   };
 }
