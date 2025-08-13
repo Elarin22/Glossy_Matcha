@@ -24,10 +24,10 @@ export default function BrandHistory() {
       <h3 className="sr-only">연혁</h3>
       <Image
         className={styles["brand-history__image"]}
-        src="/images/about/glossy-matcha.webp"
+        src="/images/about/glossy-matcha.png"
         alt="글로시 말차 카페 전경 이미지"
-        width={960}
-        height={800}
+        width={1536}
+        height={1024}
         sizes="(max-width: 768px) 100vw, 960px"
       />
 
