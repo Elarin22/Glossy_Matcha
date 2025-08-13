@@ -25,7 +25,7 @@ export const metadata = {
     title: "브랜드 소개 | Glossy Matcha",
     description:
       "글로시 말차 브랜드 소개 페이지 - 철학, 제주 유기농 말차, 연혁 등을 확인하세요.",
-    url: "https://glossymatcha.com/about",
+    url: "https://www.glossymatcha.com/ko/about",
   },
 };
 
