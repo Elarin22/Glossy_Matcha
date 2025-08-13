@@ -135,7 +135,7 @@ const mockProducts: Product[] = [
       short_description_en: "",
       mid_banner_img: "||BANNER:/images/product/teaset-mid-banner.png",
       sub_description:
-      `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성(800~1200도) 백자 제품입니다.\n말차 격불 또는 일반 차 우림에 적합하며,\n초보자도 쉽게 사용할 수 있도록\n곡선,용량,높이 등을 정밀하게 설계했습니다
+      `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성(800~1200도) 백자 제품입니다.\n말차 격불 또는 일반 차 우림에 적합하며,\n초보자도 쉽게 사용할 수 있도록\n곡선,용량,높이 등을 정밀하게 설계했습니다.
       ---
       차선꽂이 | 차선 거치대||차선을 깔끔하게 건조하고 갈래를 잘 유지할 수 있도록\n안정적인 형태로 제작되었습니다.
       ---
@@ -194,7 +194,7 @@ const mockProducts: Product[] = [
       description: "틴케이스 SET\n최상급 말차 50g + 우드스픈 + 틴케이스",
       description_en: "Tin Case Set — 50g Premium Matcha + Wooden Spoon + Tin Case",
       short_description: "* 국산 말차에는 등급제가 없지만, 해외 기준을 만족하도록 첫순 1번 잎으로 만든 세레모니얼급 유기농 말차입니다.",
-      short_description_en: "While Korea has no official matcha grading system, this ceremonial-grade organic matcha meets international standards using only the first leaves of spring.",
+      short_description_en: "* While Korea has no official matcha grading system, this ceremonial-grade organic matcha meets international standards using only the first leaves of spring.",
       mid_banner_img: "||BANNER:/images/product/case-mid-banner.png",
       sub_description: 
       `GRADE||제주도의 청정자연을 담은 말차농원\n말차밭에서 매해 첫 순, 첫 번째 잎으로 생산해 낸 말차를 사용합니다.\n특별한 말차로 더 부드럽고, 더욱 진한 맛을 담아냈습니다.\n서귀포 생태공원에서 재배된 100% 말차만을 사용합니다.\n우리는 환경을 생각하는 마음으로 지속 가능한 미래를 그립니다.\n현지 농부, 장인분들과 함께 더 건강한 내일을 향해 나아가려고 합니다.
@@ -240,14 +240,44 @@ class ProductApi {
    * @returns Promise<ProductApiResponse> 제품 목록 응답
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
-    // 개발 중에는 API 호출 없이 바로 mock 데이터 사용
-    console.log("API 서버가 없으므로 mock 데이터를 사용합니다.");
-    return {
-      success: true,
-      language: lang,
-      count: mockProducts.length,
-      results: mockProducts,
-    };
+    try {
+      const url = `${API_BASE_URL}/?lang=${lang}`;
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-store",
+        signal: AbortSignal.timeout(10000),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: ProductApiResponse = await response.json();
+
+      if (!data.success || data.results.length === 0) {
+        console.warn("API returned empty results, using mock data");
+        return {
+          success: true,
+          language: lang,
+          count: mockProducts.length,
+          results: mockProducts,
+        };
+      }
+
+      return data;
+    } catch (error) {
+      console.error("Error fetching products, using mock data:", error);
+
+      return {
+        success: true,
+        language: lang,
+        count: mockProducts.length,
+        results: mockProducts,
+      };
+    }
   }
 
   /**

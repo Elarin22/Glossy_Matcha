@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ProductApi, { type Product } from "../../services/productApi";
+import { TextFormatter } from "../../utils/textFormatter";
 import styles from "./ProductMidBanner.module.scss";
 
 interface ProductMidBannerProps {
@@ -166,33 +167,30 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
       <div className={styles.container}>
         <div className={styles.textContent}>
           {/* 제품명 */}
-          {productName && <h2 className={styles.productName}>{productName}</h2>}
+          {productName && (
+            <h2 className={styles.productName}>
+              <TextFormatter text={productName} />
+            </h2>
+          )}
           
           {/* 제품 부제목 */}
           {productSubtitle && (
             <h3 className={styles.productSubtitle}>
-              {wrapWordsForMobile(productSubtitle, "subtitle")}
+              <TextFormatter text={productSubtitle} />
             </h3>
           )}
           
           {/* 제품 설명 */}
           {productDescription && (
             <div className={styles.productDescription}>
-              {productDescription.split("\n").map((line, index) => (
-                <p key={index}>{wrapWordsForMobile(line, "description")}</p>
-              ))}
+              <TextFormatter text={productDescription} />
             </div>
           )}
           
           {/* 제품 짧은 설명 (주의사항 등) */}
           {productShortDescription && (
             <div className={styles.productNote}>
-              <p>
-                {wrapWordsForMobile(
-                  productShortDescription,
-                  "shortDescription"
-                )}
-              </p>
+              <TextFormatter text={productShortDescription} />
             </div>
           )}
         </div>

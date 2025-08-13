@@ -147,6 +147,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
                 <ProductDescription 
                     bodySections={bodySections}
                     isEnglish={lang === 'en'}
+                    midBannerImg={currentProduct?.mid_banner_img}
                 />
             )}
         </main>
