@@ -14,62 +14,92 @@
       "title": "Brand Introduction",
       "slogan": "Life With Glossy",
       "subSlogan": "Making every day a shining moment.",
-      "description": "Glossy Matcha promises to grow not just as a brand selling matcha, but as a relational brand filled with diverse emotions and content that make every moment of people's lives shine.",
-      "linkText": "Go to Brand Introduction",
+      "description": "Glossy Matcha promises to grow not just as a brand selling matcha, but as a Relational Brand filled with Diverse Emotions and Content that make every moment of people's lives Shine.",
+      "linkText": "About Brand",
       "subContents": {
         "title": "Relax with Glossy",
         "subTitle": "\"Glossy Matcha offers you true relaxation\"",
         "contents": [
-          "Glossy Matcha uses only the highest quality 100% organic matcha grown in Jeju.",
-          "Experience true relaxation with Glossy Matcha, capturing the fresh vitality of Jeju’s pristine nature."
+          "Glossy Matcha uses only the Highest Quality 100% Organic Matcha grown in Jeju.",
+          "Experience True Relaxation with Glossy Matcha, capturing the Fresh Vitality of Jeju’s Pristine Nature."
         ]
       }
     },
     "cafe": {
       "title": "Cafe Introduction",
       "slogan": "Cafe Glossy Matcha",
-      "subSlogan": "The hottest spot in the east of Jeju",
+      "subSlogan": "The Hottest Spot in the East of Jeju",
       "sideBarImage": "/images/home/cafe-location.webp",
-      "description": "At 112 Johamhaean-ro, Jocheon-eup, Jeju Special Self-Governing Province, enjoy drinks and desserts made with the finest Jeju-grown matcha while taking in the beautiful ocean view and peaceful atmosphere.",
-      "linkText": "Visit the Cafe",
+      "description": "At 112 Johamhaean-ro, Jocheon-eup, Jeju Special Self-Governing Province, enjoy drinks and desserts made with the Finest Jeju-Grown Matcha while taking in the Beautiful Ocean View and Peaceful Atmosphere.",
+      "linkText": "Visit Cafe",
       "subContents": {
         "title": "Enjoy Matcha",
-        "subTitle": "\"Organic Matcha enjoyed in Jeju\"",
+        "subTitle": "\"Organic Matcha Enjoyed in Jeju\"",
         "contents": [
-          "Jeju’s hills, straight matcha, Glossy Matcha mojito, Ang matcha butter toast, barley cream matcha latte, and more.",
-          "Discover a variety of matcha menu items exclusive to Cafe Glossy Matcha."
+          "Jeju’s Hills, Straight Matcha, Glossy Matcha Mojito, Ang Matcha Butter Toast, Barley Cream Matcha Latte, and more.",
+          "Discover a variety of Matcha Menu Items exclusive to Cafe Glossy Matcha."
         ]
       }
     },
     "product": {
       "title": "Product Introduction",
       "slogan": "Glossy Signature",
-      "subSlogan": "The perfect sweetness blended with natural and alternative sugars",
-      "description": "Following traditional processing methods passed down from ancestors, Glossy Matcha reduces bitterness and offers a delicate, smooth, clean finish, making it enjoyable even for beginners.",
-      "linkText": "Go to Product Introduction",
+      "subSlogan": "The Perfect Sweetness blended with Natural and Alternative Sugars",
+      "description": "Following Traditional Processing Methods passed down from ancestors, Glossy Matcha reduces bitterness and offers a Delicate, Smooth and Clean Finish, making it enjoyable even for beginners.",
+      "linkText": "View Products",
       "subContents": {
         "title": "Ease to use, Glossy",
-        "subTitle": "\"From Glossy Matcha signature to tea sets\"",
+        "subTitle": "\"From Glossy Matcha Signature to Tea Sets\"",
         "contents": [
-          "The possibilities are endless with a single pack of Glossy Matcha Signature, made from the first new leaves of Jeju’s early spring.",
-          "Enjoy matcha straight, matcha latte, lemonade, and more at home."
+          "The possibilities are endless with a single pack of Glossy Matcha Signature, made from the First New Leaves of Jeju’s Early Spring.",
+          "Enjoy Matcha Straight, Matcha Latte, Lemonade, and more ─ all from the comfort of your home."
         ]
       }
     },
     "test": {
       "title": "Matcha Test",
       "slogan": "Glossy Pick",
-      "subSlogan": "The one and only Glossy Matcha just for you",
-      "description": "Matcha straight? Matcha mojito? Matcha latte? Find the matcha menu that suits you and enjoy it at Glossy Matcha!",
-      "linkText": "Take the Test",
+      "subSlogan": "The One and Only Glossy Matcha ─ Just For You",
+      "description": "Matcha Straight? Matcha Mojito? Matcha Latte? Find the Matcha Menu that suits you and enjoy it at Glossy Matcha!",
+      "linkText": "Get Matcha Picks",
       "subContents": {
         "title": "Find your matcha",
-        "subTitle": "\"Looking for a recommended menu?\"",
+        "subTitle": "\"Looking For a Recommended Menu?\"",
         "contents": [
-          "It’s not easy to find a menu that fits your mood and taste today.",
-          "We recommend the perfect menu tailored to your preferences."
+          "It’s not easy to find a menu that fits your Mood and Taste today.",
+          "We'll recommend the Perfect Choice tailored to your Preferences."
         ]
       }
+    }
+  },
+  "inquire": {
+    "title": "Contact Us",
+    "description": "If you have any questions, please feel free to reach out.\nOur team will respond promptly via email.",
+    "form": {
+      "category": ["General Inquiry", "Product Inquiry", "Other Inquiry"],
+      "name": {
+        "label": "Name",
+        "placeholder": "Please enter your name."
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Please enter your email."
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Please enter your message."
+      }
+    },
+    "buttonText": "Send Inquiry",
+    "hideText": {
+      "subTitle": "Write inquiry details",
+      "categoryTitle": "Select inquiry category"
+    },
+    "alertMessage": {
+      "invaild": "Please fill out all the fields.",
+      "success": "Your inquiry has been received. We will reply to your email as soon as we check it!",
+      "fail": "Failed to submit the inquiry. Please try again.",
+      "error": "A network error has occurred."
     }
   },
   "about": {

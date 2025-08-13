@@ -31,7 +31,7 @@
       "subSlogan": "제주의 동쪽, 가장 뜨는 핫플",
       "sideBarImage": "/images/home/cafe-location.webp",
       "description": "제주특별자치도 조천읍 조함해안로 112 에서 제주산 최상급 말차를 사용한 음료와 디저트를 맛보며 멋진 바다 전경과 편안함 '쉼'을 경험해보세요.",
-      "linkText": "카페 구경가기",
+      "linkText": "카페 방문하기",
       "subContents": {
         "title": "Enjoy Matcha",
         "subTitle": "\"제주에서 즐기는 유기농 말차\"",
@@ -46,7 +46,7 @@
       "slogan": "Glossy Signature",
       "subSlogan": "자연의 원당과 대체당으로 블랜딩한 최적의 달콤함",
       "description": "선조들로부터 이어진 전통 가공방식을 고수해 떫은 맛은 줄고 섬세하고 부드러운 깔끔한 끝맛으로 초심자들도 맛있게 드실 수 있어요.",
-      "linkText": "제품 소개가기",
+      "linkText": "제품 둘러보기",
       "subContents": {
         "title": "Ease to use, Glossy",
         "subTitle": "\"글로시 말차 시그니처부터 다구 세트까지\"",
@@ -61,7 +61,7 @@
       "slogan": "Glossy Pick",
       "subSlogan": "단 하나, 당신만을 위한 글로시 말차",
       "description": "말차 스트레이트? 말차 모히또? 말차 라떼? 나와 어울리는 말차 메뉴를 찾고 글로시 말차에서 즐겨보세요!",
-      "linkText": "테스트 바로가기",
+      "linkText": "말차 추천 받기",
       "subContents": {
         "title": "Find your matcha",
         "subTitle": "\"추천 받고 싶은 메뉴가 있으신가요?\"",
@@ -70,6 +70,36 @@
           "당신의 취향에 딱 맞는 메뉴를 추천해드립니다."
         ]
       }
+    }
+  },
+  "inquire": {
+    "title": "문의하기",
+    "description": "궁금하신 점이 있으시면 언제든지 문의해 주세요.\n담당자가 신속하게 이메일로 답변해 드리겠습니다.",
+    "form": {
+      "category": ["일반 문의", "제품 문의", "기타 문의"],
+      "name": {
+        "label": "이름",
+        "placeholder": "이름을 입력해주세요."
+      },
+      "email": {
+        "label": "이메일",
+        "placeholder": "이메일을 입력해주세요."
+      },
+      "message": {
+        "label": "문의 내용",
+        "placeholder": "문의 내용을 입력해주세요."
+      }
+    },
+    "buttonText": "문의하기",
+    "hideText": {
+      "subTitle": "문의 내용 작성",
+      "categoryTitle": "문의 카테고리 선택"
+    },
+    "alertMessage": {
+      "invaild": "모든 입력란을 작성해주세요.",
+      "success": "문의를 접수했습니다. 확인 즉시 이메일로 답변드릴게요!",
+      "fail": "문의 접수에 실패했습니다. 다시 시도해주세요.",
+      "error": "네트워크 오류가 발생했습니다."
     }
   },
   "about": {
