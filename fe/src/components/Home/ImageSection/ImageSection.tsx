@@ -16,6 +16,7 @@ export default function ImageSection({
   contents: HomeContent[];
 }): React.JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
+  console.log("ImageSection contents", contents);
 
   return (
     <div>
@@ -64,7 +65,13 @@ export default function ImageSection({
                 />
               )}
             </div>
-            <ImageSubInfo index={index} />
+            <ImageSubInfo
+              index={index}
+              subContent={content.subContent}
+              link={content.link}
+              btnText={content.linkText}
+              isExternal={content.isExternal}
+            />
           </section>
         );
       })}

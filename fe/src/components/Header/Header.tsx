@@ -8,15 +8,14 @@ import styles from "./Header.module.scss";
 import { useMobileDetect } from "@/hooks/useMobileDetect";
 import LanguageButton from "./LanguageButton/LanguageButton";
 
-interface NavigationItem {
+const NAVIGATION_ITEMS: {
   href: string;
   label: string;
-}
-
-const NAVIGATION_ITEMS: NavigationItem[] = [
+}[] = [
   { href: "/about", label: "about" },
   { href: "/products", label: "products" },
   { href: "/test", label: "test" },
+  { href: "/inquire", label: "inquire" },
 ];
 
 export default function Header({ locale }: { locale: string }) {
@@ -62,7 +61,7 @@ export default function Header({ locale }: { locale: string }) {
               src="/images/logo/logo-1.png"
               alt=""
               className={styles["logo-pc"]}
-              width={300}
+              width={270}
               height={28}
               priority
             />
@@ -79,7 +78,6 @@ export default function Header({ locale }: { locale: string }) {
 
           {/* pc version */}
           <div className={styles["header-pc"]}>
-            {/* left */}
             <nav>
               <ul className={styles["header__list"]}>
                 {NAVIGATION_ITEMS.map((item) => (
@@ -89,19 +87,7 @@ export default function Header({ locale }: { locale: string }) {
                 ))}
               </ul>
             </nav>
-
-            {/* right */}
-            <div className={styles["header__list"]}>
-              <Link href={`/${locale}/inquire`} aria-label={t("contact")}>
-                <img
-                  src="/images/icon/headset.svg"
-                  alt=""
-                  width={20}
-                  height={20}
-                />
-              </Link>
-              <LanguageButton locale={locale} />
-            </div>
+            <LanguageButton locale={locale} />
           </div>
 
           {/* mobile version */}
@@ -126,7 +112,6 @@ export default function Header({ locale }: { locale: string }) {
           </div>
         </div>
       </header>
-
       {/* sidebar */}
       {isMobile && (
         <>
@@ -154,11 +139,6 @@ export default function Header({ locale }: { locale: string }) {
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <Link href={`/${locale}/inquire`} onClick={closeSidebar}>
-                    {t("contact")}
-                  </Link>
-                </li>
               </ul>
             </nav>
           </aside>

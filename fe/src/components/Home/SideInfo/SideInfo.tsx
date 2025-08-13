@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./SideInfo.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 import { HomeContent } from "@/app/[locale]/page";
-import { useLocale } from "next-intl";
 
 export default function SideInfo({
   currentIndex,
@@ -12,7 +10,7 @@ export default function SideInfo({
   currentIndex: number;
   contents: HomeContent[];
 }): React.JSX.Element {
-  const locale = useLocale();
+  const content = contents[currentIndex];
 
   return (
     <aside className={styles["info-box"]}>
@@ -21,25 +19,17 @@ export default function SideInfo({
         key={currentIndex}
         className={`${styles["info-item"]} ${styles["fade-up"]}`}
       >
-        <h3 className={styles["info-title"]}>
-          {contents[currentIndex].slogan}
-        </h3>
-        <p className={styles["info-subtitle"]}>
-          {contents[currentIndex].subSlogan}
-        </p>
-        {contents[currentIndex].sideBarImage && (
+        <h3 className={styles["info-title"]}>{content.slogan}</h3>
+        <p className={styles["info-subtitle"]}>{content.subSlogan}</p>
+        {content.sideBarImage && (
           <Image
-            src={
-              contents[currentIndex].sideBarImage || "/images/logo/logo-1.png"
-            }
+            src={content.sideBarImage}
             alt="Glossy Matcha Location(위치)"
             width={300}
             height={220}
           />
         )}
-        <p className={styles["info-content"]}>
-          {contents[currentIndex].description}
-        </p>
+        <p className={styles["info-content"]}>{content.description}</p>
       </div>
     </aside>
   );
