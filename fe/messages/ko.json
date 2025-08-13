@@ -9,6 +9,18 @@
     "menuOpen": "메뉴 열기",
     "menuClose": "메뉴 닫기"
   },
+  "footer": {
+    "companyName": "회사명",
+    "companyNameValue": "(주) 컬쳐히어로제주",
+    "ceo": "대표:",
+    "ceoValue": "윤종석",
+    "contact": "연락처:",
+    "contactValue": "0507-1449-7847 jay@culturehero.net",
+    "businessNumber": "사업자번호:",
+    "businessNumberValue": "779-81-02082",
+    "address": "주소:",
+    "addressValue": "제주시 조천읍 조함해안로 112"
+  },
   "home": {
     "brand": {
       "title": "브랜드 소개",
