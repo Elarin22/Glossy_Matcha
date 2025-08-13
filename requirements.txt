@@ -10,26 +10,8 @@ django-cors-headers
 django-environ
 django-extensions
 
-# AI
-pyhub-llm[all]
-
-# data 분석 및 처리
-pandas
-
 # Excel파일 읽기/쓰기 지원
 openpyxl
-
-# python 테스트 framework
-pytest
-
-# 테스트 결과 읽기
-pytest-testdox
-
-# django project pytest
-pytest-django
-
-# PostgreSQL
-psycopg2-binary
 
 # 배포
 asgiref
