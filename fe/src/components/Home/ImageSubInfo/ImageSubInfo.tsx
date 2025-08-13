@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
 import styles from "./ImageSubInfo.module.scss";
-import { useLocale } from "next-intl";
+import { useParams } from "next/navigation";
 
 type SubContent = {
   title: string;
@@ -22,7 +22,8 @@ export default function ImageSubInfo({
   btnText?: string;
   isExternal?: boolean;
 }): React.JSX.Element {
-  const locale = useLocale();
+  const params = useParams();
+  const locale = params.locale as string;
 
   if (!subContent) {
     return <div className={styles.container} />;
@@ -32,7 +33,12 @@ export default function ImageSubInfo({
     <div className={styles.container}>
       <div>
         <p className={styles.title}>{subContent.title}</p>
-        <p className={styles.subtitle}>{subContent.subTitle}</p>
+        <p
+          className={styles.subtitle}
+          style={locale === "en" ? { fontStyle: "italic" } : undefined}
+        >
+          {subContent.subTitle}
+        </p>
         <p className={styles.contents}>
           {subContent.contents.map((line, id) => (
             <Fragment key={id}>
