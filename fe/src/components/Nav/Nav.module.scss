@@ -1,66 +1,66 @@
-@import "@/styles/fonts";
-@import "@/styles/mixins";
-@import "@/styles/variables";
+@use "@/styles/fonts";
+@use "@/styles/mixins" as *;
+@use "@/styles/variables" as *;
 
 .nav {
-    position: sticky;
-    top: 62px;
-    z-index: 800;
-    background-color: $color-beige-100;
-    padding: 20px 0;
-    border-bottom: 1px solid $color-gray-100;
+  position: sticky;
+  top: 62px;
+  z-index: 800;
+  background-color: $color-beige-100;
+  padding: 20px 0;
+  border-bottom: 1px solid $color-gray-100;
 }
 
 .menuList {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
-    @media (max-width: 768px) {
-        gap: 24px;
-        flex-wrap: wrap;
-    }
+  @media (max-width: 768px) {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
 }
 
 .menuItem {
-    @include pretendard($font-size-18, 400);
-    color: $color-black-200;
-    position: relative;
-    text-decoration: none;
-    transition: color 0.2s ease;
+  @include pretendard($font-size-18, 400);
+  color: $color-black-200;
+  position: relative;
+  text-decoration: none;
+  transition: color 0.2s ease;
 
-    &:hover {
-        color: $color-green-500;
+  &:hover {
+    color: $color-green-500;
 
-        &::before {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 1.5px;
-            background-color: $color-green-500;
-            opacity: 1;
-        }
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background-color: $color-green-500;
+      opacity: 1;
     }
+  }
 
-    &.active {
-        color: $color-green-500;
+  &.active {
+    color: $color-green-500;
 
-        &::after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: $color-green-500;
-        }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: $color-green-500;
     }
-    @media (max-width: 768px) {
-        @include pretendard($font-size-14, 500);
-    }
+  }
+  @media (max-width: 768px) {
+    @include pretendard($font-size-14, 500);
+  }
 }

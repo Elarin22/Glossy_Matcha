@@ -28,7 +28,8 @@ export default function About() {
           alt="브랜드 소개 매인 배너"
           width={1920}
           height={1280}
-          sizes="(max-width: 768px) 100vw, 1920px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 1200px, 1920px"
+          quality={60}
           priority
         />
       </section>
