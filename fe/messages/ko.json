@@ -305,5 +305,13 @@
         }
       }
     }
+  },
+  "share": {
+    "shareText": "나의 글로시 말차 추천 메뉴는 ",
+    "shareTitle": "글로시 말차",
+    "toastShared": "공유가 완료되었어요!",
+    "toastShareFailed": "공유에 실패했어요!",
+    "toastCopied": "링크가 복사되었어요!",
+    "toastCopyFailed": "링크 복사에 실패했어요!"
   }
 }

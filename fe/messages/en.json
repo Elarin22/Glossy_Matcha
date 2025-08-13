@@ -309,5 +309,13 @@
         }
       }
     }
+  },
+  "share": {
+    "shareText": "My recommended Glossy Matcha menu is ",
+    "shareTitle": "Glossy Matcha",
+    "toastShared": "Sharing completed!",
+    "toastShareFailed": "Failed to share!",
+    "toastCopied": "Link copied!",
+    "toastCopyFailed": "Failed to copy link!"
   }
 }
