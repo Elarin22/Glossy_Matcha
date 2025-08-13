@@ -230,7 +230,7 @@ const mockProducts: Product[] = [
   ];
 
 // === API 설정 ===
-const API_BASE_URL = "https://api.glossymatcha.com/api/products";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api.glossymatcha.com/api/products";
 
 // === 제품 API 클래스 ===
 class ProductApi {
