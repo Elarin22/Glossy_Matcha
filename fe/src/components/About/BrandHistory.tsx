@@ -42,8 +42,8 @@ export default function BrandHistory() {
 
         <ul className={styles["brand-history__list"]}>
           {historyItems.map((item, index) => (
-            <FadeInUp key={item.date} delay={600 + index * 200}>
-              <li className={styles["history-item"]}>
+            <li key={index} className={styles["history-item"]}>
+              <FadeInUp delay={600 + index * 200}>
                 <time
                   className={styles["history-item__date"]}
                   dateTime={item.date.replace(".", "-")}
@@ -57,8 +57,8 @@ export default function BrandHistory() {
                     </p>
                   ))}
                 </div>
-              </li>
-            </FadeInUp>
+              </FadeInUp>
+            </li>
           ))}
         </ul>
       </div>
