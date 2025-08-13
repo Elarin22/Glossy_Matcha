@@ -8,6 +8,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer/Footer";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const ArrowLink = ({
   locale,
@@ -52,6 +53,8 @@ export default function MobileHome({
 }: {
   contents: HomeContent[];
 }): React.JSX.Element {
+  const t = useTranslations("home.inquire");
+
   const params = useParams();
   const locale = params.locale as string;
 
@@ -137,20 +140,28 @@ export default function MobileHome({
         );
       })}
 
-      <section className={styles["inquire-section"]}>
-        <h3 className="sr-only">문의 안내</h3>
-        <p className={styles.subTitle}>
-          문의사항이 있으신 경우,
-          <br />
-          아래 ‘문의하기’ 버튼을 클릭하여 내용을 작성해 주세요.
-          <br />
-          검토 후 빠르게 연락드리겠습니다.
-        </p>
-        <button className="btn-g">✉ 문의하기</button>
-      </section>
-
-      {/* Footer - mobile home only (for scroll snap behavior) */}
-      <section className={styles["footer-section"]}>
+      {/* inquire & footer */}
+      <section className={styles.section} style={{ padding: 0 }}>
+        <h2 className="sr-only">{t("h2Title")}</h2>
+        <section className={styles.inquire}>
+          <h3 className="sr-only">{t("h3Title")}</h3>
+          <p className={styles.description}>
+            {t("description")
+              .split("\n")
+              .map((text, index) => (
+                <span key={index}>
+                  {text}
+                  <br />
+                </span>
+              ))}
+          </p>
+          <Link
+            href={`/${locale}/inquire`}
+            className={`btn-g ${styles["btn-w"]}`}
+          >
+            {t("buttonText")}
+          </Link>
+        </section>
         <Footer />
       </section>
     </main>
