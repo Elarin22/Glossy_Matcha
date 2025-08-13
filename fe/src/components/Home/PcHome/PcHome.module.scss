@@ -2,4 +2,8 @@
   display: grid;
   grid-template-columns: min(34%, 440px) 1fr;
   position: relative;
+
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 }

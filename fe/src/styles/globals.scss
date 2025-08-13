@@ -94,10 +94,19 @@ body {
   border: 0;
 }
 
-// only for mobile home
-body:has(.mobile-home-page) > div > footer:last-child {
-  display: block;
-  @media (max-width: 768px) {
-    display: none !important;
+@media (max-width: 768px) {
+  [aria-label="PC 버전 메인 콘텐츠"] {
+    /* 스크린리더에서도 완전히 숨김 */
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 769px) {
+  [aria-label="모바일 버전 메인 콘텐츠"] {
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
   }
 }

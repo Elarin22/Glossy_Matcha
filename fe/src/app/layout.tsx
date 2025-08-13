@@ -46,6 +46,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-capable" content="yes" />
+      </head>
       <body>{children}</body>
     </html>
   );
