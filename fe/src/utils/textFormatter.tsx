@@ -19,8 +19,8 @@ export const formatText = (text: string, className?: string): React.ReactElement
     const parts = text.split('||');
     
     if (parts.length === 1) {
-        // || 구분자가 없는 경우: 일반 텍스트로 처리 (\n만 변환)
-        const lines = parts[0].split('\\n');
+        // || 구분자가 없는 경우: 일반 텍스트로 처리 (\n과 \\n 모두 변환)
+        const lines = parts[0].split(/\\n|\n/);
         return (
             <span className={className}>
                 {lines.map((line, index) => (
@@ -49,10 +49,10 @@ export const formatText = (text: string, className?: string): React.ReactElement
                         lineHeight: '1.5'
                     }}
                 >
-                    {beforePart.split('\\n').map((line, index) => (
+                    {beforePart.split(/\\n|\n/).map((line, index) => (
                         <React.Fragment key={index}>
                             {line}
-                            {index < beforePart.split('\\n').length - 1 && <br />}
+                            {index < beforePart.split(/\\n|\n/).length - 1 && <br />}
                         </React.Fragment>
                     ))}
                 </span>
@@ -68,10 +68,10 @@ export const formatText = (text: string, className?: string): React.ReactElement
                         lineHeight: '1.5'
                     }}
                 >
-                    {afterPart.split('\\n').map((line, index) => (
+                    {afterPart.split(/\\n|\n/).map((line, index) => (
                         <React.Fragment key={index}>
                             {line}
-                            {index < afterPart.split('\\n').length - 1 && <br />}
+                            {index < afterPart.split(/\\n|\n/).length - 1 && <br />}
                         </React.Fragment>
                     ))}
                 </span>

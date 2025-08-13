@@ -68,22 +68,22 @@ const mockProducts: Product[] = [
       mid_banner_img: "||BANNER:/images/product/signature-mid-banner.png",
       sub_description: `말차, 이젠 쉽고 간편하게 즐겨요||귀찮고 복잡한 차선과 차완 대신, 오직 10g. 단 한 포로 손쉽게 말차 음료를 완성하세요.
   ---
-  제주의 봄, 첫순으로만 만든 유기농 말차||국내에는 세레모니얼 등급의 인증기관이 없는 대신, 글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순', 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.
+  제주의 봄, 첫순으로만 만든 유기농 말차||국내에는 세레모니얼 등급의 인증기관이 없는 대신,\n글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순',\n 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.
   ---
-  떫은 맛은 줄이고, 신선한 향을 살린 깔끔한 피니쉬||말차는 고유의 떫고 쓴 맛으로 호불호가 있으나, 글로시말차의 원료는 신선한 원료와 가공 노하우로 떫은 맛은 적고, 크림처럼 부드러운 텍스쳐와 끝맛이 일품입니다.
+  떫은 맛은 줄이고,\n신선한 향을 살린 깔끔한 피니쉬||말차는 고유의 떫고 쓴 맛으로 호불호가 있으나,\n글로시말차의 원료는 신선한 원료와 가공 노하우로 떫은 맛은 적고,\n크림처럼 부드러운 텍스쳐와 끝맛이 일품입니다.
   ---
-  자연의 은은한 단 맛을 부담없이||대체당과 코코넛슈가, 대나무수액 원당의 블랜딩으로 당류 부담은 낮추고, 인위적인 대체당의 맛 대신에 원당의 자연스런 단맛과 풍미를 즐기세요. (1회 섭취량 기준 당류 1g)
+  자연의 은은한 단 맛을 부담없이||대체당과 코코넛슈가, 대나무수액 원당의 블랜딩으로\n당류 부담은 낮추고, 인위적인 대체당의 맛 대신에\n원당의 자연스런 단맛과 풍미를 즐기세요.\n(1회 섭취량 기준 당류 1g)
   ---
-  휴대성과 간편성은 더 강화한 감각적인 디자인||꽂아두기 쉬운 세로형 스틱과 슬라이드형 패키지. 그리고 이지컷 방식으로 제작된 상단부로 더 편리해요`,
-      sub_description_en: `Enjoy Matcha Easily, Anytime||Skip the whisk and bowl—just one 10g stick makes the perfect cup of matcha.
+  휴대성과 간편성은 더 강화한 감각적인 디자인||꽂아두기 쉬운 세로형 스틱과 슬라이드형 패키지.\n그리고 이지컷 방식으로 제작된 상단부로 더 편리해요`,
+      sub_description_en: `Enjoy Matcha Easily, Anytime||Skip the whisk and bowl—just one 10g stick completes your matcha drink with ease.
   ---
-  Organic Matcha from Jeju's First Spring Leaves||Using only the first leaves of spring, Glossy Matcha meets Japan's ceremonial-grade standards for true organic matcha.
+  Organic Matcha from Jeju's First Spring Leaves||Although there is no ceremonial-grade certification body in Korea,\nGlossy Matcha meets Japan's ceremonial-grade standards, using the first flush and very first leaves of spring for true organic matcha.
   ---
-  Smooth Finish with Reduced Bitterness||Less bitterness, more freshness—creamy texture with a clean finish.
+  Smooth Finish with Reduced Bitterness||With fresh ingredients and refined processing techniques,\nGlossy Matcha reduces bitterness while enhancing a creamy texture and delivering a clean, refreshing finish.
   ---
-  Naturally Gentle Sweetness||A low-sugar blend of natural sweeteners and bamboo sap for a light, pleasant sweetness. Only 1g sugar per serving.
+  Naturally Gentle Sweetness||A blend of alternative sweeteners, coconut sugar, and bamboo sap sugar lowers sugar content,\nwhile replacing the artificial taste of substitutes with the natural sweetness and aroma of raw sugar.\n(Only 1g sugar per serving)
   ---
-  Stylish, Portable Design||Vertical sticks, slide-out packaging, and easy-cut tops for ultimate convenience.`,
+  Stylish, Portable Design||Easy-to-store vertical sticks and slide-out packaging,\nplus an easy-cut top for ultimate convenience.`,
       images: [
         {
           id: 1,
@@ -128,26 +128,30 @@ const mockProducts: Product[] = [
       name: "말차다구세트",
       name_en: "Matcha Tea Set",
       subtitle: "차 한 잔의 격을 더하다",
-      subtitle_en: "Adding elegance to a cup of tea",
-      description: "차선 | 사발 | 스픈 | 차탁",
-      description_en: "Tea Whisk | Bowl | Spoon | Tea Stand",
+      subtitle_en: "Elevate Your Tea Experience",
+      description: "차완 | 차선꽂이 | 차선 | 차시\n글로시말차 매장의 감도를 담은 정제된 구성",
+      description_en: "Matcha Bowl | Matcha Bowl | Bamboo Matcha Whisk | Long Matcha Scoop\nA refined set inspired by the elegance of Glossy Matcha stores",
       short_description: "",
       short_description_en: "",
       mid_banner_img: "||BANNER:/images/product/teaset-mid-banner.png",
-      sub_description: `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성 백자 제품. 초보자도 쉽게 사용할 수 있도록 설계되었습니다.
-  ---
-  차선꽂이 | 차선 거치대||차선을 깔끔하게 건조하고 형태를 유지하는 안정적인 거치대
-  ---
-  차선 | 말차용 대나무 거품기||100갈래 대나무 차선으로 부드럽고 풍부한 거품을 만듭니다.
-  ---
-  차시 | 말차 긴 스픈||길고 가는 디자인으로 말차를 쉽게 덜어낼 수 있습니다.`,           
-      sub_description_en: `Matcha Bowl||High-fired porcelain crafted in collaboration with a Jeju local artist, designed for both beginners and experts.
-  ---
-  Chasen Stand||A stable stand to dry your whisk neatly and maintain its shape.
-  ---
-  Bamboo Whisk||100-prong bamboo whisk for smooth, stable foam.
-  ---
-  Bamboo Tea Scoop||Long, slender bamboo scoop for easy matcha measuring.`,       
+      sub_description:
+      `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성(800~1200도) 백자 제품입니다.\n말차 격불 또는 일반 차 우림에 적합하며,\n초보자도 쉽게 사용할 수 있도록\n곡선,용량,높이 등을 정밀하게 설계했습니다
+      ---
+      차선꽂이 | 차선 거치대||차선을 깔끔하게 건조하고 갈래를 잘 유지할 수 있도록\n안정적인 형태로 제작되었습니다.
+      ---
+      차선 | 말차용 대나무 거품기||100갈래 대나무 차선으로\n물과 말차가 잘 섞여 부드럽고 안정적인 거품을 만들어냅니다.
+      ---
+      차시 | 말차 긴 스픈||국내산대나무로 길고 가는 디자인으로\n말차가루를 보다 쉽고 편하게 덜 수 있습니다.
+      `,           
+      sub_description_en:
+      `Matcha Bowl||A high-fired (800-1200°C) white porcelain bowl,\ncreated in collaboration with a local Jeju artist.\n
+      Ideal for whisking matcha or steeping tea.\nCarefully designed with the right curves, volume,\nand height to ensure ease of use, even for beginners.
+      ---
+      Whisk Holder||Keeps your chasen clean and well-shaped after use.\nCrafted for stability and proper drying.
+      ---
+      Bamboo Matcha Whisk||Made from 100-prong bamboo.\nHelps mix water and matcha smoothly to create a rich, stable foam.
+      ---
+      Long Matcha Scoop||A long, slender scoop designed to easily\nand neatly portion matcha powder.`,       
       images: [
         {
           id: 2,
@@ -186,18 +190,22 @@ const mockProducts: Product[] = [
       name: "틴케이스",
       name_en: "Tin Case",
       subtitle: "제주의 자연을 담은 100% HIGH QUALITY 유기농 말차",
-      subtitle_en: "100% HIGH QUALITY organic matcha containing the nature of Jeju",
-      description: "틴케이스 SET \n 최상급 말차 50g + 우드스픈 + 틴케이스",
+      subtitle_en: "100% High-Quality Organic Matcha from Jeju's Nature",
+      description: "틴케이스 SET\n최상급 말차 50g + 우드스픈 + 틴케이스",
       description_en: "Tin Case Set — 50g Premium Matcha + Wooden Spoon + Tin Case",
-      mid_banner_img: "||BANNER:/images/product/case-mid-banner.png",
-      sub_description: `GRADE||제주 청정 자연에서 첫 순, 첫 번째 잎으로 만든 최상급 말차. 환경과 지속 가능성을 생각하며 재배합니다.
-  ---
-  PRICE||최고 품질의 말차를 합리적인 가격에 제공합니다.`,          
-      sub_description_en: `GRADE||Premium matcha made from the very first leaves in Jeju's pristine nature, grown with care for sustainability.
-  ---
-  PRICE||Premium quality matcha at a fair price, without compromise.`,        
       short_description: "* 국산 말차에는 등급제가 없지만, 해외 기준을 만족하도록 첫순 1번 잎으로 만든 세레모니얼급 유기농 말차입니다.",
       short_description_en: "While Korea has no official matcha grading system, this ceremonial-grade organic matcha meets international standards using only the first leaves of spring.",
+      mid_banner_img: "||BANNER:/images/product/case-mid-banner.png",
+      sub_description: 
+      `GRADE||제주도의 청정자연을 담은 말차농원\n말차밭에서 매해 첫 순, 첫 번째 잎으로 생산해 낸 말차를 사용합니다.\n특별한 말차로 더 부드럽고, 더욱 진한 맛을 담아냈습니다.\n서귀포 생태공원에서 재배된 100% 말차만을 사용합니다.\n우리는 환경을 생각하는 마음으로 지속 가능한 미래를 그립니다.\n현지 농부, 장인분들과 함께 더 건강한 내일을 향해 나아가려고 합니다.
+      ---
+      PRICE||글로시말차는 오래도록 함께할 수 있는 방법을 고민합니다.\n오랜 노하우로 인한 가공기법과 유통 관리를 통해\n최고 품질의 말차만을 제공할 것을 약속합니다.\n시중에 판매중인 일반적인 말차의 판매가보다\n훨씬 합리적인 가격에 최상급 원료를 제공합니다.\n품질에 대한 자부심 그리고 공생할 수 있는 미래를 준비합니다.`,          
+      sub_description_en:
+      `GRADE||Jeju's Pristine Nature Captured in a Matcha Farm\nWe use matcha made from the first flush and the very first leaves harvested each year from our matcha fields.\nThis special matcha delivers a smoother and richer taste.\nWe use only 100% matcha cultivated in Seogwipo Ecological Park.\nWith a commitment to the environment, we envision a sustainable future.\nTogether with local farmers and artisans, we strive toward a healthier tomorrow.
+
+      ---
+      PRICE||Glossy Matcha is dedicated to finding ways for long-lasting enjoyment.\nThrough processing techniques and distribution management honed over years of expertise,\nwe promise to provide only the highest-quality matcha.\nCompared to the prices of typical matcha sold on the market,\nwe offer top-grade ingredients at far more reasonable prices.\nWe take pride in our quality and prepare for a future where we can thrive together.
+      `,        
       images: [
         {
           id: 3,
@@ -232,45 +240,14 @@ class ProductApi {
    * @returns Promise<ProductApiResponse> 제품 목록 응답
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
-    try {
-      const url = `${API_BASE_URL}/?lang=${lang}`;
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        cache: "no-store", // 항상 최신 데이터 가져오기
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data: ProductApiResponse = await response.json();
-
-      // API 응답 검증 및 빈 결과 처리
-      if (!data.success || data.results.length === 0) {
-        console.warn("API returned empty results, using mock data");
-        return {
-          success: true,
-          language: lang,
-          count: mockProducts.length,
-          results: mockProducts,
-        };
-      }
-
-      return data;
-    } catch (error) {
-      console.error("Error fetching products, using mock data:", error);
-
-      // API 실패 시 Mock 데이터로 fallback
-      return {
-        success: true,
-        language: lang,
-        count: mockProducts.length,
-        results: mockProducts,
-      };
-    }
+    // 개발 중에는 API 호출 없이 바로 mock 데이터 사용
+    console.log("API 서버가 없으므로 mock 데이터를 사용합니다.");
+    return {
+      success: true,
+      language: lang,
+      count: mockProducts.length,
+      results: mockProducts,
+    };
   }
 
   /**
@@ -289,7 +266,7 @@ class ProductApi {
       return product || null;
     } catch (error) {
       console.error("Error fetching product by ID:", error);
-      throw error;
+      return null;
     }
   }
 
