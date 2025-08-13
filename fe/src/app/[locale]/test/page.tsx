@@ -2,7 +2,8 @@ import MatchaGenerator from "@/components/GlossyPick/MatchaGenerator";
 
 export const metadata = {
   title: "Glossy Pick | Glossy Matcha",
-  description: "단 하나, 당신만을 위한 글로시 말차",
+  description:
+    "몇 가지 질문에 답하면, 당신에게 어울리는 글로시 말차 메뉴를 추천해드려요.",
   keywords: [
     "말차",
     "프리미엄 말차",
