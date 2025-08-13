@@ -1,8 +1,13 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import styles from "./Footer.module.scss";
 
 export default function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer className={styles.footer}>
       <section className={styles["footer__section"]}>
@@ -20,29 +25,33 @@ export default function Footer() {
 
         <dl className={styles["footer__company-info"]}>
           <div className={styles["footer__info-item"]}>
-            <dt className="sr-only">회사명</dt>
+            <dt className="sr-only">{t("companyName")}</dt>
             <dd className={styles["footer__info-value"]}>
-              (주) 컬쳐히어로제주
+              {t("companyNameValue")}
             </dd>
           </div>
           <div className={styles["footer__info-item"]}>
-            <dt className={styles["footer__info-label"]}>대표:</dt>
-            <dd className={styles["footer__info-value"]}>윤종석</dd>
+            <dt className={styles["footer__info-label"]}>{t("ceo")}</dt>
+            <dd className={styles["footer__info-value"]}>{t("ceoValue")}</dd>
           </div>
           <div className={styles["footer__info-item"]}>
-            <dt className={styles["footer__info-label"]}>연락처:</dt>
+            <dt className={styles["footer__info-label"]}>{t("contact")}</dt>
             <dd className={styles["footer__info-value"]}>
-              0507-1449-7847 jay@culturehero.net
+              {t("contactValue")}
             </dd>
           </div>
           <div className={styles["footer__info-item"]}>
-            <dt className={styles["footer__info-label"]}>사업자번호:</dt>
-            <dd className={styles["footer__info-value"]}>779-81-02082</dd>
+            <dt className={styles["footer__info-label"]}>
+              {t("businessNumber")}
+            </dt>
+            <dd className={styles["footer__info-value"]}>
+              {t("businessNumberValue")}
+            </dd>
           </div>
           <div className={styles["footer__info-item"]}>
-            <dt className={styles["footer__info-label"]}>주소:</dt>
+            <dt className={styles["footer__info-label"]}>{t("address")}</dt>
             <dd className={styles["footer__info-value"]}>
-              제주시 조천읍 조함해안로 112
+              {t("addressValue")}
             </dd>
           </div>
         </dl>
@@ -57,7 +66,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icon/icon-insta.png"
-                alt="인스타그램"
+                alt="instagram"
                 width={16}
                 height={16}
               />
@@ -72,7 +81,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icon/icon-naver.png"
-                alt="네이버 지도"
+                alt="naverMap"
                 width={16}
                 height={16}
               />
@@ -87,7 +96,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icon/icon-google.png"
-                alt="구글 지도"
+                alt="googleMap"
                 width={16}
                 height={16}
               />
