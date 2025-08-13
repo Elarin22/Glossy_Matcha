@@ -3,6 +3,7 @@ import "@/styles/globals.scss";
 import "@/styles/fonts.scss";
 
 export const metadata = {
+  metadataBase: new URL("https://www.glossymatcha.com"),
   title: "Glossy Matcha",
   description: "글로시 말차, 최고의 프리미엄 말차를 만나보세요.",
   icons: {
