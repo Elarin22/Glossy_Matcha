@@ -1,52 +1,100 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./Footer.module.scss";
 
-import Link from 'next/link';
-import styles from './Footer.module.scss';
-
-export function Footer() {
-    return (
+export default function Footer() {
+  return (
     <footer className={styles.footer}>
-        <div className={styles.container}>
-        {/* Social Icons */}
-        <div className={styles.socialIcons}>
-            <a 
-            href="https://map.naver.com/p/entry/place/1265323075?placePath=/home?entry=plt&from=map&fromPanelNum=1&additionalHeight=76&timestamp=202508011801&locale=ko&svcName=map_pcv5&searchType=place&lng=126.6397881&lat=33.5457978&c=15.00,0,0,0,dh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialLink}
-            >
-            <img src="/images/icon/naver-icon.png" alt="네이버 지도" className={styles.icon} />
-            </a>
-            <a 
-            href="https://www.instagram.com/glossy_matcha/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.socialLink}
-            >
-            <img src="/images/icon/instagram-icon.png" alt="인스타그램" className={styles.icon} />
-            </a>
-        </div>
+      <section className={styles["footer__section"]}>
+        <h2 className={styles["footer__logo-title"]}>
+          <Link href="/" className={styles["footer__logo-link"]}>
+            <Image
+              src="/images/logo/logo-w.png"
+              alt="Glossy Matcha"
+              width={207}
+              height={19}
+              className={styles["footer__logo-image"]}
+            />
+          </Link>
+        </h2>
 
-        {/* Company Info */}
-        <div className={styles.companyInfo}>
-            <div className={styles.companyName}>(주) 컬쳐히어로제주</div>
-            <div className={styles.infoRow}>
-                <span className={styles.infoItem}>대표자 | 윤종석</span>
-            </div>
-            <div className={styles.infoRow}>
-                <span className={styles.infoItem}>연락처 | 0507-1449-7847 |</span>
-                <span className={styles.infoItem}>jay@culturehero.net</span>
-            </div>
-            <div className={styles.infoRow}>
-                <span className={styles.infoItem}>사업자번호 | 779-81-02082</span>
-            </div>
-            <div className={styles.infoRow}>
-                <span className={styles.infoItem}>주소 | 제주시 조천읍 조함해안로 112</span>
-            </div>
-        </div>
-        </div>
+        <dl className={styles["footer__company-info"]}>
+          <div className={styles["footer__info-item"]}>
+            <dt className="sr-only">회사명</dt>
+            <dd className={styles["footer__info-value"]}>
+              (주) 컬쳐히어로제주
+            </dd>
+          </div>
+          <div className={styles["footer__info-item"]}>
+            <dt className={styles["footer__info-label"]}>대표:</dt>
+            <dd className={styles["footer__info-value"]}>윤종석</dd>
+          </div>
+          <div className={styles["footer__info-item"]}>
+            <dt className={styles["footer__info-label"]}>연락처:</dt>
+            <dd className={styles["footer__info-value"]}>
+              0507-1449-7847 jay@culturehero.net
+            </dd>
+          </div>
+          <div className={styles["footer__info-item"]}>
+            <dt className={styles["footer__info-label"]}>사업자번호:</dt>
+            <dd className={styles["footer__info-value"]}>779-81-02082</dd>
+          </div>
+          <div className={styles["footer__info-item"]}>
+            <dt className={styles["footer__info-label"]}>주소:</dt>
+            <dd className={styles["footer__info-value"]}>
+              제주시 조천읍 조함해안로 112
+            </dd>
+          </div>
+        </dl>
+
+        <ul className={styles["footer__social-list"]}>
+          <li className={styles["footer__social-item"]}>
+            <a
+              href="https://www.instagram.com/glossy_matcha/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["footer__social-link"]}
+            >
+              <Image
+                src="/images/icon/icon-insta.png"
+                alt="인스타그램"
+                width={16}
+                height={16}
+              />
+            </a>
+          </li>
+          <li className={styles["footer__social-item"]}>
+            <a
+              href="https://naver.me/502MfWpo"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["footer__social-link"]}
+            >
+              <Image
+                src="/images/icon/icon-naver.png"
+                alt="네이버 지도"
+                width={16}
+                height={16}
+              />
+            </a>
+          </li>
+          <li className={styles["footer__social-item"]}>
+            <a
+              href="https://maps.app.goo.gl/udwTSdq47GJJxMNG8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["footer__social-link"]}
+            >
+              <Image
+                src="/images/icon/icon-google.png"
+                alt="구글 지도"
+                width={16}
+                height={16}
+              />
+            </a>
+          </li>
+        </ul>
+      </section>
     </footer>
-    );
+  );
 }
-
-export default Footer
