@@ -143,24 +143,34 @@ export default function MobileHome({
       {/* inquire & footer */}
       <section className={styles.section} style={{ padding: 0 }}>
         <h2 className="sr-only">{t("h2Title")}</h2>
-        <section className={styles.inquire}>
-          <h3 className="sr-only">{t("h3Title")}</h3>
-          <p className={styles.description}>
-            {t("description")
-              .split("\n")
-              .map((text, index) => (
-                <span key={index}>
-                  {text}
-                  <br />
-                </span>
-              ))}
-          </p>
-          <Link
-            href={`/${locale}/inquire`}
-            className={`btn-g ${styles["btn-w"]}`}
+        <section
+          ref={(el: HTMLElement | null): void => {
+            sectionRefs.current.push(el);
+          }}
+          className={styles.inquire}
+        >
+          <div
+            className={styles["content-box"]}
+            style={{ alignItems: "center", justifyContent: "center" }}
           >
-            {t("buttonText")}
-          </Link>
+            <h3 className="sr-only">{t("h3Title")}</h3>
+            <p className={styles.description}>
+              {t("description")
+                .split("\n")
+                .map((text, index) => (
+                  <span key={index}>
+                    {text}
+                    <br />
+                  </span>
+                ))}
+            </p>
+            <Link
+              href={`/${locale}/inquire`}
+              className={`btn-g ${styles["btn-w"]}`}
+            >
+              {t("buttonText")}
+            </Link>
+          </div>
         </section>
         <Footer />
       </section>
