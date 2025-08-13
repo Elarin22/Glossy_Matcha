@@ -16,7 +16,6 @@ export default function ImageSection({
   contents: HomeContent[];
 }): React.JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
-  console.log("ImageSection contents", contents);
 
   return (
     <div>
@@ -50,7 +49,7 @@ export default function ImageSection({
                   >
                     <source src={content.source} type="video/webm" />
                     <source src="/videos/intro-pc.mp4" type="video/mp4" />
-                    브라우저가 비디오를 지원하지 않습니다.
+                    Your browser does not support the video.
                   </video>
                   <SoundButton videoRef={videoRef} />
                   <ScrollIndicator extraMoveHeight={240} />
