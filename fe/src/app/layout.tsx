@@ -25,14 +25,14 @@ export const metadata = {
     description: "글로시 말차, 최고의 프리미엄 말차를 만나보세요.",
     url: "https://glossymatcha.com",
     siteName: "Glossy Matcha",
-    // images: [
-    //   {
-    //     url: "https://glossymatcha.com/og-image.jpg",
-    //     width: 1200,
-    //     height: 630,
-    //     alt: "Glossy Matcha 대표 이미지",
-    //   },
-    // ],
+    images: [
+      {
+        url: "/images/logo/logo-BI.png",
+        width: 1200,
+        height: 630,
+        alt: "Glossy Matcha",
+      },
+    ],
     locale: "ko_KR",
     type: "website",
   },

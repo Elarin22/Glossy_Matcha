@@ -6,6 +6,29 @@ import JejuMatcha from "@/components/About/JejuMatcha";
 import BrandHistory from "@/components/About/BrandHistory";
 import styles from "./page.module.scss";
 
+export const metadata = {
+  title: "About | Glossy Matcha",
+  description:
+    "글로시 말차 브랜드 소개 페이지 - 철학, 제주 유기농 말차, 연혁 등을 확인하세요.",
+  keywords: [
+    "말차",
+    "프리미엄 말차",
+    "글로시 말차",
+    "녹차",
+    "건강음료",
+    "브랜드 소개",
+    "브랜드 철학",
+    "제주 유기농 말차",
+    "연혁",
+  ],
+  openGraph: {
+    title: "브랜드 소개 | Glossy Matcha",
+    description:
+      "글로시 말차 브랜드 소개 페이지 - 철학, 제주 유기농 말차, 연혁 등을 확인하세요.",
+    url: "https://www.glossymatcha.com/ko/about",
+  },
+};
+
 /**
  * 브랜드 소개 페이지 컴포넌트
  *
