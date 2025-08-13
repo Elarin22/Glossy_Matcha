@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.scss";
+import { useTranslations } from "next-intl";
 
 type FormDataType = {
   name: string;
@@ -9,41 +10,49 @@ type FormDataType = {
   message: string;
 };
 
-type Category = "일반 문의" | "제품 문의" | "기타";
-
-const CATEGORIES: Category[] = ["일반 문의", "제품 문의", "기타"];
-
-const CATEGORY_MAP = {
-  "일반 문의": "general",
-  "제품 문의": "product",
-  기타: "other",
-} as const;
-
-const FORM_FIELDS = [
-  {
-    label: "이름",
-    name: "name" as keyof FormDataType,
-    placeholder: "이름을 입력해주세요.",
-    type: "text",
-  },
-  {
-    label: "이메일",
-    name: "email" as keyof FormDataType,
-    placeholder: "이메일을 입력해주세요.",
-    type: "email",
-  },
-  {
-    label: "문의 내용",
-    name: "message" as keyof FormDataType,
-    placeholder: "문의 내용을 입력해주세요.",
-    type: "textArea",
-  },
-] as const;
+type CategoryCode = "general" | "product" | "other";
 
 export default function Inquire() {
+  const t = useTranslations("inquire");
+  const categories = t.raw("form.category") as string[];
+  type Category = (typeof categories)[number];
+
+  const CATEGORY_MAP: Record<Category, CategoryCode> = {
+    [categories[0]]: "general",
+    [categories[1]]: "product",
+    [categories[2]]: "other",
+  };
+
   const [selectedCategory, setSelectedCategory] = useState<Category>(
-    CATEGORIES[0]
+    categories[0]
   );
+
+  const FORM_FIELDS: {
+    label: string;
+    name: keyof FormDataType;
+    placeholder: string;
+    type: string;
+  }[] = [
+    {
+      label: t("form.name.label"),
+      name: "name",
+      placeholder: t("form.name.placeholder"),
+      type: "text",
+    },
+    {
+      label: t("form.email.label"),
+      name: "email",
+      placeholder: t("form.email.placeholder"),
+      type: "email",
+    },
+    {
+      label: t("form.message.label"),
+      name: "message",
+      placeholder: t("form.message.placeholder"),
+      type: "textArea",
+    },
+  ];
+
   const [formData, setFormData] = useState<FormDataType>({
     name: "",
     email: "",
@@ -60,7 +69,7 @@ export default function Inquire() {
     e.preventDefault();
 
     if (Object.values(formData).some((value) => !value)) {
-      alert("모든 입력란을 작성해주세요.");
+      alert(t("alertMessage.invaild"));
       return;
     }
 
@@ -76,11 +85,6 @@ export default function Inquire() {
     };
 
     try {
-      console.log(
-        "전송 url: ",
-        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`
-      );
-
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`,
         {
@@ -92,22 +96,20 @@ export default function Inquire() {
         }
       );
 
-      console.log(requestData);
-
       if (response.ok) {
-        alert("문의를 접수했습니다. 확인 즉시 이메일로 답변드릴게요!");
-        setSelectedCategory(CATEGORIES[0]);
+        alert(t("alertMessage.success"));
+        setSelectedCategory(categories[0]);
         setFormData({
           name: "",
           email: "",
           message: "",
         });
       } else {
-        alert("문의 접수에 실패했습니다. 다시 시도해주세요.");
+        alert(t("alertMessage.fail"));
       }
       console.log("response: ", response);
     } catch (error) {
-      alert("네트워크 오류가 발생했습니다.");
+      alert(t("alertMessage.error"));
       console.error("error:", error);
     }
   };
@@ -115,23 +117,23 @@ export default function Inquire() {
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h2 className={styles.title}>문의하기</h2>
+        <h2 className={styles.title}>{t("title")}</h2>
         <p className={styles.description}>
-          궁금한 사항이 있으신가요?
+          {t("description").split("\n")[0]}
           <br />
-          담당자가 빠른 시간내에 이메일로 답변을 드릴게요.
+          {t("description").split("\n")[1]}
         </p>
       </header>
 
       <section className={styles.formSection}>
-        <h3 className="sr-only">문의 내용 작성</h3>
+        <h3 className="sr-only">{t("hideText.subTitle")}</h3>
 
         <div
           className={styles.categories}
           role="group"
-          aria-label="문의 카테고리 선택"
+          aria-label={t("hideText.categoryTitle")}
         >
-          {CATEGORIES.map((category) => (
+          {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
@@ -175,7 +177,7 @@ export default function Inquire() {
           ))}
 
           <button type="submit" className={`btn-g ${styles.submitBtn}`}>
-            문의하기
+            {t("buttonText")}
           </button>
         </form>
       </section>
