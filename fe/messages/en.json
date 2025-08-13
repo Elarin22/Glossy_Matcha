@@ -2,7 +2,7 @@
   "navigation": {
     "about": "About",
     "products": "Products",
-    "test": "MatchaTEST",
+    "test": "GlossyPick",
     "inquire": "Contact",
     "language": "Language Change",
 
@@ -82,6 +82,12 @@
           "We'll recommend the Perfect Choice tailored to your Preferences."
         ]
       }
+    },
+    "inquire": {
+      "h2Title": "Inquiry Guide and Company Information",
+      "h3Title": "Inquiry",
+      "description": "If you have any questions,\nplease click the 'Contact Us' button below and fill out the form.\nWe will review it and get back to you promptly.",
+      "buttonText": "Contact Us"
     }
   },
   "inquire": {

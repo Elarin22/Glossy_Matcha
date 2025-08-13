@@ -106,18 +106,50 @@
   }
 }
 
-.inquire-section {
+.inquire {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
-}
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  padding-top: 64px;
 
-/* Footer section for mobile */
-.footer-section {
-  min-height: auto;
-  height: auto;
-  scroll-snap-align: end; // 요소의 끝점에서 스냅 (bottom 맞춤)
-  scroll-snap-stop: always; // Footer에서 멈춤
+  background: url("/images/about/main-banner.webp") center/cover no-repeat;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  & .description {
+    font-size: $font-size-14;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  .btn-w {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
 }
 
 /* 기존 Footer */
