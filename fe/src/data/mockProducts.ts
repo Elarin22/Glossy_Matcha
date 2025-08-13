@@ -1,9 +1,10 @@
+// === 시그니처 ===
 export const mockSignature = {
     id: 0,
     name: "시그니처",
     name_en: "Signature",
     subtitle: "100% 제주 새봄의 첫 순을 담은 부드러운 말차 포켓",
-    subtitle_en: "Soft Matcha Pocket with 100% Jeju’s First Spring Harvest",
+    subtitle_en: "Soft Matcha Pocket with 100% Jeju's First Spring Harvest",
     description: "세레모니얼 말차 | 대나무 수액 | 코코넛슈가 제주산 세레모니얼 등급 말차 원료와 대체당, 대나무수액, 코코넛슈가를 블렌딩한 은은한 단맛의 밸런스",
     description_en: "Ceremonial Matcha | Bamboo Sap | Coconut Sugar — A balanced blend of Jeju ceremonial-grade matcha, natural sweeteners, bamboo sap, and coconut sugar for a gentle sweetness.",
     short_description: "글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
@@ -22,9 +23,9 @@ export const mockSignature = {
         {
             id: 1,
             sub_description: "제주의 봄, 첫순으로만 만든 유기농 말차",
-            sub_description_en: "Organic Matcha from Jeju’s First Spring Leaves",
+            sub_description_en: "Organic Matcha from Jeju's First Spring Leaves",
             detail: "국내에는 세레모니얼 등급의 인증기관이 없는 대신, 글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순', 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.",
-            detail_en: "Using only the first leaves of spring, Glossy Matcha meets Japan’s ceremonial-grade standards for true organic matcha.",
+            detail_en: "Using only the first leaves of spring, Glossy Matcha meets Japan's ceremonial-grade standards for true organic matcha.",
             images: [{ image: "/images/product/signature2.jpg" }]
         },
         {
@@ -54,6 +55,7 @@ export const mockSignature = {
     ]
 };
 
+// === 말차 다구 세트 ===
 export const mockTeaSet = {
     id: 1,
     name: "말차다구세트",
@@ -100,12 +102,13 @@ export const mockTeaSet = {
     ]
 };
 
+// === 틴케이스 ===
 export const mockCase = {
     id: 2,
     name: "틴케이스",
     name_en: "Tin Case",
     subtitle: "제주의 자연을 담은 100% HIGH QUALITY 유기농 말차",
-    subtitle_en: "100% High-Quality Organic Matcha from Jeju’s Nature",
+    subtitle_en: "100% High-Quality Organic Matcha from Jeju's Nature",
     description: "틴케이스 SET <br> 최상급 말차 50g + 우드스픈 + 틴케이스",
     description_en: "Tin Case Set — 50g Premium Matcha + Wooden Spoon + Tin Case",
     short_description: "* 국산 말차에는 등급제가 없지만, 해외 기준을 만족하도록 첫순 1번 잎으로 만든 세레모니얼급 유기농 말차입니다.",
@@ -118,7 +121,7 @@ export const mockCase = {
             sub_description: "GRADE",
             sub_description_en: "GRADE",
             detail: "제주 청정 자연에서 첫 순, 첫 번째 잎으로 만든 최상급 말차. 환경과 지속 가능성을 생각하며 재배합니다.",
-            detail_en: "Premium matcha made from the very first leaves in Jeju’s pristine nature, grown with care for sustainability.",
+            detail_en: "Premium matcha made from the very first leaves in Jeju's pristine nature, grown with care for sustainability.",
             images: [{ image: "/images/product/case1.webp" }]
         },
         {

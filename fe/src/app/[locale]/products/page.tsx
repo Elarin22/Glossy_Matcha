@@ -1,12 +1,13 @@
 "use client";
 
+// === 제품 페이지 ===
+
 import React, { useState, useEffect } from 'react';
 import ProductNav from '@/components/Nav/ProductNav';
 import ProductMainBanner from '@/components/Product/ProductMainBanner';
 import ProductMidBanner from '@/components/Product/ProductMidBanner';
-import ProductDescription from '@/components/Product/ProductDescription';
-import { Product } from '@/components/Product/ProductDescription';
-import ProductApi, { ProductBodySection } from '@/services/productApi';
+import ProductDescription, { type ProductBodySection } from '@/components/Product/ProductDescription';
+import ProductApi, { type Product } from '@/services/productApi';
 import styles from './page.module.scss';
 
 interface ProductsPageProps {
@@ -17,15 +18,18 @@ interface ProductsPageProps {
 
 const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
     const resolvedParams = React.use(params);
-    const [activeProductId, setActiveProductId] = useState<number>(1);
-    const [products, setProducts] = useState<Product[]>([]);
-    const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    
+    // === 상태 관리 ===
+    const [activeProductId, setActiveProductId] = useState<number>(1); // 현재 선택된 제품 ID
+    const [products, setProducts] = useState<Product[]>([]);             // 제품 목록
+    const [currentProduct, setCurrentProduct] = useState<Product | null>(null); // 선택된 제품 상세 정보
+    const [loading, setLoading] = useState(true);                       // 로딩 상태
+    const [error, setError] = useState<string | null>(null);            // 에러 메시지
     
     const lang = resolvedParams?.locale || 'ko';
 
-    // 제품 목록 가져오기
+    // === 제품 목록 로드 ===
+    // 언어 변경 시 제품 목록을 다시 가져오고 첫 번째 제품을 기본 선택
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -50,7 +54,8 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         fetchProducts();
     }, [lang]);
 
-    // 선택된 제품의 상세 정보 가져오기
+    // === 선택된 제품 상세 정보 로드 ===
+    // activeProductId나 언어가 변경될 때마다 해당 제품의 상세 정보 가져오기
     useEffect(() => {
         const fetchCurrentProduct = async () => {
             if (!activeProductId) return;
@@ -71,61 +76,34 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         productId: product.id
     }));
 
-    const handleProductSelect = (productId: number) => {
-        setActiveProductId(productId);
-    };
+    const handleProductSelect = (productId: number) => setActiveProductId(productId);
 
-    // sub_description을 파싱해서 ProductBodySection 배열로 변환하는 함수
+    // === sub_description 파싱 헬퍼 함수 ===
     const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
-        if (!subDescriptionText || !subDescriptionText.trim()) {
-            return [];
-        }
+        if (!subDescriptionText?.trim()) return [];
 
-        const sections: ProductBodySection[] = [];
-        // --- 구분자로 나누기 (첫 번째와 마지막 빈 문자열 제거)
-        const rawSections = subDescriptionText.trim().split('---').filter((section: string) => section.trim());
-
-        console.log('=== 파싱 디버깅 ===');
-        console.log('전체 이미지 개수:', currentProduct?.images?.length || 0);
-        console.log('파싱된 섹션 개수:', rawSections.length);
-
-        rawSections.forEach((section, index) => {
-            const trimmedSection = section.trim();
-            if (!trimmedSection) return;
-
-            // || 구분자로 title과 content 분리
-            const parts = trimmedSection.split('||');
-            const title = parts[0]?.trim() || "";
-            const content = parts[1]?.trim() || "";
-
-            if (!title) return; // title이 없으면 섹션 생성하지 않음
-
-            // 이미지 매핑:
-            // mid_banner_img를 따로 사용하므로 images 배열은 모두 섹션용
-            // images[0] = 첫 번째 섹션용 (index 0에 해당)
-            // images[1] = 두 번째 섹션용 (index 1에 해당)
-            // images[2] = 세 번째 섹션용 (index 2에 해당) ...
-            // 따라서: 섹션의 이미지 = images[index]
-            const imageIndex = index;
-            const sectionImage = currentProduct?.images?.[imageIndex];
-            
-            console.log(`섹션 ${index}: "${title}" -> 이미지 인덱스 ${imageIndex}:`, sectionImage?.image || '없음');
-
-            sections.push({
-                id: index,
-                image: sectionImage?.image || undefined,
-                title: title,
-                title_en: title,
-                content: content,
-                content_en: content,
-                sort_order: index + 1
-            });
-        });
-
-        console.log('최종 섹션들:', sections);
-        return sections;
+        return subDescriptionText
+            .trim()
+            .split('---')
+            .filter(section => section.trim())
+            .map((section, index) => {
+                const [title = '', content = ''] = section.split('||').map(part => part.trim());
+                if (!title) return null;
+                
+                return {
+                    id: index,
+                    image: currentProduct?.images?.[index]?.image,
+                    title,
+                    title_en: title,
+                    content,
+                    content_en: content,
+                    sort_order: index + 1
+                };
+            })
+            .filter(Boolean) as ProductBodySection[];
     };
 
+    // === 로딩 상태 처리 ===
     if (loading) {
         return (
             <main className={styles.main}>
@@ -137,6 +115,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         );
     }
 
+    // === 에러 상태 처리 ===
     if (error || products.length === 0) {
         return (
             <main className={styles.main}>
@@ -148,43 +127,29 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         );
     }
 
-    // sub_description에서 파싱한 섹션들
-    const bodySections = currentProduct ? (() => {
-        // body_sections가 있으면 그대로 사용, 없으면 sub_description을 파싱
-        if (currentProduct.body_sections && currentProduct.body_sections.length > 0) {
-            return currentProduct.body_sections;
-        } else {
-            // sub_description 필드에서 파싱
-            const subDescText = ProductApi.getLocalizedField(currentProduct, 'sub_description', lang);
-            return parseSubDescription(subDescText);
-        }
-    })() : [];
+    // === 제품 섹션 데이터 준비 ===
+    const bodySections: ProductBodySection[] = currentProduct?.body_sections?.length 
+        ? currentProduct.body_sections
+        : currentProduct 
+            ? parseSubDescription(ProductApi.getLocalizedField(currentProduct, 'sub_description', lang))
+            : [];
 
     return (
-        <>
-            <main className={styles.main}>
-                {/* MainBanner */}
-                <ProductMainBanner />
-                
-                {/* ProductNav - 제품 전용 네비게이션 */}
-                <ProductNav 
-                    menuItems={productMenuItems}
-                    onProductSelect={handleProductSelect}
-                    activeProductId={activeProductId}
+        <main className={styles.main}>
+            <ProductMainBanner />
+            <ProductNav 
+                menuItems={productMenuItems}
+                onProductSelect={handleProductSelect}
+                activeProductId={activeProductId}
+            />
+            <ProductMidBanner productId={activeProductId} lang={lang} />
+            {bodySections.length > 0 && (
+                <ProductDescription 
+                    bodySections={bodySections}
+                    isEnglish={lang === 'en'}
                 />
-                
-                {/* MidBanner - 선택된 제품만 표시 (mid_banner_img 사용) */}
-                <ProductMidBanner productId={activeProductId} lang={lang} />
-                
-                {/* ProductDescription - 제품 상세 설명 (images[0]부터 사용) */}
-                {bodySections.length > 0 && (
-                    <ProductDescription 
-                        bodySections={bodySections}
-                        isEnglish={lang === 'en'}
-                    />
-                )}
-            </main>
-        </>
+            )}
+        </main>
     );
 };
 

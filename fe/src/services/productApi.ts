@@ -1,3 +1,5 @@
+// === 백엔드 API 타입 정의 ===
+
 // 제품 이미지 타입 (백엔드 API 응답 구조)
 interface ProductImage {
   id: number;
@@ -12,7 +14,7 @@ interface ProductSpecification {
   product_code?: string;
 }
 
-// 제품 섹션 타입 (body_sections)
+// 제품 본문 섹션 타입 (body_sections)
 interface ProductBodySection {
   id?: number;
   image?: string;
@@ -23,7 +25,7 @@ interface ProductBodySection {
   sort_order: number;
 }
 
-// 제품 메인 타입
+// 제품 메인 타입 - 백엔드 API 응답 구조
 interface Product {
     id: number;
     name: string;
@@ -42,6 +44,7 @@ interface Product {
     body_sections?: ProductBodySection[];
 }
 
+// API 응답 래퍼 타입
 interface ProductApiResponse {
   success: boolean;
   language: string;
@@ -49,7 +52,8 @@ interface ProductApiResponse {
   results: Product[];
 }
 
-// 임시 Mock 데이터 (API 에러 시 fallback용)
+// === Mock 데이터 (API 에러 시 fallback용) ===
+// productApi.ts에서만 사용되는 임시 백업 데이터
 const mockProducts: Product[] = [
     {
       id: 1,
@@ -217,13 +221,15 @@ const mockProducts: Product[] = [
     }
   ];
 
+// === API 설정 ===
 const API_BASE_URL = "https://api.glossymatcha.com/api/products";
 
+// === 제품 API 클래스 ===
 class ProductApi {
   /**
-   * 제품 목록을 가져오는 함수
+   * 제품 목록 조회
    * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<ProductApiResponse>
+   * @returns Promise<ProductApiResponse> 제품 목록 응답
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
@@ -242,7 +248,7 @@ class ProductApi {
 
       const data: ProductApiResponse = await response.json();
 
-      // API 응답이 성공적이지만 결과가 없는 경우 Mock 데이터 사용
+      // API 응답 검증 및 빈 결과 처리
       if (!data.success || data.results.length === 0) {
         console.warn("API returned empty results, using mock data");
         return {
@@ -257,7 +263,7 @@ class ProductApi {
     } catch (error) {
       console.error("Error fetching products, using mock data:", error);
 
-      // API 에러 시 Mock 데이터 반환
+      // API 실패 시 Mock 데이터로 fallback
       return {
         success: true,
         language: lang,
@@ -268,10 +274,10 @@ class ProductApi {
   }
 
   /**
-   * 특정 제품 정보를 가져오는 함수 (ID로 필터링)
-   * @param productId 제품 ID
+   * 특정 제품 상세 정보 조회
+   * @param productId 조회할 제품 ID
    * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<Product | null>
+   * @returns Promise<Product | null> 제품 정보 또는 null
    */
   static async getProductById(
     productId: number,
@@ -288,11 +294,11 @@ class ProductApi {
   }
 
   /**
-   * 제품 데이터에서 언어별 필드 값 가져오기 헬퍼 함수
+   * 제품 필드 다국어 값 추출 헬퍼
    * @param product 제품 객체
    * @param fieldName 필드명 (예: 'name', 'subtitle', 'description')
-   * @param lang 언어 코드
-   * @returns 해당 언어의 필드 값 또는 기본값
+   * @param lang 언어 코드 (ko/en)
+   * @returns string 해당 언어의 필드 값 또는 기본값
    */
   static getLocalizedField(
     product: Product,
@@ -311,11 +317,11 @@ class ProductApi {
   }
 
   /**
-   * 제품 섹션에서 언어별 필드 값 가져오기
-   * @param section 섹션 객체
-   * @param fieldName 필드명
-   * @param lang 언어 코드
-   * @returns 해당 언어의 필드 값 또는 기본값
+   * 제품 섹션 필드 다국어 값 추출 헬퍼
+   * @param section 제품 섹션 객체
+   * @param fieldName 필드명 (title/content)
+   * @param lang 언어 코드 (ko/en)
+   * @returns string 해당 언어의 섹션 필드 값 또는 기본값
    */
   static getLocalizedSectionField(
     section: ProductBodySection,

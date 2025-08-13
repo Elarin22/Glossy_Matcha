@@ -87,22 +87,5 @@ export const TextFormatter: React.FC<TextFormatterProps> = ({ text, className })
     return formatText(text, className);
 };
 
-/**
- * 문자열에서 || 구분자 존재 여부 확인
- */
-export const hasStyleSeparator = (text: string): boolean => {
-    return text.includes('||');
-};
-
-/**
- * || 구분자를 기준으로 텍스트 분할
- */
-export const splitByStyleSeparator = (text: string): { before: string; after: string } => {
-    const parts = text.split('||');
-    return {
-        before: parts[0] || '',
-        after: parts.slice(1).join('||') || ''
-    };
-};
 
 export default TextFormatter;
