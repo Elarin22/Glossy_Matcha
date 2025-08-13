@@ -14,7 +14,7 @@
 </div>
 
 <!-- 요약 통계 카드 -->
-<div class="row mb-4">
+<div class="row mb-4 dashboard-stats">
     <div class="col-xl-2 col-md-4 mb-3">
         <div class="card dashboard-card h-100">
             <div class="card-body text-center">
@@ -89,34 +89,34 @@
             <div class="card-header">
                 <h5 class="mb-0"><i class="bi bi-lightning me-2"></i>빠른 작업</h5>
             </div>
-            <div class="card-body">
+            <div class="card-body action-buttons">
                 <div class="row">
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="{% url 'staff_create' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-person-plus me-2"></i>직원 등록
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="{% url 'daily_sales_create' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-calendar-day me-2"></i>일별 매출
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="{% url 'sales_create' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-calendar3 me-2"></i>월별 매출
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="{% url 'yearly_sales_create' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-bar-chart me-2"></i>연별 매출
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="{% url 'suppliers_create' %}" class="btn btn-outline-primary w-100">
                             <i class="bi bi-shop-window me-2"></i>거래처 등록
                         </a>
                     </div>
-                    <div class="col-lg-2 col-md-4 mb-2">
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-6 mb-2">
                         <a href="#" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#workRecordModal">
                             <i class="bi bi-cash me-2"></i>급여 기록
                         </a>
@@ -144,7 +144,7 @@
             </div>
             <div class="card-body">
                 <!-- 매출 지표 -->
-                <div class="row mb-4">
+                <div class="row mb-4 sales-analysis">
                     <div class="col-lg-3 col-md-6 mb-3">
                         <div class="card bg-light">
                             <div class="card-body text-center">
@@ -184,8 +184,8 @@
                 </div>
                 
                 <!-- 차트 영역 -->
-                <div class="row">
-                    <div class="col-lg-8 mb-4">
+                <div class="row chart-container">
+                    <div class="col-lg-8 col-12 mb-4">
                         <div class="card">
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs" role="tablist">
@@ -213,7 +213,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-4">
+                    <div class="col-lg-4 col-12 mb-4">
                         <div class="card">
                             <div class="card-header">
                                 <h6 class="mb-0">매출 구성</h6>
@@ -230,7 +230,7 @@
 </div>
 
 <!-- 최근 활동 -->
-<div class="row">
+<div class="row recent-activities">
     <div class="col-md-4 mb-4">
         <div class="card">
             <div class="card-header">
@@ -380,7 +380,7 @@
 
 <!-- 급여 기록 입력 모달 -->
 <div class="modal fade" id="workRecordModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><i class="bi bi-cash me-2"></i>급여 기록 입력</h5>
