@@ -78,21 +78,26 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
 
     const handleProductSelect = (productId: number) => setActiveProductId(productId);
 
-    // === sub_description 파싱 헬퍼 함수 ===
     const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
         if (!subDescriptionText?.trim()) return [];
 
-        return subDescriptionText
+        const sections = subDescriptionText
             .trim()
             .split('---')
-            .filter(section => section.trim())
+            .filter(section => section.trim());
+
+        return sections
             .map((section, index) => {
                 const [title = '', content = ''] = section.split('||').map(part => part.trim());
                 if (!title) return null;
                 
+                // 이미지 할당 로직 수정: index + 1을 사용하여 첫 번째 이미지는 MidBanner에서 사용하도록 함
+                const imageIndex = index + 1;
+                const assignedImage = currentProduct?.images?.[imageIndex]?.image;
+                
                 return {
                     id: index,
-                    image: currentProduct?.images?.[index]?.image,
+                    image: assignedImage,
                     title,
                     title_en: title,
                     content,
