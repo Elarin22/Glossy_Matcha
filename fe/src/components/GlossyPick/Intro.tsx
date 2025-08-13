@@ -4,26 +4,26 @@ import GlossyPickHeader from "./GlossyPickHeader";
 import styles from "./Intro.module.scss";
 
 interface IntroProps {
-    onStart: () => void;
+  onStart: () => void;
 }
 
 export default function Intro({ onStart }: IntroProps) {
-    const t = useTranslations("test.intro");
+  const t = useTranslations("test.intro");
 
-    return (
-        <div className={styles.intro}>
-            <GlossyPickHeader />
-            <p className={styles["intro__description"]}>{t("desc")}</p>
-            <Image
-                className={styles["intro__image"]}
-                src="/images/glossy-pick/intro.webp"
-                alt="글로시 말차 메뉴 이미지"
-                width={1920}
-                height={1764}
-            />
-            <button className="btn-g" onClick={onStart}>
-                {t("start")}
-            </button>
-        </div>
-    );
+  return (
+    <div className={styles.intro}>
+      <GlossyPickHeader />
+      <p className={styles["intro__description"]}>{t("desc")}</p>
+      <Image
+        className={styles["intro__image"]}
+        src="/images/glossy-pick/intro.JPG"
+        alt="글로시 말차 메뉴 이미지"
+        width={3024}
+        height={3780}
+      />
+      <button className="btn-g" onClick={onStart}>
+        {t("start")}
+      </button>
+    </div>
+  );
 }
