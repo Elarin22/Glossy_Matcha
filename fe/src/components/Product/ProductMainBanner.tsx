@@ -1,11 +1,16 @@
 'use client';
 
+// === 제품 메인 배너 컴포넌트 ===
+// 제품 페이지 상단의 자동 이미지 슬라이더 배너
+
 import React, { useState, useEffect } from 'react';
 import styles from './ProductMainBanner.module.scss';
 
 const ProductMainBanner: React.FC = () => {
+    // === 상태 관리 ===
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     
+    // === 비주얼 데이터 ===
     const images = [
         '/images/product/signature-main-banner1.jpg',
         '/images/product/signature-main-banner2.jpg',
@@ -13,6 +18,8 @@ const ProductMainBanner: React.FC = () => {
         '/images/product/signature-main-banner4.jpg'
     ];
 
+    // === 자동 슬라이드 기능 ===
+    // 4초마다 이미지 자동 전환
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => 
@@ -27,6 +34,8 @@ const ProductMainBanner: React.FC = () => {
         };
     }, [images.length]);
 
+    // === 이벤트 핸들러 ===
+    // 스크롤 인디케이터 클릭 시 다음 섹션으로 스크롤
     const scrollToNext = () => {
         if (typeof window !== 'undefined') {
             window.scrollTo({
@@ -36,9 +45,10 @@ const ProductMainBanner: React.FC = () => {
         }
     };
 
+    // === 렌더링 ===
     return (
         <section className={styles.banner}>
-            {/* Background Images */}
+            {/* 배경 이미지 슬라이더 */}
             <div className={styles.imageContainer}>
                 {images.map((image, index) => (
                     <div
@@ -51,10 +61,10 @@ const ProductMainBanner: React.FC = () => {
                 ))}
             </div>
 
-            {/* Gradient Overlay */}
+            {/* 그라디언트 오버레이 */}
             <div className={styles.gradientOverlay} />
 
-            {/* Content */}
+            {/* 메인 컨텐츠 */}
             <div className={styles.content}>
                 <h1 className={styles.title}>
                     Life With<br />
@@ -62,12 +72,12 @@ const ProductMainBanner: React.FC = () => {
                 </h1>
                 <p className={styles.description}>
                     제주산 세레모니얼 등급 말차 원료와<br />
-                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한 <br className={styles.mobileBreak} />
+                    대체당, 대나무 수액, 코코넥 슈가를 블렌딩한 <br className={styles.mobileBreak} />
                     은은한 단맛의 밸런스
                 </p>
             </div>
 
-            {/* Scroll Indicator */}
+            {/* 스크롤 인디케이터 */}
             <div className={styles.scrollIndicator} onClick={scrollToNext}>
                 <span className={styles.scrollText}>Scroll</span>
                 <span className={styles.scrollArrow}>↓</span>
