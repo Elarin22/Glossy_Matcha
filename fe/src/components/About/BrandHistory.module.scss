@@ -87,6 +87,7 @@
 
   &__date {
     color: #828282;
+    font-variant-numeric: tabular-nums;
   }
 
   @media (max-width: 768px) {
