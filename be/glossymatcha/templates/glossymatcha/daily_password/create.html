@@ -1,0 +1,185 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}일일 패스워드 생성 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-0">
+            <i class="bi bi-plus-circle me-2"></i>일일 패스워드 생성
+        </h2>
+        <p class="text-muted">새로운 일일 패스워드를 생성합니다</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'daily_password_management' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>목록으로 돌아가기
+        </a>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header" style="background-color: #00563f; color: white;">
+                <h5 class="mb-0"><i class="bi bi-shield-plus me-2"></i>패스워드 생성 폼</h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.date.id_for_label }}" class="form-label">
+                                <i class="bi bi-calendar me-2"></i>날짜
+                            </label>
+                            {{ form.date }}
+                            {% if form.date.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.date.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted">패스워드를 적용할 날짜를 선택하세요</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label for="{{ form.password.id_for_label }}" class="form-label">
+                                <i class="bi bi-key me-2"></i>패스워드
+                            </label>
+                            <div class="input-group">
+                                {{ form.password }}
+                                <button type="button" class="btn btn-outline-primary" onclick="generateRandomPassword()">
+                                    <i class="bi bi-arrow-clockwise"></i>
+                                </button>
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.password.errors }}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted">직접 입력하거나 자동 생성 버튼을 클릭하세요</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            {{ form.is_active }}
+                            <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                                <i class="bi bi-toggle-on me-2"></i>즉시 활성화
+                            </label>
+                        </div>
+                        {% if form.is_active.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.is_active.errors }}
+                            </div>
+                        {% endif %}
+                        <small class="text-muted">체크하면 생성 즉시 해당 날짜의 패스워드가 활성화됩니다</small>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>참고사항</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>패스워드는 8자리 영문 대소문자 + 숫자 조합이 권장됩니다</li>
+                            <li>같은 날짜에는 하나의 활성 패스워드만 존재할 수 있습니다</li>
+                            <li>생성된 패스워드는 관리 페이지에서 확인할 수 있습니다</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'daily_password_management' %}" class="btn btn-outline-secondary me-md-2">
+                            <i class="bi bi-x-circle me-2"></i>취소
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i>패스워드 생성
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 패스워드 생성 도움말 -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="bi bi-lightbulb me-2"></i>패스워드 보안 팁</h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-success"><i class="bi bi-shield-check me-2"></i>좋은 패스워드</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check text-success me-2"></i>8자리 이상</li>
+                            <li><i class="bi bi-check text-success me-2"></i>영문 대소문자 혼합</li>
+                            <li><i class="bi bi-check text-success me-2"></i>숫자 포함</li>
+                            <li><i class="bi bi-check text-success me-2"></i>예: Ab12Cd34, Xy9Zw8Mp</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-danger"><i class="bi bi-shield-x me-2"></i>피해야 할 패스워드</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-x text-danger me-2"></i>생일, 전화번호</li>
+                            <li><i class="bi bi-x text-danger me-2"></i>연속된 숫자 (1234, abcd)</li>
+                            <li><i class="bi bi-x text-danger me-2"></i>동일한 문자 반복 (aaaa)</li>
+                            <li><i class="bi bi-x text-danger me-2"></i>예: 12345678, password</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateRandomPassword() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let password = '';
+    
+    // 8자리 랜덤 패스워드 생성
+    for (let i = 0; i < 8; i++) {
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    
+    // 패스워드 필드에 설정
+    const passwordField = document.querySelector('input[name="password"]');
+    if (passwordField) {
+        passwordField.value = password;
+        
+        // 시각적 피드백
+        passwordField.style.backgroundColor = '#e8f5e8';
+        setTimeout(() => {
+            passwordField.style.backgroundColor = '';
+        }, 1000);
+    }
+}
+
+// 폼 제출 전 확인
+document.querySelector('form').addEventListener('submit', function(e) {
+    const dateField = document.querySelector('input[name="date"]');
+    const passwordField = document.querySelector('input[name="password"]');
+    
+    if (!dateField.value || !passwordField.value) {
+        e.preventDefault();
+        alert('날짜와 패스워드를 모두 입력해주세요.');
+        return false;
+    }
+    
+    // 패스워드 길이 확인
+    if (passwordField.value.length < 4) {
+        e.preventDefault();
+        alert('패스워드는 최소 4자리 이상이어야 합니다.');
+        return false;
+    }
+});
+
+// 페이지 로드 시 오늘 날짜를 기본값으로 설정
+document.addEventListener('DOMContentLoaded', function() {
+    const dateField = document.querySelector('input[name="date"]');
+    if (dateField && !dateField.value) {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        dateField.value = `${year}-${month}-${day}`;
+    }
+});
+</script>
+{% endblock %}
