@@ -7,6 +7,8 @@ from django.db import models
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from rest_framework import generics, status
 from rest_framework.decorators import api_view, permission_classes
@@ -1336,6 +1338,7 @@ class IndividualYearlySalesExcelExportView(LoginRequiredMixin, TemplateView):
         wb.save(response)
         return response
     
+@method_decorator(csrf_protect, name='dispatch')
 class DailyPasswordCheckView(TemplateView):
     """
     일일 비밀번호 확인 페이지
