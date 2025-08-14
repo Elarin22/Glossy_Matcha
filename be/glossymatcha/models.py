@@ -640,17 +640,40 @@ class DailyPassword(models.Model):
     @classmethod
     def generate_today_password(cls):
         today = date.today()
-        if not cls.objects.filter(date=today).exists():
+        # is_active=True인 오늘 날짜의 비밀번호가 있는지 확인
+        if not cls.objects.filter(date=today, is_active=True).exists():
+            # 기존의 비활성화된 레코드가 있다면 먼저 삭제
+            cls.objects.filter(date=today, is_active=False).delete()
+            
             """
-            오늘 날짜의 비밀번호가 없으면 새로 생성
+            오늘 날짜의 활성화된 비밀번호가 없으면 새로 생성
             8자리 랜덤 비밀번호 생성 (영문 대소문자 + 숫자)
             8자리로 설정한 이유는 보안과 사용 편의성의 균형을 고려
             8자리면 충분히 안전하면서도 기억하기 쉬운 길이입니다.
             """
             password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
-            cls.objects.create(date=today, password=password)
+            cls.objects.create(date=today, password=password, is_active=True)
             return password
         return cls.get_today_password()
 
     def __str__(self):
         return f"{self.date} - {self.password}"
+
+# DailyPassword 관련 시그널
+@receiver(post_delete, sender=DailyPassword)
+def auto_regenerate_today_password_on_delete(sender, instance, **kwargs):
+    """
+    일일 비밀번호 삭제 시, 오늘 날짜의 비밀번호였다면 자동으로 새로 생성
+    """
+    from datetime import date
+    today = date.today()
+    
+    # 삭제된 비밀번호가 오늘 날짜의 것이었다면
+    if instance.date == today:
+        # 오늘 날짜의 활성화된 비밀번호가 남아있는지 확인
+        if not DailyPassword.objects.filter(date=today, is_active=True).exists():
+            # 새로운 일일 비밀번호 자동 생성
+            import random, string
+            password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+            DailyPassword.objects.create(date=today, password=password, is_active=True)
+            print(f"오늘({today}) 일일 비밀번호가 삭제되어 새로운 비밀번호({password})를 자동 생성했습니다.")

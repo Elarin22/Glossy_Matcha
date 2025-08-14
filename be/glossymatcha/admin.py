@@ -5,16 +5,56 @@ from .models import Products, ProductImages, ProductSpecifications, DailyPasswor
 class DailyPasswordAdmin(admin.ModelAdmin):
     """
     일일 패스워드 관리 어드민 클래스
-    - 일일 패스워드 목록 페이지에서 표시할 필드: 날짜, 패스워드, 활성화 여부, 생성일
-    - 필터링: 활성화 여부, 날짜"""
-    list_display = ('date', 'password', 'is_active', 'created_at')
+    - 일일 패스워드 목록 페이지에서 표시할 필드: 날짜, 패스워드, 활성화 여부, 오늘 여부, 생성일
+    - 필터링: 활성화 여부, 날짜
+    - 오늘 날짜의 비밀번호 삭제 시 자동으로 새 비밀번호 생성
+    """
+    list_display = ('date', 'password', 'is_today', 'is_active', 'created_at')
     list_filter = ('is_active', 'date')
     search_fields = ('date', 'password')
     readonly_fields = ('created_at',)
+    ordering = ('-date',)
+    
+    def is_today(self, obj):
+        """오늘 날짜의 비밀번호인지 표시"""
+        from datetime import date
+        if obj.date == date.today():
+            return "🔥 오늘"
+        return ""
+    is_today.short_description = '오늘'
+    
+    def delete_model(self, request, obj):
+        """단일 객체 삭제 시 메시지 표시"""
+        from datetime import date
+        is_today_password = obj.date == date.today()
+        super().delete_model(request, obj)
+        
+        if is_today_password:
+            self.message_user(
+                request, 
+                f"오늘({obj.date}) 일일 비밀번호를 삭제했습니다. 새로운 비밀번호가 자동으로 생성됩니다.",
+                level='WARNING'
+            )
+    
+    def delete_queryset(self, request, queryset):
+        """여러 객체 일괄 삭제 시 메시지 표시"""
+        from datetime import date
+        today = date.today()
+        today_passwords = queryset.filter(date=today)
+        
+        super().delete_queryset(request, queryset)
+        
+        if today_passwords.exists():
+            self.message_user(
+                request,
+                f"오늘({today}) 일일 비밀번호가 삭제되었습니다. 새로운 비밀번호가 자동으로 생성됩니다.",
+                level='WARNING'
+            )
     
     fieldsets = (
         ('패스워드 정보', {
-            'fields': ('date', 'password', 'is_active')
+            'fields': ('date', 'password', 'is_active'),
+            'description': '오늘 날짜의 비밀번호를 삭제하면 새로운 비밀번호가 자동으로 생성됩니다.'
         }),
         ('시간 정보', {
             'fields': ('created_at',),
