@@ -42,7 +42,7 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
     const mobileBreakToken = '\u0001__MOBILE_BREAK__\u0001';
     
     // *n을 모바일 전용 브레이크로 변환
-    let withMobileBreaks = text.split('*n').join(mobileBreakToken);
+    const withMobileBreaks = text.split('*n').join(mobileBreakToken);
     
     // 일반 줄바꿈 처리: \\n과 \n 모두 지원
     const normalBreakParts = withMobileBreaks.split(/\\n|\n/);
