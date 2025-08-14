@@ -76,7 +76,17 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         productId: product.id
     }));
 
-    const handleProductSelect = (productId: number) => setActiveProductId(productId);
+    const handleProductSelect = (productId: number) => {
+        setActiveProductId(productId);
+        
+        // scroll 버튼과 동일한 위치로 스크롤 (nav 위치)
+        if (typeof window !== 'undefined') {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+    };
 
     const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
         if (!subDescriptionText?.trim()) return [];
@@ -150,6 +160,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
             <ProductMidBanner productId={activeProductId} lang={lang} />
             {bodySections.length > 0 && (
                 <ProductDescription 
+                    key={activeProductId}
                     bodySections={bodySections}
                     isEnglish={lang === 'en'}
                     midBannerImg={currentProduct?.mid_banner_img}

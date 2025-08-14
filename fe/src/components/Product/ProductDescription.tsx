@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './ProductDescription.module.scss';
 import { TextFormatter } from '../../utils/textFormatter';
+import ProductApi from '../../services/productApi';
+import FadeInUp from '../FadeInUp/FadeInUp';
 
 // === 제품 상세 설명 컴포넌트 ===
 
@@ -21,22 +23,6 @@ interface ProductDescriptionProps {
     midBannerImg?: string;
 }
 
-// === 언어별 필드 값 추출 헬퍼 함수 ===
-const getLocalizedSectionField = (
-    section: ProductBodySection,
-    fieldName: 'title' | 'content',
-    lang: string = 'ko'
-): string => {
-    if (lang === 'en') {
-        const enFieldName = `${fieldName}_en` as keyof ProductBodySection;
-        const enValue = section[enFieldName] as string;
-        if (enValue && enValue.trim()) {
-            return enValue;
-        }
-    }
-    
-    return (section[fieldName] as string) || '';
-};
 
 // === 메인 컴포넌트 ===
 const ProductDescription: React.FC<ProductDescriptionProps> = ({ 
@@ -66,42 +52,44 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
         <div className={styles.productDescription}>
             {sortedSections.map((section, index) => {
                 // 언어별 텍스트 추출
-                const title = getLocalizedSectionField(section, 'title', lang);
-                const content = getLocalizedSectionField(section, 'content', lang);
+                const title = ProductApi.getLocalizedSectionField(section, 'title', lang);
+                const content = ProductApi.getLocalizedSectionField(section, 'content', lang);
                 
                 // MidBanner와 같은 이미지인지 확인
                 const isDuplicateImage = section.image === midBannerImageUrl;
                 
                 return (
-                    <div key={`section-${section.sort_order}-${index}`} className={styles.descriptionItem}>
-                        {/* 섹션 이미지 (MidBanner와 중복되지 않을 때만 표시) */}
-                        {section.image && !isDuplicateImage && (
-                            <div className={styles.imageWrapper}>
-                                <img 
-                                    src={section.image} 
-                                    alt={title}
-                                    className={styles.descriptionImage}
-                                />
-                            </div>
-                        )}
-                        
-                        {/* 섹션 텍스트 콘텐츠 */}
-                        <div className={styles.textContent}>
-                            {/* 섹션 제목 */}
-                            {title && (
-                                <h3 className={styles.descriptionTitle}>
-                                    <TextFormatter text={title} />
-                                </h3>
+                    <FadeInUp key={`section-${section.sort_order}-${index}`} delay={index * 200}>
+                        <div className={styles.descriptionItem}>
+                            {/* 섹션 이미지 (MidBanner와 중복되지 않을 때만 표시) */}
+                            {section.image && !isDuplicateImage && (
+                                <div className={styles.imageWrapper}>
+                                    <img 
+                                        src={section.image} 
+                                        alt={title}
+                                        className={styles.descriptionImage}
+                                    />
+                                </div>
                             )}
                             
-                            {/* 섹션 내용 */}
-                            {content && (
-                                <p className={styles.descriptionText}>
-                                    <TextFormatter text={content} />
-                                </p>
-                            )}
+                            {/* 섹션 텍스트 콘텐츠 */}
+                            <div className={styles.textContent}>
+                                {/* 섹션 제목 */}
+                                {title && (
+                                    <h3 className={styles.descriptionTitle}>
+                                        <TextFormatter text={title} />
+                                    </h3>
+                                )}
+                                
+                                {/* 섹션 내용 */}
+                                {content && (
+                                    <p className={styles.descriptionText}>
+                                        <TextFormatter text={content} />
+                                    </p>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    </FadeInUp>
                 );
             })}
         </div>
