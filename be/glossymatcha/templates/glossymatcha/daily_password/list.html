@@ -1,0 +1,182 @@
+{% extends 'glossymatcha/base.html' %}
+
+{% block title %}일일 패스워드 관리 - Glossy Matcha{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-0">
+            <i class="bi bi-shield-lock me-2"></i>일일 패스워드 관리
+        </h2>
+        <p class="text-muted">매일 새로운 패스워드를 생성하고 관리합니다</p>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'daily_password_create' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-2"></i>새 패스워드 생성
+        </a>
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i>대시보드
+        </a>
+    </div>
+</div>
+
+<!-- 오늘의 패스워드 표시 -->
+{% if today_password %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card" style="border-color: #00563f;">
+            <div class="card-body text-center" style="background-color: #f8f9fa;">
+                <h4 class="card-title" style="color: #00563f;">
+                    <i class="bi bi-calendar-day me-2"></i>오늘의 패스워드
+                </h4>
+                <h2 class="text-primary font-monospace">{{ today_password }}</h2>
+                <p class="text-muted mb-0">{{ "now"|date:"Y년 m월 d일" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- 패스워드 목록 -->
+<div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-list me-2"></i>패스워드 목록</h5>
+        <small class="text-muted">총 {{ daily_passwords|length }}개</small>
+    </div>
+    <div class="card-body p-0">
+        {% if daily_passwords %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover mb-0">
+                <thead style="background-color: #00563f; color: white;">
+                    <tr>
+                        <th><i class="bi bi-calendar me-1"></i> 날짜</th>
+                        <th><i class="bi bi-key me-1"></i> 패스워드</th>
+                        <th><i class="bi bi-toggle-on me-1"></i> 상태</th>
+                        <th><i class="bi bi-clock me-1"></i> 생성일</th>
+                        <th><i class="bi bi-gear me-1"></i> 관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for password in daily_passwords %}
+                    <tr>
+                        <td>
+                            <strong>{{ password.date|date:"Y-m-d" }}</strong>
+                            {% if password.date == "now"|date:"Y-m-d" %}
+                                <span class="badge" style="background-color: #00563f;">오늘</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <code class="bg-light px-2 py-1" style="color: #00563f; font-weight: bold;">{{ password.password }}</code>
+                        </td>
+                        <td>
+                            {% if password.is_active %}
+                                <span class="badge bg-success">
+                                    <i class="bi bi-check-circle me-1"></i>활성
+                                </span>
+                            {% else %}
+                                <span class="badge bg-secondary">
+                                    <i class="bi bi-x-circle me-1"></i>비활성
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <small class="text-muted">{{ password.created_at|date:"m-d H:i" }}</small>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-outline-primary btn-sm" 
+                                        onclick="copyPassword('{{ password.password }}')" 
+                                        title="패스워드 복사">
+                                    <i class="bi bi-clipboard"></i>
+                                </button>
+                                <a href="{% url 'admin:glossymatcha_dailypassword_change' password.pk %}" 
+                                   class="btn btn-outline-secondary btn-sm" title="수정">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="bi bi-shield-lock" style="font-size: 4rem; color: #00563f; opacity: 0.3;"></i>
+            <p class="text-muted mt-3">등록된 패스워드가 없습니다.</p>
+            <a href="{% url 'daily_password_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle me-2"></i>첫 번째 패스워드 생성
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 사용법 안내 -->
+<div class="card mt-4">
+    <div class="card-header">
+        <h6 class="mb-0"><i class="bi bi-info-circle me-2"></i>사용법 안내</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 style="color: #00563f;"><i class="bi bi-person-badge me-2"></i>관리자</h6>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check text-success me-2"></i>매일 새로운 패스워드 생성</li>
+                    <li><i class="bi bi-check text-success me-2"></i>직원들에게 패스워드 전달</li>
+                    <li><i class="bi bi-check text-success me-2"></i>패스워드 활성화/비활성화</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-primary"><i class="bi bi-people me-2"></i>직원</h6>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check text-primary me-2"></i>관리자에게 오늘의 패스워드 문의</li>
+                    <li><i class="bi bi-check text-primary me-2"></i>매장 시스템 접속시 패스워드 입력</li>
+                    <li><i class="bi bi-check text-primary me-2"></i>매일 새로운 패스워드로 보안 강화</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyPassword(password) {
+    navigator.clipboard.writeText(password).then(function() {
+        // 성공 알림 (Bootstrap Toast 사용)
+        const toastContainer = document.getElementById('toast-container') || createToastContainer();
+        const toastHTML = `
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <i class="bi bi-check-circle text-success me-2"></i>
+                    <strong class="me-auto">복사 완료</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    패스워드가 클립보드에 복사되었습니다.
+                </div>
+            </div>
+        `;
+        
+        toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+        const toast = new bootstrap.Toast(toastContainer.lastElementChild);
+        toast.show();
+        
+        // 토스트가 닫힌 후 DOM에서 제거
+        toastContainer.lastElementChild.addEventListener('hidden.bs.toast', function() {
+            this.remove();
+        });
+        
+    }).catch(function(err) {
+        alert('복사에 실패했습니다: ' + err);
+    });
+}
+
+function createToastContainer() {
+    const container = document.createElement('div');
+    container.id = 'toast-container';
+    container.className = 'toast-container position-fixed top-0 end-0 p-3';
+    document.body.appendChild(container);
+    return container;
+}
+</script>
+{% endblock %}
