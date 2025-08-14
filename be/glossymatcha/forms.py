@@ -356,17 +356,17 @@ class YearlySalesForm(forms.ModelForm):
     
 class DailyPasswordForm(forms.Form):
     """
-    일별 매출 비밀번호 입력 폼
-    사용자가 일별 매출 비밀번호를 입력할 때 사용하는 폼
+    일별 비밀번호 입력 폼
+    사용자가 일별 비밀번호를 입력할 때 사용하는 폼
     """
     daily_password = forms.CharField(
         max_length=20,
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': '일별 매출 비밀번호를 입력하세요.',
+            'placeholder': '일별 비밀번호를 입력하세요.',
             'autocomplete': 'off'
         }),
-        label='일별 매출 비밀번호'
+        label='일별 비밀번호'
     )
 
     def clean_daily_password(self):
