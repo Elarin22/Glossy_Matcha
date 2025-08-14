@@ -12,6 +12,11 @@ body {
   overscroll-behavior: none;
 }
 
+button:focus {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
 .btn-g {
   display: flex;
   justify-content: center;
