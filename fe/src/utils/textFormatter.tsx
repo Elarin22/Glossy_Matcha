@@ -5,6 +5,9 @@ interface TextFormatterProps {
     className?: string;
 }
 
+// 모바일 브레이크포인트 상수
+const MOBILE_BREAKPOINT = 768;
+
 /**
  * 모바일 감지 컴포넌트
  */
@@ -12,8 +15,11 @@ const MobileBreak: React.FC<{ id: string }> = ({ id }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
+        // SSR 환경에서 window 객체 사용 보호
+        if (typeof window === 'undefined') return;
+        
         const checkMobile = () => {
-            setIsMobile(window.innerWidth <= 768);
+            setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
         };
 
         checkMobile();
@@ -26,19 +32,20 @@ const MobileBreak: React.FC<{ id: string }> = ({ id }) => {
 
 /**
  * 텍스트의 줄바꿈 처리 함수
- * - \n: 모든 화면에서 줄바꿈
+ * - \n 또는 \\n: 모든 화면에서 줄바꿈
  * - *n: 모바일에서만 줄바꿈
  */
 const processTextWithBreaks = (text: string): React.ReactNode[] => {
     if (!text) return [];
 
-    // 먼저 *n(모바일 전용)을 특별한 토큰으로 변환
-    const mobileBreakToken = '___MOBILE_BREAK___';
+    // 더 안전한 모바일 브레이크 토큰 사용
+    const mobileBreakToken = '\u0001__MOBILE_BREAK__\u0001';
+    
     // *n을 모바일 전용 브레이크로 변환
     let withMobileBreaks = text.split('*n').join(mobileBreakToken);
     
-    // 일반 줄바꿈 \n으로 분할 (Django에서 \n 입력 시 \\n으로 저장됨)
-    const normalBreakParts = withMobileBreaks.split('\\n');
+    // 일반 줄바꿈 처리: \\n과 \n 모두 지원
+    const normalBreakParts = withMobileBreaks.split(/\\n|\n/);
     
     const result: React.ReactNode[] = [];
     
@@ -55,7 +62,7 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
             if (subIndex < mobileBreakParts.length - 1) {
                 result.push(
                     <MobileBreak 
-                        key={`mobile-${partIndex}-${subIndex}`}
+                        key={`mobile-${partIndex}-${subIndex}-${Date.now()}`}
                         id={`mobile-${partIndex}-${subIndex}`}
                     />
                 );
@@ -64,7 +71,7 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
         
         // 마지막이 아니면 일반 브레이크 추가
         if (partIndex < normalBreakParts.length - 1) {
-            result.push(<br key={`normal-${partIndex}`} />);
+            result.push(<br key={`normal-${partIndex}-${Date.now()}`} />);
         }
     });
     

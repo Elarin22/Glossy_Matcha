@@ -28,8 +28,8 @@ const ProductMainBanner: React.FC = () => {
                 korean: false,
                 content: (
                     <>
-                        A balanced, subtle sweetness <br className={styles.mobileBreak} /> from a blend of Jeju <br />
-                        ceremonial-grade matcha,<br className={styles.mobileBreak} /> alternative sweeteners,<br />
+                        A balanced, subtle sweetness <br /> from a blend of Jeju <br />
+                        ceremonial-grade matcha, alternative sweeteners,<br />
                         bamboo sap, and coconut sugar.
                     </>
                 )
@@ -41,7 +41,7 @@ const ProductMainBanner: React.FC = () => {
             content: (
                 <>
                     제주산 세레모니얼 등급 말차 원료와<br />
-                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한<br className={styles.mobileBreak} />
+                    대체당, 대나무 수액, 코코넛 슈가를 블렌딩한<br />
                     은은한 단맛의 밸런스
                 </>
             )
