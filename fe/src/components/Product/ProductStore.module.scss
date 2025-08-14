@@ -1,0 +1,40 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.productStore {
+  width: 100%;
+  padding: 80px 20px;
+  background-color: $color-beige-100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.storeButton {
+  @include pretendard($font-size-18, $font-weight-medium);
+  background-color: $color-green-500;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 16px 40px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  outline: none;
+  
+  &:hover {
+    background-color: $color-green-700;
+  }
+  
+  @media (max-width: 768px) {
+    @include pretendard($font-size-16, $font-weight-medium);
+    padding: 14px 32px;
+  }
+}
