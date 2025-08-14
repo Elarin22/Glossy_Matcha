@@ -7,6 +7,7 @@ import Image from "next/image";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import { HomeContent } from "@/app/[locale]/page";
 import SoundButton from "../../SoundButton/SoundButton";
+import Flash from "./Flash/Flash";
 
 /**
  * PC 버전에서 오른쪽 메인 이미지/비디오 영역을 표시하는 컴포넌트.
@@ -26,9 +27,11 @@ export default function ImageSection({
   contents: HomeContent[];
 }): React.JSX.Element {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div>
+    <div ref={containerRef}>
+      <Flash containerRef={containerRef} />
       {contents.map((content, index) => {
         return (
           <section key={index}>
