@@ -371,17 +371,28 @@ class DailyPasswordForm(forms.Form):
 
     def clean_daily_password(self):
         daily_password = self.cleaned_data.get('daily_password')
-        if not daily_password:
+        
+        # 패스워드가 입력되지 않았을 때
+        if not daily_password or not daily_password.strip():
+            raise ValidationError('패스워드를 입력해주세요.')
+        
+        # 입력된 패스워드 정제 (공백 제거)
+        daily_password = daily_password.strip()
+        
+        # 오늘의 실제 패스워드 조회
+        today_password = DailyPassword.get_today_password()
+        if not today_password:
+            # 오늘의 비밀번호가 없으면 새로 생성
+            DailyPassword.generate_today_password()
             today_password = DailyPassword.get_today_password()
-            if not today_password:
-                """
-                오늘의 비밀번호가 없으면 새로 생성
-                """
-                DailyPassword.generate_today_password()
-                today_password = DailyPassword.get_today_password()
+            
+        # 여전히 비밀번호가 없다면 에러
+        if not today_password:
+            raise ValidationError('시스템 오류: 일일 비밀번호를 생성할 수 없습니다. 관리자에게 문의하세요.')
 
-            if daily_password != today_password:
-                raise ValidationError('비밀번호가 틀렸습니다. 다시 입력해주세요.')
+        # 입력한 패스워드와 실제 패스워드 비교 (대소문자 구분)
+        if daily_password != today_password:
+            raise ValidationError('비밀번호가 틀렸습니다. 다시 입력해주세요.')
             
         return daily_password
     
