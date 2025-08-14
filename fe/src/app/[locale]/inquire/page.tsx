@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import styles from "./page.module.scss";
 import { useTranslations } from "next-intl";
+import { postInquire } from "@/services/inquireApi";
 
 type FormDataType = {
   name: string;
@@ -65,7 +66,7 @@ export default function Inquire() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (Object.values(formData).some((value) => !value)) {
@@ -73,10 +74,6 @@ export default function Inquire() {
       return;
     }
 
-    fetchInquire();
-  };
-
-  const fetchInquire = async () => {
     const requestData = {
       name: formData.name,
       email: formData.email,
@@ -85,32 +82,18 @@ export default function Inquire() {
     };
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/inquiries/`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const response = await postInquire(requestData);
 
       if (response.ok) {
         alert(t("alertMessage.success"));
         setSelectedCategory(categories[0]);
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", message: "" });
       } else {
         alert(t("alertMessage.fail"));
       }
-      console.log("response: ", response);
     } catch (error) {
       alert(t("alertMessage.error"));
-      console.error("error:", error);
+      console.error(error);
     }
   };
 
