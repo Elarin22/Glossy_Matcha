@@ -1,0 +1,174 @@
+"use client";
+
+import React, { useState } from "react";
+import styles from "./InquirePage.module.scss";
+import { useTranslations } from "next-intl";
+import { postInquire } from "@/services/inquireApi";
+
+type FormDataType = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+type CategoryCode = "general" | "product" | "other";
+
+/**
+ * 문의 페이지 컴포넌트
+ * 카테고리 선택, 입력 필드, 제출 기능을 포함한 폼을 렌더링합니다.
+ * @returns {JSX.Element} 문의 폼 컴포넌트
+ */
+export default function InquirePage() {
+  const t = useTranslations("inquire");
+  const categories = t.raw("form.category") as string[];
+  type Category = (typeof categories)[number];
+
+  const CATEGORY_MAP: Record<Category, CategoryCode> = {
+    [categories[0]]: "general",
+    [categories[1]]: "product",
+    [categories[2]]: "other",
+  };
+
+  const [selectedCategory, setSelectedCategory] = useState<Category>(
+    categories[0]
+  );
+
+  const FORM_FIELDS: {
+    label: string;
+    name: keyof FormDataType;
+    placeholder: string;
+    type: string;
+  }[] = [
+    {
+      label: t("form.name.label"),
+      name: "name",
+      placeholder: t("form.name.placeholder"),
+      type: "text",
+    },
+    {
+      label: t("form.email.label"),
+      name: "email",
+      placeholder: t("form.email.placeholder"),
+      type: "email",
+    },
+    {
+      label: t("form.message.label"),
+      name: "message",
+      placeholder: t("form.message.placeholder"),
+      type: "textArea",
+    },
+  ];
+
+  const [formData, setFormData] = useState<FormDataType>({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (Object.values(formData).some((value) => !value)) {
+      alert(t("alertMessage.invaild"));
+      return;
+    }
+
+    const requestData = {
+      name: formData.name,
+      email: formData.email,
+      inquiry_type: CATEGORY_MAP[selectedCategory],
+      message: formData.message,
+    };
+
+    try {
+      const response = await postInquire(requestData);
+
+      if (response.ok) {
+        alert(t("alertMessage.success"));
+        setSelectedCategory(categories[0]);
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        alert(t("alertMessage.fail"));
+      }
+    } catch (error) {
+      alert(t("alertMessage.error"));
+      console.error(error);
+    }
+  };
+
+  return (
+    <main className={styles.container}>
+      <header className={styles.header}>
+        <h2 className={styles.title}>{t("title")}</h2>
+        <p className={styles.description}>
+          {t("description").split("\n")[0]}
+          <br />
+          {t("description").split("\n")[1]}
+        </p>
+      </header>
+
+      <section className={styles.formSection}>
+        <h3 className="sr-only">{t("hideText.subTitle")}</h3>
+
+        <div
+          className={styles.categories}
+          role="group"
+          aria-label={t("hideText.categoryTitle")}
+        >
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              aria-pressed={category === selectedCategory}
+              className={`${styles.categoryBtn} ${
+                category === selectedCategory ? styles.active : ""
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          {FORM_FIELDS.map((field) => (
+            <div key={field.name} className={styles.field}>
+              <label htmlFor={field.name} className={styles.label}>
+                {field.label}
+              </label>
+              {field.type !== "textArea" ? (
+                <input
+                  type={field.type}
+                  id={field.name}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
+                  onChange={handleChange}
+                  className={styles.input}
+                />
+              ) : (
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  value={formData[field.name]}
+                  onChange={handleChange}
+                  className={styles.textarea}
+                />
+              )}
+            </div>
+          ))}
+
+          <button type="submit" className={`btn-g ${styles.submitBtn}`}>
+            {t("buttonText")}
+          </button>
+        </form>
+      </section>
+    </main>
+  );
+}
