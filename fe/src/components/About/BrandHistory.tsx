@@ -44,13 +44,14 @@ export default function BrandHistory() {
           {historyItems.map((item, index) => (
             <li key={index} className={styles["history-item"]}>
               <FadeInUp delay={600 + index * 200}>
-                <time
-                  className={styles["history-item__date"]}
-                  dateTime={item.date.replace(".", "-")}
-                >
-                  {item.date}
-                </time>
-                <div className={styles["history-item__desc-wrapper"]}>
+                <div className={styles["history-item__wrapper"]}>
+                  <time
+                    className={styles["history-item__date"]}
+                    dateTime={item.date.replace(".", "-")}
+                  >
+                    {item.date}
+                  </time>
+
                   {item.desc.map((text, idx) => (
                     <p key={idx} className={styles["history-item__desc"]}>
                       {text}
