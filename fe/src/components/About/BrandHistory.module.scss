@@ -85,6 +85,10 @@
     gap: 20px;
   }
 
+  &__date {
+    color: #828282;
+  }
+
   @media (max-width: 768px) {
     gap: 10px;
     @include pretendard($font-size-12, 500);

@@ -17,22 +17,29 @@ interface ScrollNavProps {
 const NAV_HEIGHT = 130;
 
 /**
- * 스크롤 기반 네비게이션 컴포넌트
+ * 스크롤 위치에 따라 현재 섹션을 하이라이트하는 네비게이션 컴포넌트
  *
- * IntersectionObserver를 활용해 현재 보이는 섹션을 감지하고,
- * 스크롤 방향에 따라 다른 로직을 적용하여 자연스러운 활성 상태 전환을 제공
+ * 사용자가 스크롤할 때 현재 화면에 보이는 섹션을 자동으로 감지하여 해당 메뉴를 활성화합니다.
+ * 메뉴 클릭 시 부드러운 스크롤 애니메이션으로 해당 섹션으로 이동합니다.
  *
  * @param {ScrollNavProps} props - 컴포넌트 props
- * @param {string[]} props.menuKeys - 네비게이션 메뉴 키 배열 (i18n 번역 키로 사용됨)
+ * @param {string[]} props.menuKeys - 네비게이션 메뉴를 생성할 키 배열. 'intro' 키는 'brand-intro' ID로 매핑됩니다.
  * @returns {JSX.Element} 스크롤 네비게이션 컴포넌트
  *
  * @example
  * ```tsx
- * <ScrollNav menuKeys={['intro', 'features', 'contact']} />
+ * // 기본 사용법
+ * <ScrollNav menuKeys={['intro', 'about', 'services', 'contact']} />
+ *
+ * // 'intro' 키는 자동으로 'brand-intro' ID와 매핑됩니다
+ * <ScrollNav menuKeys={['intro', 'company', 'team']} />
  * ```
+ *
+ * @requires next-intl - 다국어 번역 (about.sub-nav.{key} 경로 사용)
+ * @requires ./Nav.module.scss - 스타일링 (nav, menuList, menuItem, active 클래스 필요)
  */
 export default function ScrollNav({ menuKeys }: ScrollNavProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string>("");
   const t = useTranslations("about");
 
   const menuItems: MenuItem[] = menuKeys.map((key) => ({
@@ -41,107 +48,52 @@ export default function ScrollNav({ menuKeys }: ScrollNavProps) {
   }));
 
   /**
-   * 섹션으로 부드럽게 스크롤 이동 처리
+   * 네비게이션 메뉴 클릭 시 해당 섹션으로 부드럽게 스크롤하는 이벤트 핸들러
    *
-   * 클릭된 메뉴 항목에 해당하는 섹션으로 부드럽게 스크롤하며,
-   * 고정 네비게이션 바 높이(NAV_HEIGHT)를 고려하여 정확한 위치로 이동
-   * 스크롤 완료 즉시 해당 섹션을 활성 상태로 설정하여 사용자 피드백 제공
+   * 기본 링크 동작을 방지하고, NAV_HEIGHT만큼 오프셋을 적용하여
+   * 네비게이션 바에 가려지지 않도록 정확한 위치로 스크롤합니다.
+   * 클릭과 동시에 해당 메뉴를 활성 상태로 즉시 변경합니다.
    *
-   * @param {React.MouseEvent<HTMLAnchorElement>} e - 메뉴 클릭 이벤트 객체
-   * @param {string} href - 이동할 섹션의 앵커 href (예: "#section-id")
-   * @returns {void}
+   * @param {React.MouseEvent} e - 마우스 클릭 이벤트 객체
+   * @param {string} href - 이동할 앵커 링크 (예: "#about", "#contact")
    */
-  const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
+  const handleClick = (e: React.MouseEvent, href: string) => {
     e.preventDefault();
-
     const id = href.replace("#", "");
-    const target = document.getElementById(id);
-    if (!target) return;
+    const element = document.getElementById(id);
 
-    const offsetTop =
-      target.getBoundingClientRect().top + window.pageYOffset - NAV_HEIGHT;
-
-    window.scrollTo({
-      top: offsetTop,
-      behavior: "smooth",
-    });
-
-    setActiveId(id);
+    if (element) {
+      const top = element.offsetTop - NAV_HEIGHT;
+      window.scrollTo({ top, behavior: "smooth" });
+      setActiveId(id);
+    }
   };
 
-  /**
-   * 스크롤 방향을 고려한 섹션 감지 및 활성화 로직
-   *
-   * IntersectionObserver를 사용하여 뷰포트에 보이는 섹션들을 실시간으로 감지하고,
-   * 스크롤 방향에 따라 서로 다른 활성화 전략을 적용하여 자연스러운 UX 제공
-   *
-   * **스크롤 방향별 로직:**
-   * - 하향 스크롤 (의도적 탐색):
-   *   - 모바일: 섹션이 30% 이상 보이면 즉시 활성화
-   *   - 데스크톱: 뷰포트 상단 기준점을 넘으면 활성화
-   * - 상향 스크롤 (되돌아가기):
-   *   - 현재 보이는 섹션들 중 가장 높은 intersectionRatio를 가진 섹션 활성화
-   *
-   * **디바이스별 최적화:**
-   * - 모바일: threshold [0, 0.2, 0.4, 0.6, 0.8, 1] - 뷰포트가 작아 큰 단위로 감지
-   * - 데스크톱: threshold [0, 0.1, 0.25, 0.5, 0.75, 1] - 세밀한 감지로 정확도 향상
-   *
-   * @returns {void}
-   */
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const isMobile = window.innerWidth < 768;
+    const handleScroll = () => {
+      const scrollTop = window.scrollY + NAV_HEIGHT + 100;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const currentScrollY = window.scrollY;
-        const scrollingDown = currentScrollY > lastScrollY;
+      for (let i = menuItems.length - 1; i >= 0; i--) {
+        const id = menuItems[i].href.replace("#", "");
+        const element = document.getElementById(id);
 
-        if (scrollingDown) {
-          const enteringEntry = entries.find(
-            (entry) =>
-              entry.isIntersecting &&
-              (isMobile
-                ? entry.intersectionRatio >= 0.3
-                : entry.boundingClientRect.top <= NAV_HEIGHT + 50)
-          );
-          if (enteringEntry) {
-            setActiveId(enteringEntry.target.id);
+        if (element && element.offsetTop <= scrollTop) {
+          if (activeId !== id) {
+            setActiveId(id);
           }
-        } else {
-          const visibleEntries = entries.filter(
-            (entry) => entry.isIntersecting
-          );
-          if (visibleEntries.length > 0) {
-            const mostVisible = visibleEntries.reduce((prev, current) =>
-              current.intersectionRatio > prev.intersectionRatio
-                ? current
-                : prev
-            );
-            setActiveId(mostVisible.target.id);
-          }
+          break;
         }
-
-        lastScrollY = currentScrollY;
-      },
-      {
-        threshold: isMobile
-          ? [0, 0.2, 0.4, 0.6, 0.8, 1]
-          : [0, 0.1, 0.25, 0.5, 0.75, 1],
       }
-    );
+    };
 
-    const targets = menuItems
-      .map((item) => document.querySelector(item.href))
-      .filter((el): el is Element => el !== null);
+    if (menuItems.length > 0) {
+      const firstId = menuItems[0].href.replace("#", "");
+      setActiveId(firstId);
+    }
 
-    targets.forEach((section) => observer.observe(section));
-
-    return () => observer.disconnect();
-  }, [menuItems]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <nav className={styles.nav}>
