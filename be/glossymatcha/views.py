@@ -1432,3 +1432,23 @@ def daily_password_logout(request):
         del request.session['daily_password_date']
     messages.success(request, '일일 패스워드 인증이 해제되었습니다.')
     return redirect('daily_password_check')
+
+def custom_logout(request):
+    """
+    커스텀 로그아웃 뷰
+    - Django 로그아웃과 일일 비밀번호 세션 초기화를 동시에 처리
+    - 로그아웃 후 로그인 페이지로 리다이렉트
+    """
+    from django.contrib.auth import logout
+    
+    # Django 로그아웃
+    logout(request)
+    
+    # 일일 비밀번호 세션 초기화
+    if 'daily_password_verified' in request.session:
+        del request.session['daily_password_verified']
+    if 'daily_password_date' in request.session:
+        del request.session['daily_password_date']
+    
+    messages.success(request, '로그아웃되었습니다.')
+    return redirect('login')

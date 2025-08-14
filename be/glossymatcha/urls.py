@@ -70,4 +70,5 @@ urlpatterns = [
     path('daily-password/logout/', views.daily_password_logout, name='daily_password_logout'), # 일별 비밀번호 로그아웃
     path('daily-password/management/', views.DailyPasswordManagementView.as_view(), name='daily_password_management'), # 일별 비밀번호 관리
     path('daily-password/create/', views.DailyPasswordCreateView.as_view(), name='daily_password_create'), # 일별 비밀번호 생성
+    path('custom-logout/', views.custom_logout, name='custom_logout'), # 커스텀 로그아웃 (Django + 일일 비밀번호 세션 초기화)
 ]
