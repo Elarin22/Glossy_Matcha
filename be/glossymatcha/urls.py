@@ -62,4 +62,9 @@ urlpatterns = [
     path('yearly-sales/export/', views.YearlySalesExcelExportView.as_view(), name='yearly_sales_excel_export'),   # 연간 매출 엑셀 내보내기
     path('monthly-sales/<int:pk>/export/', views.IndividualMonthlySalesExcelExportView.as_view(), name='individual_monthly_sales_excel_export'), # 개별 월별 매출 엑셀 내보내기
     path('yearly-sales/<int:pk>/export/', views.IndividualYearlySalesExcelExportView.as_view(), name='individual_yearly_sales_excel_export'),     # 개별 연별 매출 엑셀 내보내기
+
+    path('daily-password/', views.DailyPasswordCheckView.as_view(), name='daily_password_check'), # 일별 비밀번호 확인
+    path('daily-password/logout/', views.daily_password_logout, name='daily_password_logout'), # 일별 비밀번호 로그아웃
+    path('daily-password/management/', views.DailyPasswordManagementView.as_view(), name='daily_password_management'), # 일별 비밀번호 관리
+    path('daily-password/create/', views.DailyPasswordCreateView.as_view(), name='daily_password_create'), # 일별 비밀번호 생성
 ]
