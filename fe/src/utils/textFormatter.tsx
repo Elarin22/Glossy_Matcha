@@ -62,7 +62,7 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
             if (subIndex < mobileBreakParts.length - 1) {
                 result.push(
                     <MobileBreak 
-                        key={`mobile-${partIndex}-${subIndex}-${Date.now()}`}
+                        key={`mobile-${partIndex}-${subIndex}`}
                         id={`mobile-${partIndex}-${subIndex}`}
                     />
                 );
@@ -71,7 +71,7 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
         
         // 마지막이 아니면 일반 브레이크 추가
         if (partIndex < normalBreakParts.length - 1) {
-            result.push(<br key={`normal-${partIndex}-${Date.now()}`} />);
+            result.push(<br key={`normal-${partIndex}`} />);
         }
     });
     
