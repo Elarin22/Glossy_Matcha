@@ -119,6 +119,64 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
             .filter(Boolean) as ProductBodySection[];
     };
 
+    const parseDetailsImages = (product: Product, lang: string): ProductBodySection[] => {
+        console.log('parseDetailsImages - product images:', product.images);
+        console.log('parseDetailsImages - lang:', lang);
+
+        if (!product.images || product.images.length === 0) {
+            console.log('parseDetailsImages - no images array, returning empty');
+            return [];
+        }
+
+        // images 배열에서 파일명에 "details"가 포함된 이미지 찾기
+        const detailsImages = product.images.filter(img => 
+            img.image.toLowerCase().includes('details')
+        );
+
+        console.log('parseDetailsImages - found details images:', detailsImages);
+
+        if (detailsImages.length === 0) {
+            console.log('parseDetailsImages - no details images found');
+            return [];
+        }
+
+        // 언어에 따라 적절한 이미지 선택
+        let selectedImage;
+        if (lang === 'en') {
+            // 영어: "details-en"이 포함된 이미지 우선, 없으면 일반 "details" 이미지
+            selectedImage = detailsImages.find(img => 
+                img.image.toLowerCase().includes('details-en')
+            ) || detailsImages.find(img => 
+                img.image.toLowerCase().includes('details') && !img.image.toLowerCase().includes('details-en')
+            );
+        } else {
+            // 한국어: "details-en"이 아닌 "details" 이미지
+            selectedImage = detailsImages.find(img => 
+                img.image.toLowerCase().includes('details') && !img.image.toLowerCase().includes('details-en')
+            );
+        }
+
+        console.log('parseDetailsImages - selected image:', selectedImage);
+
+        if (!selectedImage) {
+            console.log('parseDetailsImages - no appropriate details image found');
+            return [];
+        }
+
+        const result = [{
+            id: 1000, // 텍스트 섹션과 구분하기 위한 큰 ID
+            image: selectedImage.image,
+            title: '',
+            title_en: '',
+            content: '',
+            content_en: '',
+            sort_order: 1000
+        }];
+
+        console.log('parseDetailsImages - result:', result);
+        return result;
+    };
+
     // === 로딩 상태 처리 ===
     if (loading) {
         return (
@@ -147,7 +205,10 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
     const bodySections: ProductBodySection[] = currentProduct?.body_sections?.length 
         ? currentProduct.body_sections
         : currentProduct 
-            ? parseSubDescription(ProductApi.getLocalizedField(currentProduct, 'sub_description', lang))
+            ? [
+                ...parseSubDescription(ProductApi.getLocalizedField(currentProduct, 'sub_description', lang)),
+                ...parseDetailsImages(currentProduct, lang)
+            ]
             : [];
 
     return (

@@ -5,6 +5,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import ScrollIndicator from '../ScrollIndicator/ScrollIndicator';
 import styles from './ProductMainBanner.module.scss';
 
 const ProductMainBanner: React.FC = () => {
@@ -64,16 +65,6 @@ const ProductMainBanner: React.FC = () => {
         };
     }, [images.length]);
 
-    // === 이벤트 핸들러 ===
-    // 스크롤 인디케이터 클릭 시 다음 섹션으로 스크롤
-    const scrollToNext = () => {
-        if (typeof window !== 'undefined') {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            });
-        }
-    };
 
     // === 렌더링 ===
     return (
@@ -106,10 +97,7 @@ const ProductMainBanner: React.FC = () => {
             </div>
 
             {/* 스크롤 인디케이터 */}
-            <div className={styles.scrollIndicator} onClick={scrollToNext}>
-                <span className={styles.scrollText}>Scroll</span>
-                <span className={styles.scrollArrow}>↓</span>
-            </div>
+            <ScrollIndicator />
         </section>
     );
 };

@@ -58,36 +58,52 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
                 // MidBanner와 같은 이미지인지 확인
                 const isDuplicateImage = section.image === midBannerImageUrl;
                 
+                // Details 이미지인지 확인 (ID가 1000 이상)
+                const isDetailsImage = section.id && section.id >= 1000;
+                
                 return (
                     <FadeInUp key={`section-${section.sort_order}-${index}`} delay={index * 200}>
-                        <div className={styles.descriptionItem}>
-                            {/* 섹션 이미지 (MidBanner와 중복되지 않을 때만 표시) */}
-                            {section.image && !isDuplicateImage && (
-                                <div className={styles.imageWrapper}>
+                        <div className={isDetailsImage ? styles.detailsImageItem : styles.descriptionItem}>
+                            {/* Details 이미지는 별도 스타일 적용 */}
+                            {isDetailsImage && section.image ? (
+                                <div className={styles.detailsImageWrapper}>
                                     <img 
                                         src={section.image} 
-                                        alt={title}
-                                        className={styles.descriptionImage}
+                                        alt="Product Details"
+                                        className={styles.detailsImage}
                                     />
                                 </div>
+                            ) : (
+                                <>
+                                    {/* 일반 섹션 이미지 (MidBanner와 중복되지 않을 때만 표시) */}
+                                    {section.image && !isDuplicateImage && (
+                                        <div className={styles.imageWrapper}>
+                                            <img 
+                                                src={section.image} 
+                                                alt={title}
+                                                className={styles.descriptionImage}
+                                            />
+                                        </div>
+                                    )}
+                                    
+                                    {/* 섹션 텍스트 콘텐츠 */}
+                                    <div className={styles.textContent}>
+                                        {/* 섹션 제목 */}
+                                        {title && (
+                                            <h3 className={styles.descriptionTitle}>
+                                                <TextFormatter text={title} />
+                                            </h3>
+                                        )}
+                                        
+                                        {/* 섹션 내용 */}
+                                        {content && (
+                                            <p className={styles.descriptionText}>
+                                                <TextFormatter text={content} />
+                                            </p>
+                                        )}
+                                    </div>
+                                </>
                             )}
-                            
-                            {/* 섹션 텍스트 콘텐츠 */}
-                            <div className={styles.textContent}>
-                                {/* 섹션 제목 */}
-                                {title && (
-                                    <h3 className={styles.descriptionTitle}>
-                                        <TextFormatter text={title} />
-                                    </h3>
-                                )}
-                                
-                                {/* 섹션 내용 */}
-                                {content && (
-                                    <p className={styles.descriptionText}>
-                                        <TextFormatter text={content} />
-                                    </p>
-                                )}
-                            </div>
                         </div>
                     </FadeInUp>
                 );

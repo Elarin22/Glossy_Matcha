@@ -38,6 +38,8 @@ interface Product {
     short_description_en?: string;
     sub_description?: string;
     sub_description_en?: string;
+    note?: string;
+    note_en?: string;
     mid_banner_img?: string;
     images: ProductImage[];
     specifications: ProductSpecification[];
@@ -66,6 +68,8 @@ const mockProducts: Product[] = [
       short_description: "* 글로시말차 시그니처는 실제 매장에서 사용되는 말차와 동일한 원료로 제작된 상품입니다.",
       short_description_en: "GlossyMatcha Signature is made with the same ingredients as the matcha used in actual stores.",
       mid_banner_img: "||BANNER:/images/product/signature-mid-banner.png",
+      note: "||DETAILS:/images/product/signature-details.jpg",
+      note_en: "||DETAILS:/images/product/signature-details-en.jpg",
       sub_description: `말차, 이젠 쉽고 간편하게 즐겨요||귀찮고 복잡한 차선과 차완 대신, 오직 10g. 단 한 포로 손쉽게 말차 음료를 완성하세요.
   ---
   제주의 봄, 첫순으로만 만든 유기농 말차||국내에는 세레모니얼 등급의 인증기관이 없는 대신,\n글로시말차는 '일본 등급표 기준'을 만족하도록 봄의 '첫 순',\n 1번 잎으로 만든 진짜 세레모니얼 유기농 말차입니다.
@@ -114,7 +118,7 @@ const mockProducts: Product[] = [
           image: "/images/product/signature5.jpg",
           alt_text_ko: "감각적인 디자인",
           alt_text_en: "Stylish Design",
-        }
+        },
       ],
       specifications: [
         {
@@ -134,6 +138,8 @@ const mockProducts: Product[] = [
       short_description: "",
       short_description_en: "",
       mid_banner_img: "||BANNER:/images/product/teaset-mid-banner.png",
+      note: "||DETAILS:/images/product/teaset-details.jpg",
+      note_en: "||DETAILS:/images/product/teaset-details-en.jpg",
       sub_description:
       `차완 | 말차 그릇||제주 로컬 아티스트와 협업한 고온소성(800~1200도) 백자 제품입니다.\n말차 격불 또는 일반 차 우림에 적합하며,\n초보자도 쉽게 사용할 수 있도록\n곡선,용량,높이 등을 정밀하게 설계했습니다.
       ---
@@ -176,7 +182,7 @@ const mockProducts: Product[] = [
           image: "/images/product/teaset4.webp",
           alt_text_ko: "차시 말차 긴 스픈",
           alt_text_en: "Bamboo Tea Scoop",
-        }
+        },
       ],
       specifications: [
         {
@@ -196,6 +202,8 @@ const mockProducts: Product[] = [
       short_description: "* 국산 말차에는 등급제가 없지만, 해외 기준을 만족하도록 첫순 1번 잎으로 만든 세레모니얼급 유기농 말차입니다.",
       short_description_en: "* While Korea has no official matcha grading system, this ceremonial-grade organic matcha meets international standards using only the first leaves of spring.",
       mid_banner_img: "||BANNER:/images/product/case-mid-banner.png",
+      note: "||DETAILS:/images/product/case-details.jpg",
+      note_en: "||DETAILS:/images/product/case-details-en.jpg",
       sub_description: 
       `GRADE||제주도의 청정자연을 담은 말차농원\n말차밭에서 매해 첫 순, 첫 번째 잎으로 생산해 낸 말차를 사용합니다.\n특별한 말차로 더 부드럽고, 더욱 진한 맛을 담아냈습니다.\n서귀포 생태공원에서 재배된 100% 말차만을 사용합니다.\n우리는 환경을 생각하는 마음으로 지속 가능한 미래를 그립니다.\n현지 농부, 장인분들과 함께 더 건강한 내일을 향해 나아가려고 합니다.
       ---
@@ -218,7 +226,7 @@ const mockProducts: Product[] = [
           image: "/images/product/case2.webp",
           alt_text_ko: "틴케이스 가격",
           alt_text_en: "Tin case price",
-        }
+        },
       ],
       specifications: [
         {
