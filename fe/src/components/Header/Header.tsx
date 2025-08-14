@@ -14,7 +14,7 @@ const NAVIGATION_ITEMS: {
 }[] = [
   { href: "/about", label: "about" },
   { href: "/products", label: "products" },
-  { href: "/test", label: "test" },
+  { href: "/glossypick", label: "glossypick" },
   { href: "/inquire", label: "inquire" },
 ];
 

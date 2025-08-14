@@ -2,7 +2,7 @@
   "navigation": {
     "about": "About",
     "products": "Products",
-    "test": "GlossyPick",
+    "glossypick": "GlossyPick",
     "inquire": "Contact",
     "language": "Language Change",
 
@@ -68,7 +68,7 @@
         ]
       }
     },
-    "test": {
+    "glossypick": {
       "title": "Matcha Test",
       "slogan": "Glossy Pick",
       "subSlogan": "The One and Only Glossy Matcha ─ Just For You",

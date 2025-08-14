@@ -65,14 +65,14 @@ export default async function Home({
       subContent: messages.home.product.subContents,
     },
     {
-      title: messages.home.test.title,
-      slogan: messages.home.test.slogan,
-      subSlogan: messages.home.test.subSlogan,
-      description: messages.home.test.description,
+      title: messages.home.glossypick.title,
+      slogan: messages.home.glossypick.slogan,
+      subSlogan: messages.home.glossypick.subSlogan,
+      description: messages.home.glossypick.description,
       source: "/images/home/glossy-pick.webp",
-      link: "/test",
-      linkText: messages.home.test.linkText,
-      subContent: messages.home.test.subContents,
+      link: "/glossypick",
+      linkText: messages.home.glossypick.linkText,
+      subContent: messages.home.glossypick.subContents,
     },
   ];
 

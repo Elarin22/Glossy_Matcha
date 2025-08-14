@@ -2,7 +2,7 @@
   "navigation": {
     "about": "브랜드 소개",
     "products": "제품 소개",
-    "test": "나만의 말차",
+    "glossypick": "나만의 말차",
     "inquire": "문의하기",
     "language": "언어 변경",
 
@@ -68,7 +68,7 @@
         ]
       }
     },
-    "test": {
+    "glossypick": {
       "title": "말차 테스트",
       "slogan": "Glossy Pick",
       "subSlogan": "단 하나, 당신만을 위한 글로시 말차",
