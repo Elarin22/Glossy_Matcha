@@ -22,6 +22,14 @@ export interface HomeContent {
   subContent: SubContent;
 }
 
+/**
+ * 홈 페이지 진입점.
+ * - `getMessages`로 로컬라이즈된 텍스트를 가져와 `homeContents` 데이터를 구성합니다.
+ * - PC 버전과 Mobile 버전 컴포넌트에 동일한 데이터를 전달하여 렌더링합니다.
+ *
+ * @param {Object} props
+ * @param {Promise<{ locale: string }>} props.params - 동적 라우트 파라미터 (locale)
+ */
 export default async function Home({
   params,
 }: {

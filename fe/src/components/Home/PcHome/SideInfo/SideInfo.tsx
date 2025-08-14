@@ -3,6 +3,15 @@ import styles from "./SideInfo.module.scss";
 import Image from "next/image";
 import { HomeContent } from "@/app/[locale]/page";
 
+/**
+ * 현재 선택된 콘텐츠 인덱스에 따라 사이드 정보 영역을 표시하는 컴포넌트.
+ * - 슬로건, 서브 슬로건, 이미지(있을 경우), 설명을 렌더링합니다.
+ *
+ * @component
+ * @param {Object} props
+ * @param {number} props.currentIndex - 현재 표시할 콘텐츠의 인덱스
+ * @param {HomeContent[]} props.contents - 전체 홈 콘텐츠 데이터 배열
+ */
 export default function SideInfo({
   currentIndex,
   contents,

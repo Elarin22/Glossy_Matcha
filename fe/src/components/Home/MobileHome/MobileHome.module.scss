@@ -95,23 +95,6 @@
   }
 }
 
-.top-right-link {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  color: $color-green-50;
-  transition: transform 0.3s ease;
-  transform: translateX(0);
-
-  &:hover {
-    transform: translateX(4px);
-  }
-
-  &:active {
-    transform: translateX(4px);
-  }
-}
-
 .inquire {
   position: relative;
   display: flex;

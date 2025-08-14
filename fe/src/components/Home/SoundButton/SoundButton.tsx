@@ -3,6 +3,15 @@
 import React, { useCallback, useState } from "react";
 import styles from "./SoundButton.module.scss";
 
+/**
+ * 비디오 음소거/음소거 해제 토글 버튼.
+ * - 클릭 시 videoRef의 muted 속성을 토글합니다.
+ *
+ * @component
+ * @param {Object} props
+ * @param {React.RefObject<HTMLVideoElement>} props.videoRef - 제어할 비디오 요소 참조
+ * @param {boolean} [props.isBottom=true] - 버튼이 하단에 배치되는지 여부
+ */
 export default function SoundButton({
   videoRef,
   isBottom = true,

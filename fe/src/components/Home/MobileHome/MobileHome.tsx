@@ -9,45 +9,19 @@ import Footer from "@/components/Footer/Footer";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { ArrowLink } from "./ArrowLink/ArrowLink";
 
-const ArrowLink = ({
-  locale,
-  link,
-  linkText,
-  isExternalSite = false,
-}: {
-  locale: string;
-  link: string;
-  linkText: string;
-  isExternalSite?: boolean;
-}) => {
-  const content = (
-    <>
-      {linkText}
-      <img src="/images/icon/icon-Right-arrow.svg" alt="화살표 아이콘" />
-    </>
-  );
-
-  return (
-    <>
-      {isExternalSite ? (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles["top-right-link"]}
-        >
-          {content}
-        </a>
-      ) : (
-        <Link href={`/${locale}${link}`} className={styles["top-right-link"]}>
-          {content}
-        </Link>
-      )}
-    </>
-  );
-};
-
+/**
+ * 모바일 버전 메인 홈 컴포넌트.
+ * - 첫 번째 섹션은 동영상 배경과 음소거 버튼을 표시합니다.
+ * - 이후 섹션은 이미지 배경과 콘텐츠를 표시합니다.
+ * - IntersectionObserver로 스크롤 시 콘텐츠 박스가 나타나는 애니메이션 처리.
+ * - 마지막 섹션에는 문의 안내와 푸터가 표시됩니다.
+ *
+ * @component
+ * @param {Object} props
+ * @param {HomeContent[]} props.contents - 홈 화면에 표시할 콘텐츠 데이터 배열
+ */
 export default function MobileHome({
   contents,
 }: {

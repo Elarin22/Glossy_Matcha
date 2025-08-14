@@ -18,6 +18,16 @@ const NAVIGATION_ITEMS: {
   { href: "/inquire", label: "inquire" },
 ];
 
+/**
+ * 메인 헤더 컴포넌트.
+ * - 로고, 내비게이션 메뉴, 언어 전환 버튼을 포함합니다.
+ * - PC/모바일 레이아웃에 따라 다른 UI를 표시합니다.
+ * - 모바일에서는 햄버거 버튼을 통해 사이드바 메뉴를 토글할 수 있습니다.
+ * - ESC 키나 백드롭 클릭 시 사이드바가 닫히며, 열려 있는 동안 body 스크롤이 비활성화됩니다.
+ *
+ * @param {Object} props
+ * @param {string} props.locale - 현재 선택된 언어(locale) 코드
+ */
 export default function Header({ locale }: { locale: string }) {
   const t = useTranslations("navigation");
 
