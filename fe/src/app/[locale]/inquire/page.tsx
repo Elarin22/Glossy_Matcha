@@ -5,6 +5,35 @@ import styles from "./page.module.scss";
 import { useTranslations } from "next-intl";
 import { postInquire } from "@/services/inquireApi";
 
+export async function generateMetadata() {
+  return {
+    title: "Contact | Glossy Matcha",
+    description: "글로시 말차 문의하기 페이지 - 문의를 작성해주세요.",
+    keywords: [
+      "말차",
+      "프리미엄 말차",
+      "글로시 말차",
+      "녹차",
+      "건강음료",
+      "문의",
+      "Contact",
+    ],
+    openGraph: {
+      title: "문의하기 | Glossy Matcha",
+      description: "글로시 말차 문의하기 페이지 - 문의를 작성해주세요.",
+      url: "https://www.glossymatcha.com/ko/inquire",
+      images: [
+        {
+          url: "/images/logo/logo-BI.png",
+          width: 1200,
+          height: 630,
+          alt: "Glossy Matcha",
+        },
+      ],
+    },
+  };
+}
+
 type FormDataType = {
   name: string;
   email: string;
