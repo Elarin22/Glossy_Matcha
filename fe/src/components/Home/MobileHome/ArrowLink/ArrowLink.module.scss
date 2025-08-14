@@ -3,7 +3,7 @@
 .top-right-link {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  align-self: flex-end;
   color: $color-green-50;
   transition: transform 0.3s ease;
   transform: translateX(0);
