@@ -1,4 +1,4 @@
-from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord, YearlySales
+from .models import Staff, Suppliers, DailySales, Sales, Inquiries, Products, WorkRecord, YearlySales, DailyPassword
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import date, datetime, timedelta
@@ -14,7 +14,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import InquirySerializer, ProductListSerializer, ProductDetailSerializer
-from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm, YearlySalesForm
+from .forms import StaffForm, WorkRecordForm, SuppliersForm, DailySalesForm, SalesForm, YearlySalesForm, DailyPasswordForm, DailyPasswordManagementForm
 from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font, Alignment, PatternFill, NamedStyle
@@ -30,6 +30,20 @@ class DashboardView(LoginRequiredMixin, TemplateView):
     - 통계 데이터: 직원 수, 공급업체 수, 오늘 매출, 이번 달 매출, 최근 매출 현황, 직원 목록, 최근 문의 현황
     """
     template_name = 'glossymatcha/dashboard.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        """
+        요청을 처리하기 전에 인증 및 세션 검증
+        - 사용자가 인증되지 않은 경우 로그인 페이지로 리다이렉트
+        - 일일 비밀번호 검증이 완료되지 않은 경우 일일 비밀번호 확인 페이지로 리다이렉트
+        """
+        if not request.user.is_authenticated:
+            return redirect('login')
+        
+        if not request.session.get('daily_password_verified'):
+            return redirect('daily_password_check')
+        
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -1321,3 +1335,92 @@ class IndividualYearlySalesExcelExportView(LoginRequiredMixin, TemplateView):
 
         wb.save(response)
         return response
+    
+class DailyPasswordCheckView(LoginRequiredMixin, TemplateView):
+    """
+    일일 비밀번호 확인 페이지
+    - 로그인한 사용자만 접근 가능
+    - 인증된 경우 대시보드로 리다이렉트
+    - 인증되지 않은 경우 인증 폼을 렌더링
+    """
+    template_name = 'glossymatcha/daily_password_check.html'
+
+    def get(self, request, *args, **kwargs):
+        """
+        일일 비밀번호 확인 페이지
+        - 이미 인증된 경우 대시보드로 리다이렉트
+        - 인증되지 않은 경우 인증 폼을 렌더링
+        """
+        if request.session.get('daily_password_verified'):
+            return redirect('dashboard')
+        
+        form = DailyPasswordForm()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        form = DailyPasswordForm(request.POST)
+        if form.is_valid():
+            # 일일 패스워드 인증 성공
+            request.session['daily_password_verified'] = True
+            request.session['daily_password_date'] = str(date.today())
+            messages.success(request, '일일 패스워드 인증이 완료되었습니다.')
+            return redirect('dashboard')
+        
+        return render(request, self.template_name, {'form': form})
+    
+class DailyPasswordManagementView(LoginRequiredMixin, ListView):
+    """
+    일일 비밀번호 관리 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일일 비밀번호 목록 페이지를 렌더링
+    - 오늘 날짜의 비밀번호를 생성하고 컨텍스트에 추가
+    """
+    model = DailyPassword
+    template_name = 'glossymatcha/daily_password/list.html'
+    context_object_name = 'daily_passwords'
+
+    def get_context_data(self, **kwargs):
+        """
+        일일 비밀번호 관리 페이지의 컨텍스트 데이터 추가
+        - 오늘 날짜의 비밀번호를 생성하여 컨텍스트에 추가
+        - 오늘 날짜의 비밀번호는 매일 새로 생성되며, 이전 비밀번호는 유지되지 않음
+        - 오늘 날짜의 비밀번호는 DailyPassword 모델에서 생성된 값을 사용
+        - 만약 오늘 날짜의 비밀번호가 없다면 새로 생성
+        - 오늘 날짜의 비밀번호를 컨텍스트에 추가하여 템플릿에서 사용할 수 있도록 함
+        - 이 컨텍스트는 템플릿에서 오늘 날짜의 비밀번호를 표시하는 데 사용됨
+        - 이 컨텍스트는 일일 비밀번호 관리 페이지에서 오늘 날짜의 비밀번호를 표시하는 데 사용됨
+        """
+        context = super().get_context_data(**kwargs)
+        today_password = DailyPassword.generate_today_password()
+        context['today_password'] = today_password
+        return context
+    
+class DailyPasswordCreateView(LoginRequiredMixin, CreateView):
+    """
+    일일 비밀번호 생성 페이지
+    - 로그인한 사용자만 접근 가능
+    - Django Template을 사용하여 일일 비밀번호 생성 페이지를 렌더링
+    - 오늘 날짜의 비밀번호를 생성하고 성공 메시지를 표시
+    """
+    model = DailyPassword
+    form_class = DailyPasswordManagementForm
+    template_name = 'glossymatcha/daily_password/create.html'
+    success_url = reverse_lazy('daily_password_management')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, f'{self.object.date} 일일 비밀번호가 생성되었습니다.')
+        return response
+    
+def daily_password_logout(request):
+    """
+    일일 패스워드 인증 해제
+    - 세션에서 인증 정보를 삭제하고 성공 메시지를 표시
+    - 인증 해제 후 일일 패스워드 확인 페이지로 리다이렉트
+    """
+    if 'daily_password_verified' in request.session:
+        del request.session['daily_password_verified']
+    if 'daily_password_date' in request.session:
+        del request.session['daily_password_date']
+    messages.success(request, '일일 패스워드 인증이 해제되었습니다.')
+    return redirect('daily_password_check')
