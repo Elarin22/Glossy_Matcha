@@ -2,8 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # Django Template를 사용한 대시보드 뷰
-    path('', views.DashboardView.as_view(), name='dashboard'),
+    # 메인 페이지 - 일일 비밀번호 인증
+    path('', views.DailyPasswordCheckView.as_view(), name='home'),
+    
+    # 대시보드 (인증 후 접근)
+    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
 
     # API Views for Inquiries
     path('api/inquiries/', views.CreateInquiryView.as_view(), name='create_inquiry'),           # POST: 문의 생성
