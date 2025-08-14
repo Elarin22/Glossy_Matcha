@@ -1336,7 +1336,7 @@ class IndividualYearlySalesExcelExportView(LoginRequiredMixin, TemplateView):
         wb.save(response)
         return response
     
-class DailyPasswordCheckView(LoginRequiredMixin, TemplateView):
+class DailyPasswordCheckView(TemplateView):
     """
     일일 비밀번호 확인 페이지
     - 로그인한 사용자만 접근 가능
@@ -1364,6 +1364,11 @@ class DailyPasswordCheckView(LoginRequiredMixin, TemplateView):
             request.session['daily_password_verified'] = True
             request.session['daily_password_date'] = str(date.today())
             messages.success(request, '일일 패스워드 인증이 완료되었습니다.')
+            
+            # Django 로그인 확인
+            if not request.user.is_authenticated:
+                return redirect('login')
+            
             return redirect('dashboard')
         
         return render(request, self.template_name, {'form': form})
