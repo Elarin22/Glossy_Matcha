@@ -1,0 +1,92 @@
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+.productDetails {
+  max-width: 1200px;
+  margin: -10px auto 0;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.detailsToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  
+  .detailsText {
+    font-family: 'Pretendard', sans-serif;
+    font-size: $font-size-18;
+    color: $color-black-200;
+    font-weight: 400;
+    line-height: 1.6;
+    
+    @media (max-width: 768px) {
+      font-size: $font-size-14;
+    }
+  }
+  
+  .arrowIcon {
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+    color: $color-black-200;
+    width: 18px;
+    height: 18px;
+    
+    @media (max-width: 768px) {
+      width: 14px;
+      height: 14px;
+    }
+  }
+  
+  &:hover {
+    .detailsText {
+      color: $color-green-500;
+    }
+    
+    .arrowIcon {
+      color: $color-green-500;
+    }
+  }
+}
+
+.detailsContent {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  
+  .detailsImageWrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    
+    .detailsImage {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .productDetails {
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .productDetails {
+    padding: 0 16px;
+    align-items: flex-start;
+  }
+  
+  .detailsContent {
+    margin-top: 16px;
+  }
+}

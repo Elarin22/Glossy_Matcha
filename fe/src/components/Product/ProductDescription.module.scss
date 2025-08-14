@@ -57,41 +57,18 @@
         color: $color-black-200;
         font-weight: 400;
         line-height: 1.6;
-        margin: 0 0 60px 0;
+        margin: 0 0 20px 0;
         word-break: keep-all;
         
         @media (max-width: 768px) {
           font-size: $font-size-14;
           line-height: 1.5;
-          margin-bottom: 40px;
+          margin-bottom: 16px;
         }
       }
     }
   }
 
-  // Details 이미지 전용 스타일
-  .detailsImageItem {
-    margin-bottom: 160px;
-    display: flex;
-    justify-content: center;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-    
-    .detailsImageWrapper {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-      
-      .detailsImage {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: cover;
-      }
-    }
-  }
 }
 
 // 반응형 디자인
@@ -108,9 +85,6 @@
       }
     }
 
-    .detailsImageItem {
-      margin-bottom: 120px;
-    }
   }
 }
 
@@ -135,9 +109,6 @@
       }
     }
 
-    .detailsImageItem {
-      margin-bottom: 100px;
-    }
   }
 
 }
