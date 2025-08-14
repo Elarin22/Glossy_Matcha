@@ -68,6 +68,30 @@
       }
     }
   }
+
+  // Details 이미지 전용 스타일
+  .detailsImageItem {
+    margin-bottom: 160px;
+    display: flex;
+    justify-content: center;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .detailsImageWrapper {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      
+      .detailsImage {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+    }
+  }
 }
 
 // 반응형 디자인
@@ -82,6 +106,10 @@
         height: 400px;
         margin-bottom: 32px;
       }
+    }
+
+    .detailsImageItem {
+      margin-bottom: 120px;
     }
   }
 }
@@ -105,6 +133,10 @@
           margin-bottom: 12px;
         }
       }
+    }
+
+    .detailsImageItem {
+      margin-bottom: 100px;
     }
   }
 
