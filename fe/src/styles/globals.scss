@@ -60,6 +60,16 @@ button:focus {
   border: 2px solid $color-green-500;
   border-radius: 18px;
 
+  &:hover {
+    background-color: $color-green-50;
+    scale: 1.03;
+  }
+
+  &:active {
+    background-color: $color-green-50;
+    scale: 1.03;
+  }
+
   @media (max-width: 768px) {
     width: 240px;
     padding: 16px 0;
