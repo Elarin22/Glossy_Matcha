@@ -1,5 +1,5 @@
-@import '@/styles/mixins.scss';
-@import '@/styles/variables.scss';
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
 
 .banner {
     position: relative;
@@ -80,10 +80,7 @@
     color: $color-beige-100;
 }
 
-// PC에서는 모바일 줄바꿈 숨김
-.mobileBreak {
-    display: none;
-}
+// 모바일 줄바꿈 관련 스타일 제거됨 (textFormatter.tsx의 MobileBreak 컴포넌트로 대체)
 
 .scrollIndicator {
     position: absolute;
@@ -186,9 +183,7 @@
         max-width: 100%;
     }
 
-    .mobileBreak {
-        display: inline;
-    }
+    // 모바일 줄바꿈 관련 스타일 제거됨 (textFormatter.tsx의 MobileBreak 컴포넌트로 대체)
 
     .scrollIndicator {
         bottom: 60px;

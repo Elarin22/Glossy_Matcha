@@ -1,5 +1,7 @@
-@import '@/styles/mixins.scss';
-@import '@/styles/variables.scss';
+@use '@/styles/mixins' as *;
+@use '@/styles/variables' as *;
+
+// 모바일 전용 줄바꿈 처리는 컴포넌트 내부에서 처리
 
 .productDescription {
   width: 100%;
@@ -99,4 +101,5 @@
       }
     }
   }
+
 }

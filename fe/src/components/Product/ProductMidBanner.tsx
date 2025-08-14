@@ -110,7 +110,7 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
         <span className={styles.word}>{word}</span>
         {index < words.length - 1 && " "}
         {breakpoints.includes(index + 1) && (
-          <br className={styles.mobileBreak} />
+          <br />
         )}
       </React.Fragment>
     ));
