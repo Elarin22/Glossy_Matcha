@@ -74,6 +74,21 @@ export default function Footer() {
           </li>
           <li className={styles["footer__social-item"]}>
             <a
+              href="https://smartstore.naver.com/glossymatcha"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles["footer__social-link"]}
+            >
+              <Image
+                src="/images/icon/icon-store.png"
+                alt="naverStore"
+                width={50}
+                height={50}
+              />
+            </a>
+          </li>
+          <li className={styles["footer__social-item"]}>
+            <a
               href="https://naver.me/502MfWpo"
               target="_blank"
               rel="noopener noreferrer"
