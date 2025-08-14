@@ -7,6 +7,7 @@ import ProductNav from '@/components/Nav/ProductNav';
 import ProductMainBanner from '@/components/Product/ProductMainBanner';
 import ProductMidBanner from '@/components/Product/ProductMidBanner';
 import ProductDescription, { type ProductBodySection } from '@/components/Product/ProductDescription';
+import ProductStore from '@/components/Product/ProductStore';
 import ProductApi, { type Product } from '@/services/productApi';
 import styles from './page.module.scss';
 
@@ -166,6 +167,7 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
                     midBannerImg={currentProduct?.mid_banner_img}
                 />
             )}
+            <ProductStore />
         </main>
     );
 };

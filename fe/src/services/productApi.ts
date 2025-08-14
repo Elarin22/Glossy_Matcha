@@ -230,7 +230,7 @@ const mockProducts: Product[] = [
   ];
 
 // === API 설정 ===
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://x81fj32kd.glossymatcha.com/api/products";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://x81fj32kd.glossymatcha.com/api";
 
 // === 제품 API 클래스 ===
 class ProductApi {
@@ -241,7 +241,7 @@ class ProductApi {
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
-      const url = `${API_BASE_URL}/?lang=${lang}`;
+      const url = `${API_BASE_URL}/products/?lang=${lang}`;
       const response = await fetch(url, {
         method: "GET",
         headers: {
