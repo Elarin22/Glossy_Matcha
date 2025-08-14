@@ -6,6 +6,15 @@ import { HomeContent } from "@/app/[locale]/page";
 import SideInfo from "./SideInfo/SideInfo";
 import ImageSection from "./ImageSection/ImageSection";
 
+/**
+ * PC 버전 메인 홈 컴포넌트.
+ * - IntersectionObserver를 이용해 현재 보여지는 섹션의 index를 추적합니다.
+ * - 좌측 정보 영역(SideInfo)과 우측 이미지 영역(ImageSection)을 표시합니다.
+ *
+ * @component
+ * @param {Object} props
+ * @param {HomeContent[]} props.contents - 홈 화면에 표시할 콘텐츠 데이터 배열
+ */
 export default function PcHome({ contents }: { contents: HomeContent[] }) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const sectionRefs = useRef<HTMLDivElement[]>([]);

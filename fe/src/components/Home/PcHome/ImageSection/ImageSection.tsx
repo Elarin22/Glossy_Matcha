@@ -8,6 +8,16 @@ import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import { HomeContent } from "@/app/[locale]/page";
 import SoundButton from "../../SoundButton/SoundButton";
 
+/**
+ * PC 버전에서 오른쪽 메인 이미지/비디오 영역을 표시하는 컴포넌트.
+ * - 첫 번째 섹션은 배경 비디오 + 음소거 버튼 + 스크롤 인디케이터를 표시합니다.
+ * - 이후 섹션은 이미지와 함께 ImageSubInfo 컴포넌트를 렌더링합니다.
+ *
+ * @component
+ * @param {Object} props
+ * @param {React.RefObject<HTMLDivElement[]>} props.sectionRefs - 각 섹션 DOM 요소 참조 배열
+ * @param {HomeContent[]} props.contents - 홈 콘텐츠 데이터 배열
+ */
 export default function ImageSection({
   sectionRefs,
   contents,
