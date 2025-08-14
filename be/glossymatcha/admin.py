@@ -1,5 +1,26 @@
 from django.contrib import admin
-from .models import Products, ProductImages, ProductSpecifications
+from .models import Products, ProductImages, ProductSpecifications, DailyPassword
+
+@admin.register(DailyPassword)
+class DailyPasswordAdmin(admin.ModelAdmin):
+    """
+    일일 패스워드 관리 어드민 클래스
+    - 일일 패스워드 목록 페이지에서 표시할 필드: 날짜, 패스워드, 활성화 여부, 생성일
+    - 필터링: 활성화 여부, 날짜"""
+    list_display = ('date', 'password', 'is_active', 'created_at')
+    list_filter = ('is_active', 'date')
+    search_fields = ('date', 'password')
+    readonly_fields = ('created_at',)
+    
+    fieldsets = (
+        ('패스워드 정보', {
+            'fields': ('date', 'password', 'is_active')
+        }),
+        ('시간 정보', {
+            'fields': ('created_at',),
+            'classes': ('collapse',)
+        }),
+    )
 
 class ProductImagesInline(admin.TabularInline):
     """
