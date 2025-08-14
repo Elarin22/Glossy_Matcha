@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord, Suppliers, DailySales, Sales, YearlySales
+from .models import Staff, WorkRecord, Suppliers, DailySales, Sales, YearlySales, DailyPassword
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -353,3 +353,57 @@ class YearlySalesForm(forms.ModelForm):
                 raise ValidationError(f'{year}년의 월별 매출 데이터가 없습니다. 먼저 월별 매출을 입력해주세요.')
         
         return year
+    
+class DailyPasswordForm(forms.Form):
+    """
+    일별 매출 비밀번호 입력 폼
+    사용자가 일별 매출 비밀번호를 입력할 때 사용하는 폼
+    """
+    daily_password = forms.CharField(
+        max_length=20,
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': '일별 매출 비밀번호를 입력하세요.',
+            'autocomplete': 'off'
+        }),
+        label='일별 매출 비밀번호'
+    )
+
+    def clean_daily_password(self):
+        daily_password = self.cleaned_data.get('daily_password')
+        if not daily_password:
+            today_password = DailyPassword.get_today_password()
+            if not today_password:
+                """
+                오늘의 비밀번호가 없으면 새로 생성
+                """
+                DailyPassword.generate_today_password()
+                today_password = DailyPassword.get_today_password()
+
+            if daily_password != today_password:
+                raise ValidationError('비밀번호가 틀렸습니다. 다시 입력해주세요.')
+            
+        return daily_password
+    
+class DailyPasswordManagementForm(forms.ModelForm):
+    """"
+    일별 매출 비밀번호 관리 폼
+    관리자가 일별 매출 비밀번호를 생성, 수정, 삭제할 때 사용하는 폼
+    """
+    class Meta:
+        model = DailyPassword
+        fields = ['date', 'password', 'is_active']
+        widgets = {
+            'date': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }),
+            'password': forms.PasswordInput(attrs={
+                'class': 'form-control',
+                'placeholder': '비밀번호를 입력하세요.',
+                'autocomplete': 'off'
+            }),
+            'is_active': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+        }
