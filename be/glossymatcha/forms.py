@@ -385,7 +385,7 @@ class DailyPasswordForm(forms.Form):
             
         return daily_password
     
-class DailyPassworkdManagementForm(forms.ModelForm):
+class DailyPasswordManagementForm(forms.ModelForm):
     """"
     일별 매출 비밀번호 관리 폼
     관리자가 일별 매출 비밀번호를 생성, 수정, 삭제할 때 사용하는 폼
