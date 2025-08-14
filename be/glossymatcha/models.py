@@ -1,4 +1,6 @@
 from django.db import models
+from datetime import date
+import random, string
 
 # 제품 관리 모델들
 class Products(models.Model):
@@ -602,3 +604,53 @@ def auto_update_yearly_sales_costs_on_delete(sender, instance, **kwargs):
             print(f"{year}년 연별 매출원가가 자동으로 업데이트되었습니다.")
         except YearlySales.DoesNotExist:
             pass  # 연별 매출이 없으면 무시
+
+class DailyPassword(models.Model):
+    """
+    일별 비밀번호 관리 모델
+    매일의 비밀번호를 저장하여 보안 강화
+    오늘 날짜의 비밀번호를 조회하거나 생성하는 기능 제공
+    8자리 랜덤 비밀번호 생성 (영문 대소문자 + 숫자)
+    8자리로 설정한 이유는 보안과 사용 편의성의 균형을 고려
+    8자리면 충분히 안전하면서도 기억하기 쉬운 길이입니다.
+    """
+    date = models.DateField(unique=True, verbose_name="날짜")
+    password = models.CharField(max_length=100, verbose_name="비밀번호")
+    is_active = models.BooleanField(default=True, verbose_name="활성화 상태")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="등록일")
+    
+    class Meta:
+        verbose_name = "일별 비밀번호"
+        verbose_name_plural = "일별 비밀번호"
+        ordering = ['-date']
+    
+    @classmethod
+    def get_today_password(cls):
+        """
+        오늘 날짜의 비밀번호를 반환
+        오늘 날짜의 비밀번호가 없으면 None 반환
+        """
+        today = date.today()
+        try:
+            daily_pass = cls.objects.get(date=today, is_active=True)
+            return daily_pass.password
+        except cls.DoesNotExist:
+            return None
+        
+    @classmethod
+    def generate_today_password(cls):
+        today = date.today()
+        if not cls.objects.filter(date=today).exists():
+            """
+            오늘 날짜의 비밀번호가 없으면 새로 생성
+            8자리 랜덤 비밀번호 생성 (영문 대소문자 + 숫자)
+            8자리로 설정한 이유는 보안과 사용 편의성의 균형을 고려
+            8자리면 충분히 안전하면서도 기억하기 쉬운 길이입니다.
+            """
+            password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+            cls.objects.create(date=today, password=password)
+            return password
+        return cls.get_today_password()
+
+    def __str__(self):
+        return f"{self.date} - {self.password}"
