@@ -6,7 +6,7 @@ import ImageSubInfo from "../ImageSubInfo/ImageSubInfo";
 import Image from "next/image";
 import ScrollIndicator from "@/components/ScrollIndicator/ScrollIndicator";
 import { HomeContent } from "@/app/[locale]/page";
-import SoundButton from "../SoundButton/SoundButton";
+import SoundButton from "../../SoundButton/SoundButton";
 
 export default function ImageSection({
   sectionRefs,

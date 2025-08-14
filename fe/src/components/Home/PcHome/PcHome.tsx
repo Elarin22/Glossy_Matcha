@@ -2,9 +2,9 @@
 
 import styles from "./PcHome.module.scss";
 import { useEffect, useRef, useState } from "react";
-import SideInfo from "@/components/Home/SideInfo/SideInfo";
-import ImageSection from "@/components/Home/ImageSection/ImageSection";
 import { HomeContent } from "@/app/[locale]/page";
+import SideInfo from "./SideInfo/SideInfo";
+import ImageSection from "./ImageSection/ImageSection";
 
 export default function PcHome({ contents }: { contents: HomeContent[] }) {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
