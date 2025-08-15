@@ -1,12 +1,9 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
-    # 메인 페이지 - 일일 비밀번호 인증
-    path('', views.DailyPasswordCheckView.as_view(), name='home'),
-    
-    # 대시보드 (인증 후 접근)
-    path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
+urlpatterns = [    
+    # 대시보드
+    path('', views.DashboardView.as_view(), name='dashboard'),
 
     # API Views for Inquiries
     path('api/inquiries/', views.CreateInquiryView.as_view(), name='create_inquiry'),           # POST: 문의 생성
@@ -66,9 +63,4 @@ urlpatterns = [
     path('monthly-sales/<int:pk>/export/', views.IndividualMonthlySalesExcelExportView.as_view(), name='individual_monthly_sales_excel_export'), # 개별 월별 매출 엑셀 내보내기
     path('yearly-sales/<int:pk>/export/', views.IndividualYearlySalesExcelExportView.as_view(), name='individual_yearly_sales_excel_export'),     # 개별 연별 매출 엑셀 내보내기
 
-    path('daily-password/', views.DailyPasswordCheckView.as_view(), name='daily_password_check'), # 일별 비밀번호 확인
-    path('daily-password/logout/', views.daily_password_logout, name='daily_password_logout'), # 일별 비밀번호 로그아웃
-    path('daily-password/management/', views.DailyPasswordManagementView.as_view(), name='daily_password_management'), # 일별 비밀번호 관리
-    path('daily-password/create/', views.DailyPasswordCreateView.as_view(), name='daily_password_create'), # 일별 비밀번호 생성
-    path('custom-logout/', views.custom_logout, name='custom_logout'), # 커스텀 로그아웃 (Django + 일일 비밀번호 세션 초기화)
 ]

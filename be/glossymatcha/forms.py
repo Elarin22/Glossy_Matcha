@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Staff, WorkRecord, Suppliers, DailySales, Sales, YearlySales, DailyPassword
+from .models import Staff, WorkRecord, Suppliers, DailySales, Sales, YearlySales
 
 class StaffForm(forms.ModelForm):
     class Meta:
@@ -354,67 +354,3 @@ class YearlySalesForm(forms.ModelForm):
         
         return year
     
-class DailyPasswordForm(forms.Form):
-    """
-    일별 비밀번호 입력 폼
-    사용자가 일별 비밀번호를 입력할 때 사용하는 폼
-    """
-    daily_password = forms.CharField(
-        max_length=20,
-        widget=forms.PasswordInput(attrs={
-            'class': 'form-control',
-            'placeholder': '일별 비밀번호를 입력하세요.',
-            'autocomplete': 'off'
-        }),
-        label='일별 비밀번호'
-    )
-
-    def clean_daily_password(self):
-        daily_password = self.cleaned_data.get('daily_password')
-        
-        # 패스워드가 입력되지 않았을 때
-        if not daily_password or not daily_password.strip():
-            raise ValidationError('패스워드를 입력해주세요.')
-        
-        # 입력된 패스워드 정제 (공백 제거)
-        daily_password = daily_password.strip()
-        
-        # 오늘의 실제 패스워드 조회
-        today_password = DailyPassword.get_today_password()
-        if not today_password:
-            # 오늘의 비밀번호가 없으면 새로 생성
-            DailyPassword.generate_today_password()
-            today_password = DailyPassword.get_today_password()
-            
-        # 여전히 비밀번호가 없다면 에러
-        if not today_password:
-            raise ValidationError('시스템 오류: 일일 비밀번호를 생성할 수 없습니다. 관리자에게 문의하세요.')
-
-        # 입력한 패스워드와 실제 패스워드 비교 (대소문자 구분)
-        if daily_password != today_password:
-            raise ValidationError('비밀번호가 틀렸습니다. 다시 입력해주세요.')
-            
-        return daily_password
-    
-class DailyPasswordManagementForm(forms.ModelForm):
-    """"
-    일별 매출 비밀번호 관리 폼
-    관리자가 일별 매출 비밀번호를 생성, 수정, 삭제할 때 사용하는 폼
-    """
-    class Meta:
-        model = DailyPassword
-        fields = ['date', 'password', 'is_active']
-        widgets = {
-            'date': forms.DateInput(attrs={
-                'class': 'form-control',
-                'type': 'date'
-            }),
-            'password': forms.PasswordInput(attrs={
-                'class': 'form-control',
-                'placeholder': '비밀번호를 입력하세요.',
-                'autocomplete': 'off'
-            }),
-            'is_active': forms.CheckboxInput(attrs={
-                'class': 'form-check-input',
-            }),
-        }
