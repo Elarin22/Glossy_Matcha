@@ -32,10 +32,10 @@
 
 | 이름   | 사진  | 깃허브 주소               | 담당 파트            |
 |--------|-------|----------------------------|----------------------|
-| 심희현  | <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:100px;"> | [@Elarin22](https://github.com/Elarin22) | Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집 |
-| 김성현  | <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:100px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트 |
-| 조은이  | <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:100px;"> | [@chohc](https://github.com/chohc) | 메인 페이지/문의하기 페이지 디자인 및 구현, 헤더/푸터, API 연동, 다국어 시스템, 공통 컴포넌트 |
-| 김유빈  | <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:100px;"> | [@6wol](https://github.com/6wol) | 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트 |
+| 심희현| <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:90px;"> | [@Elarin22](https://github.com/Elarin22) | Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집 |
+| 김성현| <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:90px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트 |
+| 조은이| <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:90px;"> | [@chohc](https://github.com/chohc) | 메인 페이지/문의하기 페이지 디자인 및 구현, 헤더/푸터, API 연동, 다국어 시스템, 공통 컴포넌트 |
+| 김유빈| <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:90px;"> | [@6wol](https://github.com/6wol) | 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트 |
 
 ---
 
@@ -65,12 +65,12 @@
 
   <img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black"> 
   <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white"> 
-  <img src="https://img.shields.io/badge/Let's Encrypt-003A70?style=for-the-badge&logo=Let's Encrypt&logoColor=white">
+  <img src="https://img.shields.io/badge/Let's-Encrypt-003A70?style=for-the-badge&logo=Let's-Encrypt&logoColor=white">
   <br>
   
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-  <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white">
+  <img src="https://img.shields.io/badge/GitHub-Actions-2088FF?style=for-the-badge&logo=GitHub-Actions&logoColor=white">
 </div>
 
 ---
@@ -96,8 +96,8 @@
 - **배포 환경**:
 
     <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonwebservices&logoColor=white">
-    <img src="https://img.shields.io/badge/AWS Lightsail-FF9900?style=for-the-badge&logo=Amazon AWS&logoColor=white">
-    <img src="https://img.shields.io/badge/GitHub Actions-2088FF?style=for-the-badge&logo=GitHub Actions&logoColor=white">
+    <img src="https://img.shields.io/badge/AWS-Lightsail-FF9900?style=for-the-badge&logo=Amazon-AWS&logoColor=white">
+    <img src="https://img.shields.io/badge/GitHub-Actions-2088FF?style=for-the-badge&logo=GitHub-Actions&logoColor=white">
     <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white">
 
 - **협업 툴**:
@@ -1065,7 +1065,11 @@ Vercel에 도메인을 추가하면 자동 연결되는 줄 알았으나, 실제
 
 > 마지막으로, 프로젝트 완료 후 실제 사용자에게 보여질 결과물을 직접 구현했다는 성취감과 자신감이 매우 컸으며, 앞으로의 개발 경험에 큰 밑거름이 될 것이라고 느꼈다.
 ### **👧🏻 김유빈**
-> 
+> 이번 Glossy Matcha 웹사이트 프로젝트는 프론트엔드와 백엔드가 함께 협업하는 첫 경험이었기에 큰 의미가 있었습니다. 단순히 화면을 구현하는 데 그치지 않고, 실제 배포되는 서비스의 한 부분을 맡아 개발할 수 있었다는 점에서 큰 성취감을 느꼈습니다. 디자이너가 따로 없는 상황이었기 때문에 페이지의 전체적인 디자인까지 직접 진행해야 했는데, 다양한 UI/UX 레퍼런스를 참고하면서 Figma로 와이어프레임과 시안을 제작했습니다. 이 과정을 통해 단순히 기능 구현을 넘어 사용자 경험을 고려하는 시각을 기를 수 있었습니다.
+
+> 또한 제품 상세 페이지, 메인 배너, 네비게이션과 푸터 같은 공통 컴포넌트를 직접 구현하면서, 반응형 UI와 애니메이션, API 연동까지 실무에서 자주 접하는 기능들을 폭넓게 다뤄볼 수 있었습니다. 처음에는 API 연동 과정에서 낯선 오류를 마주하며 어려움을 겪었지만, 팀원들과의 소통을 통해 빠르게 문제를 해결할 수 있었고, 이를 통해 협업의 중요성과 즐거움을 다시 한 번 깨닫게 되었습니다. API 서버가 불안정하거나 일시적으로 다운되는 상황을 대비해 별도의 Mock 데이터를 제작하여 개발을 이어갈 수 있도록 준비했습니다. 이 과정을 통해 예외 상황을 고려한 안정적인 개발 습관을 기를 수 있었고, 작은 부분까지 놓치지 않는 꼼꼼함을 발휘했습니다.
+
+> 프로젝트를 진행하며 GitHub Flow 방식의 협업을 직접 경험하면서, 효율적인 브랜치 전략과 코드 리뷰 문화가 왜 중요한지 몸소 느낄 수 있었습니다. 또한 단순히 맡은 기능만 구현하는 데 그치지 않고, 전체 서비스의 구조와 사용자 흐름을 고려하며 문제를 해결하는 시야를 넓힐 수 있었습니다. 무엇보다 다양한 의견을 주고받으며 팀과 함께 완성도를 높여가는 과정에서 협업 능력을 한층 강화할 수 있었습니다.
 ### **👧🏻 조은이**
 > 이번 프로젝트에서는 기획자와 디자이너의 역할이 얼마나 중요한지 크게 느낄 수 있었다. 명세와 디자인 요구사항이 구체적이지 않아 개발자들이 직접 디자인을 나눠 진행하게 되었는데, 처음에는 막막했지만 디자인 시스템을 정리하고 분업하며 결과적으로 괜찮은 화면을 만들 수 있었다. 이 과정에서 단순히 개발만이 아니라 디자인 감각과 다른 파트에 대한 이해도 함께 키울 수 있었다.
 
