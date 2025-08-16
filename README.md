@@ -30,12 +30,12 @@
 
 ## 2. 🏡 팀 소개
 
-| 이름   | 사진  | 깃허브 주소               | 담당 파트            |
-|--------|-------|----------------------------|----------------------|
-| 심희현| <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:90px;"> | [@Elarin22](https://github.com/Elarin22) | Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집 |
-| 김성현| <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:90px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트 |
-| 조은이| <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:90px;"> | [@chohc](https://github.com/chohc) | 메인 페이지/문의하기 페이지 디자인 및 구현, 헤더/푸터, API 연동, 다국어 시스템, 공통 컴포넌트 |
-| 김유빈| <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:90px;"> | [@6wol](https://github.com/6wol) | 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트 |
+| 이름     | 사진  | 깃허브 주소               | 담당 파트            |
+|----------|-------|----------------------------|----------------------|
+| 심희현  | <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:90px;"> | [@Elarin22](https://github.com/Elarin22) | Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집 |
+| 김성현  | <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:90px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트 |
+| 조은이  | <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:90px;"> | [@chohc](https://github.com/chohc) | 메인 페이지/문의하기 페이지 디자인 및 구현, 헤더/푸터, API 연동, 다국어 시스템, 공통 컴포넌트 |
+| 김유빈  | <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:90px;"> | [@6wol](https://github.com/6wol) | 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트 |
 
 ---
 
