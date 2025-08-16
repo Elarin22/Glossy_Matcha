@@ -40,6 +40,10 @@ export default function Header({ locale }: { locale: string }) {
 
   const closeSidebar = useCallback(() => {
     setIsSidebarOpen(false);
+    const toggleBtn = document.querySelector<HTMLButtonElement>(
+      `.${styles["header__list"]} button`
+    );
+    toggleBtn?.focus();
   }, []);
 
   // esc로 사이드바 닫기
@@ -135,7 +139,7 @@ export default function Header({ locale }: { locale: string }) {
           <aside
             className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ""}`}
             role="navigation"
-            aria-hidden={!isSidebarOpen}
+            inert={!isSidebarOpen}
           >
             <nav>
               <ul>
