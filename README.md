@@ -1293,26 +1293,7 @@ Vercel에 도메인을 추가하면 자동 연결되는 줄 알았으나, 실제
 
 ---
 
-## 24. 시연 영상
-
-### PC 버전
-
-| 메인 / 문의 화면 |
-| :--------------: |
-
-|<video src="images/readme_video/main_pc.mp4" width="600" controls></video>
-|
-|메인 홈 화면입니다. 영상 소리를 on/off 할 수 있습니다.|
-
-### 모바일 버전
-
-| 메인 / 문의 화면 |
-| :--------------: |
-
-|<video src="images/readme_video/main_mobile.mp4" width="600" controls></video>
-|
-
-## 25. 🙏 감사의 글
+## 24. 🙏 감사의 글
 
 이 프로젝트는 다음과 같은 오픈소스 라이브러리와 도구들의 도움으로 완성되었습니다:
 
