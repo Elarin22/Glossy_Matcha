@@ -2,113 +2,113 @@
 @use "@/styles/mixins" as *;
 
 .brand-philosophy {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  margin-bottom: 10vw;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 50vw;
+    gap: clamp(40px, 6vw, 120px);
+    padding: 0 clamp(20px, 5vw, 190px);
+  }
+
+  &__title {
+    @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
+    color: $color-green-500;
+    margin-bottom: clamp(12px, 1.5vw, 20px);
+  }
+
+  &__list {
+    display: flex;
+    gap: clamp(30px, 3vw, 65px);
     align-items: stretch;
-    margin-bottom: 10vw;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(20px, 2vw, 40px);
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+  }
+
+  &__circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(100px, 10vw, 180px);
+    height: clamp(100px, 10vw, 180px);
+    border-radius: 50%;
+    background-color: $color-green-500;
+  }
+
+  &__item-title {
+    @include myeongjo(clamp(16px, 1.5vw, 24px), 500);
+    color: #fff;
+  }
+
+  &__item-desc {
+    @include pretendard(clamp(14px, 1vw, 20px), 500);
+    word-break: keep-all;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 960 / 800;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 30px;
 
     &__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        max-width: 50vw;
-        gap: clamp(40px, 6vw, 120px);
-        padding: 0 clamp(20px, 5vw, 190px);
+      order: 2;
+      max-width: 100%;
+      gap: 20px;
+      padding: 0 10px;
     }
 
     &__title {
-        @include myeongjo(clamp(28px, 2.6vw, 50px), 500);
-        color: $color-green-500;
-        margin-bottom: clamp(12px, 1.5vw, 20px);
+      @include myeongjo($font-size-22, 500);
+      margin-bottom: 20px;
     }
 
     &__list {
-        display: flex;
-        gap: clamp(30px, 3vw, 65px);
-        align-items: stretch;
+      gap: 10px;
     }
 
     &__item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: clamp(20px, 2vw, 40px);
-        flex: 1;
-        min-width: 0;
-        text-align: center;
+      gap: 10px;
     }
 
     &__circle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: clamp(100px, 10vw, 180px);
-        height: clamp(100px, 10vw, 180px);
-        border-radius: 50%;
-        background-color: $color-green-500;
+      width: 90px;
+      height: 90px;
     }
 
     &__item-title {
-        @include myeongjo(clamp(16px, 1.5vw, 24px), 500);
-        color: #fff;
+      @include myeongjo($font-size-16, 500);
     }
 
     &__item-desc {
-        @include pretendard(clamp(14px, 1vw, 20px), 500);
-        word-break: keep-all;
+      @include pretendard($font-size-14, 500);
     }
 
     &__image {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 960 / 800;
-        object-fit: cover;
+      order: 1;
+      max-width: 100%;
+      aspect-ratio: 360 / 200;
     }
-
-    @media (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
-        margin-bottom: 30px;
-
-        &__content {
-            order: 2;
-            max-width: 100%;
-            gap: 20px;
-            padding: 0 10px;
-        }
-
-        &__title {
-            @include myeongjo($font-size-22, 500);
-            margin-bottom: 20px;
-        }
-
-        &__list {
-            gap: 10px;
-        }
-
-        &__item {
-            gap: 10px;
-        }
-
-        &__circle {
-            width: 90px;
-            height: 90px;
-        }
-
-        &__item-title {
-            @include myeongjo($font-size-16, 500);
-        }
-
-        &__item-desc {
-            @include pretendard($font-size-14, 500);
-        }
-
-        &__image {
-            order: 1;
-            max-width: 100%;
-            aspect-ratio: 360 / 200;
-        }
-    }
+  }
 }
