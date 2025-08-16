@@ -2,9 +2,9 @@ name: CI/CD - Django Backend
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
   pull_request:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   deploy:
@@ -26,7 +26,7 @@ jobs:
           echo "🔁 서버 접속 성공. 배포 시작..."
 
           cd /home/ubuntu/glossy/Glossy_Matcha
-          git pull origin develop
+          git pull origin main
 
           source venv/bin/activate
           pip install -r requirements.txt
