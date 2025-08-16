@@ -29,9 +29,9 @@ const ProductMainBanner: React.FC = () => {
                 korean: false,
                 content: (
                     <>
-                        A balanced, subtle sweetness <br /> from a blend of Jeju <br />
-                        ceremonial-grade matcha, alternative sweeteners,<br />
-                        bamboo sap, and coconut sugar.
+                        A balanced, Subtle sweetness <br /> from a Blend of Jeju <br />
+                        Ceremonial-Grade Matcha, Alternative Sweeteners,<br />
+                        Bamboo Sap, and Coconut Sugar.
                     </>
                 )
             };
