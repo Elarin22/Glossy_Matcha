@@ -1,10 +1,9 @@
 import React from 'react';
-import { useParams } from 'next/navigation';
+import { useCurrentLocale } from '../../utils/localeUtils';
 import styles from './ProductStore.module.scss';
 
 const ProductStore: React.FC = () => {
-    const params = useParams();
-    const currentLocale = params?.locale as string || 'ko';
+    const currentLocale = useCurrentLocale();
     
     const handleStoreClick = () => {
         window.open('https://smartstore.naver.com/glossymatcha/category/ALL?cp=1', '_blank');

@@ -6,28 +6,26 @@
     min-height: 100vh;
 }
 
-.contentSection {
-    height: 100vh;
-    padding: 2rem;
+.loading, .error {
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $color-beige-100;
-
-    h2 {
-        @include myeongjo($font-size-32, $font-weight-medium);
+    
+    p {
+        @include myeongjo($font-size-24, $font-weight-medium);
         color: $color-black-200;
+        text-align: center;
     }
 }
 
-// Mobile
 @media (max-width: 768px) {
-    .contentSection {
+    .loading, .error {
+        height: 40vh;
         padding: 1rem;
         
-        h2 {
-            @include myeongjo($font-size-24, $font-weight-medium);
-            text-align: center;
+        p {
+            @include myeongjo($font-size-18, $font-weight-medium);
         }
     }
 }

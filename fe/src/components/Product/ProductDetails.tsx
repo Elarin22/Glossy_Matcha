@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useCurrentLocale } from '../../utils/localeUtils';
 import { Product } from '@/services/productApi';
 import styles from './ProductDetails.module.scss';
 
@@ -10,10 +10,8 @@ interface ProductDetailsProps {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product, lang }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const params = useParams();
-    const currentLocale = params?.locale as string || 'ko';
+    const currentLocale = useCurrentLocale();
 
-    // images 배열에서 파일명에 "details"가 포함된 이미지 찾기
     const detailsImages = product.images?.filter(img => 
         img.image.toLowerCase().includes('details')
     ) || [];
@@ -22,7 +20,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, lang }) => {
         return null;
     }
 
-    // 언어에 따라 적절한 이미지 선택
     let selectedImage;
     if (lang === 'en') {
         selectedImage = detailsImages.find(img => 

@@ -1,6 +1,3 @@
-// === 백엔드 API 타입 정의 ===
-
-// 제품 이미지 타입 (백엔드 API 응답 구조)
 interface ProductImage {
   id: number;
   image: string;
@@ -8,13 +5,11 @@ interface ProductImage {
   alt_text_en?: string;
 }
 
-// 제품 스펙 타입
 interface ProductSpecification {
   id: number;
   product_code?: string;
 }
 
-// 제품 본문 섹션 타입 (body_sections)
 interface ProductBodySection {
   id?: number;
   image?: string;
@@ -25,7 +20,6 @@ interface ProductBodySection {
   sort_order: number;
 }
 
-// 제품 메인 타입 - 백엔드 API 응답 구조
 interface Product {
     id: number;
     name: string;
@@ -46,7 +40,6 @@ interface Product {
     body_sections?: ProductBodySection[];
 }
 
-// API 응답 래퍼 타입
 interface ProductApiResponse {
   success: boolean;
   language: string;
@@ -54,8 +47,6 @@ interface ProductApiResponse {
   results: Product[];
 }
 
-// === Mock 데이터 (API 에러 시 fallback용) ===
-// productApi.ts에서만 사용되는 임시 백업 데이터
 const mockProducts: Product[] = [
     {
       id: 1,
@@ -237,16 +228,9 @@ const mockProducts: Product[] = [
     }
   ];
 
-// === API 설정 ===
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://x81fj32kd.glossymatcha.com/api";
 
-// === 제품 API 클래스 ===
 class ProductApi {
-  /**
-   * 제품 목록 조회
-   * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<ProductApiResponse> 제품 목록 응답
-   */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
       const url = `${API_BASE_URL}/products/?lang=${lang}`;
@@ -288,12 +272,6 @@ class ProductApi {
     }
   }
 
-  /**
-   * 특정 제품 상세 정보 조회
-   * @param productId 조회할 제품 ID
-   * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<Product | null> 제품 정보 또는 null
-   */
   static async getProductById(
     productId: number,
     lang: string = "ko"
@@ -308,13 +286,6 @@ class ProductApi {
     }
   }
 
-  /**
-   * 제품 필드 다국어 값 추출 헬퍼
-   * @param product 제품 객체
-   * @param fieldName 필드명 (예: 'name', 'subtitle', 'description')
-   * @param lang 언어 코드 (ko/en)
-   * @returns string 해당 언어의 필드 값 또는 기본값
-   */
   static getLocalizedField(
     product: Product,
     fieldName: keyof Product,
@@ -331,13 +302,6 @@ class ProductApi {
     return (product[fieldName] as string) || "";
   }
 
-  /**
-   * 제품 섹션 필드 다국어 값 추출 헬퍼
-   * @param section 제품 섹션 객체
-   * @param fieldName 필드명 (title/content)
-   * @param lang 언어 코드 (ko/en)
-   * @returns string 해당 언어의 섹션 필드 값 또는 기본값
-   */
   static getLocalizedSectionField(
     section: ProductBodySection,
     fieldName: "title" | "content",

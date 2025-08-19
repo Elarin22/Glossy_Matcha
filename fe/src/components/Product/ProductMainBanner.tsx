@@ -1,20 +1,14 @@
 'use client';
 
-// === 제품 메인 배너 컴포넌트 ===
-// 제품 페이지 상단의 자동 이미지 슬라이더 배너
-
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useCurrentLocale } from '../../utils/localeUtils';
 import ScrollIndicator from '../ScrollIndicator/ScrollIndicator';
 import styles from './ProductMainBanner.module.scss';
 
 const ProductMainBanner: React.FC = () => {
-    // === 상태 관리 ===
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const params = useParams();
-    const currentLocale = params?.locale as string || 'ko';
+    const currentLocale = useCurrentLocale();
     
-    // === 비주얼 데이터 ===
     const images = [
         '/images/product/signature-main-banner1.jpg',
         '/images/product/signature-main-banner2.jpg',
@@ -22,7 +16,6 @@ const ProductMainBanner: React.FC = () => {
         '/images/product/signature-main-banner4.jpg'
     ];
 
-    // === 다국어 텍스트 데이터 ===
     const getDescription = () => {
         if (currentLocale === 'en') {
             return {
@@ -49,14 +42,12 @@ const ProductMainBanner: React.FC = () => {
         };
     };
 
-    // === 자동 슬라이드 기능 ===
-    // 4초마다 이미지 자동 전환
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => 
                 prevIndex === images.length - 1 ? 0 : prevIndex + 1
             );
-        }, 4000); 
+        }, 4000);
 
         return () => {
             if (interval) {
@@ -66,10 +57,8 @@ const ProductMainBanner: React.FC = () => {
     }, [images.length]);
 
 
-    // === 렌더링 ===
     return (
         <section className={styles.banner}>
-            {/* 배경 이미지 슬라이더 */}
             <div className={styles.imageContainer}>
                 {images.map((image, index) => (
                     <div
@@ -82,7 +71,6 @@ const ProductMainBanner: React.FC = () => {
                 ))}
             </div>
 
-            {/* 그라디언트 오버레이 */}
             <div className={styles.gradientOverlay} />
 
             {/* 메인 컨텐츠 */}
@@ -96,7 +84,6 @@ const ProductMainBanner: React.FC = () => {
                 </p>
             </div>
 
-            {/* 스크롤 인디케이터 */}
             <ScrollIndicator />
         </section>
     );
