@@ -1,3 +1,14 @@
+/**
+ * 제품 상세 설명 섹션들을 표시하는 컴포넌트
+ * 
+ * 주요 기능:
+ * - 제품의 body_sections 데이터를 섹션별로 렌더링
+ * - 각 섹션에 이미지, 제목, 내용 포함
+ * - FadeInUp 애니메이션 효과 적용
+ * - 중복 이미지 필터링 (mid_banner_img와 동일한 경우 제외)
+ * - 섹션 정렬 및 다국어 텍스트 처리
+ */
+
 import React from 'react';
 import styles from './ProductDescription.module.scss';
 import { TextFormatter } from '../../utils/textFormatter';
@@ -20,6 +31,9 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
     const lang = isEnglish ? 'en' : 'ko';
     
     const sortedSections = [...bodySections].sort((a, b) => (a.id || 0) - (b.id || 0));
+    /**
+     * mid_banner_img 문자열에서 실제 이미지 URL 추출
+     */
     const parseMidBannerImg = (imgString?: string): string | null => {
         if (!imgString) return null;
         if (imgString.includes('||BANNER:')) {

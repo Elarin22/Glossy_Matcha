@@ -1,3 +1,14 @@
+/**
+ * 선택된 제품의 기본 정보를 표시하는 미드 배너 컴포넌트
+ * 
+ * 주요 기능:
+ * - 제품명, 부제목, 설명, 안내사항 표시
+ * - 제품 대표 이미지 또는 mid_banner_img 표시
+ * - TextFormatter를 통한 텍스트 포매팅
+ * - 로딩/에러 상태 처리 및 스켈레톤 UI
+ * - API에서 제품 데이터 fetch 및 다국어 처리
+ */
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -42,6 +53,9 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
     fetchProduct();
   }, [productId, lang]);
 
+  /**
+   * 다국어 지원을 위한 제품 정보 getter 함수들
+   */
   const getProductName = () =>
     product ? ProductApi.getLocalizedField(product, "name", lang) : "";
   const getProductSubtitle = () =>
@@ -53,6 +67,10 @@ const ProductMidBanner: React.FC<ProductMidBannerProps> = ({
       ? ProductApi.getLocalizedField(product, "short_description", lang)
       : "";
       
+  /**
+   * 메인 이미지 URL 추출
+   * mid_banner_img 우선, 없으면 첫 번째 이미지 사용
+   */
   const getMainImage = () => {
     if (product?.mid_banner_img) {
       if (product.mid_banner_img.includes('||BANNER:')) {

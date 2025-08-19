@@ -1,3 +1,12 @@
+/**
+ * 제품 페이지 메인 배너 컴포넌트
+ * 
+ * 주요 기능:
+ * - 4개 이미지를 4초 간격으로 자동 슬라이드
+ * - 다국어 제품 설명 표시
+ * - 그라데이션 오버레이와 스크롤 인디케이터 포함
+ */
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -16,6 +25,9 @@ const ProductMainBanner: React.FC = () => {
         '/images/product/signature-main-banner4.jpg'
     ];
 
+    /**
+     * 현재 언어에 따른 제품 설명 텍스트 반환
+     */
     const getDescription = () => {
         if (currentLocale === 'en') {
             return {

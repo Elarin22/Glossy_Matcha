@@ -1,3 +1,22 @@
+/**
+ * 제품 페이지 메인 컴포넌트
+ * 
+ * 주요 기능:
+ * - 제품 목록 조회 및 선택된 제품 상세 정보 표시
+ * - 다국어 지원 (한국어/영어)
+ * - 제품 네비게이션을 통한 제품 전환
+ * - API 연동 및 로딩/에러 상태 관리
+ * - 제품 설명 텍스트 파싱 및 섹션별 표시
+ * 
+ * 컴포넌트 구조:
+ * - ProductMainBanner: 메인 배너 (슬라이드 이미지)
+ * - ProductNav: 제품 선택 네비게이션
+ * - ProductMidBanner: 선택된 제품의 기본 정보
+ * - ProductDescription: 제품 상세 설명 섹션들
+ * - ProductDetails: 제품 상세 이미지 (토글)
+ * - ProductStore: 스토어 이동 버튼
+ */
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -71,6 +90,11 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         productId: product.id
     }));
 
+    /**
+     * 제품 선택 시 실행되는 핸들러
+     * - 선택된 제품 ID 업데이트
+     * - 페이지를 메인 배너 다음 위치로 스크롤
+     */
     const handleProductSelect = (productId: number) => {
         setActiveProductId(productId);
         
@@ -82,6 +106,14 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         }
     };
 
+    /**
+     * 제품의 sub_description 텍스트를 파싱하여 섹션별로 나누는 함수
+     * 
+     * 파싱 규칙:
+     * - '---'로 섹션 구분
+     * - '||'로 제목과 내용 구분
+     * - 각 섹션에 대응하는 이미지 자동 매핑
+     */
     const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
         if (!subDescriptionText?.trim()) return [];
 

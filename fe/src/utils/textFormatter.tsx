@@ -1,3 +1,13 @@
+/**
+ * 텍스트 포매팅 및 반응형 줄바꿈 처리 유틸리티
+ * 
+ * 주요 기능:
+ * - '||' 구분자로 제목과 내용 분리 및 다른 스타일 적용
+ * - '\n' 또는 '\\n'을 <br> 태그로 변환
+ * - '*n'을 모바일에서만 줄바꿈으로 처리 (MobileBreak 컴포넌트)
+ * - 반응형 줄바꿈을 위한 윈도우 리사이즈 이벤트 처리
+ */
+
 import React, { useEffect, useState } from 'react';
 
 interface TextFormatterProps {
@@ -7,6 +17,10 @@ interface TextFormatterProps {
 
 const MOBILE_BREAKPOINT = 768;
 
+/**
+ * 모바일 화면에서만 줄바꿈을 표시하는 컴포넌트
+ * 데스크톱에서는 비활성화
+ */
 const MobileBreak: React.FC<{ id: string }> = ({ id }) => {
     const [isMobile, setIsMobile] = useState(false);
 
@@ -25,6 +39,11 @@ const MobileBreak: React.FC<{ id: string }> = ({ id }) => {
     return isMobile ? <br key={id} /> : null;
 };
 
+/**
+ * 텍스트에서 일반 줄바꿈과 모바일 전용 줄바꿈을 처리
+ * - '*n': 모바일 전용 줄바꿈
+ * - '\n' 또는 '\\n': 일반 줄바꿈
+ */
 const processTextWithBreaks = (text: string): React.ReactNode[] => {
     if (!text) return [];
 
@@ -62,6 +81,10 @@ const processTextWithBreaks = (text: string): React.ReactNode[] => {
     return result;
 };
 
+/**
+ * 메인 텍스트 포매팅 함수
+ * '||' 구분자로 제목과 내용을 나누어 다른 스타일 적용
+ */
 export const formatText = (text: string, className?: string): React.ReactElement => {
     if (!text) return <span className={className}></span>;
 

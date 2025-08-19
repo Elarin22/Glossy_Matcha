@@ -1,3 +1,18 @@
+/**
+ * 제품 데이터 API 통신 및 관리 서비스
+ * 
+ * 주요 기능:
+ * - 제품 목록 조회 (getProducts)
+ * - 특정 제품 조회 (getProductById)
+ * - API 실패 시 Mock 데이터 fallback
+ * - 다국어 필드 처리 (getLocalizedField, getLocalizedSectionField)
+ * - 제품, 이미지, 사양, 섹션 타입 정의
+ * 
+ * Mock 데이터:
+ * - 시그니처, 말차다구세트, 틴케이스 3개 제품
+ * - 각 제품별 이미지, 사양, 다국어 설명 포함
+ */
+
 interface ProductImage {
   id: number;
   image: string;
@@ -231,6 +246,10 @@ const mockProducts: Product[] = [
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://x81fj32kd.glossymatcha.com/api";
 
 class ProductApi {
+  /**
+   * 제품 목록 조회
+   * API 실패 시 Mock 데이터 사용
+   */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
       const url = `${API_BASE_URL}/products/?lang=${lang}`;
@@ -272,6 +291,9 @@ class ProductApi {
     }
   }
 
+  /**
+   * 특정 ID의 제품 조회
+   */
   static async getProductById(
     productId: number,
     lang: string = "ko"
@@ -286,6 +308,10 @@ class ProductApi {
     }
   }
 
+  /**
+   * 다국어 필드 값 반환
+   * 영어 요청 시 _en 필드 우선 반환
+   */
   static getLocalizedField(
     product: Product,
     fieldName: keyof Product,
@@ -302,6 +328,9 @@ class ProductApi {
     return (product[fieldName] as string) || "";
   }
 
+  /**
+   * 섹션 다국어 필드 값 반환
+   */
   static getLocalizedSectionField(
     section: ProductBodySection,
     fieldName: "title" | "content",
