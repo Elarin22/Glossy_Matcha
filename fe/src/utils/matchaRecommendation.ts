@@ -9,13 +9,13 @@ type MenuKey = keyof typeof menuData;
  * @constant {Record<string, MenuKey>}
  */
 const MENU_KEYS: Record<string, MenuKey> = {
-    JEJU_OREUM: "jeju-oreum",
-    MATCHA_STRAIGHT: "matcha-straight",
-    GLOSSY_MATCHA_LATTE: "matcha-latte",
-    MATCHA_SCHPENER: "matcha-spanner",
-    BARLEY_CREAM_MATCHA_LATTE: "matcha-barley",
-    GLOSSY_MATCHA_MOJITO: "matcha-mojito",
-    GREEN_LEMONADE: "green-lemonade",
+  JEJU_OREUM: "jeju-oreum",
+  MATCHA_STRAIGHT: "matcha-straight",
+  GLOSSY_MATCHA_LATTE: "matcha-latte",
+  MATCHA_SCHPENER: "matcha-spanner",
+  BARLEY_CREAM_MATCHA_LATTE: "matcha-barley",
+  GLOSSY_MATCHA_MOJITO: "matcha-mojito",
+  GREEN_LEMONADE: "green-lemonade",
 } as const;
 
 /**
@@ -39,158 +39,151 @@ const MENU_KEYS: Record<string, MenuKey> = {
  *
  */
 export const getRecommendation = (userAnswers: AnswerType): string => {
-    const { style, mood, purpose, favorite } = userAnswers;
+  const { style, mood, purpose, favorite } = userAnswers;
 
-    const scores: Record<MenuKey, number> = {};
+  const scores: Record<MenuKey, number> = {};
 
-    // menuData의 모든 키로 scores 초기화
-    (Object.keys(menuData) as MenuKey[]).forEach((menu) => {
-        scores[menu] = 0;
-    });
+  // menuData의 모든 키로 scores 초기화
+  (Object.keys(menuData) as MenuKey[]).forEach((menu) => {
+    scores[menu] = 0;
+  });
 
-    // Q1: 스타일
-    if (style === "depth") {
-        scores[MENU_KEYS.JEJU_OREUM] += 1;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-    } else if (style === "sweet") {
-        scores[MENU_KEYS.JEJU_OREUM] += 4;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    } else if (style === "visual") {
-        scores[MENU_KEYS.JEJU_OREUM] += 3;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    } else if (style === "fresh") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    }
+  // Q1: 스타일
+  if (style === "depth") {
+    scores[MENU_KEYS.JEJU_OREUM] += 1;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+  } else if (style === "sweet") {
+    scores[MENU_KEYS.JEJU_OREUM] += 4;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 3;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+  } else if (style === "visual") {
+    scores[MENU_KEYS.JEJU_OREUM] += 3;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  } else if (style === "fresh") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  }
 
-    // Q2: 무드
-    if (mood === "professional") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    } else if (mood === "natural") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    } else if (mood === "cheerful") {
-        scores[MENU_KEYS.JEJU_OREUM] += 4;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 1;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    } else if (mood === "minimal") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    }
+  // Q2: 무드
+  if (mood === "professional") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+  } else if (mood === "natural") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  } else if (mood === "cheerful") {
+    scores[MENU_KEYS.JEJU_OREUM] += 4;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 1;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  } else if (mood === "minimal") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  }
 
-    // Q3: 목적
-    if (purpose === "thirst") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 4;
-    } else if (purpose === "caffeine") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    } else if (purpose === "healing") {
-        scores[MENU_KEYS.JEJU_OREUM] += 4;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 1;
-    } else if (purpose === "health") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 3;
-    }
+  // Q3: 목적
+  if (purpose === "thirst") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 4;
+  } else if (purpose === "caffeine") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 2;
+  } else if (purpose === "healing") {
+    scores[MENU_KEYS.JEJU_OREUM] += 4;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 1;
+  } else if (purpose === "health") {
+    scores[MENU_KEYS.JEJU_OREUM] += 2;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 4;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 3;
+  }
 
-    // Q4: 선호 음료
-    if (favorite === "coffee") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 3;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    } else if (favorite === "herbal") {
-        scores[MENU_KEYS.JEJU_OREUM] += 3;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 3;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 2;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    } else if (favorite === "refreshing") {
-        scores[MENU_KEYS.JEJU_OREUM] += 2;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 4;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 4;
-    } else if (favorite === "milk") {
-        scores[MENU_KEYS.JEJU_OREUM] += 3;
-        scores[MENU_KEYS.MATCHA_STRAIGHT] += 2;
-        scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 4;
-        scores[MENU_KEYS.MATCHA_SCHPENER] += 4;
-        scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
-        scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
-        scores[MENU_KEYS.GREEN_LEMONADE] += 2;
-    }
+  // Q4: 선호 음료
+  if (favorite === "coffee") {
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 15;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.JEJU_OREUM] += 1;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 2;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 1;
+  } else if (favorite === "herbal") {
+  } else if (favorite === "refreshing") {
+    scores[MENU_KEYS.GREEN_LEMONADE] += 15;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 15;
+    scores[MENU_KEYS.JEJU_OREUM] += 1;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 1;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 1;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 1;
+  } else if (favorite === "milk") {
+    scores[MENU_KEYS.GLOSSY_MATCHA_LATTE] += 12;
+    scores[MENU_KEYS.JEJU_OREUM] += 12;
+    scores[MENU_KEYS.MATCHA_SCHPENER] += 10;
+    scores[MENU_KEYS.BARLEY_CREAM_MATCHA_LATTE] += 12;
+    scores[MENU_KEYS.MATCHA_STRAIGHT] += 1;
+    scores[MENU_KEYS.GLOSSY_MATCHA_MOJITO] += 1;
+    scores[MENU_KEYS.GREEN_LEMONADE] += 1;
+  }
 
-    const keys = Object.keys(scores) as MenuKey[];
-    const maxScore = Math.max(...Object.values(scores));
-    const topItems = keys.filter((key) => scores[key] === maxScore);
+  const keys = Object.keys(scores) as MenuKey[];
+  const maxScore = Math.max(...Object.values(scores));
+  const topItems = keys.filter((key) => scores[key] === maxScore);
 
-    return topItems[Math.floor(Math.random() * topItems.length)];
+  return topItems[Math.floor(Math.random() * topItems.length)];
 };
