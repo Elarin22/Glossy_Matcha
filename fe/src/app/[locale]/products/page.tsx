@@ -1,15 +1,32 @@
-"use client";
+/**
+ * 제품 페이지 메인 컴포넌트
+ * 
+ * 주요 기능:
+ * - 제품 목록 조회 및 선택된 제품 상세 정보 표시
+ * - 다국어 지원 (한국어/영어)
+ * - 제품 네비게이션을 통한 제품 전환
+ * - API 연동 및 로딩/에러 상태 관리
+ * - 제품 설명 텍스트 파싱 및 섹션별 표시
+ * 
+ * 컴포넌트 구조:
+ * - ProductMainBanner: 메인 배너 (슬라이드 이미지)
+ * - ProductNav: 제품 선택 네비게이션
+ * - ProductMidBanner: 선택된 제품의 기본 정보
+ * - ProductDescription: 제품 상세 설명 섹션들
+ * - ProductDetails: 제품 상세 이미지 (토글)
+ * - ProductStore: 스토어 이동 버튼
+ */
 
-// === 제품 페이지 ===
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import ProductNav from '@/components/Nav/ProductNav';
 import ProductMainBanner from '@/components/Product/ProductMainBanner';
 import ProductMidBanner from '@/components/Product/ProductMidBanner';
-import ProductDescription, { type ProductBodySection } from '@/components/Product/ProductDescription';
+import ProductDescription from '@/components/Product/ProductDescription';
 import ProductDetails from '@/components/Product/ProductDetails';
 import ProductStore from '@/components/Product/ProductStore';
-import ProductApi, { type Product } from '@/services/productApi';
+import ProductApi, { type Product, type ProductBodySection } from '@/services/productApi';
 import styles from './page.module.scss';
 
 interface ProductsPageProps {
@@ -21,17 +38,14 @@ interface ProductsPageProps {
 const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
     const resolvedParams = React.use(params);
     
-    // === 상태 관리 ===
-    const [activeProductId, setActiveProductId] = useState<number>(1); // 현재 선택된 제품 ID
-    const [products, setProducts] = useState<Product[]>([]);             // 제품 목록
-    const [currentProduct, setCurrentProduct] = useState<Product | null>(null); // 선택된 제품 상세 정보
-    const [loading, setLoading] = useState(true);                       // 로딩 상태
-    const [error, setError] = useState<string | null>(null);            // 에러 메시지
+    const [activeProductId, setActiveProductId] = useState<number>(1);
+    const [products, setProducts] = useState<Product[]>([]);
+    const [currentProduct, setCurrentProduct] = useState<Product | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     
     const lang = resolvedParams?.locale || 'ko';
 
-    // === 제품 목록 로드 ===
-    // 언어 변경 시 제품 목록을 다시 가져오고 첫 번째 제품을 기본 선택
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -56,8 +70,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         fetchProducts();
     }, [lang]);
 
-    // === 선택된 제품 상세 정보 로드 ===
-    // activeProductId나 언어가 변경될 때마다 해당 제품의 상세 정보 가져오기
     useEffect(() => {
         const fetchCurrentProduct = async () => {
             if (!activeProductId) return;
@@ -78,10 +90,14 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         productId: product.id
     }));
 
+    /**
+     * 제품 선택 시 실행되는 핸들러
+     * - 선택된 제품 ID 업데이트
+     * - 페이지를 메인 배너 다음 위치로 스크롤
+     */
     const handleProductSelect = (productId: number) => {
         setActiveProductId(productId);
         
-        // scroll 버튼과 동일한 위치로 스크롤 (nav 위치)
         if (typeof window !== 'undefined') {
             window.scrollTo({
                 top: window.innerHeight,
@@ -90,6 +106,14 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         }
     };
 
+    /**
+     * 제품의 sub_description 텍스트를 파싱하여 섹션별로 나누는 함수
+     * 
+     * 파싱 규칙:
+     * - '---'로 섹션 구분
+     * - '||'로 제목과 내용 구분
+     * - 각 섹션에 대응하는 이미지 자동 매핑
+     */
     const parseSubDescription = (subDescriptionText: string): ProductBodySection[] => {
         if (!subDescriptionText?.trim()) return [];
 
@@ -103,7 +127,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
                 const [title = '', content = ''] = section.split('||').map(part => part.trim());
                 if (!title) return null;
                 
-                // 이미지 할당 로직 수정: index + 1을 사용하여 첫 번째 이미지는 MidBanner에서 사용하도록 함
                 const imageIndex = index + 1;
                 const assignedImage = currentProduct?.images?.[imageIndex]?.image;
                 
@@ -121,7 +144,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
     };
 
 
-    // === 로딩 상태 처리 ===
     if (loading) {
         return (
             <main className={styles.main}>
@@ -133,7 +155,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         );
     }
 
-    // === 에러 상태 처리 ===
     if (error || products.length === 0) {
         return (
             <main className={styles.main}>
@@ -145,7 +166,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ params }) => {
         );
     }
 
-    // === 제품 섹션 데이터 준비 ===
     const bodySections: ProductBodySection[] = currentProduct?.body_sections?.length 
         ? currentProduct.body_sections
         : currentProduct 
