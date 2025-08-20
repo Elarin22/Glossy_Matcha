@@ -1,6 +1,18 @@
-// === 백엔드 API 타입 정의 ===
+/**
+ * 제품 데이터 API 통신 및 관리 서비스
+ * 
+ * 주요 기능:
+ * - 제품 목록 조회 (getProducts)
+ * - 특정 제품 조회 (getProductById)
+ * - API 실패 시 Mock 데이터 fallback
+ * - 다국어 필드 처리 (getLocalizedField, getLocalizedSectionField)
+ * - 제품, 이미지, 사양, 섹션 타입 정의
+ * 
+ * Mock 데이터:
+ * - 시그니처, 말차다구세트, 틴케이스 3개 제품
+ * - 각 제품별 이미지, 사양, 다국어 설명 포함
+ */
 
-// 제품 이미지 타입 (백엔드 API 응답 구조)
 interface ProductImage {
   id: number;
   image: string;
@@ -8,13 +20,11 @@ interface ProductImage {
   alt_text_en?: string;
 }
 
-// 제품 스펙 타입
 interface ProductSpecification {
   id: number;
   product_code?: string;
 }
 
-// 제품 본문 섹션 타입 (body_sections)
 interface ProductBodySection {
   id?: number;
   image?: string;
@@ -25,7 +35,6 @@ interface ProductBodySection {
   sort_order: number;
 }
 
-// 제품 메인 타입 - 백엔드 API 응답 구조
 interface Product {
     id: number;
     name: string;
@@ -46,7 +55,6 @@ interface Product {
     body_sections?: ProductBodySection[];
 }
 
-// API 응답 래퍼 타입
 interface ProductApiResponse {
   success: boolean;
   language: string;
@@ -54,8 +62,6 @@ interface ProductApiResponse {
   results: Product[];
 }
 
-// === Mock 데이터 (API 에러 시 fallback용) ===
-// productApi.ts에서만 사용되는 임시 백업 데이터
 const mockProducts: Product[] = [
     {
       id: 1,
@@ -237,15 +243,12 @@ const mockProducts: Product[] = [
     }
   ];
 
-// === API 설정 ===
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "https://x81fj32kd.glossymatcha.com/api";
 
-// === 제품 API 클래스 ===
 class ProductApi {
   /**
    * 제품 목록 조회
-   * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<ProductApiResponse> 제품 목록 응답
+   * API 실패 시 Mock 데이터 사용
    */
   static async getProducts(lang: string = "ko"): Promise<ProductApiResponse> {
     try {
@@ -289,10 +292,7 @@ class ProductApi {
   }
 
   /**
-   * 특정 제품 상세 정보 조회
-   * @param productId 조회할 제품 ID
-   * @param lang 언어 코드 (ko/en, 기본값: ko)
-   * @returns Promise<Product | null> 제품 정보 또는 null
+   * 특정 ID의 제품 조회
    */
   static async getProductById(
     productId: number,
@@ -309,11 +309,8 @@ class ProductApi {
   }
 
   /**
-   * 제품 필드 다국어 값 추출 헬퍼
-   * @param product 제품 객체
-   * @param fieldName 필드명 (예: 'name', 'subtitle', 'description')
-   * @param lang 언어 코드 (ko/en)
-   * @returns string 해당 언어의 필드 값 또는 기본값
+   * 다국어 필드 값 반환
+   * 영어 요청 시 _en 필드 우선 반환
    */
   static getLocalizedField(
     product: Product,
@@ -332,11 +329,7 @@ class ProductApi {
   }
 
   /**
-   * 제품 섹션 필드 다국어 값 추출 헬퍼
-   * @param section 제품 섹션 객체
-   * @param fieldName 필드명 (title/content)
-   * @param lang 언어 코드 (ko/en)
-   * @returns string 해당 언어의 섹션 필드 값 또는 기본값
+   * 섹션 다국어 필드 값 반환
    */
   static getLocalizedSectionField(
     section: ProductBodySection,

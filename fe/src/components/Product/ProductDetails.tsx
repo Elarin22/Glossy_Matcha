@@ -1,5 +1,15 @@
+/**
+ * 제품 상세 이미지를 토글 방식으로 표시하는 컴포넌트
+ * 
+ * 주요 기능:
+ * - "제품 상세" 버튼 클릭 시 상세 이미지 토글
+ * - 언어별 상세 이미지 선택 (details-en.jpg / details.jpg)
+ * - 화살표 아이콘 방향 변경 (열림/닫힘 상태)
+ * - 상세 이미지가 없는 경우 컴포넌트 숨김
+ */
+
 import React, { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useCurrentLocale } from '../../utils/localeUtils';
 import { Product } from '@/services/productApi';
 import styles from './ProductDetails.module.scss';
 
@@ -10,10 +20,11 @@ interface ProductDetailsProps {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product, lang }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const params = useParams();
-    const currentLocale = params?.locale as string || 'ko';
+    const currentLocale = useCurrentLocale();
 
-    // images 배열에서 파일명에 "details"가 포함된 이미지 찾기
+    /**
+     * 제품 이미지 중 'details'가 포함된 상세 이미지만 필터링
+     */
     const detailsImages = product.images?.filter(img => 
         img.image.toLowerCase().includes('details')
     ) || [];
@@ -22,7 +33,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product, lang }) => {
         return null;
     }
 
-    // 언어에 따라 적절한 이미지 선택
+    /**
+     * 언어에 따라 적절한 상세 이미지 선택
+     * - 영어: details-en.jpg 우선, 없으면 기본 details.jpg
+     * - 한국어: details.jpg (영어용 제외)
+     */
     let selectedImage;
     if (lang === 'en') {
         selectedImage = detailsImages.find(img => 
