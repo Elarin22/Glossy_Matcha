@@ -479,27 +479,27 @@ Glossy_Matcha/
 
 ### 매장 운영 대시보드 시스템
 
-#### ▶ Gmail 연동 답변 시스템
+> **Gmail 연동 답변 시스템**
 - **고객 서비스 자동화**
   - **원클릭 답장**: 고객 이메일 클릭 시 Gmail 답장 창이 자동으로 열리며 즉시 답변 가능
   - **스마트 템플릿**: 고객명, 문의 내용, 문의 유형이 미리 입력된 답장 템플릿 자동 생성
   - **고객 이력 추적**: 동일 고객의 과거 모든 문의 이력을 한 화면에서 확인 가능
   - **문의 유형별 자동 분류**: 일반문의/제품문의/기타문의 자동 태그 표시
 
-#### ▶ 실시간 통계 대시보드
+> **실시간 통계 대시보드**
 - **한눈에 보는 매장 현황**
   - **6개 핵심 지표 카드**: 재직 직원 수, 오늘 매출, 이번 달 매출, 올해 매출, 거래처 수, 고객문의 건수
   - **실시간 데이터 업데이트**: 페이지 새로고침 시 최신 데이터 자동 반영
   - **직관적 아이콘**: Bootstrap Icons로 각 지표별 시각적 구분
   - **반응형 카드 레이아웃**: 모바일/태블릿/데스크톱 환경별 최적화
 
-#### ▶ Chart.js 기반 매출 시각화
+> **Chart.js 기반 매출 시각화**
 - **월별 매출 트렌드**: 최근 12개월 라인 차트로 매출/비용/수익 추이 표시
 - **일별 매출 현황**: 최근 30일 바 차트로 일매출 변화 시각화
 - **매출 구성 분석**: 도넛 차트로 매출/비용/수익 비율 표시
 - **동적 차트 업데이트**: 데이터 변경 시 실시간 차트 갱신
 
-#### ▶ 통합 관리 시스템
+> **통합 관리 시스템**
 - **직원 관리**
   - 재직/퇴사 상태별 관리
   - 근무 기록 및 급여 계산
@@ -515,19 +515,19 @@ Glossy_Matcha/
   - **월별 매출**: 월간 매출 자동 집계
   - **연별 매출**: 연간 매출 자동 집계
 
-#### ▶ Excel 내보내기 시스템
+> **Excel 내보내기 시스템**
 - **원클릭 리포트 생성**
   - **전문적인 엑셀 리포트**: 금액 콤마 표시, 비율 퍼센트 자동 변환, 열 너비 자동 조정으로 가독성 극대화
   - **다양한 리포트 유형**: 전체 매출 현황, 개별 월/년도 상세 분석
   - **즉시 다운로드**: 버튼 클릭 즉시 완성된 엑셀 파일 다운로드 (별도 프로그램 불필요)
 
-#### ▶ 빠른 액션 시스템
+> **빠른 액션 시스템**
 - **업무 효율성 극대화**
   - **원클릭 업무 처리**: 직원 등록, 거래처 추가, 매출 입력 등 주요 업무를 한 번의 클릭으로 처리
   - **실시간 현황 모니터링**: 최신 5건의 매출/직원/문의 현황을 메인 화면에서 즉시 확인
   - **스마트 필터링**: 재직/퇴사, 활성/비활성 등 상태별 자동 분류로 필요한 정보만 선별 표시
 
-#### ▶ 문의 관리 주요 기능
+> **문의 관리 주요 기능**
 - **실시간 문의 현황**: 대시보드 메인에서 최신 문의 3건 표시
 - **문의 유형별 분류**: 일반문의/제품문의/기타 자동 분류 및 통계
 - **문의자 이력 관리**: 동일 고객의 문의 이력 연결 추적
@@ -575,7 +575,7 @@ const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/inquiries/`, {
 
 ### 제품 데이터 통합 관리 시스템
 
-#### ▶ 다국어 제품 모델 설계
+> **다국어 제품 모델 설계**
 - **글로벌 서비스 준비된 제품 관리**
   - **이중 언어 지원**: 제품명, 설명, 부제목 등 모든 정보를 한국어/영어로 관리
   - **다중 이미지 지원**: ProductImages 모델로 제품당 여러 이미지 관리
@@ -583,7 +583,7 @@ const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/inquiries/`, {
   - **이미지별 다국어 alt 텍스트**: 접근성과 SEO 최적화
   - **번역 상태 관리**: Django Admin에서 ✅완료/⚠️부분완료/❌미완료 표시
 
-#### ▶ 스마트 언어 처리 제품 관련 시스템
+> **스마트 언어 처리 제품 관련 시스템**
 - **사용자 경험 극대화**
   - **지능형 언어 선택**: 영어 번역이 없으면 한국어 버전을 자동으로 표시하여 빈 화면 방지
   - **URL 기반 언어 전환**: `/api/products/?lang=ko|en` 파라미터로 언어별 API 제공
@@ -616,7 +616,7 @@ const response = await fetch(`${API_BASE_URL}/products/?lang=${lang}`, {
 const data: ProductApiResponse = await response.json();
 ```
 
-#### ▶ 실시간 제품 데이터 동기화
+> **실시간 제품 데이터 동기화**
 
 ```
 Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최신 데이터 반영
@@ -723,56 +723,56 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 ### 📼 매장 운영 대시보드
 |   1. Login   |
 |:---------:|
-|<img src="images/readme_gif/be/login.gif">|
+|<img src="images/readme_gif/be/login.gif" width="800">|
 |Django Login|
 
 <br>
 
 |   2. Dashboard    |
 |:--------------:|
-|<img src="images/readme_gif/be/dashboard.gif">|
+|<img src="images/readme_gif/be/dashboard.gif" width="800">|
 |매장 운영 메인 대시보드|
 
 <br>
 
 |   3. 직원[Staff]    |
 |:--------------:|
-|<img src="images/readme_gif/be/staff.gif">|
+|<img src="images/readme_gif/be/staff.gif" width="800">|
 |직원 관리|
 
 <br>
 
 |   4. 일별 매출[Daily Sales]   |
 |:--------------:|
-|<img src="images/readme_gif/be/sales.gif">|
+|<img src="images/readme_gif/be/sales.gif" width="800">|
 |일별 매출 관리|
 
 <br>
 
 |   5. 개별 월/년 매출   |
 |:--------------:|
-|<img src="images/readme_gif/be/excel1.gif">|
+|<img src="images/readme_gif/be/excel1.gif" width="800">|
 |개별 월/년 매출 엑셀 다운로드|
 
 <br>
 
 |   6. 전체 월/년 매출   |
 |:--------------:|
-|<img src="images/readme_gif/be/excel2.gif">|
+|<img src="images/readme_gif/be/excel2.gif" width="800">|
 |전체 월/년 매출 엑셀 다운로드|
 
 <br>
 
 |   7. 거래처   |
 |:--------------:|
-|<img src="images/readme_gif/be/client.gif">|
+|<img src="images/readme_gif/be/client.gif" width="800">|
 |거래처 관리|
 
 <br>
 
 |   8. 문의하기   |
 |:--------------:|
-|<img src="images/readme_gif/be/email.gif">|
+|<img src="images/readme_gif/be/email.gif" width="800">|
 |Gmail로 원클릭 답장|
 
 ---
@@ -780,50 +780,50 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 ### 📼 글로벌 브랜드 웹사이트
 |   1. Home   |
 |:---------:|
-|<img src="images/readme_gif/fe/home.gif" width="450">|
+|<img src="images/readme_gif/fe/home.gif" width="800">|
 |메인 홈 화면|
 
 <br>
 
 |   2. About   |
 |:---------:|
-|<img src="images/readme_gif/fe/about.gif" width="450">|
+|<img src="images/readme_gif/fe/about.gif" width="800">|
 |브랜드 소개|
 
 <br>
 
 |   3. Product   |
 |:---------:|
-|<img src="images/readme_gif/fe/product.gif" width="450">|
+|<img src="images/readme_gif/fe/product.gif" width="800">|
 |제품 소개|
 
 <br>
 
 |   4. Add Product   |
 |:---------:|
-|<img src="images/readme_gif/fe/addProduct.gif" width="450">|
+|<img src="images/readme_gif/fe/addProduct.gif" width="800">|
 |admin 제품 추가 실시간 연동|
 
 <br>
 
 |   5. GlossyPick   |
 |:---------:|
-|<img src="images/readme_gif/fe/glossypick.gif" width="450">|
+|<img src="images/readme_gif/fe/glossypick.gif" width="800">|
 |체험형 컨텐츠|
 
 <br>
 
 |   6. Inquire   |
 |:---------:|
-|<img src="images/readme_gif/fe/inquire.gif" width="450">|
+|<img src="images/readme_gif/fe/inquire.gif" width="800">|
 |문의하기|
 
 <br>
 
 |   7. Change Language   |
 |:---------:|
-|<img src="images/readme_gif/fe/language.gif" width="450">|
-|헤더에 언어변경 버튼 클릭 시 국영문 전환|
+|<img src="images/readme_gif/fe/language.gif" width="800">|
+|상단 ko/en 버튼 원클릭 국영문 전환|
 
 <br>
 
@@ -832,7 +832,7 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 **[모바일 반응형]**
 | 1. Home (Mobile) | 2. About (Mobile) | 3. Product (Mobile) | 4. GlossyPick (Mobile) |
 | --- | --- | --- | --- |
-| <img src="images/readme_gif/fe/home_mb.gif" width="400"> | <img src="images/readme_gif/fe/about_mb.gif" width="400"> | <img src="images/readme_gif/fe/product_mb.gif" width="400"> | <img src="images/readme_gif/fe/glossypick_mb.gif" width="400"> |
+| <img src="images/readme_gif/fe/home_mb.gif" width="300"> | <img src="images/readme_gif/fe/about_mb.gif" width="300"> | <img src="images/readme_gif/fe/product_mb.gif" width="300"> | <img src="images/readme_gif/fe/glossypick_mb.gif" width="300"> |
 
 ---
 
