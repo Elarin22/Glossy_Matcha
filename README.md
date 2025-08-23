@@ -48,7 +48,7 @@
 - 웹 기반 (PC와 모바일에서도 접근 가능) [o]
 - 로그인 기능은 있으면 좋으나, 없어도 무방 (내부용 MVP) [o]
 ```
-<img src="images/readme_img/내부MVP.png" width="450">
+<img src="images/readme_img/내부MVP.png" width="900">
 
 ***[2] 🌐 Glossy Matcha 브랜드 웹사이트 MVP (국·영문)***
 ```
@@ -81,7 +81,7 @@
 - GLOSSY MATCHA의 기존 BI/브랜드 가이드에 맞춘 세련되고 간결한 스타일 [o]
 - SPA(Single Page Application) 형식 환영 [o]
 ```
-<img src="images/readme_img/외부MVP.png" width="450">
+<img src="images/readme_img/외부MVP.png" width="900">
 
 ### 프로젝트 목표
 
