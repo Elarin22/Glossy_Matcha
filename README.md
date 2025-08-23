@@ -48,7 +48,6 @@
 - 웹 기반 (PC와 모바일에서도 접근 가능) [o]
 - 로그인 기능은 있으면 좋으나, 없어도 무방 (내부용 MVP) [o]
 ```
-**[IA]**
 <img src="images/readme_img/내부MVP.png" width="450">
 
 ***[2] 🌐 Glossy Matcha 브랜드 웹사이트 MVP (국·영문)***
@@ -82,7 +81,6 @@
 - GLOSSY MATCHA의 기존 BI/브랜드 가이드에 맞춘 세련되고 간결한 스타일 [o]
 - SPA(Single Page Application) 형식 환영 [o]
 ```
-**[IA]**
 <img src="images/readme_img/외부MVP.png" width="450">
 
 ### 프로젝트 목표
@@ -843,13 +841,9 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 ---
 
 **[모바일 반응형]**
-| 1. Home (Mobile) | 2. About (Mobile) |
-| --- | --- |
-| <img src="images/readme_gif/fe/home_mb.gif" width="400"> | <img src="images/readme_gif/fe/about_mb.gif" width="400"> |
-
-| 3. Product (Mobile) | 4. GlossyPick (Mobile) |
-| --- | --- |
-| <img src="images/readme_gif/fe/product_mb.gif" width="400"> | <img src="images/readme_gif/fe/glossypick_mb.gif" width="400"> |
+| 1. Home (Mobile) | 2. About (Mobile) | 3. Product (Mobile) | 4. GlossyPick (Mobile) |
+| --- | --- | --- | --- |
+| <img src="images/readme_gif/fe/home_mb.gif" width="400"> | <img src="images/readme_gif/fe/about_mb.gif" width="400"> | <img src="images/readme_gif/fe/product_mb.gif" width="400"> | <img src="images/readme_gif/fe/glossypick_mb.gif" width="400"> |
 
 ---
 
