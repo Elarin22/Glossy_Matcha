@@ -2,31 +2,90 @@
 
 ![Glossy Matcha Logo](images/readme_img/logo-BI.png)
 
-## **🍵 제주의 프리미엄 말차를 경험할 수 있는 브랜드 웹사이트(외부 MVP)**
-
-## **📠 매장 운영 관리 시스템(내부 MVP)**
-
 ## 1. 📌 프로젝트 개요
 
-**Glossy Matcha**는 **듀얼 MVP 아키텍처**를 기반으로 한 풀스택 비즈니스 솔루션입니다.
+**Glossy Matcha**는 **듀얼 MVP 아키텍처**를 기반으로 한 **실제 비즈니스에서 운영되는 라이브 서비스**입니다
+  - ✅ **현재 운영 중**: 고객들이 사용하는 프로덕션 환경
+  - ✅ **실무 요구사항**: 기업 대표님의 피드백과 요구사항을 반영
+  - ✅ **비즈니스 임팩트**: 브랜드 인지도 향상과 매출 증대에 기여
+  - ✅ **지속적 운영**: 출시 후 지속적인 유지보수와 기능 개선
 
-### 🌍 External MVP - 브랜드 웹사이트
 
-**타겟**: 글로벌 고객 및 잠재 고객  
-**목적**: 제주 프리미엄 말차 브랜드의 디지털 프레젠스 구축 및 브랜드 가치 전달  
-**핵심 가치**: 브랜드 아이덴티티, 고객 경험, 글로벌 접근성
+### **구현한 웹사이트**
+- **글로벌 브랜드 웹사이트**: 글로벌로 뻗어나가는 글로시 말차의 브랜드 가치 전달
+- **매장 운영 대시보드**: 매장 운영 데이터를 실시간으로 분석 및 모니터링, 업무 프로세스를 자동화함으로써 운영 효율 극대화
 
-### 🏢 Internal MVP - 매장 운영 대시보드
+### **배포 URL**
+- **프론트엔드**
+  - **글로벌 브랜드 웹사이트**: https://glossymatcha.com
+- **백엔드**
+  - **매장 운영 대시보드**: https://a92fj39af.glossymatcha.com
+  - **제품 API 서버**: https://x81fj32kd.glossymatcha.com/api/products
+  - **문의 API 서버**: https://x81fj32kd.glossymatcha.com/api/inquiries
 
-**타겟**: 내부 운영진 및 관리자  
-**목적**: 실시간 비즈니스 인텔리전스 및 운영 효율성 극대화  
-**핵심 가치**: 데이터 기반 의사결정, 업무 자동화, 운영 최적화
+### 기업 요구사항 명세
+- 우선순위 : [1] > [2]
 
-### 🔗 통합 생태계
+***[1] 📊 Glossy Matcha 매장 운영관리 시스템 MVP***
+```
+* 목적
+- 현재 구글 스프레드시트로 분산 관리 중인 매출·거래처·HR(급여) 등을 한 화면에서 통합 관리할 수 있는 기본적인 내부용 시스템 필요
 
-두 MVP가 RESTful API를 통해 완벽하게 연동되어, **고객 접점에서 운영 백엔드까지의 끊김 없는 비즈니스 플로우**를 구현합니다. 현대적인 웹 기술 스택을 활용하여 확장 가능하고 유지보수성이 뛰어난 엔터프라이즈 급 솔루션을 제공합니다.
+* 필수 기능 목록
+- 직원 목록 관리 [o]
+- 직원 이름, 근무 형태(정직원/파트), 입사일, 연락처 [o]
+- 근무시간 & 급여 입력/관리 [o]
+- 기본 시급/급여 설정 [o]
+- 월별 근무일수 또는 시간 입력 → 자동 합산 계산 [o]
+- 매장별 매출 입력 [ ]
+- 날짜별 매출 기록, 간단한 분류(음료/MD 등) [o]
+- 일간/월간 합계 [o]
+- 거래처 리스트 관리 [o]
+- 업체명, 담당자 연락처, 결제방식 메모 등 [o]
+- 간단한 리포트 출력 (표 형태) [o]
 
-### 🎯 프로젝트 목표
+* 사용환경
+- 웹 기반 (PC와 모바일에서도 접근 가능) [o]
+- 로그인 기능은 있으면 좋으나, 없어도 무방 (내부용 MVP) [o]
+```
+**[IA]**
+<img src="images/readme_img/내부MVP.png" width="450">
+
+***[2] 🌐 Glossy Matcha 브랜드 웹사이트 MVP (국·영문)***
+```
+* 목적
+- 브랜드를 전 세계 소비자와 바이어에게 효과적으로 소개할 수 있는 양방향 웹사이트 MVP 구축
+  - 글로벌 마케팅, 바이어 대응, 콘텐츠 확산에 사용
+
+* 필수 구성 요소
+- 브랜드 소개 페이지
+  - 브랜드 스토리 / 제주의 유기농 말차 / 글로시말의 철학 [o]
+  - 심플하고 세련된 디자인 [o]
+- 제품 소개 섹션
+  - 주요 제품(Glossy Signature, 100% Pure 등) 이미지 + 설명 [o]
+  - 제품별 스펙 및 특징 [o]
+- 바이어 전용 페이지 (숨김 URL or 간단한 로그인)
+  - MOQ, HS CODE, 수출용 제품 스펙 요약 [ ]
+  - 라벨 이미지, 인증서, 수출용 패키지 사진 등 다운로드 가능 [ ]
+- Matcha Recipe Generator (체험형 콘텐츠)
+  - 3~5개의 간단한 질문 → 취향 기반 말차 레시피 추천 [o]
+  - 결과 공유용 링크 [o]
+  - 결과 공유용 이미지 출력 (SNS용) [ ]
+- 문의하기 폼
+  - 이름/이메일/문의내용 [o]
+  - 자동 이메일 전송 [ ]
+
+* 언어
+- 국문 & 영문 버전 제공 (한 페이지 내 전환도 가능) [o]
+
+* 스타일
+- GLOSSY MATCHA의 기존 BI/브랜드 가이드에 맞춘 세련되고 간결한 스타일 [o]
+- SPA(Single Page Application) 형식 환영 [o]
+```
+**[IA]**
+<img src="images/readme_img/외부MVP.png" width="450">
+
+### 프로젝트 목표
 
 - **브랜드 아이덴티티 강화**: 제주 프리미엄 말차 브랜드의 고급스러운 이미지 구축
 - **글로벌 접근성**: 한국어/영어 다국어 지원으로 해외 시장 진출 준비
@@ -38,11 +97,11 @@
 ## 2. 🏡 팀 소개
 
 | 이름   | 사진                                                                                 | 깃허브 주소                                          | 담당 파트                                                                                     |
-| ------ | ------------------------------------------------------------------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| 심희현 | <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:90px;">   | [@Elarin22](https://github.com/Elarin22)             | Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집           |
-| 김성현 | <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:90px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트                 |
-| 조은이 | <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:90px;">   | [@chohc](https://github.com/chohc)                   | 메인 페이지/문의하기 페이지 디자인 및 구현, 헤더/푸터, API 연동, 다국어 시스템, 공통 컴포넌트 |
-| 김유빈 | <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:90px;">   | [@6wol](https://github.com/6wol)                     | 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트        |
+| --------- | ------------------------------------------------------------------------------------ | ---------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| 심희현 | <img src="images/readme_img/hee.png" alt="심희현" style="width:70px;height:90px;">   | [@Elarin22](https://github.com/Elarin22)          | [팀장] Django 백엔드, AWS 인프라, 매장 운영 시스템, API 설계, 메인 페이지 브랜드 영상 편집           |
+| 김성현 | <img src="images/readme_img/seong.png" alt="김성현" style="width:70px;height:90px;"> | [@seonghyeon1022](https://github.com/seonghyeon1022) | [팀원] 브랜드 소개/체험형 콘텐츠 페이지 디자인 및 구현, 다국어 시스템, 공통 컴포넌트                 |
+| 조은이 | <img src="images/readme_img/eun.png" alt="조은이" style="width:70px;height:90px;">   | [@chohc](https://github.com/chohc)                   | [팀원] 메인 페이지/문의하기 페이지 디자인 및 구현, API 연동, 다국어 시스템, 공통 컴포넌트 |
+| 김유빈  | <img src="images/readme_img/you.png" alt="김유빈" style="width:70px;height:90px;">   | [@6wol](https://github.com/6wol)                     | [팀원] 메인 페이지 디자인, 제품 페이지 디자인 및 개발, API 연동, 다국어 시스템, 공통 컴포넌트        |
 
 ---
 
@@ -119,83 +178,204 @@
 
 ---
 
-## 5. 📅 개발 일정
+## 5. 🔑 코딩 컨벤션
+<details>
+<summary>Backend</summary>
 
-**개발 기간**: 2025년 7월 28일 ~ 2025년 8월 15일 (19일간)
-
-```mermaid
-gantt
-    title Glossy Matcha 웹사이트 개발 일정표
-    dateFormat  YYYY-MM-DD
-    axisFormat  %m/%d
-
-    section 프로젝트 초기화
-    Git 환경 구축           :setup1, 2024-07-28, 1d
-    Django 프로젝트 초기화  :setup2, 2024-07-28, 1d
-    Next.js 프로젝트 초기화 :setup3, 2024-07-28, 1d
-    Figma 디자인 초안       :setup4, 2024-07-28, 2d
-
-    section 백엔드 개발 (심희현)
-    ERD 설계 및 DB 구축     :be1, 2024-07-29, 1d
-    Django REST API 셋업    :be2, 2024-07-29, 1d
-    AWS 인프라 구축         :be3, 2024-07-29, 1d
-    CI/CD 파이프라인        :be4, 2024-07-29, 2d
-    Django ORM 모델 구현    :be5, 2024-07-31, 1d
-    문의하기 API            :be6, 2024-07-31, 1d
-    PostgreSQL 연동         :be7, 2024-07-31, 1d
-    Admin 인터페이스        :be8, 2024-08-02, 2d
-    Serializers 구현        :be9, 2024-08-03, 2d
-    제품 관리 API           :be10, 2024-08-07, 1d
-    매장 운영 대시보드      :be11, 2024-08-05, 3d
-    직원 관리 시스템        :be12, 2024-08-07, 1d
-    거래처 관리 시스템      :be13, 2024-08-07, 1d
-    매출 관리 시스템        :be14, 2024-08-08, 2d
-    HTTPS 보안 설정         :be15, 2024-08-09, 3d
-    도메인 보안 강화        :be16, 2024-08-14, 1d
-
-    section 프론트엔드 공통
-    TypeScript 환경 구성    :fe1, 2024-07-30, 1d
-    공통 컴포넌트 설계      :fe2, 2024-08-01, 1d
-    스타일 시스템 구축      :fe3, 2024-08-01, 1d
-
-    section 김성현 (프론트엔드)
-    브랜드 소개 페이지      :fe4, 2024-07-30, 2d
-    체험형 콘텐츠 페이지    :fe5, 2024-08-04, 4d
-    공통 컴포넌트 제작      :fe6, 2024-08-01, 1d
-    반응형 디자인 구현      :fe7, 2024-08-05, 2d
-    국영문 전환 시스템      :fe8, 2024-08-09, 2d
-    페이지 최적화           :fe9, 2024-08-12, 2d
-    메타데이터 및 SEO       :fe10, 2024-08-13, 1d
-
-    section 조은이 (프론트엔드)
-    메인 페이지 개발        :fe11, 2024-07-29, 3d
-    문의하기 페이지         :fe12, 2024-07-31, 2d
-    Netlify 배포 환경       :fe13, 2024-07-29, 1d
-    API 연동 구현           :fe14, 2024-08-06, 1d
-    반응형 메인 페이지      :fe15, 2024-08-07, 2d
-    언어 전환 시스템        :fe16, 2024-08-08, 2d
-    헤더/푸터 컴포넌트      :fe17, 2024-08-11, 2d
-
-    section 김유빈 (프론트엔드)
-    메인/제품 페이지 디자인      :fe18, 2024-07-28, 5d
-    Nav/Footer 컴포넌트       :fe19, 2024-08-01, 1d
-    반응형 디자인 구현        :fe20, 2024-08-08, 3d
-    Mock 데이터 연동          :fe21, 2024-08-09, 2d
-    API 연동 구현             :fe22, 2024-08-12, 1d
-    언어 전환 시스템          :fe23, 2024-08-12, 2d
-    UI 개선 및 최적화         :fe24, 2024-08-14, 3d
-    테스트 및 배포 준비       :fe25, 2024-08-14, 1d
-
-    section 통합 및 배포
-    프론트-백엔드 연동      :integration1, 2024-08-06, 3d
-    전체 시스템 테스트      :integration2, 2024-08-11, 2d
-    성능 최적화             :integration3, 2024-08-12, 2d
-    최종 배포 및 검증       :integration4, 2024-08-14, 2d
+**1. 네이밍 컨벤션**
 ```
+- 클래스명 (PascalCase)
+  - View 클래스: DashboardView, StaffListView, CreateInquiryView
+  - Model 클래스: Staff, Products, Inquiries, DailySales
+  - Form 클래스: StaffForm, WorkRecordForm
+  - Serializer 클래스: InquirySerializer, ProductListSerializer
+
+- 함수/메서드명 (snake_case)
+  - get_context_data, clean, save, validate_email
+  - 템플릿 태그: korean_won, korean_won_with_unit
+
+- 변수명 (snake_case)
+  - active_staff_count, today_sales, related_inquiries
+
+- 상수명 (UPPER_CASE)
+  - INQUIRY_TYPE_CHOICES, EMPLOYEE_TYPE_CHOICES, PAYMENT_METHOD_CHOICES
+```
+
+**2. 파일 구조 컨벤션**
+```
+glossymatcha/
+ ├── management/        # 관리 명령어
+ ├── models.py          # 데이터 모델 정의
+ ├── views.py           # 뷰 로직 (Django Template Views + DRF API Views)
+ ├── serializers.py     # DRF 시리얼라이저
+ ├── forms.py           # Django 폼
+ ├── admin.py           # Django Admin 설정
+ ├── tests.py           # test 코드
+ ├── urls.py            # URL 패턴
+ ├── templates/         # Django Templates
+ └── templatetags/      # 커스텀 템플릿 태그
+```
+
+**3. URL 패턴 컨벤션**
+```
+- API 엔드포인트
+  - 접두사
+    - api/
+  - RESTful 패턴
+    - api/inquiries/
+    - api/products/
+  - 언어 파라미터
+    - ?lang=ko|en
+
+- 템플릿 뷰
+  - 슬래시(/) 구분자 사용
+    - staff/, inquiries/, suppliers/
+  - CRUD 패턴
+    - create/
+    - <int:pk>/update/
+    - <int:pk>/delete/
+```
+
+**4. 모델 컨벤션**
+```
+- 필드 순서
+1) CharField 필드
+2) 선택 필드
+3) Date/DateTime 필드
+4) 관계 필드
+5) created_at, updated_at (타임스탬프)
+
+- 메서드 순서
+1) clean() → 검증 로직
+2) save() → 저장 로직
+3) @property 메서드
+4) __str__() → 문자열 표현
+
+- Meta 클래스
+  - verbose_name, verbose_name_plural → 한국어 설정
+  - ordering → 정렬 기준 명시
+```
+
+**5. 뷰 컨벤션**
+```
+- 클래스 기반 뷰: ListView, CreateView, UpdateView
+- Mixin 사용: LoginRequiredMixin
+- DRF Generic Views: CreateAPIView, ListAPIView, RetrieveAPIView
+- 권한 설정
+  - Template Views: LoginRequiredMixin
+  - API Views: AllowAny, IsAdminUser
+```
+
+**6. 문서화 컨벤션**
+```
+- Docstring: 클래스 & 주요 메서드에 한국어 작성 (기능, 파라미터, 반환값)
+- 주석: 복잡한 로직 및 비즈니스 로직 설명
+```
+
+**7. 템플릿 태그 컨벤션**
+```
+- 명확한 필터명 사용
+  - korean_won, korean_won_with_unit
+```
+
+**8. Admin 인터페이스 컨벤션**
+```
+- Admin 클래스
+  - list_display: 목록 표시 필드
+  - list_filter: 필터링 옵션
+  - search_fields: 검색 가능 필드
+  - readonly_fields: 읽기 전용 필드
+  - inlines: 인라인 편집
+
+- 커스텀 메서드
+  - translation_status: 번역 상태 표시
+  - HTML 태그 활용: format_html(), mark_safe()
+```
+
+</details>
+
+<details>
+<summary>Frontend</summary>
+
+**1. 파일 및 폴더 네이밍 규칙**
+```
+- 폴더: PascalCase (Product/, GlossyPick/, MobileHome/)
+  - 컴포넌트 파일: PascalCase + .tsx (ProductMainBanner.tsx, LanguageButton.tsx)
+  - 스타일 파일: PascalCase + .module.scss (ProductMainBanner.module.scss)
+  - Hook: camelCase + use접두사 (useMatchaQuiz.ts, useMobileDetect.ts)
+```
+
+**2. 컴포넌트 명명 규칙**
+```
+- 컴포넌트명: PascalCase (ProductMainBanner, LanguageButton)
+- export: export default 컴포넌트명
+```
+
+**3. 함수/변수 네이밍 규칙**
+```
+- 함수: camelCase (getProductName, handleAnswer, fetchProduct)
+- 변수: camelCase (currentStep, quizState, activeProductId)
+- Hook: use 접두사 (useMatchaQuiz, useCurrentLocale)
+```
+
+**4. 스타일링 규칙**
+```
+- CSS Modules: .module.scss 확장자
+```
+
+**5. Import/Export 규칙**
+```
+- Default export: 컴포넌트는 default export
+```
+
+</details>
+
+<details>
+<summary>Git Branch 명명 규칙</summary>
+
+**1. main branch**
+```
+- 항상 배포 가능한 상태
+- 직접 커밋하지 않고 PR을 통해 머지
+```
+
+**2. develop**
+```
+- 통합 개발 브랜치
+- 모든 기능/버그 브랜치는 여기로 PR 후 머지
+```
+
+**3. 기능 브랜치**
+```
+- feat or feature: <기능명>
+- 새로운 기능 개발
+- PR 후 `develop`에 머지
+```
+
+**4. 코드 수정 브랜치**
+```
+- fix: <수정 파트 이름>
+- 버그 수정
+- PR 후 develop 브랜치에 merge
+```
+
+</details>
 
 ---
 
-## 6. 📂 프로젝트 구조
+## 6. 🔧 시스템 아키텍처
+<img src="images/readme_img/system.png">
+
+---
+
+## 7. 📅 개발 일정
+
+**개발 기간**: 2025년 7월 28일 ~ 2025년 8월 15일 (19일간)
+<img src="images/readme_img/wbs.png">
+
+---
+
+## 8. 📂 프로젝트 구조
 
 <details>
 <summary>프로젝트 폴더 구조</summary>
@@ -269,11 +449,11 @@ Glossy_Matcha/
 
 ---
 
-## 7. 📋 ERD
+## 9. 📋 ERD
 
 ![ERD](images/readme_img/ER%20Diagram.png)
 
-### ✅ ERD 특징
+### ERD 특징
 
 > 🔹 제품 관리 영역
 
@@ -297,37 +477,34 @@ Glossy_Matcha/
 
 ---
 
-## 8-1. 👩🏻‍💻 Backend 시스템
+## 10-1. 👩🏻‍💻 Backend 시스템
 
-### 📊 매장 운영 대시보드 시스템
+### 매장 운영 대시보드 시스템
 
 #### Gmail 연동 답변 시스템
-
 **고객 서비스 자동화**
 
 - **원클릭 답장**: 고객 이메일 클릭 시 Gmail 답장 창이 자동으로 열리며 즉시 답변 가능
-- **스마트 템플릿**: 고객명, 문의 내용, 문의 유형이 미리 입력된 정중한 답장 템플릿 자동 생성
+- **스마트 템플릿**: 고객명, 문의 내용, 문의 유형이 미리 입력된 답장 템플릿 자동 생성
 - **고객 이력 추적**: 동일 고객의 과거 모든 문의 이력을 한 화면에서 확인 가능
-- **업무 시간 단축**: 기존 10분 소요 → 1분 내 답변 완료로 고객 만족도 향상
+- **문의 유형별 자동 분류**: 일반문의/제품문의/기타문의 자동 태그 표시
 
-#### 📡 실시간 통계 대시보드
-
+#### 실시간 통계 대시보드
 **한눈에 보는 매장 현황**
 
-- **6개 핵심 지표 카드**: 재직직원 수, 오늘매출, 이번달매출, 올해매출, 거래처 수, 고객문의 건수
+- **6개 핵심 지표 카드**: 재직 직원 수, 오늘 매출, 이번 달 매출, 올해 매출, 거래처 수, 고객문의 건수
 - **실시간 데이터 업데이트**: 페이지 새로고침 시 최신 데이터 자동 반영
 - **직관적 아이콘**: Bootstrap Icons로 각 지표별 시각적 구분
 - **반응형 카드 레이아웃**: 모바일/태블릿/데스크톱 환경별 최적화
 
-#### 📈 Chart.js 기반 매출 시각화
+#### Chart.js 기반 매출 시각화
 
 - **월별 매출 트렌드**: 최근 12개월 라인 차트로 매출/비용/수익 추이 표시
 - **일별 매출 현황**: 최근 30일 바 차트로 일매출 변화 시각화
 - **매출 구성 분석**: 도넛 차트로 매출/비용/수익 비율 표시
 - **동적 차트 업데이트**: 데이터 변경 시 실시간 차트 갱신
 
-#### 📱 통합 관리 시스템
-
+#### 통합 관리 시스템
 **직원 관리**
 
 - 재직/퇴사 상태별 관리
@@ -340,121 +517,133 @@ Glossy_Matcha/
 - 결제 방식별 분류
 - 거래처별 매입 현황
 
-**매출 관리 (3단계 구조)**
+**매출 관리**
 
-- **일별 매출**: 일일 매출 입력 및 관리
-- **월별 매출**: 월간 매출 집계 및 분석
-- **연별 매출**: 연간 매출 통계 및 비교
+- **일별 매출**: 일일 매출 입력
+- **월별 매출**: 월간 매출 자동 집계
+- **연별 매출**: 연간 매출 자동 집계
 
-#### 📤 Excel 내보내기 시스템
-
+#### Excel 내보내기 시스템
 **원클릭 리포트 생성**
 
-- **전문적인 엑셀 리포트**: 회계팀이 바로 사용 가능한 완성도 높은 양식
-- **자동 포맷팅**: 숫자 콤마 표시, 색상 코딩, 열 너비 자동 조정으로 가독성 극대화
-- **다양한 리포트 유형**: 전체 매출 현황, 개별 월/년도 상세 분석, 맞춤형 기간별 리포트
+- **전문적인 엑셀 리포트**: 금액 콤마 표시, 비율 퍼센트 자동 변환, 열 너비 자동 조정으로 가독성 극대화
+- **다양한 리포트 유형**: 전체 매출 현황, 개별 월/년도 상세 분석
 - **즉시 다운로드**: 버튼 클릭 즉시 완성된 엑셀 파일 다운로드 (별도 프로그램 불필요)
 
-#### 🎢 빠른 액션 시스템
-
+#### 빠른 액션 시스템
 **업무 효율성 극대화**
 
 - **원클릭 업무 처리**: 직원 등록, 거래처 추가, 매출 입력 등 주요 업무를 한 번의 클릭으로 처리
 - **실시간 현황 모니터링**: 최신 5건의 매출/직원/문의 현황을 메인 화면에서 즉시 확인
 - **스마트 필터링**: 재직/퇴사, 활성/비활성 등 상태별 자동 분류로 필요한 정보만 선별 표시
 
-#### 💭 문의 관리 통합
+#### 문의 관리 주요 기능
 
 - **실시간 문의 현황**: 대시보드 메인에서 최신 문의 3건 표시
 - **문의 유형별 분류**: 일반문의/제품문의/기타 자동 분류 및 통계
 - **문의자 이력 관리**: 동일 고객의 문의 이력 연결 추적
+- **권한 제어**: 일반 사용자는 문의만 가능, 관리자만 조회 가능
+- **API 연동**: `POST /api/inquiries/` 엔드포인트로 문의 데이터 전송
+
+**문의하기 플로우**
+```
+Next.js 문의 폼 → REST API → Django DB → 매장 운영 대시보드
+```
+
+**문의하기 API Logic**
+```python
+# Backend
+class InquirySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inquiries
+        fields = ['id', 'name', 'email', 'inquiry_type', 'message', 'created_at']
+    
+    def validate_email(self, value):
+        if not value:
+            raise serializers.ValidationError("이메일은 필수 입력 항목입니다.")
+        return value
+```
+
+```javascript
+// Frontend
+const requestData = {
+  name: formData.name,
+  email: formData.email,
+  inquiry_type: CATEGORY_MAP[selectedCategory], // general/product/other
+  message: formData.message,
+};
+
+const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/inquiries/`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(requestData),
+});
+```
 
 ---
 
-## 8-2. 👩🏻‍💻 Back / Front 협업 시스템
+## 10-2. 👩🏻‍💻 Back / Front 협업 시스템
 
-### 📦 제품 데이터 통합 관리 시스템
+### 제품 데이터 통합 관리 시스템
 
-#### 👩🏾‍🤝‍👩🏼 다국어 제품 모델 설계
-
+#### 다국어 제품 모델 설계
 **글로벌 서비스 준비된 제품 관리**
 
-- **완전한 이중 언어 지원**: 제품명, 설명, 부제목 등 모든 정보를 한국어/영어로 관리
+- **이중 언어 지원**: 제품명, 설명, 부제목 등 모든 정보를 한국어/영어로 관리
 - **다중 이미지 지원**: ProductImages 모델로 제품당 여러 이미지 관리
 - **인라인 관리**: Django Admin에서 제품 수정 시 이미지도 함께 관리
 - **이미지별 다국어 alt 텍스트**: 접근성과 SEO 최적화
-- **확장 가능한 구조**: 향후 중국어, 일본어 등 추가 언어 지원 용이
 - **번역 상태 관리**: Django Admin에서 ✅완료/⚠️부분완료/❌미완료 표시
 
-#### 👨🏿‍🤝‍👨🏼 스마트 언어 처리 시스템
-
+#### 스마트 언어 처리 제품 관련 시스템
 **사용자 경험 극대화**
 
 - **지능형 언어 선택**: 영어 번역이 없으면 한국어 버전을 자동으로 표시하여 빈 화면 방지
 - **URL 기반 언어 전환**: `/api/products/?lang=ko|en` 파라미터로 언어별 API 제공
 - **번역 진행 상황**: 관리자가 번역 작업 우선순위를 한눈에 파악할 수 있는 시각적 표시
 
-#### 📡 실시간 데이터 동기화
+**제품 API Logic**
+```python
+# Backend
+class ProductListSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        language = self.context.get('language', 'ko')
+        
+        if language == 'en':
+            data['name'] = instance.name_en or instance.name  # fallback
+            data['description'] = instance.description_en or instance.description
+        return data
+```
+
+```javascript
+// Frontend
+const response = await fetch(`${API_BASE_URL}/products/?lang=${lang}`, {
+  method: "GET",
+  headers: { "Content-Type": "application/json" },
+  cache: "no-store",
+});
+
+const data: ProductApiResponse = await response.json();
+```
+
+#### 실시간 제품 데이터 동기화
 
 ```
 Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최신 데이터 반영
 ```
 
-- **캐시 없는 실시간**: 관리자가 제품 정보 수정하면 프론트엔드에서 즉시 확인 가능
+- **캐시 없는 실시간**: 관리자가 제품 정보 수정하면 제품 페이지에서 즉시 확인 가능
 - **데이터 검증**: 한국어/영어 중 최소 하나의 제품명과 설명 필수 검증
 - **관련 데이터 연결**: 제품-이미지-스펙 정보 관계형 구조로 일관성 유지
 
 ---
 
-### 💬 실시간 문의 관리 시스템
+## 11. 🔌 API 명세
 
-```
-Next.js 문의 폼 → REST API → Django DB → 매장 운영 대시보드
-```
-
-#### 문의 접수 플로우
-
-1. **프론트엔드**: Next.js 문의 폼에서 고객이 문의 작성
-2. **API 연동**: `POST /api/inquiries/` 엔드포인트로 문의 데이터 전송
-3. **실시간 반영**: Django 매장 운영 대시보드에서 즉시 문의 확인 가능
-
----
-
-## 9. 📋 요구사항 명세
-
-### 기능적 요구사항
-
-| 구분                 | 기능          | 설명                                           | 우선순위 |
-| -------------------- | ------------- | ---------------------------------------------- | -------- |
-| **사용자 웹사이트**  | 브랜드 소개   | 글로시말차 브랜드 철학, 연혁, 제주 말차 스토리 | High     |
-|                      | 제품 카탈로그 | 시그니처/다구세트/틴케이스 상세 정보           | High     |
-|                      | 체험형 콘텐츠 | 말차 추천 퀴즈 '글로시픽'                      | Medium   |
-|                      | 다국어 지원   | 한국어/영어 실시간 전환                        | High     |
-|                      | 고객 문의     | 문의 접수 및 유형별 분류                       | High     |
-| **매장 운영 시스템** | 운영 대시보드 | 매출/직원/거래처 현황 통합 조회                | High     |
-|                      | 직원 관리     | 직원 정보, 근무 기록, 급여 관리                | High     |
-|                      | 거래처 관리   | 공급업체 정보 및 결제 방식 관리                | Medium   |
-|                      | 매출 관리     | 일별/월별/연별 매출 통계 및 엑셀 내보내기      | High     |
-|                      | 문의 관리     | 고객 문의 조회 및 답변 관리                    | Medium   |
-
-### 비기능적 요구사항
-
-| 구분       | 요구사항         | 목표                                        |
-| ---------- | ---------------- | ------------------------------------------- |
-| **성능**   | 페이지 로딩 속도 | 3초 이내                                    |
-|            | API 응답 시간    | 1초 이내                                    |
-| **호환성** | 브라우저 지원    | Chrome, Safari, Firefox, Edge 최신 2개 버전 |
-|            | 모바일 대응      | iOS/Android 네이티브 앱 수준의 UX           |
-| **보안**   | 데이터 암호화    | HTTPS 통신, 민감 정보 암호화                |
-|            | 인증/인가        | Django 세션 기반 관리자 인증                |
-| **가용성** | 서비스 가용률    | 99% 이상                                    |
-| **확장성** | 동시 접속자      | 500명 이상 처리 가능                        |
-
----
-
-## 10. 🔌 API 명세
-
-### 📋 글로시 말차 브랜드 사이트 (협업 API)
+### 글로시 말차 브랜드 사이트 (협업 API)
 
 #### 문의하기 API
 
@@ -473,7 +662,7 @@ Next.js 문의 폼 → REST API → Django DB → 매장 운영 대시보드
 
 ---
 
-## 11. 📑 매장 운영 대시보드 URL (내부 MVP)
+## 12. 📑 매장 운영 대시보드 URL (내부 MVP)
 
 ### 메인 대시보드
 
@@ -543,237 +732,156 @@ Next.js 문의 폼 → REST API → Django DB → 매장 운영 대시보드
 
 ---
 
-## 12. 🚀 매장 운영 대시보드 주요 기능 [백엔드 Django Templates]
+## 13. 시연 영상
+### 📼 매장 운영 대시보드
+|   1. Login   |
+|:---------:|
+|<img src="images/readme_gif/be/login.gif">|
+|Django Login|
 
-## 👧🏻 **심희현**
-> 🎯 **문의하기 핵심 기술적 특징**
->
-> 1.  무상태 API 설계: RESTful API로 확장성 보장
-> 2.  계층화된 권한 제어: 일반 사용자(문의) vs 관리자(조회)
-> 3.  실시간 데이터 동기화: DB 저장 즉시 대시보드 반영
-> 4.  타입 안전성: TypeScript로 프론트엔드 타입 보장
-> 5.  Django ORM 활용: 효율적인 데이터베이스 쿼리 최적화
+<br>
 
-> ⚡ **성능 최적화 포인트**
->
-> 1. 대시보드는 최근 5건만 조회하여 페이지 로딩 속도 최적화
-> 2. Django의 auto_now_add로 자동 타임스탬프 관리
-> 3. SQLite 인덱싱으로 조회 성능 향상
+|   2. Dashboard    |
+|:--------------:|
+|<img src="images/readme_gif/be/dashboard.gif">|
+|매장 운영 메인 대시보드|
 
----
+<br>
 
-## 13. 🎨 브랜드 웹사이트 주요 페이지 및 기능 [백엔드 DRF API + 프론트엔드]
+|   3. 직원[Staff]    |
+|:--------------:|
+|<img src="images/readme_gif/be/staff.gif">|
+|직원 관리|
 
-## 👧🏻 **심희현**
+<br>
 
-### 🔌 문의하기 API 시스템
+|   4. 일별 매출[Daily Sales]   |
+|:--------------:|
+|<img src="images/readme_gif/be/sales.gif">|
+|일별 매출 관리|
 
-- **문의 생성 API**: 고객이 웹사이트에서 문의 제출 시 즉시 데이터베이스 저장
-- **실시간 대시보드 연동**: 문의 접수 즉시 매장 운영 대시보드에 반영
-- **유형별 분류**: 일반문의, 제품문의, 기타문의로 자동 분류
-- **보안 처리**: 무상태 RESTful API 설계로 확장성 보장
-- **권한 제어**: 일반 사용자는 문의만 가능, 관리자만 조회 가능
+<br>
 
-### 🌐 제품 API 다국어 시스템
+|   5. 개별 월/년 매출   |
+|:--------------:|
+|<img src="images/readme_gif/be/excel1.gif">|
+|개별 월/년 매출 엑셀 다운로드|
 
-- **지능형 언어 처리**: URL 파라미터로 한국어/영어 전환 지원
-- **스마트 폴백**: 영어 번역 미완료 시 한국어 자동 표시로 빈 화면 방지
-- **다중 이미지 관리**: 제품당 여러 이미지 및 이미지별 다국어 설명 지원
-- **실시간 동기화**: Django Admin에서 제품 수정 시 프론트엔드 즉시 반영
-- **확장 가능 구조**: 향후 중국어, 일본어 등 추가 언어 지원 준비
-- **성능 최적화**: 관련 데이터 미리 로딩으로 API 응답 속도 향상
+<br>
 
-## 👧🏻 **조은이**
+|   6. 전체 월/년 매출   |
+|:--------------:|
+|<img src="images/readme_gif/be/excel2.gif">|
+|전체 월/년 매출 엑셀 다운로드|
 
-### 🔎 메인 페이지
+<br>
 
-- **브랜드 맞춤 비디오**: 원본 영상을 글로시말차 브랜드 가치에 맞게 재편집 (edit: BE\_심희현)
-- **인터랙티브 미디어 제어**: 배경 비디오 사운드 on/off 기능
-- **간략한 메뉴 별 소개**: 이미지와 텍스트로 각 메뉴 간략히 설명
+|   7. 거래처   |
+|:--------------:|
+|<img src="images/readme_gif/be/client.gif">|
+|거래처 관리|
 
-#### 🔎 문의하기 페이지
+<br>
 
-- **문의 접수**: 이름, 이메일, 문의 유형, 메시지 입력
-- **유형별 분류**: 일반 문의, 제품 문의, 기타
-- **API 연동**: Django 백엔드와 RESTful API 통신
-
-#### 🌐 다국어 지원 (국문/영문)
-
-- **next-intl 기반 i18n 시스템**으로 서버/클라이언트 컴포넌트 모두 번역 지원
-- **URL 구조에 locale 적용** (예: /ko, /en)으로 링크 공유 및 SEO 대응
-- **언어 스위처 컴포넌트** 구현으로 사용자가 즉시 언어 변경 가능
+|   8. 문의하기   |
+|:--------------:|
+|<img src="images/readme_gif/be/email.gif">|
+|Gmail로 원클릭 답장|
 
 ---
 
-## 🧑🏻 **김성현**
+### 📼 글로벌 브랜드 웹사이트
+|   1. Home   |
+|:---------:|
+|<img src="images/readme_gif/fe/home.gif" width="450">|
+|메인 홈 화면|
 
-### 🔎 브랜드 소개 페이지
+<br>
 
-- **브랜드 철학**: 제주 자연과 프리미엄 품질에 대한 스토리
-- **브랜드 연혁**: 타임라인 형태의 브랜드 역사
-- **제주 말차**: 제주도에서 재배되는 말차의 특별함
-- **비전**: 글로시말차가 추구하는 미래 가치
+|   2. about   |
+|:---------:|
+|<img src="images/readme_gif/fe/about.gif" width="450">|
+|브랜드 소개|
 
-#### 🌐 다국어 지원 (국문/영문)
+<br>
 
-- **next-intl 기반 i18n 시스템**으로 서버/클라이언트 컴포넌트 모두 번역 지원
-- **브라우저 언어 감지**로 초기 진입 시 자동 언어 선택
-- **URL 구조에 locale 적용** (예: /ko, /en)으로 링크 공유 및 SEO 대응
-- **언어 스위처 컴포넌트** 구현으로 사용자가 즉시 언어 변경 가능
+|   3. product   |
+|:---------:|
+|<img src="images/readme_gif/fe/product.gif" width="450">|
+|제품 소개|
 
-#### 🎮 체험형 콘텐츠 (Glossy Pick)
+<br>
 
-- **Next.js SPA + React Hook/Custom Hook**으로 퀴즈 흐름과 추천 점수 계산 구현
-- **퀴즈 결과 표시** 및 개인 취향 맞춤 메뉴 추천
-- **Web Share API & Fallback**으로 모바일 공유/클립보드 복사 지원
-- **React-Toastify 연동**으로 공유/복사 성공·실패 시 실시간 피드백 제공
-- **i18n 적용**: `useTranslations("share")`로 공유 메시지, 제목, Toast 알림 다국어 처리
+|   4. add product   |
+|:---------:|
+|<img src="images/readme_gif/fe/addProduct.gif" width="450">|
+|admin 제품 추가 실시간 연동|
 
----
+<br>
 
-## 👧🏻 **김유빈**
+|   5. glossyPick   |
+|:---------:|
+|<img src="images/readme_gif/fe/glossypick.gif" width="450">|
+|체험형 컨텐츠|
 
-### 🔎 제품 페이지
+<br>
 
-- **제품 메인 배너**: 4초 간격 자동 슬라이드로 시그니처 제품 이미지 4개 순환 표시
-- **다국어 제품 설명**: next-intl 기반으로 한국어/영어 제품명, 부제목, 상세 설명 동적 전환
-- **제품 카테고리**: 시그니처, 말차다구세트, 틴케이스 3개 제품군 분류 및 개별 상세 페이지 구현
-- **API 연동**: Django REST API (ProductListView, ProductDetailView)와 연동하여 실시간 제품 정보 조회
-- **Fallback 시스템**: API 장애 발생 시 mockProducts 데이터로 자동 전환하여 서비스 안정성 보장
+|   6. inquire   |
+|:---------:|
+|<img src="images/readme_gif/fe/inquire.gif" width="450">|
+|문의하기|
 
-### 🔎 제품 상세 페이지
+<br>
 
-- **상세 정보 표시**: 제품 이미지, 스펙, body_sections 기반 상세 설명 구조화
-- **이미지 최적화**: Next.js Image 컴포넌트 + WebP/AVIF 포맷 지원으로 로딩 성능 개선
-- **타입 안전성**: TypeScript 인터페이스 (Product, ProductImage, ProductSpecification) 정의
-- **반응형 디자인**: PC/모바일 대응을 위해 ProductMainBanner, ProductMidBanner 컴포넌트 분리
-- **스크롤 인디케이터**: 페이지 스크롤 진행도 시각적 피드백 제공
+|   7. change language   |
+|:---------:|
+|<img src="images/readme_gif/fe/language.gif" width="450">|
+|헤더에 언어변경 버튼 클릭 시 국영문 전환|
 
-### 🔎 구매 연동 & 시스템 안정화
-
-- **구매 버튼**: 각 제품별 외부 마켓(네이버 스마트스토어, 쿠팡 등) 링크 연결
-- **다국어 필드 처리**: getLocalizedField 헬퍼 함수로 ko/en 필드 자동 선택 및 fallback 처리
-- **캐시 정책**: cache: "no-store" 설정으로 최신 제품 정보 실시간 반영
-- **에러 핸들링**: 10초 API 타임아웃 및 try-catch 적용으로 안정적인 사용자 경험 제공
-
----
-
-## 14. 🏗 시스템 아키텍처
-
-### 배포 아키텍처
-
-```
-[사용자] → [Vercel CDN] → [Next.js Frontend]
-                                    ↓
-                        [REST API 요청]
-                                    ↓
-[관리자] → [AWS Lightsail] → [Django Backend]
-            ↓                      ↓
-        [Nginx + SSL]         [SQLite3 DB]
-```
-
-### 도메인 구조
-
-- **프론트엔드**: Vercel 자동 배포 (https://glossymatcha.com)
-- **API 서버**: https://x81fj32kd.glossymatcha.com
-- **관리자 대시보드**: https://a92fj39af.glossymatcha.com
-- **IP 직접 접속 차단**: 보안 강화를 위한 도메인 기반 접근만 허용
+<br>
 
 ---
 
-## 15. 🚀 설치 및 실행 방법
+**[모바일 반응형]**
+| 1. Home (Mobile) | 2. About (Mobile) |
+| --- | --- |
+| <img src="images/readme_gif/fe/home_mb.gif" width="400"> | <img src="images/readme_gif/fe/about_mb.gif" width="400"> |
 
-### 환경 요구사항
-
-- **Node.js**: 18.0 이상
-- **Python**: 3.12 이상
-- **Git**: 최신 버전
-
-### 1. 저장소 클론
-
-```bash
-git clone https://github.com/Gloss-y/Glossy_Matcha
-```
-
-### 2. 백엔드 설정
-
-```bash
-cd be
-
-# 가상환경 생성 및 활성화
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 의존성 설치
-pip install -r requirements.txt
-
-# 데이터베이스 마이그레이션
-python manage.py migrate
-
-# 관리자 계정 생성
-python manage.py createsuperuser
-
-# 개발 서버 실행
-python manage.py runserver
-```
-
-### 3. 프론트엔드 설정
-
-```bash
-cd fe
-
-# 의존성 설치
-npm install
-
-# 개발 서버 실행
-npm run dev
-```
-
-### 4. 접속 정보
-
-- **프론트엔드**: http://localhost:3000
-- **백엔드 API**: http://localhost:8000/api
-- **관리자 페이지**: http://localhost:8000/glossyjay
+| 3. Product (Mobile) | 4. GlossyPick (Mobile) |
+| --- | --- |
+| <img src="images/readme_gif/fe/product_mb.gif" width="400"> | <img src="images/readme_gif/fe/glossypick_mb.gif" width="400"> |
 
 ---
 
-## 16. 🌐 배포 정보
+## 14. 🌐 배포 정보
 
 ### 프론트엔드 (Vercel)
+- **자동 배포**: GitHub main branch 푸시 시 Vercel 자동 배포
+- **환경 변수**: Vercel Dashboard에서 설정
+- **무중단 배포**: 코드 변경 시 자동 빌드/테스트/배포 파이프라인
 
-- **배포 URL**: https://glossymatcha.com
-- **자동 배포**: GitHub main 브랜치 푸시 시 자동 배포
-- **환경 변수**: Vercel 대시보드에서 설정
-- **CDN**: Vercel Edge Network를 통한 글로벌 배포
-
-### 백엔드 (AWS Lightsail)
-
+### 백엔드 (AWS Lightsail & GitHub Actions)
 - **서버**: AWS Lightsail Ubuntu 22.04 LTS
-- **데이터베이스**: SQLite3 (파일 기반)
+- **데이터베이스**: SQLite3 (파일 기반) / 데이터베이스 마이그레이션 자동 실행
 - **웹서버**: Nginx + Gunicorn
 - **SSL/보안**: Let's Encrypt HTTPS 인증서
-- **도메인 분리**:
-  - API 서버: https://x81fj32kd.glossymatcha.com
-  - 관리자 대시보드: https://a92fj39af.glossymatcha.com
+- **Collectstatic**: 정적 파일 수집 및 배포 자동화
+- **CI/CD 프로세스**: 코드 푸시 → GitHub Actions → 테스트 → 빌드 → AWS Lightsail 자동 배포 → 서비스 재시작
 
-### 보안 강화 적용 사항
+### 🔐 도메인 보안 강화 적용 사항
 
 #### HTTPS 전환 이유
-
 - **데이터 보안**: 클라이언트-서버 간 모든 통신 암호화로 중간자 공격 차단
 - **신뢰성 향상**: 브라우저 보안 경고 제거 및 사용자 신뢰도 증가
 - **SEO 최적화**: Google 등 검색엔진의 HTTPS 사이트 우선 순위 적용
-- **모던 웹 표준**: PWA, Service Worker 등 최신 웹 기술 지원
 
 #### 도메인 보안 강화
-
 - **서브도메인 난독화**: 예측 가능한 URL을 난수 형태로 변경하여 무차별 대입 공격 방지
   - 변경 전: `admin.glossymatcha.com`, `api.glossymatcha.com`
   - 변경 후: `a92fj39af.glossymatcha.com`, `x81fj32kd.glossymatcha.com`
 - **IP 접속 차단**: 직접 IP 접근 차단으로 서버 노출 최소화
 
 #### 구현 방법
-
 ```bash
 # 1. SSL 인증서 발급
 sudo certbot --nginx -d a92fj39af.glossymatcha.com
@@ -790,7 +898,6 @@ CSRF_COOKIE_SECURE = True
 ```
 
 #### 적용된 보안 기능
-
 - **SSL 인증서**: Let's Encrypt 자동 갱신
 - **보안 헤더**: HSTS, XSS Protection, Content-Type 보안
 - **접근 제어**: IP 직접 접속 차단, 도메인 기반 접근만 허용
@@ -798,106 +905,32 @@ CSRF_COOKIE_SECURE = True
 
 ---
 
-## 17. ⚙️ CI/CD 자동화 배포
-
-### 실제 운영 환경 배포
-
-- **프론트엔드**: Vercel 자동 배포 (GitHub main 브랜치 연동)
-- **백엔드**: GitHub Actions → AWS Lightsail 자동 배포 시스템
-- **실제 기업 사용**: 현재 글로시말차 매장에서 실제 운영 중인 시스템
-- **무중단 배포**: 코드 변경 시 자동 빌드/테스트/배포 파이프라인
-
-### 배포 자동화 프로세스
-
-- **코드 푸시 → 자동 테스트 → 빌드 → 배포 → 서비스 재시작**
-- **데이터베이스 마이그레이션 자동 실행**
-- **정적 파일 수집 및 배포 자동화**
-- **서버 상태 모니터링 및 롤백 지원**
-
----
-
-## 18. 🎯 핵심 기술적 특징
-
-### 🔥 프로덕션 레벨 아키텍처
-
-- **마이크로서비스 지향 설계**: API 서버와 관리자 시스템 완전 분리
-- **도메인 기반 서비스 분할**: 보안성과 확장성을 고려한 아키텍처
-- **실시간 데이터 동기화**: 프론트엔드-백엔드 간 즉시 반영 시스템
-
-### 🌐 글로벌 서비스 준비
-
-- **완전한 다국어 지원**: 한국어/영어 동시 서비스 (확장 가능한 구조)
-- **국제화 자동화**: 언어별 URL 라우팅 및 콘텐츠 자동 전환
-- **SEO 최적화**: 다국어 메타데이터 및 검색엔진 최적화
-
-### 🛡️ 엔터프라이즈급 보안
-
-- **다층 보안 구조**: HTTPS, 도메인 난독화, IP 접속 차단
-- **인증/인가 시스템**: Django 세션 기반 관리자 권한 관리
-- **API 보안**: CORS 정책, CSRF 보호, 입력값 검증
-
-### 📊 비즈니스 인텔리전스
-
-- **실시간 매출 분석**: Chart.js 기반 인터랙티브 대시보드
-- **다차원 데이터 분석**: 일별/월별/연별 매출 통계 및 추이 분석
-- **비즈니스 자동화**: Excel 리포트 자동 생성 및 다운로드
-
-### 🚀 성능 최적화
-
-- **CDN 활용**: Vercel Edge Network를 통한 글로벌 콘텐츠 배포
-- **이미지 최적화**: WebP 포맷 및 반응형 이미지 자동 변환
-- **캐싱 전략**: 정적 파일 장기 캐싱 및 API 응답 최적화
-
----
-
-## 19. 🏢 실제 운영 현황
-
-### 현재 서비스 중
-
-- **브랜드 웹사이트**: https://glossymatcha.com (고객용)
-- **매장 운영 시스템**: 실제 글로시말차 매장에서 현재 사용 중
-- **고객 문의 시스템**: 실제 고객 문의 접수 및 처리 운영
-- **제품 관리**: 실제 제품 정보 관리 및 업데이트
-
-### 실운영 검증된 기능
-
-- **매출 관리**: 실제 매장 일일/월별 매출 데이터 관리
-- **직원 관리**: 실제 직원 근무 시간 및 급여 계산
-- **거래처 관리**: 실제 공급업체 정보 및 거래 내역 관리
-- **고객 서비스**: 실제 고객 문의 접수 및 Gmail 연동 답변 시스템
-
----
-
-## 20. 🏆 프로젝트 성과
+## 15. 🏆 프로젝트 성과
 
 ### 기술적 성과
-
-- **모던 웹 기술 스택**: Next.js 15 + Django 5.3 최신 기술 적용
+- **모던 웹 기술 스택**: Next.js 15 + Django 5.2 최신 기술 적용
 - **타입 안전성**: TypeScript 도입으로 런타임 에러 최소화
-- **성능 최적화**: Vercel CDN을 통한 빠른 로딩, Image Optimization
 - **반응형 디자인**: 모든 디바이스에서 최적화된 사용자 경험
 - **다국어 지원**: next-intl을 활용한 효율적인 국제화 구현
 - **보안 강화**: HTTPS 적용 및 도메인 기반 서비스 분리
 
 ### 비즈니스 성과
-
 - **브랜드 가치 향상**: 프리미엄 브랜드 이미지 구축
 - **운영 효율성**: Django 템플릿 기반 매장 운영 대시보드로 업무 효율 개선
 - **고객 접점 확대**: 온라인 브랜드 경험 제공
 - **글로벌 준비**: 다국어 지원으로 해외 진출 기반 마련
 
 ### 학습 성과
-
 - **풀스택 개발**: 프론트엔드부터 백엔드까지 전체 시스템 구축
-- **팀워크**: 4인 팀 협업을 통한 프로젝트 관리 경험
+- **협업 능력**: 협업을 통한 프로젝트 관리 경험
 - **DevOps**: 클라우드 배포 및 HTTPS 보안 설정 경험
 - **UI/UX**: 사용자 중심의 인터페이스 설계 및 구현
 
 ---
 
-## 21. 🚨 트러블슈팅 사례
+## 16. 🚨 트러블슈팅 사례
 
-### **👧🏻 심희현**
+### **심희현**
 
 ### 1. HTTPS/HTTP 프로토콜 불일치로 인한 API 연동 오류
 
@@ -940,7 +973,7 @@ CSRF_COOKIE_SECURE = True
 #### **문제 상황**
 
 - 초기 PostgreSQL 사용 중 배포 과정에서 복잡성 증가
-- 팀 프로젝트 특성상 간단하고 빠른 개발 환경 필요
+- 프로젝트 기간 특성상 간단하고 빠른 개발 환경 필요
 
 #### **PostgreSQL 대비 SQLite 선택 이유**
 
@@ -959,7 +992,7 @@ CSRF_COOKIE_SECURE = True
 
 #### **성과**
 
-- 개발 환경 설정 시간 90% 단축
+- 개발 환경 설정 시간 단축
 - 팀원 간 개발 환경 동기화 문제 해결
 - 단순한 배포 프로세스로 DevOps 복잡도 감소
 
@@ -1025,15 +1058,15 @@ sudo systemctl restart site
 - **디버깅 스킬**: 로그 분석과 시스템 상태 점검 능력
 - **자동화 개선**: CI/CD 스크립트의 완전성과 검증 프로세스 중요성
 
-### 📊 트러블슈팅 성과 요약
+### 트러블슈팅 성과 요약
 
 | 문제 영역        | 해결 시간 | 핵심 스킬                     | 비즈니스 임팩트       |
 | ---------------- | --------- | ----------------------------- | --------------------- |
 | **보안/통신**    | 4시간     | SSL/HTTPS, 브라우저 보안 정책 | 사용자 신뢰도 향상    |
-| **데이터베이스** | 2일       | DB 마이그레이션, ORM 최적화   | 개발 생산성 90% 향상  |
-| **인프라/배포**  | 6시간     | Nginx, Unix 소켓, CI/CD       | 배포 신뢰성 100% 달성 |
+| **데이터베이스** | 2일       | DB 마이그레이션, ORM 최적화   | 개발 생산성 향상  |
+| **인프라/배포**  | 6시간     | Nginx, Unix 소켓, CI/CD       | 배포 신뢰성 증가 |
 
-### 🎯 핵심 역량 어필 포인트
+### 핵심 역량 어필 포인트
 
 #### **문제 해결 능력**
 
@@ -1057,218 +1090,197 @@ sudo systemctl restart site
 
 ---
 
-### **🧑🏻 김성현**
+### **김성현**
 
-#### 1. Git 브랜치 및 PR 관리 오류
+### 1. Git 브랜치 및 PR 관리 오류
 
-**상황**
+**문제 상황**
 
 - 초기 프론트엔드 기능 개발 후 `develop` 브랜치로 PR을 올리려 했으나 실수로 `main` 브랜치로 머지함
 - `develop`에는 변경 사항이 반영되지 않아 브랜치 관리 혼란 발생
 - 최종적으로 레포지토리를 초기화하고 새로 생성
 
-**원인**
+**원인 분석**
 
 - PR 생성 시 대상 브랜치 확인 누락
 - 브랜치 전략 및 Git 워크플로우에 대한 사전 합의 부족
 
-**해결 및 교훈**
-
+**해결 방안**  
 - PR 생성 전 대상 브랜치 반드시 확인
 - `develop`은 주 개발 브랜치, `main`은 릴리즈 전용으로 관리
 - 팀 내 Git 사용법과 체크리스트 공유
 - 문제 발생 시 즉시 공유 및 해결 방안 논의
 
-#### 2. useDownload 훅 – iOS 다운로드 오류
+**배운점**  
+- 브랜치 전략을 명확히 하지 않으면 협업 과정에서 혼선이 발생할 수 있음  
+- 코드 리뷰 전 브랜치 대상 검증 절차가 중요함  
+- 사소한 실수도 팀 전체 일정에 영향을 줄 수 있음을 경험함  
+- 문서화와 규칙 공유가 협업 품질을 높이는 핵심 요소임  
 
-**배경**
+---
 
-- 말차 추천 결과를 이미지로 저장하는 기능 구현 시 iOS Safari에서 다운로드 기능이 정상 작동하지 않음
+### 2. useDownload 훅 – iOS 다운로드 오류
 
 **문제 상황**
 
+- 말차 추천 결과를 이미지로 저장하는 기능 구현 시 iOS Safari에서 다운로드 기능이 정상 작동하지 않음
 - html2canvas 캡처 이미지를 즉시 다운로드 시도 → 팝업 차단, 다운로드 불가, 이미지 미출력
 - `document.write` 사용 시 deprecated 경고
 - `about:blank` 새 탭에서는 이미지 렌더링 실패
 
-**시도한 해결책**
+**해결 과정**
 
 - `window.open()`을 클릭 이벤트 내에서 호출하여 팝업 차단 최소화
 - `document.write` 대신 DOM API로 이미지 삽입
 - iOS는 Web Share API로 공유 유도, Android/PC는 즉시 다운로드 유지
 
-**결론 및 교훈**
+**결론**
 
 - iOS 보안 정책상 즉시 다운로드 UX 한계 존재
 - 기능을 "공유하기" 중심으로 통합해 사용자 혼란 최소화
 - 초기 기획 시 플랫폼별 제약 고려 필요
 
-#### 3. About 페이지 sub-nav 언어 전환 불가
+---
 
-**문제**
+### 3. About 페이지 sub-nav 언어 전환 불가
+
+**문제 상황**
 
 - About 페이지 sub-nav 텍스트가 국·영문 전환 시 갱신되지 않음
 
-**원인**
+**원인 분석**
 
 - ScrollNav(클라이언트 컴포넌트)가 서버에서 번역된 고정 문자열을 props로 받아 표시
 - 언어 변경 시 ScrollNav 내부에서 번역 재처리하지 않음
 
-**해결 방법**
+**해결 과정**
 
 - About 페이지에서 번역된 문자열 대신 메뉴 키(id) 전달
 - ScrollNav에서 `useTranslations()`로 직접 번역 처리
 
-**교훈**
+**배운점**
 
 - 다국어 처리 시 클라이언트 컴포넌트 내부에서 번역 수행 필요
 - 서버에서 번역된 결과를 그대로 넘기면 언어 전환 반영이 어려움
 
-#### 4. ScrollNav 활성 메뉴 인식 오류
-
-**문제 상황**
-
-- 특정 섹션 진입 시 활성 메뉴 표시가 바뀌지 않거나, 잘못된 메뉴가 활성화됨
-- 고정 헤더가 있을 때 스크롤 기준이 맞지 않아 활성화 타이밍이 부정확
-
-**원인 분석**
-
-1. `NAV_HEIGHT` 고정값 사용 → 반응형 환경에서 헤더 높이 변화 반영 불가
-2. `useEffect` 의존성 배열 누락 → 메뉴나 언어 변경 시 로직 갱신 안 됨
-3. `element.offsetTop` 사용 → 부모 레이아웃 변경에 따른 오차 발생
-
-**해결 방법**
-
-- 헤더 높이를 DOM에서 동적으로 계산
-- `useEffect` 의존성 배열에 `menuItems`, `activeId` 포함
-- IntersectionObserver를 활용해 섹션 진입 여부 감지
-
-**결과**
-
-- 반응형·다국어 환경에서도 정확하게 활성 메뉴 전환
-- UX 향상: 메뉴 클릭 후 스크롤과 활성화 상태 자연스럽게 동기화
-
 ---
 
-### **👧🏻 조은이**
+### **조은이**
 
 ### 1. 초기 렌더링 지연 문제 (useMobileDetect 훅 → 미디어쿼리 전환)
 
 #### **문제**
 
-PC/모바일 UI가 크게 달라서 useMobileDetect 훅을 만들어 기기별 컴포넌트를 렌더링하도록 구현했으나, resize 이벤트 리스너 기반으로 동작하다 보니 초기 렌더링 속도가 매우 느려짐. Lighthouse에서도 성능 저하 경고가 발생.
+- PC/모바일 UI가 크게 달라서 useMobileDetect 훅을 만들어 기기별 컴포넌트를 렌더링하도록 구현했으나, resize 이벤트 리스너 기반으로 동작하다 보니 초기 렌더링 속도가 매우 느려짐. Lighthouse에서도 성능 저하 경고가 발생.
 
 #### **시도**
 
-훅 유지 → 최적화 고민 → 개선이 어려움.
+- 훅 유지 → 최적화 고민 → 개선이 어려움.
 
 #### **해결**
 
-CSS 미디어쿼리만으로 대응하도록 리팩토링 → 초기 렌더링 속도 크게 개선됨.
+- CSS 미디어쿼리만으로 대응하도록 리팩토링 → 초기 렌더링 속도 크게 개선됨.
 
-#### **배운 점**
+#### **배운점**
 
-불필요한 JS 연산보다 CSS 레벨에서 해결 가능한 부분은 스타일링으로 해결하는 것이 성능상 유리함.
+- 불필요한 JS 연산보다 CSS 레벨에서 해결 가능한 부분은 스타일링으로 해결하는 것이 성능상 유리함.
+
+---
 
 ### 2. 모바일 홈 스크롤 구현 시 Footer 겹침 문제
 
 #### **문제**
 
-모바일 홈에서 scroll-snap을 적용했을 때, Layout에 공통 포함된 Footer가 스크롤 영역에 속하지 않아 Footer가 메인 콘텐츠와 겹침.
+- 모바일 홈에서 scroll-snap을 적용했을 때, Layout에 공통 포함된 Footer가 스크롤 영역에 속하지 않아 Footer가 메인 콘텐츠와 겹침.
 
 #### **시도**
 
-CSS로 스크롤 범위를 조정하려 했으나 실패.
+- CSS로 스크롤 범위를 조정하려 했으나 실패.
 
 #### **해결**
 
-모바일 홈에서는 공통 Footer를 display: none 처리하고, 해당 페이지 전용 Footer를 main 내부에 직접 넣음.
+- 모바일 홈에서는 공통 Footer를 display: none 처리하고, 해당 페이지 전용 Footer를 main 내부에 직접 넣음.
 
-#### **배운 점**
+#### **배운점**
 
-공통 레이아웃 구조가 특정 인터랙션과 충돌할 수 있으며, 일관성과 시멘틱 구조 vs. UX 기능 구현 사이에서 트레이드오프가 필요할 수 있음.
+- 공통 레이아웃 구조가 특정 인터랙션과 충돌할 수 있으며, 일관성과 시멘틱 구조 vs. UX 기능 구현 사이에서 트레이드오프가 필요할 수 있음.
+
+---
 
 ### 3. 구매한 도메인 연결 시도 중 DNS 설정 문제
 
 #### **문제**
 
-Vercel에 도메인을 추가하면 자동 연결되는 줄 알았으나, 실제로는 **도메인 등록처의 DNS 설정(A 레코드, CNAME)**을 직접 수정해야 함.
+- Vercel에 도메인을 추가하면 자동 연결되는 줄 알았으나, 실제로는 **도메인 등록처의 DNS 설정(A 레코드, CNAME)**을 직접 수정해야 함.
 
 #### **시도**
 
-단순 등록 → 연결 실패.
+- 단순 등록 → 연결 실패.
 
 #### **해결**
 
-도메인 등록처 네임서버 관리 화면에서 Vercel이 제공하는 A 레코드와 CNAME을 직접 등록. 이후 AWS API 연결된 백엔드 도메인도 정상 작동.
+- 도메인 등록처 네임서버 관리 화면에서 Vercel이 제공하는 A 레코드와 CNAME을 직접 등록. 이후 AWS API 연결된 백엔드 도메인도 정상 작동.
 
-#### **배운 점**
+#### **배운점**
 
-배포 시에는 프론트엔드뿐 아니라 DNS, 네임서버, 백엔드 연결까지 전반적인 배포 인프라를 이해해야 함.
+- 배포 시에는 DNS의 전반적인 배포 인프라를 이해해야 함.
 
 ---
 
-### **👧🏻 김유빈**
-#### 1. API 타입 정의 불일치 → 런타임 에러 해결
+### **김유빈**
+### 1. API 타입 정의 불일치 → 런타임 에러 해결
+**문제 상황**  
+- 제품 API 연동 초기, 백엔드 JSON 구조와 프론트엔드 타입 정의가 달라 undefined 에러 발생 (특히 images, body_sections)
+
+**해결 과정**  
+- 브라우저 네트워크 탭을 통해 실제 API 응답 분석 → ProductImage, ProductBodySection 등 세부 타입 정의 → 타입 가드 함수로 런타임 검증 추가
+
+**성과**  
+- 런타임 에러 제거, 개발 단계에서 타입 안정성 확보, 백엔드와 API 스펙 동기화 개선
+
+---
+
+### 2. API 타임아웃 → 무한 로딩 문제 방어
+**문제 상황**  
+- 네트워크 불안정 시 API 호출이 무한 대기 상태에 빠져 페이지가 멈춤
+
+**해결 과정**  
+- AbortSignal.timeout(10000) 적용으로 10초 타임아웃 설정, 로딩/에러 상태 UI 분리로 사용자 피드백 제공
+
+**성과**  
+- 안정적인 사용자 경험 제공, 네트워크 불안정성을 고려한 방어적 프로그래밍 경험
+
+---
+
+### 3. Mock 데이터 Fallback → 서비스 안정성 확보
+**문제 상황**  
+- API 서버 장애 시 제품 페이지 전체가 blank 화면으로 표시
+
+**해결 과정**  
+- 실제 API 구조와 동일한 Mock 데이터 구축, API 에러 시 자동 Fallback 적용, 콘솔 경고로 개발자 알림
+
+**성과**  
+- 서비스 가용성 확보, 프론트/백엔드 병렬 개발 가능
+
+---
+
+### 4. 텍스트 필드 줄바꿈 처리 - PC/모바일 충돌 해결
 **문제 상황**
-제품 API 연동 초기, 백엔드 JSON 구조와 프론트엔드 타입 정의가 달라 undefined 에러 발생 (특히 images, body_sections)
+- 제품 설명 텍스트에서 PC와 모바일 환경별로 서로 다른 줄바꿈 처리가 필요했음  
+- 초기 구현에서 \n을 PC 줄바꿈, n을 모바일 줄바꿈으로 혼합 사용 → 렌더링 오류 발생
 
-**해결 과정**
-브라우저 네트워크 탭을 통해 실제 API 응답 분석 → ProductImage, ProductBodySection 등 세부 타입 정의 → 타입 가드 함수로 런타임 검증 추가
+**원인 분석**  
+- 프론트엔드에서 n 파싱 시 \n과 구분 불가 → 예상치 못한 줄바꿈  
+- CSS `white-space` 속성만으로는 반응형 대응이 어려움
 
-**성과**
-런타임 에러 100% 제거, 개발 단계에서 타입 안정성 확보, 백엔드와 API 스펙 동기화 개선
+**시도한 해결책**  
+- 이스케이프 문자 변경 (n → \r\n) → 여전히 충돌  
+- CSS `white-space: pre-line` 적용 → 반응형 레이아웃 제약
+- 별도 필드(`description_mobile`) 분리 → 데이터 중복, 관리 복잡
 
-#### 2. CORS 정책 위반 → API 호출 차단 문제 해결
-**문제 상황**
-로컬 개발 환경에서 API 호출 시 CORS 오류 발생
-
-**해결 과정**
-Django settings.py의 CORS_ALLOWED_ORIGINS 수정, API 권한 설정 (AllowAny), 환경별 API URL .env로 분리
-
-**성과**
-개발/운영 환경 모두에서 안정적인 API 통신 확보, 보안 정책 준수하면서 필요한 접근 허용
-
-#### 3. API 타임아웃 → 무한 로딩 문제 방어
-**문제 상황**
-네트워크 불안정 시 API 호출이 무한 대기 상태에 빠져 페이지가 멈춤
-
-**해결 과정**
-AbortSignal.timeout(10000) 적용으로 10초 타임아웃 설정, 로딩/에러 상태 UI 분리로 사용자 피드백 제공
-
-**성과**
-안정적인 사용자 경험 제공, 네트워크 불안정성을 고려한 방어적 프로그래밍 경험
-
-#### 4. Mock 데이터 Fallback → 서비스 안정성 확보
-
-**문제 상황**
-API 서버 장애 시 제품 페이지 전체가 blank 화면으로 표시
-
-**해결 과정**
-실제 API 구조와 동일한 Mock 데이터 구축, API 에러 시 자동 Fallback 적용, 콘솔 경고로 개발자 알림
-
-**성과**
-서비스 가용성 99% 이상 확보, 프론트/백엔드 병렬 개발 가능, QA 단계에서 다양한 데이터 시나리오 검증 가능
-
-#### 5. Django 텍스트 필드 줄바꿈 처리 - PC/모바일 충돌 해결
-
-**문제 상황**
- - 제품 설명 텍스트에서 PC와 모바일 환경별로 서로 다른 줄바꿈 처리가 필요했음
- - 초기 구현에서 \n을 PC 줄바꿈, \\n을 모바일 줄바꿈으로 혼합 사용 → 렌더링 오류 발생
-
-**원인 분석**
-- Django DB에 \n(PC용)과 \\n(모바일용)이 혼재
-- 프론트엔드에서 \\n 파싱 시 \n과 구분 불가 → 예상치 못한 줄바꿈
-- CSS white-space 속성만으로는 반응형 대응이 어려움
-
-**시도한 해결책**
-- 이스케이프 문자 변경 (\\n → \r\n) → 여전히 충돌
-- CSS white-space: pre-line 적용 → 반응형 레이아웃 제약
-- 별도 필드(description_mobile) 분리 → 데이터 중복, 관리 복잡
-
-**최종 해결 방법**
-- 모바일 전용 줄바꿈을 *n으로 변경 (구분자 분리)
-- textFormatter.tsx에서 환경별로 파싱 처리
+**최종 해결 방법**  
+- 모바일 전용 줄바꿈을 `*n`으로 변경 (구분자 분리)  
+- `textFormatter.tsx`에서 환경별로 파싱 처리  
 ```
 export const formatText = (text: string, isMobile: boolean) => {
   if (isMobile) {
@@ -1278,16 +1290,17 @@ export const formatText = (text: string, isMobile: boolean) => {
   }
 };
 ```
+
 **성과**
 - PC/모바일 각각 최적화된 텍스트 레이아웃 구현
-- Django 관리자에서 한 번 입력으로 반응형 텍스트 관리 가능
-- 텍스트 충돌 문제 100% 해결
+- 원클릭 반응형 텍스트 관리 가능
+- 텍스트 충돌 문제 해결
 
 ---
 
-## 22. ✍🏻 프로젝트 회고
+## 17. ✍🏻 프로젝트 회고
 
-### **👧🏻 심희현**
+### **심희현**
 
 > 이 프로젝트에서 백엔드 파트를 맡은 팀장으로 참여하며, Django Template과 Django REST Framework를 활용한 두 가지 버전의 서비스를 동시에 구현하는 도전적인 과제를 수행했습니다. 기획서, 와이어프레임, 디자인 가이드 등 어떤 문서도 없는 완전한 제로베이스 상황에서 프로젝트를 시작해야 했던 점이 가장 큰 도전이었습니다.
 
@@ -1305,7 +1318,7 @@ export const formatText = (text: string, isMobile: boolean) => {
 
 ---
 
-### **🧑🏻 김성현**
+### **김성현**
 
 > 이번 프로젝트는 실제 회사의 프로젝트를 처음 경험할 수 있었던 소중한 기회였다. 대표님의 요구사항을 직접 듣고 피드백을 주고받으며 합의점을 찾아가는 과정이 매우 인상 깊었고, 이를 통해 실무에서의 소통 방식과 업무 흐름을 조금이나마 체감할 수 있었다.
 
@@ -1319,7 +1332,7 @@ export const formatText = (text: string, isMobile: boolean) => {
 
 > 마지막으로, 프로젝트 완료 후 실제 사용자에게 보여질 결과물을 직접 구현했다는 성취감과 자신감이 매우 컸으며, 앞으로의 개발 경험에 큰 밑거름이 될 것이라고 느꼈다.
 
-### **👧🏻 김유빈**
+### **김유빈**
 
 > 이번 Glossy Matcha 웹사이트 프로젝트는 프론트엔드와 백엔드가 함께 협업하는 첫 경험이었기에 큰 의미가 있었습니다. 단순히 화면을 구현하는 데 그치지 않고, 실제 배포되는 서비스의 한 부분을 맡아 개발할 수 있었다는 점에서 큰 성취감을 느꼈습니다. 디자이너가 따로 없는 상황이었기 때문에 페이지의 전체적인 디자인까지 직접 진행해야 했는데, 다양한 UI/UX 레퍼런스를 참고하면서 Figma로 와이어프레임과 시안을 제작했습니다. 이 과정을 통해 단순히 기능 구현을 넘어 사용자 경험을 고려하는 시각을 기를 수 있었습니다.
 
@@ -1327,7 +1340,7 @@ export const formatText = (text: string, isMobile: boolean) => {
 
 > 프로젝트를 진행하며 GitHub Flow 방식의 협업을 직접 경험하면서, 효율적인 브랜치 전략과 코드 리뷰 문화가 왜 중요한지 몸소 느낄 수 있었습니다. 또한 단순히 맡은 기능만 구현하는 데 그치지 않고, 전체 서비스의 구조와 사용자 흐름을 고려하며 문제를 해결하는 시야를 넓힐 수 있었습니다. 무엇보다 다양한 의견을 주고받으며 팀과 함께 완성도를 높여가는 과정에서 협업 능력을 한층 강화할 수 있었습니다.
 
-### **👧🏻 조은이**
+### **조은이**
 
 > 이번 프로젝트에서는 기획자와 디자이너의 역할이 얼마나 중요한지 크게 느낄 수 있었다. 명세와 디자인 요구사항이 구체적이지 않아 개발자들이 직접 디자인을 나눠 진행하게 되었는데, 처음에는 막막했지만 디자인 시스템을 정리하고 분업하며 결과적으로 괜찮은 화면을 만들 수 있었다. 이 과정에서 단순히 개발만이 아니라 디자인 감각과 다른 파트에 대한 이해도 함께 키울 수 있었다.
 
@@ -1339,7 +1352,66 @@ export const formatText = (text: string, isMobile: boolean) => {
 
 > 결과적으로 처음에는 단순히 API 연결과 디자인된 화면 개발이 주가 될 거라 생각했지만, 오히려 디자인과 인터랙션, 협업 방식에서 더 많은 배움을 얻을 수 있었다. 이번 경험을 통해 기술뿐 아니라 소통, 디자인 감각, 배포 이해까지 폭넓게 성장했다고 느낀다.
 
-## 23. 🤝 기여 방법
+---
+
+## 18. 🚀 설치 및 실행 방법
+
+### 환경 요구사항
+
+- **Node.js**: 22.0 이상
+- **Python**: 3.12 이상
+- **Git**: 최신 버전
+
+### 1. 저장소 클론
+
+```bash
+git clone https://github.com/Gloss-y/Glossy_Matcha
+```
+
+### 2. 백엔드 설정
+
+```bash
+cd be
+
+# 가상환경 생성 및 활성화
+python -m venv venv
+MacOS: source venv/bin/activate
+Windows: venv\Scripts\activate
+
+# 의존성 설치
+pip install -r requirements.txt
+
+# 데이터베이스 마이그레이션
+python manage.py migrate
+
+# 관리자 계정 생성
+python manage.py createsuperuser
+
+# 개발 서버 실행
+python manage.py runserver
+```
+
+### 3. 프론트엔드 설정
+
+```bash
+cd fe
+
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+```
+
+### 4. 접속 정보
+
+- **프론트엔드**: http://localhost:3000
+- **백엔드 API**: http://localhost:8000/api
+- **관리자 페이지**: http://localhost:8000/glossyjay
+
+---
+
+## 19. 🤝 기여 방법
 
 ### 개발 참여
 
@@ -1349,25 +1421,20 @@ export const formatText = (text: string, isMobile: boolean) => {
 4. 브랜치에 푸시 (`git push origin feature/새기능`)
 5. Pull Request 생성
 
-### 코딩 컨벤션
-
-- **커밋 메시지**: [Conventional Commits](https://www.conventionalcommits.org/) 형식 준수
-- **브랜치명**: `feature/`, `fix/`, `docs/`, `del/` 접두사 사용
-- **코드 스타일**: ESLint, Prettier, Black 설정 준수
-
 ---
 
-## 24. 🙏 감사의 글
+## 20. 🙏 감사의 글
 
 이 프로젝트는 다음과 같은 오픈소스 라이브러리와 도구들의 도움으로 완성되었습니다:
 
-- **Next.js**: 모던 React 프레임워크
-- **Django**: 견고한 Python 웹 프레임워크
-- **Vercel**: 빠른 프론트엔드 배포 플랫폼
+### [Backend]
+- **Django**: Python 기반 웹 프레임워크
 - **AWS Lightsail**: 간편한 클라우드 서버 서비스
 - **Let's Encrypt**: 무료 SSL 인증서 서비스
 
-그리고 이 프로젝트를 함께 만들어준 모든 팀원들에게 감사드립니다.
+### [Frontend]
+- **Next.js**: React 프레임워크
+- **Vercel**: 프론트엔드 배포 플랫폼
 
 ---
 
