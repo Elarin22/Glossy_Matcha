@@ -780,50 +780,50 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 ### 📼 글로벌 브랜드 웹사이트
 |   1. Home   |
 |:---------:|
-|<img src="images/readme_gif/fe/home.gif">|
+|<img src="images/readme_gif/fe/home.gif" width="800">|
 |메인 홈 화면|
 
 <br>
 
 |   2. About   |
 |:---------:|
-|<img src="images/readme_gif/fe/about.gif">|
+|<img src="images/readme_gif/fe/about.gif" width="800">|
 |브랜드 소개|
 
 <br>
 
 |   3. Product   |
 |:---------:|
-|<img src="images/readme_gif/fe/product.gif">|
+|<img src="images/readme_gif/fe/product.gif" width="800">|
 |제품 소개|
 
 <br>
 
 |   4. Add Product   |
 |:---------:|
-|<img src="images/readme_gif/fe/addProduct.gif">|
+|<img src="images/readme_gif/fe/addProduct.gif" width="800">|
 |admin 제품 추가 실시간 연동|
 
 <br>
 
 |   5. GlossyPick   |
 |:---------:|
-|<img src="images/readme_gif/fe/glossypick.gif">|
+|<img src="images/readme_gif/fe/glossypick.gif" width="800">|
 |체험형 컨텐츠|
 
 <br>
 
 |   6. Inquire   |
 |:---------:|
-|<img src="images/readme_gif/fe/inquire.gif">|
+|<img src="images/readme_gif/fe/inquire.gif" width="800">|
 |문의하기|
 
 <br>
 
 |   7. Change Language   |
 |:---------:|
-|<img src="images/readme_gif/fe/language.gif">|
-|헤더에 언어변경 버튼 클릭 시 국영문 전환|
+|<img src="images/readme_gif/fe/language.gif" width="800">|
+|상단 ko/en 버튼 원클릭 국영문 전환|
 
 <br>
 
