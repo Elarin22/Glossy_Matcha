@@ -723,56 +723,56 @@ Django Admin 제품 수정 → 즉시 DB 저장 → Next.js API 호출 시 최�
 ### 📼 매장 운영 대시보드
 |   1. Login   |
 |:---------:|
-|<img src="images/readme_gif/be/login.gif">|
+|<img src="images/readme_gif/be/login.gif" width="800">|
 |Django Login|
 
 <br>
 
 |   2. Dashboard    |
 |:--------------:|
-|<img src="images/readme_gif/be/dashboard.gif">|
+|<img src="images/readme_gif/be/dashboard.gif" width="800">|
 |매장 운영 메인 대시보드|
 
 <br>
 
 |   3. 직원[Staff]    |
 |:--------------:|
-|<img src="images/readme_gif/be/staff.gif">|
+|<img src="images/readme_gif/be/staff.gif" width="800">|
 |직원 관리|
 
 <br>
 
 |   4. 일별 매출[Daily Sales]   |
 |:--------------:|
-|<img src="images/readme_gif/be/sales.gif">|
+|<img src="images/readme_gif/be/sales.gif" width="800">|
 |일별 매출 관리|
 
 <br>
 
 |   5. 개별 월/년 매출   |
 |:--------------:|
-|<img src="images/readme_gif/be/excel1.gif">|
+|<img src="images/readme_gif/be/excel1.gif" width="800">|
 |개별 월/년 매출 엑셀 다운로드|
 
 <br>
 
 |   6. 전체 월/년 매출   |
 |:--------------:|
-|<img src="images/readme_gif/be/excel2.gif">|
+|<img src="images/readme_gif/be/excel2.gif" width="800">|
 |전체 월/년 매출 엑셀 다운로드|
 
 <br>
 
 |   7. 거래처   |
 |:--------------:|
-|<img src="images/readme_gif/be/client.gif">|
+|<img src="images/readme_gif/be/client.gif" width="800">|
 |거래처 관리|
 
 <br>
 
 |   8. 문의하기   |
 |:--------------:|
-|<img src="images/readme_gif/be/email.gif">|
+|<img src="images/readme_gif/be/email.gif" width="800">|
 |Gmail로 원클릭 답장|
 
 ---
