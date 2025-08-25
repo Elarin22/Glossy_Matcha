@@ -912,7 +912,12 @@ glossymatcha/
 ## 15. 📅 개발 일정
 
 **개발 기간**: 2025년 7월 28일 ~ 2025년 8월 15일 (19일간)
+<details>
+<summary>WBS</summary>
+
 <img src="images/readme_img/wbs.png">
+
+</details>
 
 ---
 
