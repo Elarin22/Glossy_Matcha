@@ -266,7 +266,7 @@
 
 ## 6. 📋 ERD
 
-![ERD](images/readme_img/ER%20Diagram.png)
+<img src="images/readme_img/ER Diagram.png">
 
 ### ERD 특징
 
